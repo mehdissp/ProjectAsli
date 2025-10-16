@@ -216,24 +216,26 @@ const Project = () => {
             <div className="stat-label">کل پروژه‌ها</div>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon active">🚀</div>
-          <div className="stat-content">
-            <div className="stat-value">
-              {projects.filter(p => p.status === 'active').length}
-            </div>
-            <div className="stat-label">پروژه‌های فعال</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon completed">✅</div>
-          <div className="stat-content">
-            <div className="stat-value">
-              {projects.filter(p => p.status === 'completed').length}
-            </div>
-            <div className="stat-label">تکمیل شده</div>
-          </div>
-        </div>
+<div className="stat-card">
+  <div className="stat-icon active">🚀</div>
+  <div className="stat-content">
+    <div className="stat-value">
+      {projects.length > 0 ? projects[0].maxProjects : '0'}
+    </div>
+    <div className="stat-label">تعداد پروژه قابل تعریف</div>
+  </div>
+</div>
+      <div className="stat-card">
+  <div className="stat-icon completed">✅</div>
+  <div className="stat-content">
+    <div className="stat-value">
+      {projects.length}
+      <span className="stat-divider">/</span>
+      { projects[0].maxProjects }
+    </div>
+    <div className="stat-label">تکمیل شده از کل مجاز</div>
+  </div>
+</div>
       </div>
 
       {/* Modal ایجاد پروژه جدید */}
