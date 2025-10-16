@@ -75,7 +75,7 @@ const CreateProjectModal = ({ isOpen, onClose, onProjectCreated }) => {
         <form onSubmit={handleSubmit} className="modal-form">
           <div className="form-group">
             <label htmlFor="projectName">
-              نام پروژه *
+              نام پروژه 
               <span className="required-star">*</span>
             </label>
             <input
@@ -90,22 +90,7 @@ const CreateProjectModal = ({ isOpen, onClose, onProjectCreated }) => {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="projectDescription">توضیحات پروژه</label>
-            <textarea
-              id="projectDescription"
-              value={projectDescription}
-              onChange={(e) => setProjectDescription(e.target.value)}
-              placeholder="توضیحات اختیاری پروژه (حداکثر 500 کاراکتر)"
-              className="form-textarea"
-              rows="4"
-              maxLength="500"
-              disabled={loading}
-            />
-            <div className="char-counter">
-              {projectDescription.length}/500
-            </div>
-          </div>
+
 
           {error && (
             <div className="error-message">

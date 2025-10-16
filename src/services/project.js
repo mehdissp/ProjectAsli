@@ -2,11 +2,20 @@
 import { http } from './api';
 
 export const projectService = {
-  async getProjects() {
+  async getProjects(pageNumber = 1, pageSize = 10) {
     try {
-      const response = await http.get('/project/GetProject');
+      const response = await http.post('/project/GetProject', {
+        PageNumber: pageNumber,
+        PageSize: pageSize
+      });
       console.log('📦 Projects data received:', response.data);
-      return response.data.data || [];
+      
+      // استفاده از ساختار جدید API
+      return response.data.data || {
+        items: [],
+        totalCount: 0,
+        totalPages: 0
+      };
     } catch (error) {
       console.error('❌ Get projects service error:', error);
       throw error;
@@ -35,15 +44,19 @@ export const projectService = {
     }
   },
 
-  async deleteProject(id) {
+   async deleteProject(projectId) {
     try {
-      const response = await http.delete(`/project/${id}`);
+      console.log('🗑️ Deleting project:', projectId);
+      const response = await http.post('/project/DeleteProject', {
+        Id: projectId
+      });
+      console.log('✅ Project deleted successfully:', response.data);
       return response.data;
     } catch (error) {
-      console.error('Delete project service error:', error);
+      console.error('❌ Delete project service error:', error);
       throw error;
     }
-  }
+  },
 };
 
 export default projectService;
