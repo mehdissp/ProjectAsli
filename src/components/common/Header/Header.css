@@ -1,0 +1,178 @@
+/* components/common/Header/Header.css */
+.header {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 997;
+  transition: var(--transition);
+  direction: rtl;
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow);
+  border-bottom-color: transparent;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.menu-toggle:hover {
+  background: var(--secondary-color);
+}
+
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: var(--transition);
+  transform-origin: center;
+}
+
+.menu-toggle:hover span {
+  background: var(--primary-color);
+}
+
+.welcome-message {
+  animation: fadeIn 0.6s ease-out;
+  text-align: right;
+}
+
+.greeting {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: right;
+}
+
+.welcome-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.time-display {
+  text-align: left; /* زمان معمولاً به چپ است */
+  animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+.time {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+}
+
+.date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  animation: fadeIn 0.6s ease-out 0.4s both;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow);
+}
+
+/* ریسپانسیو راست‌چین */
+@media (max-width: 1024px) {
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .greeting {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .header-right {
+    gap: 1rem;
+  }
+  
+  .time-display {
+    display: none;
+  }
+  
+  .greeting {
+    font-size: 1.1rem;
+  }
+  
+  .welcome-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-message {
+    display: none;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+}

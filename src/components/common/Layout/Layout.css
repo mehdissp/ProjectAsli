@@ -1,0 +1,65 @@
+/* components/common/Layout/Layout.css */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  position: relative;
+  direction: rtl;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: calc(100% - 280px); /* عرض کل منهای عرض سایدبار */
+  margin-right: 0;
+  margin-left: auto; /* برای راست‌چین شدن */
+  transition: var(--transition);
+  direction: rtl;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  animation: fadeIn 0.5s ease-out;
+  direction: rtl;
+  text-align: right;
+  width: 100%;
+  min-height: calc(100vh - 80px); /* ارتفاع منهای هدر */
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ریسپانسیو راست‌چین */
+@media (max-width: 1024px) {
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 1.5rem;
+    min-height: calc(100vh - 70px);
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1rem;
+    min-height: calc(100vh - 60px);
+  }
+}
