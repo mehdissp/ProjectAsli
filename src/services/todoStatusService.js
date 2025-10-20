@@ -5,7 +5,7 @@ export const todoStatusService = {
   // دریافت لیست وضعیت‌ها
   getTodoStatuses: async (projectId) => {
     try {
-      const response = await api.get(`/Todo/GetTodoStatus?projectId=${projectId}`);
+      const response = await api.get(`/TodoStatus/GetTodoStatus?projectId=5`);
       return response.data;
     } catch (error) {
       console.error('Error fetching todo statuses:', error);
@@ -16,7 +16,16 @@ export const todoStatusService = {
   // ایجاد وضعیت جدید
   createTodoStatus: async (todoStatusData) => {
     try {
-      const response = await api.post('/Todo/InsertTodoStatus', todoStatusData);
+
+           const cleanColor = todoStatusData.color.replace('#', '');
+      
+      const requestData = {
+        ProjectId: todoStatusData.projectId,
+        Name: todoStatusData.name,
+        Color: cleanColor // بدون #
+      };
+              console.log(requestData)
+      const response = await api.post('/TodoStatus/InsertTodoStatus', requestData);
       return response.data;
     } catch (error) {
       console.error('Error creating todo status:', error);
@@ -24,10 +33,22 @@ export const todoStatusService = {
     }
   },
 
+  
+
   // آپدیت وضعیت
   updateTodoStatus: async (id, todoStatusData) => {
     try {
-      const response = await api.put(`/Todo/UpdateTodoStatus/${id}`, todoStatusData);
+             const cleanColor = todoStatusData.color.replace('#', '');
+              const requestData = {
+        ProjectId: todoStatusData.projectId,
+        Name: todoStatusData.name,
+        Id:id,
+        OrderNum:todoStatusData.orderNum,
+        Color: cleanColor // بدون #
+      };
+      console.log('miyad')
+      console.log(requestData)
+      const response = await api.post(`/TodoStatus/UpdateTodoStatus`, requestData);
       return response.data;
     } catch (error) {
       console.error('Error updating todo status:', error);
@@ -38,7 +59,7 @@ export const todoStatusService = {
   // حذف وضعیت
   deleteTodoStatus: async (id) => {
     try {
-      const response = await api.delete(`/Todo/DeleteTodoStatus/${id}`);
+      const response = await api.delete(`/TodoStatus/DeleteTodoStatus?id=${id}`);
       return response.data;
     } catch (error) {
       console.error('Error deleting todo status:', error);
