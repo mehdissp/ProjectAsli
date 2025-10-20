@@ -640,12 +640,12 @@ const Project = () => {
                       >
                             <FaEye />
                       </button>
-                      <button 
+                      {/* <button 
                         className="btn-action btn-edit"
                         title="ویرایش"
                       >
                            <FaEdit />
-                      </button>
+                      </button> */}
                  <button 
                         className="btn-action btn-delete"
                         title="حذف"
