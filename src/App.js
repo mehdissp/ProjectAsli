@@ -153,6 +153,7 @@ import Login from './components/auth/Login/Login';
 import Dashboard from './components/dashboard/Dashboard/Dashboard';
 import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner';
 import Project from './components/page/project/Project';
+import TodoBoard from './components/page/todo/TodoBoard';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -202,6 +203,9 @@ const AuthenticatedApp = () => {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="project" element={<Project />} />
+   {/* <Route path="TodoBoard" element={<TodoBoard />} /> */}
+   <Route path="/TodoBoard" element={<TodoBoard />} />
+        
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}
         <Route path="*" element={<NotFoundPage />} />

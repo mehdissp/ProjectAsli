@@ -1,4 +1,5 @@
 /* components/common/Header/Header.css */
+
 .header {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
@@ -83,7 +84,7 @@
 }
 
 .time-display {
-  text-align: left; /* زمان معمولاً به چپ است */
+  text-align: left;
   animation: fadeIn 0.6s ease-out 0.2s both;
 }
 
@@ -128,7 +129,7 @@
   box-shadow: var(--shadow);
 }
 
-/* ریسپانسیو راست‌چین */
+
 @media (max-width: 1024px) {
   .menu-toggle {
     display: flex;
