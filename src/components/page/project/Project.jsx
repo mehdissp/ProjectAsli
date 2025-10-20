@@ -265,6 +265,7 @@ import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
 import CreateProjectModal from './CreateProjectModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal/ConfirmDeleteModal';
 import Pagination from '../../common/Pagination/Pagination';
+import { useNavigate } from 'react-router-dom'; // اضافه کردن useNavigate
 import { 
   FaEye, 
   FaEdit, 
@@ -285,6 +286,7 @@ import './Project.css';
 
 const Project = () => {
   const { user } = useAuth();
+    const navigate = useNavigate(); // استفاده از useNavigate
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -356,6 +358,31 @@ const Project = () => {
     setProjectToDelete(project);
     setIsDeleteModalOpen(true);
         console.log(isDeleteModalOpen)
+  };
+
+    // مدیریت کلیک روی دکمه مشاهده
+  const handleViewClick = (project) => {
+    console.log('👁️ Viewing project:', project);
+    
+    // گرفتن آیدی پروژه - با توجه به ساختار داده‌های شما
+    const projectId = project.id || project.rowNum;
+    const name=project.name
+    
+    if (projectId) {
+      console.log(`📍 Navigating to TodoBoard with projectId: ${projectId}`);
+      
+      // navigate به صفحه TodoBoard با آیدی پروژه
+      // navigate(`/TodoBoard/${projectId}`);
+        navigate('/TodoBoard', { 
+    state: { projectId: projectId,
+
+         name: project.name 
+     }
+  });
+    } else {
+      console.error('❌ Project ID not found:', project);
+      setError('آیدی پروژه یافت نشد');
+    }
   };
 
   const handleConfirmDelete = async () => {
@@ -637,6 +664,7 @@ const Project = () => {
                       <button 
                         className="btn-action btn-view"
                         title="مشاهده"
+                            onClick={() => handleViewClick(project)}
                       >
                             <FaEye />
                       </button>

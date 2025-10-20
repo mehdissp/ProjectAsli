@@ -497,19 +497,26 @@ import {
 import ColumnManager from './ColumnManager';
 import { todoStatusService } from '../../../services/todoStatusService';
 import './TodoBoard.css';
-
+//import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 const TodoBoard = () => {
   const [columns, setColumns] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [projectId, setProjectId] = useState(1); // یا از props بگیر
+  //const [projectId, setProjectId] = useState(1); // یا از props بگیر
   
   const [showColumnManager, setShowColumnManager] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState(null);
 
 const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state برای ترتیب
-
+  const location = useLocation();
+  
+  // دریافت projectId از state
+  const projectId = location.state?.projectId;
+  const projectName=location.state?.name
+  console.log(projectName)
+  console.log(projectId)
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
@@ -570,7 +577,7 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
     try {
       setError(null);
       const todoStatusData = {
-        projectId: 5,
+        projectId: projectId,
         name: newColumnData.title,
         color: newColumnData.color
       };
@@ -793,7 +800,7 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
       {/* هدر */}
       <div className="board-header">
         <div className="header-content">
-          <h1>برد وظایف</h1>
+          <h1>   وظایف   {projectName}</h1>
           <p>مدیریت و پیگیری وظایف تیم</p>
         </div>
         <div className="header-actions">

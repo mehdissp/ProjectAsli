@@ -1,8 +1,9 @@
 /* components/common/Sidebar/Sidebar.css */
+
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0; /* تغییر از right به left */
+  left: 0; 
   width: 280px;
   height: 100vh;
   background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
@@ -10,7 +11,7 @@
   z-index: 999;
   display: flex;
   flex-direction: column;
-  transform: translateX(-100%); /* تغییر از translateX(100%) به translateX(-100%) */
+  transform: translateX(-100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-lg);
   direction: rtl;
@@ -148,7 +149,7 @@
 .menu-header:hover {
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  padding-left: 2rem; /* تغییر از padding-right به padding-left */
+  padding-left: 2rem; 
 }
 
 .menu-link.active {
@@ -159,7 +160,7 @@
 .menu-link.active::before {
   content: '';
   position: absolute;
-  left: 0; /* تغییر از right به left */
+  left: 0; 
   top: 50%;
   transform: translateY(-50%);
   width: 4px;
@@ -170,7 +171,7 @@
 }
 
 .menu-icon {
-  margin-right: 0.75rem; /* تغییر از margin-left به margin-right */
+  margin-right: 0.75rem; 
   font-size: 1.25rem;
   width: 24px;
   text-align: center;
@@ -203,21 +204,21 @@
   max-height: 500px;
 }
 
-/* سطوح مختلف منو - راست‌چین */
+
 .menu-item.level-1 .menu-link,
 .menu-item.level-1 .menu-header {
-  padding-left: 2.5rem; /* تغییر از padding-right به padding-left */
+  padding-left: 2.5rem; 
   font-size: 0.9rem;
 }
 
 .menu-item.level-2 .menu-link {
-  padding-left: 3.5rem; /* تغییر از padding-right به padding-left */
+  padding-left: 3.5rem;
   font-size: 0.85rem;
 }
 
 .active-indicator {
   position: absolute;
-  right: 1rem; /* تغییر از left به right */
+  right: 1rem; 
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -254,7 +255,6 @@
   font-size: 1.1rem;
 }
 
-/* ریسپانسیو راست‌چین */
 @media (min-width: 1025px) {
   .sidebar {
     transform: translateX(0);

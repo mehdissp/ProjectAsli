@@ -203,7 +203,8 @@ const AuthenticatedApp = () => {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="project" element={<Project />} />
-   <Route path="TodoBoard" element={<TodoBoard />} />
+   {/* <Route path="TodoBoard" element={<TodoBoard />} /> */}
+   <Route path="/TodoBoard" element={<TodoBoard />} />
         
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}

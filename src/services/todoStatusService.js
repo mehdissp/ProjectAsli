@@ -5,7 +5,7 @@ export const todoStatusService = {
   // دریافت لیست وضعیت‌ها
   getTodoStatuses: async (projectId) => {
     try {
-      const response = await api.get(`/TodoStatus/GetTodoStatus?projectId=5`);
+      const response = await api.get(`/TodoStatus/GetTodoStatus?projectId=${projectId}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching todo statuses:', error);
