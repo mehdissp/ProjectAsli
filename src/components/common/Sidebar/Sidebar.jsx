@@ -115,7 +115,7 @@ import {
   FaFolder,
   FaRocket,
   FaSignOutAlt,
-  FaTimes
+  FaTimes,FaUser
 } from 'react-icons/fa';
 import { BiSolidDashboard,BiLogoWindows   } from "react-icons/bi";
 import './Sidebar.css';
@@ -124,6 +124,7 @@ import './Sidebar.css';
 const iconComponents = {
   BiSolidDashboard: BiSolidDashboard,
   FaHome: FaHome,
+  FaUser:FaUser,
   BiLogoWindows: BiLogoWindows,
   FaFile: FaFile,
   FaFolder: FaFolder,

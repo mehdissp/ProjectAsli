@@ -154,6 +154,7 @@ import Dashboard from './components/dashboard/Dashboard/Dashboard';
 import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner';
 import Project from './components/page/project/Project';
 import TodoBoard from './components/page/todo/TodoBoard';
+import UserManagement from './components/page/user/UserManagement';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -205,6 +206,9 @@ const AuthenticatedApp = () => {
         <Route path="project" element={<Project />} />
    {/* <Route path="TodoBoard" element={<TodoBoard />} /> */}
    <Route path="/TodoBoard" element={<TodoBoard />} />
+   <Route path="/UserManagement" element={<UserManagement />} />
+
+   
         
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}

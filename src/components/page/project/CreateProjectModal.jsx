@@ -49,8 +49,8 @@ const CreateProjectModal = ({ isOpen, onClose, onProjectCreated }) => {
       handleClose();
       
     } catch (err) {
-      console.error('❌ Error creating project:', err);
-      setError(err.response?.data?.message || 'خطا در ایجاد پروژه');
+      console.error('❌ Error creating project:', err.response);
+      setError(err.response?.data?.data.message || 'خطا در ایجاد پروژه');
     } finally {
       setLoading(false);
     }
