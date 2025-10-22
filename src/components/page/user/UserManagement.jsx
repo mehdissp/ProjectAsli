@@ -18,7 +18,8 @@ import {
   FaRedo,
   FaEnvelope,
   FaPhone,
-  FaUserTag
+  FaUserTag,
+  FaHouseUser
 } from 'react-icons/fa';
 import './UserManagement.css';
 
@@ -304,7 +305,7 @@ const UserManagement = () => {
             <tr>
               <th>#</th>
               <th>اطلاعات کاربر</th>
-              <th>ایمیل</th>
+              <th>نام کاربر</th>
               <th>نقش</th>
               <th>وضعیت</th>
               <th>تاریخ ثبت‌نام</th>
@@ -346,8 +347,8 @@ const UserManagement = () => {
                   </td>
                   <td className="email-cell">
                     <div className="email-content">
-                      <FaEnvelope className="email-icon" />
-                      {user.email}
+                      <FaHouseUser className="email-icon" />
+                      {user.username}
                     </div>
                   </td>
                   <td className="role-cell">

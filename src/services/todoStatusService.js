@@ -13,6 +13,16 @@ export const todoStatusService = {
     }
   },
 
+
+    getTags: async () => {
+    try {
+      const response = await api.get('/TodoStatus/GetTags');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching tags:', error);
+      throw error;
+    }
+  },
   // ایجاد وضعیت جدید
   createTodoStatus: async (todoStatusData) => {
     try {

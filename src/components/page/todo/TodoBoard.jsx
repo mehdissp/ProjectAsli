@@ -14,7 +14,9 @@ import {
   FiRefreshCw
 } from 'react-icons/fi';
 import ColumnManager from './ColumnManager';
+import UserSearchSelect from './UserSearchSelect'
 import { todoStatusService } from '../../../services/todoStatusService';
+import { todoService } from '../../../services/todo';
 import './TodoBoard.css';
 //import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -23,6 +25,7 @@ const TodoBoard = () => {
   const [columns, setColumns] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState('');
   //const [projectId, setProjectId] = useState(1); // یا از props بگیر
   
   const [showColumnManager, setShowColumnManager] = useState(false);
@@ -35,16 +38,45 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
   // دریافت projectId از state
   const projectId = location.state?.projectId;
   const projectName=location.state?.name
-  console.log(projectName)
-  console.log(projectId)
+
+
+    // state‌های جدید برای تگ‌ها
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [tagsLoading, setTagsLoading] = useState(false);
+  const [showTagDropdown, setShowTagDropdown] = useState(false);
+
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
     priority: 'medium',
     assignee: '',
     dueDate: '',
+      assignee: '', // اینجا ID کاربر ذخیره می‌شود
     tags: []
   });
+
+  const fetchTags = async () => {
+    try {
+      setTagsLoading(true);
+      // فرض می‌کنیم این تابع در todoStatusService موجود است
+      const response = await todoStatusService.getTags();
+      console.log('Tags response:', response);
+      setTags(response.data || response || []);
+    } catch (error) {
+      console.error('Error fetching tags:', error);
+      // داده‌های نمونه برای مواقع خطا
+      setTags([
+        { id: 1, name: 'فوری', color: '#FF6B6B' },
+        { id: 2, name: 'مهم', color: '#4ECDC4' },
+        { id: 3, name: 'توسعه', color: '#45B7D1' },
+        { id: 4, name: 'باگ', color: '#FFA500' },
+        { id: 5, name: 'تست', color: '#96CEB4' }
+      ]);
+    } finally {
+      setTagsLoading(false);
+    }
+  };
 
   // دریافت ستون‌ها از API
   const fetchColumns = async () => {
@@ -90,7 +122,10 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
 
   useEffect(() => {
     fetchColumns();
-  }, [projectId]);
+    
+    fetchTags();
+ 
+  }, [projectId], [showTaskModal]);
 
   // مدیریت ستون‌ها با API
   const handleAddColumn = async (newColumnData) => {
@@ -143,6 +178,195 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
       throw err;
     }
   };
+  //******************************************** */
+// مدیریت انتخاب تگ‌ها
+const handleTagSelect = (tagId) => {
+  setSelectedTags(prev => {
+    if (prev.includes(tagId)) {
+      // حذف تگ اگر قبلاً انتخاب شده
+      return prev.filter(id => id !== tagId);
+    } else {
+      // اضافه کردن تگ
+      return [...prev, tagId];
+    }
+  });
+};
+
+// مدیریت حذف تگ انتخاب شده
+const handleRemoveTag = (tagId, e) => {
+  e.stopPropagation();
+  setSelectedTags(prev => prev.filter(id => id !== tagId));
+};
+
+// بستن مودال و ریست تگ‌ها
+const handleCloseTaskModal = () => {
+  setShowTaskModal(false);
+  setSelectedTags([]);
+  setShowTagDropdown(false);
+};
+
+// مدیریت ایجاد تسک با تگ‌ها
+// const handleCreateTask = (e) => {
+//   e.preventDefault();
+//   if (!newTask.title.trim()) {
+//     alert('لطفا عنوان تسک را وارد کنید');
+//     return;
+//   }
+
+//   // تبدیل selectedTags به آرایه‌ای از اشیاء تگ کامل
+//   const selectedTagObjects = tags.filter(tag => selectedTags.includes(tag.id));
+//   console.log(selectedTagObjects);
+//   const task = {
+//     id: `task-${Date.now()}`,
+//     title: newTask.title,
+//     description: newTask.description,
+//     priority: newTask.priority,
+//     assignee: newTask.assignee || 'بدون اختصاص',
+//     dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
+//     tags: selectedTagObjects // ذخیره تگ‌های کامل با رنگ
+//   };
+//   console.log(task);
+//   setColumns(prev => ({
+//     ...prev,
+//     [selectedColumn]: {
+//       ...prev[selectedColumn],
+//       tasks: [...prev[selectedColumn].tasks, task]
+//     }
+//   }));
+
+//   handleCloseTaskModal();
+//   setNewTask({
+//     title: '',
+//     description: '',
+//     priority: 'medium',
+//     assignee: '',
+//     dueDate: '',
+//     tags: []
+//   });
+// };
+// مدیریت ایجاد تسک با تگ‌ها
+// const handleCreateTask = async (e) => {
+//   e.preventDefault();
+//   if (!newTask.title.trim()) {
+//     alert('لطفا عنوان تسک را وارد کنید');
+//     return;
+//   }
+
+//   try {
+//     // تبدیل تگ‌ها
+//     const todoTagsDtos = selectedTags.map(tagId => {
+//       const tag = tags.find(t => t.id === tagId);
+//       return { id: tag.id, name: tag.name };
+//     });
+
+//     // آماده‌سازی داده
+//     const todoData = {
+//       title: newTask.title,
+//       description: newTask.description || '',
+//       statusId: parseInt(selectedColumn),
+//       priority: newTask.priority === 'high' ? 2 : newTask.priority === 'low' ? 0 : 1,
+//       dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
+//       todoTagsDtos: todoTagsDtos
+//     };
+
+//     // اضافه کردن assignee اگر وجود دارد
+//     if (newTask.assignee) {
+//       todoData.assigneeId = newTask.assignee;
+//     }
+
+//     console.log('🚀 Creating todo:', todoData);
+
+//     // فراخوانی API
+//     await todoService.createTodo(todoData);
+
+//     // رفرش و بستن
+//     await fetchColumns();
+//     handleCloseTaskModal();
+//     setNewTask({ title: '', description: '', priority: 'medium', assignee: '', dueDate: '', tags: [] });
+//     setSelectedTags([]);
+    
+//     setSuccess('تسک با موفقیت ایجاد شد');
+//     setTimeout(() => setSuccess(''), 3000);
+
+//   } catch (error) {
+//     console.error('❌ Create todo error:', error);
+//     setError(error.response?.data || 'خطا در ایجاد تسک');
+//   }
+// };
+
+const handleCreateTask = async (e) => {
+  e.preventDefault();
+  if (!newTask.title.trim()) {
+    alert('لطفا عنوان تسک را وارد کنید');
+    return;
+  }
+
+  try {
+    // تبدیل selectedTags به فرمت مورد نیاز API
+    const todoTagsDtos = selectedTags.map(tagId => {
+      const tag = tags.find(t => t.id === tagId);
+      return tag ? {
+        id: tag.id,
+        name: tag.name
+      } : null;
+    }).filter(Boolean);
+
+    // تبدیل priority به عدد
+    const getPriorityNumber = (priority) => {
+      switch (priority) {
+        case 'low': return 0;
+        case 'medium': return 1;
+        case 'high': return 2;
+        default: return 1;
+      }
+    };
+
+    // آماده‌سازی داده برای API
+    const todoData = {
+      title: newTask.title,
+      description: newTask.description || '',
+      statusId: parseInt(selectedColumn),
+      priority: getPriorityNumber(newTask.priority),
+      dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
+      todoTagsDtos: todoTagsDtos,
+      userId: newTask.assignee || null // اضافه کردن assigneeId
+    };
+
+    // اگر assignee خالی است، فیلد رو حذف کن (بستگی به API داره)
+    if (!newTask.assignee) {
+      delete todoData.assigneeId;
+    }
+
+    console.log('📤 Sending to API:', todoData);
+
+    // فراخوانی API
+    await todoService.createTodo(todoData);
+
+    // رفرش داده‌ها
+    await fetchColumns();
+
+    // بستن مودال و ریست فرم
+    handleCloseTaskModal();
+    setNewTask({
+      title: '',
+      description: '',
+      priority: 'medium',
+      assignee: '',
+      dueDate: '',
+      tags: []
+    });
+    setSelectedTags([]);
+
+    // نمایش پیام موفقیت
+    setSuccess('تسک با موفقیت ایجاد شد');
+    setTimeout(() => setSuccess(''), 3000);
+
+  } catch (error) {
+    console.error('❌ Error creating todo:', error);
+    setError(error.response?.data?.message || 'خطا در ایجاد تسک');
+  }
+};
+  //********************************************* */
 
   const handleDeleteColumn = async (columnId) => {
     try {
@@ -203,41 +427,41 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
     setShowTaskModal(true);
   };
 
-  const handleCreateTask = (e) => {
-    e.preventDefault();
-    if (!newTask.title.trim()) {
-      alert('لطفا عنوان تسک را وارد کنید');
-      return;
-    }
+  // const handleCreateTask = (e) => {
+  //   e.preventDefault();
+  //   if (!newTask.title.trim()) {
+  //     alert('لطفا عنوان تسک را وارد کنید');
+  //     return;
+  //   }
 
-    const task = {
-      id: `task-${Date.now()}`,
-      title: newTask.title,
-      description: newTask.description,
-      priority: newTask.priority,
-      assignee: newTask.assignee || 'بدون اختصاص',
-      dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
-      tags: newTask.tags
-    };
+  //   const task = {
+  //     id: `task-${Date.now()}`,
+  //     title: newTask.title,
+  //     description: newTask.description,
+  //     priority: newTask.priority,
+  //     assignee: newTask.assignee || 'بدون اختصاص',
+  //     dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
+  //     tags: newTask.tags
+  //   };
 
-    setColumns(prev => ({
-      ...prev,
-      [selectedColumn]: {
-        ...prev[selectedColumn],
-        tasks: [...prev[selectedColumn].tasks, task]
-      }
-    }));
+  //   setColumns(prev => ({
+  //     ...prev,
+  //     [selectedColumn]: {
+  //       ...prev[selectedColumn],
+  //       tasks: [...prev[selectedColumn].tasks, task]
+  //     }
+  //   }));
 
-    setShowTaskModal(false);
-    setNewTask({
-      title: '',
-      description: '',
-      priority: 'medium',
-      assignee: '',
-      dueDate: '',
-      tags: []
-    });
-  };
+  //   setShowTaskModal(false);
+  //   setNewTask({
+  //     title: '',
+  //     description: '',
+  //     priority: 'medium',
+  //     assignee: '',
+  //     dueDate: '',
+  //     tags: []
+  //   });
+  // };
 
   const handleDragStart = (e, taskId, columnId) => {
     e.dataTransfer.setData('taskId', taskId);
@@ -296,6 +520,9 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
       }));
     }
   };
+  const handleAssigneeChange = (userId) => {
+  setNewTask(prev => ({ ...prev, assignee: userId }));
+};
 
   const getPriorityClass = (priority) => {
     switch (priority) {
@@ -330,6 +557,12 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
               <button onClick={() => setError(null)} className="btn-close-error">×</button>
             </div>
           )}
+            {success && (
+    <div className="success-banner">
+      {success}
+      <button onClick={() => setSuccess('')} className="btn-close-success">×</button>
+    </div>
+  )}
           <button 
             className="btn btn-secondary"
             onClick={fetchColumns}
@@ -414,13 +647,35 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
                     <p className="task-description">{task.description}</p>
                   </div>
 
-                  <div className="task-tags">
+                  {/* <div className="task-tags">
                     {task.tags.map((tag, index) => (
                       <span key={index} className="task-tag">
                         {tag}
+                    
                       </span>
                     ))}
-                  </div>
+
+                    
+                  </div> */}
+                  <div className="task-tags">
+  {task.tags.map((tag, index) => (
+    <span 
+      key={tag.id || index} 
+      className="task-tag"
+      style={{ 
+        backgroundColor: `${tag.color}20`, 
+        borderColor: tag.color,
+        color: tag.color
+      }}
+    >
+      <span 
+        className="tag-color-dot"
+        style={{ backgroundColor: tag.color }}
+      ></span>
+      {tag.name} {/* ✅ اینجا باید tag.name باشد نه tag */}
+    </span>
+  ))}
+</div>
 
                   <div className="task-footer">
                     <div className="task-assignee">
@@ -460,7 +715,7 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
       />
 
       {/* مودال ایجاد تسک جدید */}
-      {showTaskModal && (
+      {/* {showTaskModal && (
         <div className="modal-overlay task-modal-overlay" onClick={() => setShowTaskModal(false)}>
           <div className="modal-content task-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
@@ -546,7 +801,155 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
             </form>
           </div>
         </div>
-      )}
+      )} */}
+
+      {showTaskModal && (
+  <div className="modal-overlay task-modal-overlay" onClick={handleCloseTaskModal}>
+    <div className="modal-content task-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header">
+        <h2>ایجاد تسک جدید</h2>
+        <button className="close-btn" onClick={handleCloseTaskModal}>
+          <FiX />
+        </button>
+      </div>
+
+      <form onSubmit={handleCreateTask}>
+        <div className="form-group">
+          <label>عنوان تسک *</label>
+          <input
+            type="text"
+            value={newTask.title}
+            onChange={(e) => setNewTask(prev => ({ ...prev, title: e.target.value }))}
+            placeholder="عنوان تسک را وارد کنید"
+            required
+            autoFocus
+          />
+        </div>
+
+        <div className="form-group">
+          <label>توضیحات</label>
+          <textarea
+            value={newTask.description}
+            onChange={(e) => setNewTask(prev => ({ ...prev, description: e.target.value }))}
+            placeholder="توضیحات تسک"
+            rows="3"
+          />
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>اولویت</label>
+            <select
+              value={newTask.priority}
+              onChange={(e) => setNewTask(prev => ({ ...prev, priority: e.target.value }))}
+            >
+              <option value="low">پایین</option>
+              <option value="medium">متوسط</option>
+              <option value="high">بالا</option>
+            </select>
+          </div>
+
+ <div className="form-group">
+  <label>مسئول</label>
+  <UserSearchSelect
+    value={newTask.assignee}
+    onChange={handleAssigneeChange}
+    placeholder="انتخاب مسئول"
+  />
+</div>
+        </div>
+
+        <div className="form-group">
+          <label>تاریخ انجام</label>
+          <input
+            type="text"
+            value={newTask.dueDate}
+            onChange={(e) => setNewTask(prev => ({ ...prev, dueDate: e.target.value }))}
+            placeholder="مثال: 1402/10/25"
+          />
+        </div>
+
+        {/* مولتی سلکت تگ‌ها */}
+        <div className="form-group">
+          <label>تگ‌ها</label>
+          <div className="tags-selector">
+            <div 
+              className="tags-input"
+              onClick={() => setShowTagDropdown(!showTagDropdown)}
+            >
+              <div className="selected-tags">
+                {selectedTags.map(tagId => {
+                  const tag = tags.find(t => t.id === tagId);
+                  return tag ? (
+                    <span 
+                      key={tag.id}
+                      className="selected-tag"
+                      style={{ backgroundColor: tag.color + '20', borderColor: tag.color }}
+                      onClick={(e) => handleRemoveTag(tag.id, e)}
+                    >
+                      <span 
+                        className="tag-color-dot"
+                        style={{ backgroundColor: tag.color }}
+                      ></span>
+                      {tag.name}
+                      <span className="remove-tag">×</span>
+                    </span>
+                  ) : null;
+                })}
+                {selectedTags.length === 0 && (
+                  <span className="placeholder">تگ‌ها را انتخاب کنید...</span>
+                )}
+              </div>
+              <span className="dropdown-arrow">▼</span>
+            </div>
+
+            {showTagDropdown && (
+              <div className="tags-dropdown">
+                {tagsLoading ? (
+                  <div className="tags-loading">در حال دریافت تگ‌ها...</div>
+                ) : (
+                  tags.map(tag => (
+                    <div
+                      key={tag.id}
+                      className={`tag-option ${selectedTags.includes(tag.id) ? 'selected' : ''}`}
+                      onClick={() => handleTagSelect(tag.id)}
+                    >
+                      <span 
+                        className="tag-color-dot"
+                        style={{ backgroundColor: tag.color }}
+                      ></span>
+                      <span className="tag-name">{tag.name}</span>
+                      {selectedTags.includes(tag.id) && (
+                        <span className="check-mark">✓</span>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="form-actions">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleCloseTaskModal}
+          >
+            انصراف
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+          >
+            <FiSave />
+            ایجاد تسک
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 };

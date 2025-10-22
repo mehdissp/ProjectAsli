@@ -323,6 +323,23 @@ export const userService = {
     }
   },
 
+  // userService.js
+async getUsersCombo(pageNumber = 1, pageSize = 10, search = '') {
+  try {
+    const response = await http.post('/User/GetUsersCombo', {
+      PageNumber: pageNumber,
+      PageSize: pageSize,
+   //   Search: search // اگر API شما پارامتر جستجو پشتیبانی می‌کند
+    });
+    console.log('📦 Users combo response:', response);
+    
+    return response.data;
+  } catch (error) {
+    console.error('❌ Get users combo service error:', error);
+    throw error;
+  }
+},
+
   async deleteUser(userId) {
     try {
       console.log('🗑️ Deleting user:', userId);

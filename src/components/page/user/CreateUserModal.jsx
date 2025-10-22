@@ -126,7 +126,14 @@ const CreateUserModal = ({ isOpen, onClose, onUserCreated }) => {
 
     } catch (err) {
       console.error('Error creating user:', err);
-      setError(err.response?.data || 'خطا در ایجاد کاربر');
+      if(err.status=="402"){
+        console.log(err)
+  setError(err.response.data.data.message|| 'خطا در ایجاد کاربر');
+      }
+      else{
+  setError(err.response?.data || 'خطا در ایجاد کاربر');
+      }
+    
     } finally {
       setLoading(false);
     }
