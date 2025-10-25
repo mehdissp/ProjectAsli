@@ -267,19 +267,20 @@ const handleUpdateTask = async (e) => {
     });
 
     const updateData = {
+      id:editingTask.id,
       title: editingTask.title,
       description: editingTask.description,
       statusId: parseInt(editingTask.statusId),
       priority: priorityMap[editingTask.priority] || 1,
       dueDate: editingTask.dueDate,
       todoTagsDtos: todoTagsDtos,
-      assigneeId: editingTask.assignee || null
+      userId: editingTask.assignee || null
     };
 
     console.log('📤 Updating todo:', updateData);
 
     // فراخوانی API
-    //await todoStatusService.updateTodo(editingTask.id, updateData);
+    await todoService.updateTodo( updateData);
 
     // رفرش داده‌ها
     await fetchColumns();

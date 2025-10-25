@@ -78,6 +78,7 @@
 .kanban-board {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+   /* grid-template-columns: repeat(5, 1fr); */
   gap: 24px;
   align-items: start;
 }
@@ -163,9 +164,9 @@
 
 /* لیست تسک‌ها */
 .task-list {
-  padding: 16px;
+  padding: 10px;
   flex: 1;
-  min-height: 400px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -196,7 +197,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 1px;
 }
 
 .task-priority {
@@ -877,6 +878,7 @@
 
 .btn-edit {
   color: #ffc107;
+  margin-bottom: 2PX;
 }
 
 .btn-edit:hover {

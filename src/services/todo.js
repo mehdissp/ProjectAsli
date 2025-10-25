@@ -30,9 +30,19 @@ async createTodo(todoData) {
     }
   },
   
-async updateStatusTodo(todoData) {
+async updateTodo(todoData) {
   try {
-    const response = await api.post('/Todo/UpdateStatusTodo', todoData);
+    const response = await api.post('/Todo/UpdateTodo', todoData);
+    return response.data;
+  } catch (error) {
+    console.error('❌ Create todo service error:', error);
+    throw error;
+  }
+},
+
+async createTodo(todoData) {
+  try {
+    const response = await api.post('/Todo/InsertTodo', todoData);
     return response.data;
   } catch (error) {
     console.error('❌ Create todo service error:', error);
