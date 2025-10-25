@@ -20,6 +20,7 @@ import { todoService } from '../../../services/todo';
 import './TodoBoard.css';
 //import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import moment from 'moment-jalaali';
 
 const TodoBoard = () => {
   const [columns, setColumns] = useState({});
@@ -56,6 +57,29 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
     tags: []
   });
 
+// تابع تبدیل تاریخ به شمسی
+const convertToJalaali = (dateString) => {
+  if (!dateString) return 'تعیین نشده';
+  
+  try {
+    // اگر تاریخ انگلیسی هست
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      // اگر تاریخ شمسی هست (مثل 1402/10/25)
+      if (typeof dateString === 'string' && dateString.includes('/')) {
+        return dateString;
+      }
+      return 'تاریخ نامعتبر';
+    }
+    
+    // تبدیل به شمسی
+    return moment(date).format('jYYYY/jMM/jDD');
+  } catch (error) {
+    console.error('Error converting date:', error);
+    return 'تاریخ نامعتبر';
+  }
+};
+
   const fetchTags = async () => {
     try {
       setTagsLoading(true);
@@ -88,14 +112,17 @@ const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state
     const order = [];
       // تبدیل response API به فرمت داخلی
       const columnsData = {};
-      response.data.forEach(status => {
+    
+      response.data.columns.forEach(status => {
         columnsData[status.id] = {
           id: status.id.toString(),
-          title: status.name,
+          title: status.title,
           color: status.color,
           orderNum:status.orderNum,
-          tasks: [] // در مرحله بعد می‌تونیم تسک‌ها رو هم از API بگیریم
+          tasks: status.tasks
         };
+        console.log("ستون")
+          console.log(columnsData)
           order.push(status.id.toString());
         console.log( columnsData[status.id]);
       });
@@ -206,93 +233,8 @@ const handleCloseTaskModal = () => {
 };
 
 // مدیریت ایجاد تسک با تگ‌ها
-// const handleCreateTask = (e) => {
-//   e.preventDefault();
-//   if (!newTask.title.trim()) {
-//     alert('لطفا عنوان تسک را وارد کنید');
-//     return;
-//   }
 
-//   // تبدیل selectedTags به آرایه‌ای از اشیاء تگ کامل
-//   const selectedTagObjects = tags.filter(tag => selectedTags.includes(tag.id));
-//   console.log(selectedTagObjects);
-//   const task = {
-//     id: `task-${Date.now()}`,
-//     title: newTask.title,
-//     description: newTask.description,
-//     priority: newTask.priority,
-//     assignee: newTask.assignee || 'بدون اختصاص',
-//     dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
-//     tags: selectedTagObjects // ذخیره تگ‌های کامل با رنگ
-//   };
-//   console.log(task);
-//   setColumns(prev => ({
-//     ...prev,
-//     [selectedColumn]: {
-//       ...prev[selectedColumn],
-//       tasks: [...prev[selectedColumn].tasks, task]
-//     }
-//   }));
-
-//   handleCloseTaskModal();
-//   setNewTask({
-//     title: '',
-//     description: '',
-//     priority: 'medium',
-//     assignee: '',
-//     dueDate: '',
-//     tags: []
-//   });
-// };
 // مدیریت ایجاد تسک با تگ‌ها
-// const handleCreateTask = async (e) => {
-//   e.preventDefault();
-//   if (!newTask.title.trim()) {
-//     alert('لطفا عنوان تسک را وارد کنید');
-//     return;
-//   }
-
-//   try {
-//     // تبدیل تگ‌ها
-//     const todoTagsDtos = selectedTags.map(tagId => {
-//       const tag = tags.find(t => t.id === tagId);
-//       return { id: tag.id, name: tag.name };
-//     });
-
-//     // آماده‌سازی داده
-//     const todoData = {
-//       title: newTask.title,
-//       description: newTask.description || '',
-//       statusId: parseInt(selectedColumn),
-//       priority: newTask.priority === 'high' ? 2 : newTask.priority === 'low' ? 0 : 1,
-//       dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
-//       todoTagsDtos: todoTagsDtos
-//     };
-
-//     // اضافه کردن assignee اگر وجود دارد
-//     if (newTask.assignee) {
-//       todoData.assigneeId = newTask.assignee;
-//     }
-
-//     console.log('🚀 Creating todo:', todoData);
-
-//     // فراخوانی API
-//     await todoService.createTodo(todoData);
-
-//     // رفرش و بستن
-//     await fetchColumns();
-//     handleCloseTaskModal();
-//     setNewTask({ title: '', description: '', priority: 'medium', assignee: '', dueDate: '', tags: [] });
-//     setSelectedTags([]);
-    
-//     setSuccess('تسک با موفقیت ایجاد شد');
-//     setTimeout(() => setSuccess(''), 3000);
-
-//   } catch (error) {
-//     console.error('❌ Create todo error:', error);
-//     setError(error.response?.data || 'خطا در ایجاد تسک');
-//   }
-// };
 
 const handleCreateTask = async (e) => {
   e.preventDefault();
@@ -427,43 +369,11 @@ const handleCreateTask = async (e) => {
     setShowTaskModal(true);
   };
 
-  // const handleCreateTask = (e) => {
-  //   e.preventDefault();
-  //   if (!newTask.title.trim()) {
-  //     alert('لطفا عنوان تسک را وارد کنید');
-  //     return;
-  //   }
-
-  //   const task = {
-  //     id: `task-${Date.now()}`,
-  //     title: newTask.title,
-  //     description: newTask.description,
-  //     priority: newTask.priority,
-  //     assignee: newTask.assignee || 'بدون اختصاص',
-  //     dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
-  //     tags: newTask.tags
-  //   };
-
-  //   setColumns(prev => ({
-  //     ...prev,
-  //     [selectedColumn]: {
-  //       ...prev[selectedColumn],
-  //       tasks: [...prev[selectedColumn].tasks, task]
-  //     }
-  //   }));
-
-  //   setShowTaskModal(false);
-  //   setNewTask({
-  //     title: '',
-  //     description: '',
-  //     priority: 'medium',
-  //     assignee: '',
-  //     dueDate: '',
-  //     tags: []
-  //   });
-  // };
-
+ 
   const handleDragStart = (e, taskId, columnId) => {
+    console.log("draggggggggggggggggggg")
+        console.log(taskId)
+              console.log(columnId)
     e.dataTransfer.setData('taskId', taskId);
     e.dataTransfer.setData('fromColumn', columnId);
   };
@@ -478,12 +388,13 @@ const handleCreateTask = async (e) => {
   };
 
   const handleDrop = (e, toColumnId) => {
+    console.log("miyad dargg",toColumnId)
     e.preventDefault();
     e.currentTarget.classList.remove('drag-over');
     
     const taskId = e.dataTransfer.getData('taskId');
     const fromColumnId = e.dataTransfer.getData('fromColumn');
-    
+     console.log("miyad dargg",fromColumnId)
     if (fromColumnId === toColumnId) return;
 
     setColumns(prev => {
@@ -491,15 +402,16 @@ const handleCreateTask = async (e) => {
       const toColumn = prev[toColumnId];
       
       if (!fromColumn || !toColumn) return prev;
-      
-      const task = fromColumn.tasks.find(t => t.id === taskId);
+          console.log("miyad dargg",taskId)
+      const task = fromColumn.tasks.find(t => t.id.toString() === taskId);
+         console.log("miyad dargg",fromColumn.tasks)
       if (!task) return prev;
 
       return {
         ...prev,
         [fromColumnId]: {
           ...fromColumn,
-          tasks: fromColumn.tasks.filter(t => t.id !== taskId)
+          tasks: fromColumn.tasks.filter(t => t.id.toString()  !== taskId)
         },
         [toColumnId]: {
           ...toColumn,
@@ -663,9 +575,9 @@ const handleCreateTask = async (e) => {
       key={tag.id || index} 
       className="task-tag"
       style={{ 
-        backgroundColor: `${tag.color}20`, 
-        borderColor: tag.color,
-        color: tag.color
+        backgroundColor: `${tag.color}`, 
+        // borderColor: tag.color,
+        // color: tag.color
       }}
     >
       <span 
@@ -684,7 +596,7 @@ const handleCreateTask = async (e) => {
                     </div>
                     <div className="task-due-date">
                       <FiClock />
-                      <span>{task.dueDate}</span>
+                       <span>{convertToJalaali(task.dueDate)}</span>
                     </div>
                   </div>
                 </div>
