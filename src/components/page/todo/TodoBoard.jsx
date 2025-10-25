@@ -11,12 +11,13 @@ import {
   FiColumns,
   FiX,
   FiSave,
-  FiRefreshCw
+  FiRefreshCw  ,FiEye ,FiMessageSquare  // اضافه کردن آیکون چشم
 } from 'react-icons/fi';
 import ColumnManager from './ColumnManager';
 import UserSearchSelect from './UserSearchSelect'
 import { todoStatusService } from '../../../services/todoStatusService';
 import { todoService } from '../../../services/todo';
+import {commentService} from '../../../services/comment'
 import './TodoBoard.css';
 //import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -42,6 +43,14 @@ const [showEditModal, setShowEditModal] = useState(false);
 
 const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state برای ترتیب
   const location = useLocation();
+
+
+const [selectedTask, setSelectedTask] = useState(null);
+const [showTaskDetail, setShowTaskDetail] = useState(false);
+const [comments, setComments] = useState([]);
+const [newComment, setNewComment] = useState('');
+const [commentLoading, setCommentLoading] = useState(false);
+
   
   // دریافت projectId از state
   const projectId = location.state?.projectId;
@@ -126,6 +135,8 @@ const convertToJalaali = (dateString) => {
           title: status.title,
           color: status.color,
           orderNum:status.orderNum,
+          countComment:status.countComment,
+          isOverdute:status.isOverdute,
           tasks: status.tasks
         };
         console.log("ستون")
@@ -477,6 +488,81 @@ const handleCreateTask = async (e) => {
     }
   };
 
+// مدیریت کلیک روی تسک
+const handleTaskClick = async (taskId, columnId) => {
+  try {
+    // پیدا کردن تسک از state
+    const task = columns[columnId]?.tasks.find(t => t.id.toString() === taskId.toString());
+    
+    if (!task) {
+      throw new Error('تسک مورد نظر یافت نشد');
+    }
+
+    console.log('📋 Opening task details:', task);
+
+    // تنظیم تسک انتخاب شده
+    setSelectedTask({
+      ...task,
+      columnId: columnId
+    });
+
+    // دریافت کامنت‌های تسک
+    setCommentLoading(true);
+    const commentsResponse = await commentService.getTaskComments(taskId);
+    setComments(commentsResponse.data || commentsResponse || []);
+    
+    setShowTaskDetail(true);
+
+  } catch (error) {
+    console.error('❌ Error opening task details:', error);
+    setError('خطا در بارگذاری جزئیات تسک');
+  } finally {
+    setCommentLoading(false);
+  }
+};
+const handleCloseTaskDetail = () => {
+  setShowTaskDetail(false);
+  setSelectedTask(null);
+  setComments([]);
+  setNewComment('');
+};
+// مدیریت افزودن کامنت جدید
+const handleAddComment = async (e) => {
+  e.preventDefault();
+  if (!newComment.trim()) {
+    alert('لطفا متن کامنت را وارد کنید');
+    return;
+  }
+
+  try {
+    setCommentLoading(true);
+    
+    const commentData = {
+      content: newComment,
+      // اگر نیاز به authorId دارید از user context استفاده کنید
+    };
+
+    await todoStatusService.addComment(selectedTask.id, commentData);
+    
+    // رفرش کامنت‌ها
+    const commentsResponse = await todoStatusService.getTaskComments(selectedTask.id);
+    setComments(commentsResponse.data || commentsResponse || []);
+    
+    // پاک کردن فیلد کامنت
+    setNewComment('');
+    
+    setSuccess('کامنت با موفقیت افزوده شد');
+    
+  } catch (error) {
+    console.error('❌ Error adding comment:', error);
+    setError('خطا در افزودن کامنت');
+  } finally {
+    setCommentLoading(false);
+  }
+};
+
+
+
   const handleReorderColumns = (newColumnOrder) => {
       setColumnOrder(newColumnOrder);
     // اگر API برای مرتب سازی داریم، اینجا call می‌کنیم
@@ -572,7 +658,19 @@ const handleCreateTask = async (e) => {
   //   });
   // };
 
-
+// تابع برای تعیین کلاس بر اساس مقدار isOverdue
+const getOverdueClass = (overdueValue) => {
+  switch(overdueValue) {
+    case 1:
+      return 'overdue-red';    // قرمز
+    case 2:
+      return 'overdue-yellow'; // زرد
+    case 3:
+      return 'overdue-green';  // سبز
+    default:
+      return '';               // هیچ کلاسی برای 0 یا سایر مقادیر
+  }
+};
 
   const handleDrop = async (e, toColumnId) => {
   e.preventDefault();
@@ -739,9 +837,12 @@ await  todoService.deleteTodo(taskId);
               {column.tasks.map(task => (
                 <div
                   key={task.id}
-                  className="task-card"
+                //  className={`task-card ${task.isOverdute ? 'flagged' : ''}`}
+             className={`task-card ${task.isOverdute === 1 ? 'overdue-red' : ''} ${task.isOverdute === 2 ? 'overdue-yellow' : ''} ${task.isOverdute === 3 ? 'overdue-green' : ''}`}
+
                   draggable
                   onDragStart={(e) => handleDragStart(e, task.id, column.id)}
+
                 >
                   <div className="task-header">
                     <div className="task-priority">
@@ -750,8 +851,21 @@ await  todoService.deleteTodo(taskId);
                         {task.priority === 'high' ? 'بالا' : 
                          task.priority === 'medium' ? 'متوسط' : 'پایین'}
                       </span>
+                          {/* آیکون وضعیت overdue */}
+
                     </div>
                     <div className="task-actions">
+                        {/* دکمه مشاهده جزئیات */}
+  <button 
+    className="btn-icon btn-view"
+    onClick={(e) => {
+      e.stopPropagation();
+      handleTaskClick(task.id, column.id);
+    }}
+    title="مشاهده جزئیات"
+  >
+    <FiEye />
+  </button>
                         <button 
     className="btn-icon btn-edit"
     onClick={() => handleEditTaskClick(task.id, column.id)}
@@ -812,6 +926,11 @@ await  todoService.deleteTodo(taskId);
                     <div className="task-due-date">
                       <FiClock />
                        <span>{convertToJalaali(task.dueDate)}</span>
+                    </div>
+
+                    <div className="task-due-date">
+                      <FiMessageSquare />
+                       <span>{task.countComment}</span>
                     </div>
                   </div>
                 </div>
@@ -1014,6 +1133,161 @@ await  todoService.deleteTodo(taskId);
           </button>
         </div>
       </form>
+    </div>
+  </div>
+)}
+
+{/* مودال جزئیات تسک */}
+{showTaskDetail && selectedTask && (
+  <div className="modal-overlay task-detail-overlay" onClick={() => setShowTaskDetail(false)}>
+    <div className="modal-content task-detail-modal" onClick={(e) => e.stopPropagation()}>
+      {/* هدر مودال */}
+      <div className="task-detail-header">
+        <div className="task-detail-title">
+          <h2>{selectedTask.title}</h2>
+          <div className="task-meta">
+            <span className="task-id">#{selectedTask.id}</span>
+            <span 
+              className="task-status"
+              style={{ color: columns[selectedTask.columnId]?.color }}
+            >
+              {columns[selectedTask.columnId]?.title}
+            </span>
+          </div>
+        </div>
+        <button 
+          className="close-btn"
+          onClick={() => setShowTaskDetail(false)}
+        >
+          <FiX />
+        </button>
+      </div>
+
+      {/* بدنه مودال */}
+      <div className="task-detail-body">
+        {/* سایدبار اطلاعات تسک */}
+        <div className="task-sidebar">
+          <div className="sidebar-section">
+            <h4>اطلاعات تسک</h4>
+            <div className="info-item">
+              <strong>اولویت:</strong>
+              <span className={`priority-badge ${selectedTask.priority}`}>
+                {selectedTask.priority === 'high' ? 'بالا' : 
+                 selectedTask.priority === 'medium' ? 'متوسط' : 'پایین'}
+              </span>
+            </div>
+            <div className="info-item">
+              <strong>مسئول:</strong>
+              <span>{selectedTask.assignee || 'تعیین نشده'}</span>
+            </div>
+            <div className="info-item">
+              <strong>تاریخ انجام:</strong>
+        
+{convertToJalaali(selectedTask.dueDate)}
+                                  
+            </div>
+            <div className="info-item">
+              <strong>ایجاد شده توسط:</strong>
+              <span>{selectedTask.userNameCreator || 'نامشخص'}</span>
+            </div>
+          </div>
+
+          {/* تگ‌ها */}
+          {selectedTask.tags && selectedTask.tags.length > 0 && (
+            <div className="sidebar-section">
+              <h4>تگ‌ها</h4>
+              <div className="task-tags">
+                {selectedTask.tags.map((tag, index) => (
+                  <span 
+                    key={tag.id || index}
+                    className="task-tag"
+                    style={{ 
+                      backgroundColor: `${tag.color}`, 
+                      // borderColor: tag.color,
+                      // color: tag.color
+                    }}
+                  >
+                    <span 
+                      className="tag-color-dot"
+                      style={{ backgroundColor: tag.color }}
+                    ></span>
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* محتوای اصلی */}
+        <div className="task-main-content">
+          {/* توضیحات تسک */}
+          <div className="description-section">
+            <h4>توضیحات</h4>
+            <div className="description-content">
+              {selectedTask.description || 'توضیحاتی برای این تسک وارد نشده است.'}
+            </div>
+          </div>
+
+          {/* بخش کامنت‌ها */}
+          <div className="comments-section">
+            <h4>کامنت‌ها ({comments.length})</h4>
+            
+            {/* لیست کامنت‌ها */}
+            <div className="comments-list">
+              {commentLoading ? (
+                <div className="loading">در حال بارگذاری کامنت‌ها...</div>
+              ) : comments.length > 0 ? (
+                comments.map(comment => (
+                  <div key={comment.id} className="comment-item">
+                    <div className="comment-header">
+                      <div className="comment-author">
+                        <strong>{comment.userAuthor || 'کاربر'}</strong>
+                      </div>
+                      <div className="comment-date">
+                      {comment.createdAt ? new Date(comment.createdAt).toLocaleString('fa-IR', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit'
+}) : ''}
+                      </div>
+                    </div>
+                    <div className="comment-content">
+                      {comment.message}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="no-comments">هنوز کامنتی وجود ندارد.</div>
+              )}
+            </div>
+
+            {/* فرم افزودن کامنت جدید */}
+            <form onSubmit={handleAddComment} className="comment-form">
+              <div className="form-group">
+                <textarea
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="کامنت خود را اینجا بنویسید..."
+                  rows="4"
+                  disabled={commentLoading}
+                />
+              </div>
+              <div className="form-actions">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={commentLoading || !newComment.trim()}
+                >
+                  {commentLoading ? 'در حال ارسال...' : 'ارسال کامنت'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 )}

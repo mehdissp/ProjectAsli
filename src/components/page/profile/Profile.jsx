@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
+import moment from 'moment-jalaali';
 import { 
   FaUser, 
   FaEnvelope, 
@@ -40,7 +41,7 @@ const Profile = () => {
       setFormData({
         name: user.name || user.username || '',
         email: user.email || '',
-        phone: user.phone || '+98 912 345 6789',
+        phone: user.mobileNumber || '+98 912 345 6789',
         location: user.location || 'تهران، ایران',
         bio: user.bio || 'مدیر سیستم با ۵ سال سابقه در زمینه مدیریت نرم‌افزار',
         department: user.department || 'فناوری اطلاعات',
@@ -68,7 +69,27 @@ const Profile = () => {
       console.error('Error updating profile:', error);
     }
   };
-
+const convertToJalaali = (dateString) => {
+  if (!dateString) return 'تعیین نشده';
+  
+  try {
+    // اگر تاریخ انگلیسی هست
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      // اگر تاریخ شمسی هست (مثل 1402/10/25)
+      if (typeof dateString === 'string' && dateString.includes('/')) {
+        return dateString;
+      }
+      return 'تاریخ نامعتبر';
+    }
+    
+    // تبدیل به شمسی
+    return moment(date).format('jYYYY/jMM/jDD');
+  } catch (error) {
+    console.error('Error converting date:', error);
+    return 'تاریخ نامعتبر';
+  }
+};
   const handleCancel = () => {
   
     setFormData({
@@ -301,7 +322,7 @@ const Profile = () => {
                     تاریخ عضویت
                   </label>
                   <div className="form-display">
-                    {user?.joinDate || '۱۴۰۲/۰۱/۱۵'}
+                    {convertToJalaali(user?.createdAt) || '۱۴۰۲/۰۱/۱۵'}
                   </div>
                 </div>
               </div>

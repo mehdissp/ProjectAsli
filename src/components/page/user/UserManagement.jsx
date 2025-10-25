@@ -408,7 +408,7 @@ const UserManagement = () => {
         </div>
       )}
 
-      <div className="user-stats">
+      <div className="project-stats">
         <div className="stat-card">
           <div className="stat-icon total">👥</div>
           <div className="stat-content">

@@ -192,6 +192,7 @@ color: bisque;
 }
 
 .menu-icon {
+  color:whitesmoke !important;
   margin-left: 0.75rem;
   font-size: 1.125rem;
   width: 20px;

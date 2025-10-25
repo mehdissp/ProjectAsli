@@ -885,3 +885,250 @@
   color: #e0a800;
   background-color: rgba(255, 193, 7, 0.1);
 }
+
+
+/* مودال جزئیات تسک */
+.task-detail-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+}
+
+.task-detail-modal {
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  border-bottom: 1px solid #e1e4e8;
+  background: #f6f8fa;
+}
+
+.task-detail-title h2 {
+  margin: 0 0 8px 0;
+  color: #24292e;
+}
+
+.task-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: #586069;
+}
+
+.task-id {
+  background: #e1e4e8;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.task-status {
+  font-weight: 500;
+}
+
+.task-detail-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.task-sidebar {
+  width: 300px;
+  padding: 20px;
+  border-left: 1px solid #e1e4e8;
+  background: #fafbfc;
+  overflow-y: auto;
+}
+
+.task-main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  margin-bottom: 24px;
+}
+
+.sidebar-section h4 {
+  margin: 0 0 12px 0;
+  color: #24292e;
+  font-size: 14px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.priority-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.priority-badge.high {
+  background: #ffebe9;
+  color: #cf222e;
+}
+
+.priority-badge.medium {
+  background: #fff8c5;
+  color: #9a6700;
+}
+
+.priority-badge.low {
+  background: #dafbe1;
+  color: #1a7f37;
+}
+
+.description-section,
+.comments-section {
+  margin-bottom: 24px;
+}
+
+.description-section h4,
+.comments-section h4 {
+  margin: 0 0 12px 0;
+  color: #24292e;
+}
+
+.description-content {
+  background: #f6f8fa;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e1e4e8;
+  line-height: 1.5;
+}
+
+.comments-list {
+  margin-bottom: 20px;
+}
+
+.comment-item {
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: #24292e;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #586069;
+}
+
+.comment-content {
+  line-height: 1.5;
+  color: #24292e;
+}
+
+.no-comments {
+  text-align: center;
+  color: #586069;
+  padding: 20px;
+  background: #f6f8fa;
+  border-radius: 6px;
+  border: 1px dashed #e1e4e8;
+}
+
+.comment-form {
+  background: #f6f8fa;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e1e4e8;
+}
+
+.comment-form textarea {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .task-detail-body {
+    flex-direction: column;
+  }
+  
+  .task-sidebar {
+    width: 100%;
+    border-left: none;
+    border-bottom: 1px solid #e1e4e8;
+  }
+}
+
+.btn-view {
+  color: #17a2b8;
+}
+
+.btn-view:hover {
+  color: #138496;
+  background-color: rgba(23, 162, 184, 0.1);
+}
+
+/* اگر نیاز به تنظیم مجدد فاصله‌ها دارید */
+.task-actions {
+  display: flex;
+  gap: 4px; /* فاصله بین آیکون‌ها */
+}
+
+.btn-icon {
+  padding: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.btn-icon:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.close-btn{
+ 
+  background-color: red !important;
+}
+
+
+
+/* حالت ۱: قرمز */
+.task-card.overdue-red {
+  background: #ffebee; /* background قرمز روشن */
+  border: 1px solid #e1e4e8; /* border معمولی نگه دارید */
+}
+
+/* حالت ۲: زرد */
+.task-card.overdue-yellow {
+  background: #fffde7; /* background زرد روشن */
+  border: 1px solid #e1e4e8;
+}
+
+/* حالت ۳: سبز */
+.task-card.overdue-green {
+  background: #e8f5e8; /* background سبز روشن */
+  border: 1px solid #e1e4e8;
+}
