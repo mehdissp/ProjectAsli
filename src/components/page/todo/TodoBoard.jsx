@@ -272,7 +272,7 @@ const handleUpdateTask = async (e) => {
       description: editingTask.description,
       statusId: parseInt(editingTask.statusId),
       priority: priorityMap[editingTask.priority] || 1,
-      dueDate: editingTask.dueDate,
+  dueDate: editingTask.dueDate ? moment(editingTask.dueDate).format('jYYYY/jMM/jDD') : null,
       todoTagsDtos: todoTagsDtos,
       userId: editingTask.assignee || null
     };
@@ -911,16 +911,25 @@ await  todoService.deleteTodo(taskId);
               placeholder="انتخاب مسئول"
             />
           </div>
-
-          <div className="form-group">
-            <label>تاریخ انجام</label>
-            <input
-              type="text"
-              value={editingTask?.dueDate || ''}
-              onChange={(e) => setEditingTask(prev => ({ ...prev, dueDate: e.target.value }))}
-              placeholder="مثال: 1402/10/25"
-            />
-          </div>
+<div className="form-group">
+  <label>تاریخ انجام</label>
+  <input
+    type="text"
+    value={moment(editingTask.dueDate || '').format('jYYYY/jMM/jDD')}
+    onChange={(e) => {
+      const persianDate = e.target.value;
+      // تبدیل مستقیم به میلادی
+      const momentObj = moment(persianDate, 'jYYYY/jMM/jDD');
+      if (momentObj.isValid()) {
+        setEditingTask(prev => ({ 
+          ...prev, 
+          dueDate: momentObj.toDate()  // تاریخ میلادی
+        }));
+      }
+    }}
+    placeholder="مثال: 1402/10/25"
+  />
+</div>
         </div>
 
         {/* مولتی سلکت تگ‌ها */}
