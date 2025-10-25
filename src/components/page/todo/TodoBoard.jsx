@@ -283,6 +283,7 @@ const handleUpdateTask = async (e) => {
       description: editingTask.description,
       statusId: parseInt(editingTask.statusId),
       priority: priorityMap[editingTask.priority] || 1,
+         isArchive: editingTask.isArchive || false, // اضافه کردن isArchive
   dueDate: editingTask.dueDate ? moment(editingTask.dueDate).format('jYYYY/jMM/jDD') : null,
       todoTagsDtos: todoTagsDtos,
       userId: editingTask.assignee || null
@@ -307,7 +308,7 @@ const handleUpdateTask = async (e) => {
 
   } catch (error) {
     console.error('❌ Error updating task:', error);
-    setError(error.response?.data?.message || 'خطا در ویرایش تسک');
+    setError(error.response?.data?.data.message || 'خطا در ویرایش تسک');
   }
 };
 // مدیریت کلیک روی ویرایش تسک
@@ -380,7 +381,8 @@ const handleEditTaskClick = (taskId, columnId) => {
       assignee: task.userIdTodo || task.userIdTodo || '',
       dueDate: task.dueDate,
       statusId: foundColumnId, // ستونی که تسک توش پیدا شد
-      tags: task.tags || []
+      tags: task.tags || [],
+         isArchive: task.isArchive || false // اضافه کردن isArchive
     });
 
     setSelectedTags(task.tags.map(tag => tag.id));
@@ -1050,7 +1052,28 @@ await  todoService.deleteTodo(taskId);
   />
 </div>
         </div>
-
+      {/* چک‌باکس isArchive */}
+{/* چک‌باکس isArchive با ایکون */}
+<div className="form-group checkbox-group">
+  <label className="checkbox-label with-icon">
+    <input
+      type="checkbox"
+      checked={editingTask?.isArchive || false}
+      onChange={(e) => setEditingTask(prev => ({ 
+        ...prev, 
+        isArchive: e.target.checked 
+      }))}
+      className="checkbox-input"
+    />
+    <span className="checkmark"></span>
+    <span className="checkbox-text">
+      آرشیو کردن تسک
+    </span>
+  </label>
+  <small className="checkbox-help">
+    ✓ در صورت انتخاب، این تسک به بخش آرشیو منتقل شده و در لیست اصلی نمایش داده نمی‌شود
+  </small>
+</div>
         {/* مولتی سلکت تگ‌ها */}
         <div className="form-group">
           <label>تگ‌ها</label>

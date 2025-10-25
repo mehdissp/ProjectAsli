@@ -1132,3 +1132,121 @@
   background: #e8f5e8; /* background سبز روشن */
   border: 1px solid #e1e4e8;
 }
+/* استایل پیشرفته چک‌باکس */
+.checkbox-group {
+  margin: 20px 0;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.checkbox-group:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 14px;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+
+.checkbox-label:hover {
+  color: #007bff;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #cbd5e0;
+  border-radius: 6px;
+  margin-left: 10px;
+  position: relative;
+  transition: all 0.3s ease;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-input:checked + .checkmark {
+  background-color: #007bff;
+  border-color: #007bff;
+  animation: checkmarkPop 0.3s ease;
+}
+
+.checkbox-input:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.checkbox-input:checked + .checkmark:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.checkmark:hover {
+  border-color: #007bff;
+  transform: scale(1.05);
+}
+
+.checkbox-input:focus + .checkmark {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.checkbox-help {
+  color: #718096;
+  font-size: 12px;
+  margin-right: 32px;
+  display: block;
+  line-height: 1.4;
+}
+
+/* حالت فعال و غیرفعال */
+.checkbox-group.active {
+  background: #e3f2fd;
+  border-color: #007bff;
+}
+
+.checkbox-group.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* نسخه alternative با ایکون */
+.checkbox-label.with-icon {
+  position: relative;
+}
+
+.checkbox-label.with-icon::before {
+  content: '📁';
+  margin-left: 8px;
+  font-size: 16px;
+}
