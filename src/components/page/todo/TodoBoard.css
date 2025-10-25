@@ -874,3 +874,12 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.btn-edit {
+  color: #ffc107;
+}
+
+.btn-edit:hover {
+  color: #e0a800;
+  background-color: rgba(255, 193, 7, 0.1);
+}

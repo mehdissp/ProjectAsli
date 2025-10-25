@@ -167,7 +167,7 @@ const UserSearchSelect = ({ value, onChange, placeholder = "انتخاب مسئ�
     totalCount: 0,
     hasMore: false
   });
-  
+  console.log("edit",value.toString());
   const dropdownRef = useRef(null);
 
   const fetchUsers = useCallback(async (pageNumber = 1, search = '', isNewSearch = false) => {
@@ -178,6 +178,7 @@ const UserSearchSelect = ({ value, onChange, placeholder = "انتخاب مسئ�
       const data = response.data || response;
       
       const items = data.items || data.Items || [];
+     console.log("injaaaaaaaa",items)
       const totalCount = data.totalCount || data.TotalCount || 0;
       const totalPages = data.totalPages || data.TotalPages || 0;
       
@@ -206,6 +207,7 @@ const UserSearchSelect = ({ value, onChange, placeholder = "انتخاب مسئ�
   }, [pagination.pageSize]);
 
   useEffect(() => {
+      fetchUsers(1, '', true);
     if (isOpen) {
       fetchUsers(1, '', true);
     }
@@ -240,8 +242,12 @@ const UserSearchSelect = ({ value, onChange, placeholder = "انتخاب مسئ�
     }
   };
 
-  const selectedUser = users.find(user => user.id === value || user.Id === value);
-
+const selectedUser = users.find(user => 
+  user.id.toString().toLowerCase() === value.toLowerCase() || 
+  (user.Id && user.Id.toString().toLowerCase() === value.toLowerCase())
+);
+console.log("userss",users)
+  console.log("user",selectedUser)
   return (
     <div className="user-search-select" ref={dropdownRef}>
       <div 

@@ -22,6 +22,9 @@ import './TodoBoard.css';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment-jalaali';
 
+
+
+
 const TodoBoard = () => {
   const [columns, setColumns] = useState({});
   const [loading, setLoading] = useState(true);
@@ -32,6 +35,10 @@ const TodoBoard = () => {
   const [showColumnManager, setShowColumnManager] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState(null);
+
+
+  const [editingTask, setEditingTask] = useState(null);
+const [showEditModal, setShowEditModal] = useState(false);
 
 const [columnOrder, setColumnOrder] = useState([]); // اضافه کردن state برای ترتیب
   const location = useLocation();
@@ -231,8 +238,147 @@ const handleCloseTaskModal = () => {
   setSelectedTags([]);
   setShowTagDropdown(false);
 };
-
+const handleCloseEditModal = () => {
+  setShowEditModal(false);
+  setEditingTask(null);
+  setSelectedTags([]);
+  setShowTagDropdown(false);
+};
 // مدیریت ایجاد تسک با تگ‌ها
+// مدیریت آپدیت تسک
+const handleUpdateTask = async (e) => {
+  e.preventDefault();
+  if (!editingTask.title.trim()) {
+    alert('لطفا عنوان تسک را وارد کنید');
+    return;
+  }
+
+  try {
+    // تبدیل داده‌ها به فرمت API
+    const priorityMap = {
+      'low': 0,
+      'medium': 1,
+      'high': 2
+    };
+
+    const todoTagsDtos = selectedTags.map(tagId => {
+      const tag = tags.find(t => t.id === tagId);
+      return { id: tag.id, name: tag.name };
+    });
+
+    const updateData = {
+      title: editingTask.title,
+      description: editingTask.description,
+      statusId: parseInt(editingTask.statusId),
+      priority: priorityMap[editingTask.priority] || 1,
+      dueDate: editingTask.dueDate,
+      todoTagsDtos: todoTagsDtos,
+      assigneeId: editingTask.assignee || null
+    };
+
+    console.log('📤 Updating todo:', updateData);
+
+    // فراخوانی API
+    //await todoStatusService.updateTodo(editingTask.id, updateData);
+
+    // رفرش داده‌ها
+    await fetchColumns();
+
+    // بستن مودال
+    setShowEditModal(false);
+    setEditingTask(null);
+    setSelectedTags([]);
+
+    // نمایش پیام موفقیت
+    setSuccess('تسک با موفقیت ویرایش شد');
+    setTimeout(() => setSuccess(''), 3000);
+
+  } catch (error) {
+    console.error('❌ Error updating task:', error);
+    setError(error.response?.data?.message || 'خطا در ویرایش تسک');
+  }
+};
+// مدیریت کلیک روی ویرایش تسک
+// const handleEditTaskClick = async (taskId, columnId) => {
+//   try {
+//     // دریافت اطلاعات تسک از API
+//     const response = await todoStatusService.getTodoById(taskId);
+//     const task = response.data || response;
+    
+//     // تبدیل priority به فرمت داخلی
+//     const priorityMap = {
+//       0: 'low',
+//       1: 'medium', 
+//       2: 'high'
+//     };
+    
+//     // پر کردن فرم ویرایش
+//     setEditingTask({
+//       id: task.id,
+//       title: task.title,
+//       description: task.description,
+//       priority: priorityMap[task.priority] || 'medium',
+//       assignee: task.assigneeId || '',
+//       dueDate: task.dueDate ? new Date(task.dueDate).toLocaleDateString('fa-IR') : '',
+//       statusId: task.statusId.toString(),
+//       tags: task.tags || []
+//     });
+    
+//     setSelectedTags(task.tags.map(tag => tag.id));
+//     setShowEditModal(true);
+    
+//   } catch (error) {
+//     console.error('❌ Error fetching task for edit:', error);
+//     setError('خطا در دریافت اطلاعات تسک');
+//   }
+// };
+
+const handleEditTaskClick = (taskId, columnId) => {
+  try {
+    // پیدا کردن تسک در تمام ستون‌ها (اگر ممکنه ستون عوض شده باشه)
+    let task = null;
+    let foundColumnId = columnId;
+
+    // اول در ستون فعلی جستجو کن
+    task = columns[columnId]?.tasks.find(t => t.id.toString() === taskId.toString());
+    
+    // اگر پیدا نشد، در تمام ستون‌ها جستجو کن
+    if (!task) {
+      for (const [colId, column] of Object.entries(columns)) {
+        task = column.tasks.find(t => t.id.toString() === taskId.toString());
+        if (task) {
+          foundColumnId = colId;
+          break;
+        }
+      }
+    }
+
+    if (!task) {
+      throw new Error('تسک مورد نظر یافت نشد');
+    }
+
+    console.log('📝 Editing task:', task.userIdTodo );
+
+    // پر کردن فرم
+    setEditingTask({
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      priority: task.priority,
+      assignee: task.userIdTodo || task.userIdTodo || '',
+      dueDate: task.dueDate,
+      statusId: foundColumnId, // ستونی که تسک توش پیدا شد
+      tags: task.tags || []
+    });
+
+    setSelectedTags(task.tags.map(tag => tag.id));
+    setShowEditModal(true);
+
+  } catch (error) {
+    console.error('❌ Error in edit task:', error);
+    setError(error.message || 'خطا در ویرایش تسک');
+  }
+};
 
 // مدیریت ایجاد تسک با تگ‌ها
 
@@ -387,31 +533,79 @@ const handleCreateTask = async (e) => {
     e.currentTarget.classList.remove('drag-over');
   };
 
-  const handleDrop = (e, toColumnId) => {
-    console.log("miyad dargg",toColumnId)
-    e.preventDefault();
-    e.currentTarget.classList.remove('drag-over');
+  // const handleDrop =   (e, toColumnId) => {
+  //   // console.log("miyad dargg",toColumnId)
+  //   e.preventDefault();
+  //   e.currentTarget.classList.remove('drag-over');
     
-    const taskId = e.dataTransfer.getData('taskId');
-    const fromColumnId = e.dataTransfer.getData('fromColumn');
-     console.log("miyad dargg",fromColumnId)
-    if (fromColumnId === toColumnId) return;
+  //   const taskId = e.dataTransfer.getData('taskId');
+  //   const fromColumnId = e.dataTransfer.getData('fromColumn');
+  //   //  console.log("miyad dargg",fromColumnId)
+  //   if (fromColumnId === toColumnId) return;
 
+  //   setColumns(prev =>  {
+  //     const fromColumn = prev[fromColumnId];
+  //     const toColumn = prev[toColumnId];
+      
+  //     if (!fromColumn || !toColumn) return prev;
+  //         console.log("miyad dargg",taskId,toColumnId)
+  //     const task = fromColumn.tasks.find(t => t.id.toString() === taskId);
+
+  //         await todoService.createTodo(todoData);
+  //        console.log("miyad dargg",fromColumn.tasks)
+         
+
+  //     if (!task) return prev;
+
+  //     return {
+  //       ...prev,
+  //       [fromColumnId]: {
+  //         ...fromColumn,
+  //         tasks: fromColumn.tasks.filter(t => t.id.toString()  !== taskId)
+  //       },
+  //       [toColumnId]: {
+  //         ...toColumn,
+  //         tasks: [...toColumn.tasks, task]
+  //       }
+  //     };
+  //   });
+  // };
+
+
+
+  const handleDrop = async (e, toColumnId) => {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  
+  const taskId = e.dataTransfer.getData('taskId');
+  const fromColumnId = e.dataTransfer.getData('fromColumn');
+  
+  if (fromColumnId === toColumnId) return;
+
+  try {
+    // اول API رو call کن
+    const todoData = {
+      id:parseInt(taskId),
+      statusId: parseInt(toColumnId),
+      // سایر فیلدهای لازم
+    };
+    await todoService.updateStatusTodo(todoData); // یا createTodo بسته به منطق شما
+    
+    // سپس state رو آپدیت کن
     setColumns(prev => {
       const fromColumn = prev[fromColumnId];
       const toColumn = prev[toColumnId];
       
       if (!fromColumn || !toColumn) return prev;
-          console.log("miyad dargg",taskId)
+      
       const task = fromColumn.tasks.find(t => t.id.toString() === taskId);
-         console.log("miyad dargg",fromColumn.tasks)
       if (!task) return prev;
 
       return {
         ...prev,
         [fromColumnId]: {
           ...fromColumn,
-          tasks: fromColumn.tasks.filter(t => t.id.toString()  !== taskId)
+          tasks: fromColumn.tasks.filter(t => t.id.toString() !== taskId)
         },
         [toColumnId]: {
           ...toColumn,
@@ -419,17 +613,30 @@ const handleCreateTask = async (e) => {
         }
       };
     });
-  };
-
-  const handleDeleteTask = (columnId, taskId) => {
+    
+  } catch (error) {
+    console.error('❌ Error updating task status:', error);
+    setError('خطا در به‌روزرسانی وضعیت تسک');
+  }
+};
+  const handleDeleteTask = async (columnId, taskId) => {
     if (window.confirm('آیا از حذف این تسک اطمینان دارید؟')) {
-      setColumns(prev => ({
+      try{
+await  todoService.deleteTodo(taskId);
+        setColumns(prev => ({
         ...prev,
         [columnId]: {
           ...prev[columnId],
           tasks: prev[columnId].tasks.filter(t => t.id !== taskId)
         }
       }));
+      }
+         catch (error) {
+              console.error('❌ nemiad:');
+    console.error('❌ Error creating todo:', error.response.data.data.message);
+     setError(error.response?.data?.data?.message || 'خطا در ایجاد تسک');
+  }
+
     }
   };
   const handleAssigneeChange = (userId) => {
@@ -544,6 +751,13 @@ const handleCreateTask = async (e) => {
                       </span>
                     </div>
                     <div className="task-actions">
+                        <button 
+    className="btn-icon btn-edit"
+    onClick={() => handleEditTaskClick(task.id, column.id)}
+    title="ویرایش تسک"
+  >
+    <FiEdit2 />
+  </button>
                       <button 
                         className="btn-icon btn-delete"
                         onClick={() => handleDeleteTask(column.id, task.id)}
@@ -625,7 +839,174 @@ const handleCreateTask = async (e) => {
         onReorderColumns={handleReorderColumns}
         loading={loading}
       />
+{/* مودال ویرایش تسک */}
+{showEditModal && (
+  <div className="modal-overlay task-modal-overlay" onClick={() => setShowEditModal(false)}>
+    <div className="modal-content task-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header">
+        <h2>ویرایش تسک</h2>
+        <button className="close-btn" onClick={() => setShowEditModal(false)}>
+          <FiX />
+        </button>
+      </div>
 
+      <form onSubmit={handleUpdateTask}>
+        <div className="form-group">
+          <label>عنوان تسک *</label>
+          <input
+            type="text"
+            value={editingTask?.title || ''}
+            onChange={(e) => setEditingTask(prev => ({ ...prev, title: e.target.value }))}
+            placeholder="عنوان تسک را وارد کنید"
+            required
+            autoFocus
+          />
+        </div>
+
+        <div className="form-group">
+          <label>توضیحات</label>
+          <textarea
+            value={editingTask?.description || ''}
+            onChange={(e) => setEditingTask(prev => ({ ...prev, description: e.target.value }))}
+            placeholder="توضیحات تسک"
+            rows="3"
+          />
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>اولویت</label>
+            <select
+              value={editingTask?.priority || 'medium'}
+              onChange={(e) => setEditingTask(prev => ({ ...prev, priority: e.target.value }))}
+            >
+              <option value="low">پایین</option>
+              <option value="medium">متوسط</option>
+              <option value="high">بالا</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>ستون</label>
+            <select
+              value={editingTask?.statusId || ''}
+              onChange={(e) => setEditingTask(prev => ({ ...prev, statusId: e.target.value }))}
+            >
+              {Object.values(columns).sort((a, b) => a.orderNum - b.orderNum).map(column => (
+                <option key={column.id} value={column.id}>
+                  {column.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>مسئول</label>
+            <UserSearchSelect
+              value={editingTask?.assignee || ''}
+              onChange={(userId) => setEditingTask(prev => ({ ...prev, assignee: userId }))}
+              placeholder="انتخاب مسئول"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>تاریخ انجام</label>
+            <input
+              type="text"
+              value={editingTask?.dueDate || ''}
+              onChange={(e) => setEditingTask(prev => ({ ...prev, dueDate: e.target.value }))}
+              placeholder="مثال: 1402/10/25"
+            />
+          </div>
+        </div>
+
+        {/* مولتی سلکت تگ‌ها */}
+        <div className="form-group">
+          <label>تگ‌ها</label>
+          <div className="tags-selector">
+            <div 
+              className="tags-input"
+              onClick={() => setShowTagDropdown(!showTagDropdown)}
+            >
+              <div className="selected-tags">
+                {selectedTags.map(tagId => {
+                  const tag = tags.find(t => t.id === tagId);
+                  return tag ? (
+                    <span 
+                      key={tag.id}
+                      className="selected-tag"
+                      style={{ backgroundColor: tag.color + '20', borderColor: tag.color }}
+                      onClick={(e) => handleRemoveTag(tag.id, e)}
+                    >
+                      <span 
+                        className="tag-color-dot"
+                        style={{ backgroundColor: tag.color }}
+                      ></span>
+                      {tag.name}
+                      <span className="remove-tag">×</span>
+                    </span>
+                  ) : null;
+                })}
+                {selectedTags.length === 0 && (
+                  <span className="placeholder">تگ‌ها را انتخاب کنید...</span>
+                )}
+              </div>
+              <span className="dropdown-arrow">▼</span>
+            </div>
+
+            {showTagDropdown && (
+              <div className="tags-dropdown">
+                {tagsLoading ? (
+                  <div className="tags-loading">در حال دریافت تگ‌ها...</div>
+                ) : (
+                  tags.map(tag => (
+                    <div
+                      key={tag.id}
+                      className={`tag-option ${selectedTags.includes(tag.id) ? 'selected' : ''}`}
+                      onClick={() => handleTagSelect(tag.id)}
+                    >
+                      <span 
+                        className="tag-color-dot"
+                        style={{ backgroundColor: tag.color }}
+                      ></span>
+                      <span className="tag-name">{tag.name}</span>
+                      {selectedTags.includes(tag.id) && (
+                        <span className="check-mark">✓</span>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="form-actions">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              setShowEditModal(false);
+              setEditingTask(null);
+              setSelectedTags([]);
+            }}
+          >
+            انصراف
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+          >
+            <FiSave />
+            ذخیره تغییرات
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
       {/* مودال ایجاد تسک جدید */}
       {/* {showTaskModal && (
         <div className="modal-overlay task-modal-overlay" onClick={() => setShowTaskModal(false)}>
