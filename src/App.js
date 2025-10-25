@@ -155,6 +155,7 @@ import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner';
 import Project from './components/page/project/Project';
 import TodoBoard from './components/page/todo/TodoBoard';
 import UserManagement from './components/page/user/UserManagement';
+import Profile from './components/page/profile/Profile';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -207,6 +208,7 @@ const AuthenticatedApp = () => {
    {/* <Route path="TodoBoard" element={<TodoBoard />} /> */}
    <Route path="/TodoBoard" element={<TodoBoard />} />
    <Route path="/UserManagement" element={<UserManagement />} />
+   <Route path="/profile" element={<Profile />} />
 
    
         
