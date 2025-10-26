@@ -894,6 +894,7 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
   >
     <FiEdit2 />
   </button>
+
                       <button 
                         className="btn-icon btn-delete"
                         onClick={() => handleDeleteTask(column.id, task.id)}
@@ -1286,6 +1287,18 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
                       <div className="comment-author">
                         <strong>{comment.userAuthor || 'کاربر'}</strong>
                       </div>
+                      
+                      {  (comment.showDeleted==true) ?
+                         <button 
+                        className="btn-icon btn-delete"
+                        onClick={() => handleDeleteComment(comment.id)}
+                        title="حذف تسک"
+                      >
+                        <FiTrash2 />
+                      </button> : ''
+
+  }
+        
                       <div className="comment-date">
                       {comment.createdAt ? new Date(comment.createdAt).toLocaleString('fa-IR', {
   year: 'numeric',
@@ -1295,13 +1308,7 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
   minute: '2-digit'
 }) : ''}
                       </div>
-                     <button 
-                        className="btn-icon btn-delete"
-                        onClick={() => handleDeleteComment(comment.id)}
-                        title="حذف تسک"
-                      >
-                        <FiTrash2 />
-                      </button>
+        
                     </div>
                     <div className="comment-content">
                       {comment.message}
