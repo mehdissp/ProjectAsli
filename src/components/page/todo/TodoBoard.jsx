@@ -549,6 +549,7 @@ const handleAddComment = async (e) => {
     
     // رفرش کامنت‌ها
     const commentsResponse = await commentService.getTaskComments(selectedTask.id);
+
     setComments(commentsResponse.data || commentsResponse || []);
     
     // پاک کردن فیلد کامنت
@@ -741,6 +742,12 @@ await  todoService.deleteTodo(taskId);
 
     }
   };
+
+  const handleClosePopuComment= () => {
+    setShowTaskDetail(false)  
+    fetchColumns();
+
+  }
 
 
     const handleDeleteComment = async (id) => {
@@ -1182,7 +1189,7 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
 
 {/* مودال جزئیات تسک */}
 {showTaskDetail && selectedTask && (
-  <div className="modal-overlay task-detail-overlay" onClick={() => setShowTaskDetail(false)}>
+  <div className="modal-overlay task-detail-overlay" onClick={() => handleClosePopuComment()}>
     <div className="modal-content task-detail-modal" onClick={(e) => e.stopPropagation()}>
       {/* هدر مودال */}
       <div className="task-detail-header">
@@ -1200,7 +1207,7 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
         </div>
         <button 
           className="close-btn"
-          onClick={() => setShowTaskDetail(false)}
+          onClick={() => handleClosePopuComment()}
         >
           <FiX />
         </button>
