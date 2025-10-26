@@ -540,14 +540,15 @@ const handleAddComment = async (e) => {
     setCommentLoading(true);
     
     const commentData = {
-      content: newComment,
+      message: newComment,
+      todoId:selectedTask.id
       // اگر نیاز به authorId دارید از user context استفاده کنید
     };
 
-    await todoStatusService.addComment(selectedTask.id, commentData);
+    await commentService.createComment( commentData);
     
     // رفرش کامنت‌ها
-    const commentsResponse = await todoStatusService.getTaskComments(selectedTask.id);
+    const commentsResponse = await commentService.getTaskComments(selectedTask.id);
     setComments(commentsResponse.data || commentsResponse || []);
     
     // پاک کردن فیلد کامنت
@@ -731,6 +732,24 @@ await  todoService.deleteTodo(taskId);
           tasks: prev[columnId].tasks.filter(t => t.id !== taskId)
         }
       }));
+      }
+         catch (error) {
+              console.error('❌ nemiad:');
+    console.error('❌ Error creating todo:', error.response.data.data.message);
+     setError(error.response?.data?.data?.message || 'خطا در ایجاد تسک');
+  }
+
+    }
+  };
+
+
+    const handleDeleteComment = async (id) => {
+    if (window.confirm('آیا از حذف این کامنت اطمینان دارید؟')) {
+      try{
+await  commentService.deletecomment(id);
+const commentsResponse = await commentService.getTaskComments(selectedTask.id);
+    setComments(commentsResponse.data || commentsResponse || []);
+
       }
          catch (error) {
               console.error('❌ nemiad:');
@@ -1276,6 +1295,13 @@ await  todoService.deleteTodo(taskId);
   minute: '2-digit'
 }) : ''}
                       </div>
+                     <button 
+                        className="btn-icon btn-delete"
+                        onClick={() => handleDeleteComment(comment.id)}
+                        title="حذف تسک"
+                      >
+                        <FiTrash2 />
+                      </button>
                     </div>
                     <div className="comment-content">
                       {comment.message}

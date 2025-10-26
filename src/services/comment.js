@@ -16,12 +16,10 @@ async getTaskComments(todoId) {
   }
 },
 
-   async deleteTodo(todoId) {
+   async deletecomment(id) {
     try {
-      console.log('🗑️ Deleting project:', todoId);
-      const response = await api.post('/Todo/DeleteTodo', {
-        Id: todoId
-      });
+      console.log('🗑️ Deleting project:', id);
+      const response = await api.delete(`/Comment/DeleteComment?id=${id}`);
       console.log('✅ Project deleted successfully:', response.data);
       return response.data;
     } catch (error) {
@@ -30,9 +28,9 @@ async getTaskComments(todoId) {
     }
   },
   
-async updateTodo(todoData) {
+async createComment(commetnData) {
   try {
-    const response = await api.post('/Todo/UpdateTodo', todoData);
+    const response = await api.post('/Comment/InsertComment', commetnData);
     return response.data;
   } catch (error) {
     console.error('❌ Create todo service error:', error);
