@@ -137,9 +137,12 @@ const convertToJalaali = (dateString) => {
           orderNum:status.orderNum,
           countComment:status.countComment,
           isOverdute:status.isOverdute,
-          tasks: status.tasks
+          tasks: status.tasks,
+          deleteButton:status.deleteButton,
+          editButton:status.editButton
         };
         console.log("ستون")
+       
           console.log(columnsData)
           order.push(status.id.toString());
         console.log( columnsData[status.id]);
@@ -484,8 +487,9 @@ const handleCreateTask = async (e) => {
       await fetchColumns();
       
     } catch (err) {
+      console.log("aslan nemiyad")
       console.error('Error deleting column:', err);
-      setError(err.message || 'خطا در حذف ستون');
+      setError(err.response.data.data.message || 'خطا در حذف ستون');
       throw err;
     }
   };
@@ -893,22 +897,26 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
     title="مشاهده جزئیات"
   >
     <FiEye />
+
+  
   </button>
-                        <button 
+    {(task.editButton==true) ?                         <button 
     className="btn-icon btn-edit"
     onClick={() => handleEditTaskClick(task.id, column.id)}
     title="ویرایش تسک"
   >
     <FiEdit2 />
-  </button>
+  </button>  : ''}
 
-                      <button 
+  {(task.deleteButton==true) ?      <button 
                         className="btn-icon btn-delete"
                         onClick={() => handleDeleteTask(column.id, task.id)}
                         title="حذف تسک"
                       >
                         <FiTrash2 />
-                      </button>
+                      </button> :''}
+
+                 
                     </div>
                   </div>
 
