@@ -28,6 +28,18 @@ async getTaskComments(todoId) {
     }
   },
   
+   async updateSeenComment(id) {
+    try {
+      console.log('🗑️ Deleting project:', id);
+      const response = await api.delete(`/Comment/UpdateSeenComment?todoId=${id}`);
+      console.log('✅ Project deleted successfully:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('❌ Delete project service error:', error);
+      throw error;
+    }
+  },
+  
 async createComment(commetnData) {
   try {
     const response = await api.post('/Comment/InsertComment', commetnData);

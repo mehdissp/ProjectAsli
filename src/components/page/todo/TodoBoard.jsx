@@ -11,7 +11,7 @@ import {
   FiColumns,
   FiX,
   FiSave,
-  FiRefreshCw  ,FiEye ,FiMessageSquare  // اضافه کردن آیکون چشم
+  FiRefreshCw  ,FiEye ,FiMessageSquare,FiUserCheck   // اضافه کردن آیکون چشم
 } from 'react-icons/fi';
 import ColumnManager from './ColumnManager';
 import UserSearchSelect from './UserSearchSelect'
@@ -515,6 +515,9 @@ const handleTaskClick = async (taskId, columnId) => {
     // دریافت کامنت‌های تسک
     setCommentLoading(true);
     const commentsResponse = await commentService.getTaskComments(taskId);
+    const updateSeenCommenResponse = await commentService.updateSeenComment(taskId);
+    console.log("annnnnnnnnnnn",commentsResponse.data)
+    //seenAt
     setComments(commentsResponse.data || commentsResponse || []);
     
     setShowTaskDetail(true);
@@ -1322,12 +1325,41 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
   hour: '2-digit',
   minute: '2-digit'
 }) : ''}
+ 
                       </div>
+             
+
         
                     </div>
                     <div className="comment-content">
                       {comment.message}
+ 
                     </div>
+<div className="comment-date" style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '8px' }}>
+    {comment.seenAt ? (
+        <>
+            <FiUserCheck style={{ color: 'green' }} />
+            <span>
+                {new Date(comment.seenAt).toLocaleString('fa-IR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}
+            </span>
+        </>
+    ) : (
+        comment.showDeleted  && (
+            <>
+                <FiUser style={{ color: '#999' }} />
+                <span style={{ color: '#999' }}>
+                    دیده نشده
+                </span>
+            </>
+        )
+    )}
+</div>
                   </div>
                 ))
               ) : (
