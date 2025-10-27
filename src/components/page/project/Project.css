@@ -483,3 +483,19 @@
   background: transparent;
   color: var(--text-secondary);
 }
+
+
+/* در Project.css به action-buttons اضافه کنید */
+.btn-action.btn-users {
+  background: #17a2b8;
+  color: white;
+}
+
+.btn-action.btn-users:hover {
+  background: #138496;
+}
+
+.btn-action.btn-users:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}

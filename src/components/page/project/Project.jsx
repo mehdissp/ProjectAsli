@@ -1,271 +1,18 @@
-// // components/project/Project/Project.jsx
-// import React, { useState, useEffect } from 'react';
-// import { useAuth } from '../../../context/AuthContext';
-// import useApi from '../../../hooks/useApi';
-// import { projectService } from '../../../services/project';
-// import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
-// import CreateProjectModal from './CreateProjectModal';
-// import './Project.css';
-
-// const Project = () => {
-//   const { user } = useAuth();
-//   const [projects, setProjects] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-//   const [refreshTrigger, setRefreshTrigger] = useState(0);
-
-//   // دریافت پروژه‌ها از API
-//   const fetchProjects = async () => {
-//     try {
-//       setLoading(true);
-//       setError(null);
-//       const projectsData = await projectService.getProjects();
-//       setProjects(projectsData);
-//     } catch (err) {
-//       console.error('Error fetching projects:', err);
-//       setError('خطا در دریافت اطلاعات پروژه‌ها');
-//       // داده‌های نمونه برای نمایش
-//       setProjects(getSampleProjects());
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchProjects();
-//   }, [refreshTrigger]);
-
-//   // وقتی پروژه جدید ایجاد شد
-//   const handleProjectCreated = () => {
-//     console.log('🔄 Refreshing projects list after creation');
-//     setRefreshTrigger(prev => prev + 1);
-//   };
-
-//   // فرمت کردن تاریخ
-//   const formatDate = (dateString) => {
-//     const options = { 
-//       year: 'numeric', 
-//       month: 'long', 
-//       day: 'numeric',
-//       hour: '2-digit',
-//       minute: '2-digit'
-//     };
-//     return new Date(dateString).toLocaleDateString('fa-IR', options);
-//   };
-
-//   // گرفتن وضعیت پروژه
-//   const getStatusBadge = (status) => {
-//     const statusConfig = {
-//       active: { label: 'فعال', class: 'status-active' },
-//       completed: { label: 'تکمیل شده', class: 'status-completed' },
-//       pending: { label: 'در انتظار', class: 'status-pending' },
-//       cancelled: { label: 'لغو شده', class: 'status-cancelled' }
-//     };
-    
-//     const config = statusConfig[status] || { label: status, class: 'status-default' };
-//     return <span className={`status-badge ${config.class}`}>{config.label}</span>;
-//   };
-
-//   // گرفتن اولویت پروژه
-//   const getPriorityBadge = (priority) => {
-//     const priorityConfig = {
-//       high: { label: 'بالا', class: 'priority-high' },
-//       medium: { label: 'متوسط', class: 'priority-medium' },
-//       low: { label: 'پایین', class: 'priority-low' }
-//     };
-    
-//     const config = priorityConfig[priority] || { label: priority, class: 'priority-default' };
-//     return <span className={`priority-badge ${config.class}`}>{config.label}</span>;
-//   };
-
-//   if (loading && projects.length === 0) {
-//     return <LoadingSpinner text="در حال دریافت اطلاعات پروژه‌ها..." />;
-//   }
-
-//   return (
-//     <div className="project-page">
-//       <div className="page-header">
-//         <h1>مدیریت پروژه‌ها</h1>
-//         <p>لیست تمام پروژه‌های سیستم</p>
-//       </div>
-
-//       <div className="project-actions">
-//         <button 
-//           className="btn btn-primary"
-//           onClick={() => setIsCreateModalOpen(true)}
-//         >
-//           <span className="btn-icon">➕</span>
-//           پروژه جدید
-//         </button>
-//         <button 
-//           className="btn btn-secondary"
-//           onClick={fetchProjects}
-//           disabled={loading}
-//         >
-//           <span className="btn-icon">🔄</span>
-//           بروزرسانی
-//         </button>
-//       </div>
-
-//       {error && (
-//         <div className="error-banner">
-//           <span className="error-icon">⚠️</span>
-//           {error}
-//         </div>
-//       )}
-
-//       <div className="project-table-container">
-//         <table className="project-table">
-//           <thead>
-//             <tr>
-//               <th>#</th>
-//               <th>نام پروژه</th>
-//               <th>توضیحات</th>
-//               <th>وضعیت</th>
-//               <th>اولویت</th>
-//               <th>تاریخ ایجاد</th>
-//               <th>تاریخ بروزرسانی</th>
-//               <th>عملیات</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {projects.length === 0 ? (
-//               <tr>
-//                 <td colSpan="8" className="no-data">
-//                   <div className="no-data-content">
-//                     <span className="no-data-icon">📭</span>
-//                     <p>هیچ پروژه‌ای یافت نشد</p>
-//                     <button 
-//                       className="btn btn-primary"
-//                       onClick={() => setIsCreateModalOpen(true)}
-//                     >
-//                       ایجاد اولین پروژه
-//                     </button>
-//                   </div>
-//                 </td>
-//               </tr>
-//             ) : (
-//               projects.map((project, index) => (
-//                 <tr key={project.id} className="project-row">
-//                   <td className="index-cell">{index + 1}</td>
-//                   <td className="project-name">
-//                     <div className="project-name-content">
-//                       <span className="project-icon">📁</span>
-//                       <div>
-//                         <div className="project-title">{project.name}</div>
-//                         <div className="project-code">{project.code}</div>
-//                       </div>
-//                     </div>
-//                   </td>
-//                   <td className="project-description">
-//                     {project.description || 'بدون توضیحات'}
-//                   </td>
-//                   <td className="status-cell">
-//                     {getStatusBadge(project.status)}
-//                   </td>
-//                   <td className="priority-cell">
-//                     {getPriorityBadge(project.priority)}
-//                   </td>
-//                   <td className="date-cell">
-//                     <div className="date-content">
-//                       <span className="date-icon">📅</span>
-//                       {formatDate(project.createdAt)}
-//                     </div>
-//                   </td>
-//                   <td className="date-cell">
-//                     <div className="date-content">
-//                       <span className="date-icon">🔄</span>
-//                       {formatDate(project.updatedAt)}
-//                     </div>
-//                   </td>
-//                   <td className="actions-cell">
-//                     <div className="action-buttons">
-//                       <button 
-//                         className="btn-action btn-view"
-//                         title="مشاهده"
-//                       >
-//                         👁️
-//                       </button>
-//                       <button 
-//                         className="btn-action btn-edit"
-//                         title="ویرایش"
-//                       >
-//                         ✏️
-//                       </button>
-//                       <button 
-//                         className="btn-action btn-delete"
-//                         title="حذف"
-//                       >
-//                         🗑️
-//                       </button>
-//                     </div>
-//                   </td>
-//                 </tr>
-//               ))
-//             )}
-//           </tbody>
-//         </table>
-//       </div>
-
-//       <div className="project-stats">
-//         <div className="stat-card">
-//           <div className="stat-icon total">📊</div>
-//           <div className="stat-content">
-//             <div className="stat-value">{projects.length}</div>
-//             <div className="stat-label">کل پروژه‌ها</div>
-//           </div>
-//         </div>
-// <div className="stat-card">
-//   <div className="stat-icon active">🚀</div>
-//   <div className="stat-content">
-//     <div className="stat-value">
-//       {projects.length > 0 ? projects[0].maxProjects : '0'}
-//     </div>
-//     <div className="stat-label">تعداد پروژه قابل تعریف</div>
-//   </div>
-// </div>
-//       <div className="stat-card">
-//   <div className="stat-icon completed">✅</div>
-//   <div className="stat-content">
-//     <div className="stat-value">
-//       {projects.length}
-//       <span className="stat-divider">/</span>
-//       { projects[0].maxProjects }
-//     </div>
-//     <div className="stat-label">تکمیل شده از کل مجاز</div>
-//   </div>
-// </div>
-//       </div>
-
-//       {/* Modal ایجاد پروژه جدید */}
-//       <CreateProjectModal
-//         isOpen={isCreateModalOpen}
-//         onClose={() => setIsCreateModalOpen(false)}
-//         onProjectCreated={handleProjectCreated}
-//       />
-//     </div>
-//   );
-// };
-
-// // داده‌های نمونه برای زمانی که API در دسترس نیست
-// const getSampleProjects = () => [
-//   // ... داده‌های نمونه قبلی
-// ];
-
-// export default Project;
-
-// components/project/Project/Project.jsx
-// components/project/Project/Project.jsx
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { projectService } from '../../../services/project';
+import { userService } from '../../../services/user'; // اضافه کردن سرویس کاربران
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
 import CreateProjectModal from './CreateProjectModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal/ConfirmDeleteModal';
+import UserSelectionModal from './UserSelectionModal/UserSelectionModal'
 import Pagination from '../../common/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom'; // اضافه کردن useNavigate
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { 
   FaEye, 
   FaEdit, 
@@ -277,7 +24,7 @@ import {
   FaRocket,
   FaCheckCircle,
   FaPlus,
-  FaRedo
+  FaRedo,FaUsers 
 } from 'react-icons/fa';
 import { 
   HiOutlineExclamationCircle 
@@ -294,6 +41,15 @@ const Project = () => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
+
+
+    // stateهای جدید برای مدیریت کاربران
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState(new Set());
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [usersError, setUsersError] = useState(null);
   
   // حالت‌های پیجینیشن
   const [pagination, setPagination] = useState({
@@ -349,6 +105,171 @@ const Project = () => {
       setLoading(false);
     }
   }, [pagination.pageSize]);
+
+
+  //***********انتخاب کاربر */
+
+// تابع برای باز کردن modal کاربران
+const handleUsersClick = async (project) => {
+  try {
+    setSelectedProject(project);
+    setUsersLoading(true);
+    setUsersError(null);
+    
+    console.log('👥 Fetching users for project:', project.name);
+    
+    // دریافت لیست کاربران
+    const usersResponse = await projectService.getUserForProject(1, 100,project.id); // صفحه اول با 100 آیتم
+    console.log("userrrrrrrrrrrr")
+    console.log(usersResponse.items)
+    setUsers(usersResponse.items || []);
+      // ایجاد Set از کاربران انتخاب شده بر اساس isCheck
+    const initiallySelected = new Set();
+    (usersResponse.items || []).forEach(user => {
+      if (user.isCheck) {
+        initiallySelected.add(user.id);
+      }
+    });
+    setSelectedUsers(initiallySelected);
+    // در اینجا می‌توانید کاربران انتخاب شده قبلی را از API دریافت کنید
+    // فعلاً یک Set خالی قرار می‌دهیم
+    setSelectedUsers(new Set());
+    
+    setIsUserModalOpen(true);
+    
+  } catch (err) {
+          toast.error('عملیات با موفقیت انجام شد', {
+      position: "top-left",
+      autoClose: 5000,
+    });
+    console.error('❌ Error fetching users:', err);
+    setUsersError('خطا در دریافت لیست کاربران');
+  } finally {
+    setUsersLoading(false);
+  }
+};
+
+// تoggle انتخاب کاربر
+// const toggleUserSelection = (userId) => {
+//   const newSelectedUsers = new Set(selectedUsers);
+//   if (newSelectedUsers.has(userId)) {
+//     newSelectedUsers.delete(userId);
+//   } else {
+//     newSelectedUsers.add(userId);
+//   }
+//   setSelectedUsers(newSelectedUsers);
+// };
+
+const toggleUserSelection = (userId) => {
+  // آپدیت state selectedUsers
+  const newSelectedUsers = new Set(selectedUsers);
+  console.log("checkkkkkkk",newSelectedUsers)
+  if (newSelectedUsers.has(userId)) {
+    newSelectedUsers.delete(userId);
+  } else {
+    newSelectedUsers.add(userId);
+  }
+  setSelectedUsers(newSelectedUsers);
+
+  // آپدیت isCheck در داده‌های users
+  setUsers(prevUsers => 
+    prevUsers.map(user => 
+      user.id === userId 
+        ? { ...user, isCheck: !user.isCheck }
+        : user
+    )
+  );
+};
+
+// انتخاب همه کاربران
+// توابع selectAll و deselectAll را آپدیت کنید
+const selectAllUsers = () => {
+  const currentPageUserIds = users.map(user => user.id);
+  const newSelectedUsers = new Set(selectedUsers);
+  
+  currentPageUserIds.forEach(userId => {
+    newSelectedUsers.add(userId);
+  });
+  
+  setSelectedUsers(newSelectedUsers);
+  
+  // آپدیت isCheck در داده‌ها
+  setUsers(prevUsers => 
+    prevUsers.map(user => ({
+      ...user,
+      isCheck: true
+    }))
+  );
+};
+
+
+// لغو انتخاب همه کاربران
+const deselectAllUsers = () => {
+  const currentPageUserIds = users.map(user => user.id);
+  const newSelectedUsers = new Set(selectedUsers);
+  
+  currentPageUserIds.forEach(userId => {
+    newSelectedUsers.delete(userId);
+  });
+  
+  setSelectedUsers(newSelectedUsers);
+  
+  // آپدیت isCheck در داده‌ها
+  setUsers(prevUsers => 
+    prevUsers.map(user => ({
+      ...user,
+      isCheck: false
+    }))
+  );
+};
+
+// ذخیره انتخاب‌های کاربران
+// تابع saveUserSelections - بر اساس isCheck
+const saveUserSelections = async () => {
+  try {
+    setUsersLoading(true);
+    
+    // گرفتن کاربران انتخاب شده بر اساس isCheck
+    const selectedUserIds = users
+      .filter(user => user.isCheck)
+      .map(user => user.id);
+    
+    console.log('💾 Saving user selections:', {
+      project: selectedProject?.id,
+      selectedUsers: selectedUserIds
+    });
+    
+    const saveData = {
+
+      userIds: selectedUserIds
+    };
+    
+    await projectService.insertOrDeleteMenuAccess(saveData,selectedProject?.id);
+            toast.success('عملیات با موفقیت انجام شد', {
+          position: "top-left",
+          autoClose: 5000,
+        });
+    console.log('✅ User assignments saved successfully');
+    
+    setIsUserModalOpen(false);
+    setSelectedProject(null);
+    
+  } catch (err) {
+    console.error('❌ Error saving user selections:', err);
+    setUsersError('خطا در ذخیره انتخاب‌ها');
+  } finally {
+    setUsersLoading(false);
+  }
+};
+
+// بستن modal کاربران
+const handleCloseUserModal = () => {
+  setIsUserModalOpen(false);
+  setSelectedProject(null);
+  setSelectedUsers(new Set());
+  setUsersError(null);
+};
+  /************************ */
 
   useEffect(() => {
     fetchProjects(pagination.currentPage, pagination.pageSize);
@@ -546,6 +467,18 @@ const Project = () => {
         <h1>مدیریت پروژه‌ها</h1>
         <p>لیست تمام پروژه‌های سیستم</p>
       </div>
+                          <ToastContainer
+            position="top-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={true}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
 
       <div className="project-actions">
         <div className="actions-left">
@@ -669,6 +602,16 @@ const Project = () => {
                       >
                             <FaEye />
                       </button>
+                          
+    {/* دکمه جدید برای مدیریت کاربران */}
+    <button 
+      className="btn-action btn-users"
+      title="مدیریت کاربران"
+      onClick={() => handleUsersClick(project)}
+      disabled={loading}
+    >
+      <FaUsers />
+    </button>
                       {/* <button 
                         className="btn-action btn-edit"
                         title="ویرایش"
@@ -749,6 +692,20 @@ const Project = () => {
         loading={deleteLoading}
         
       />
+    <UserSelectionModal
+      isOpen={isUserModalOpen}
+      onClose={handleCloseUserModal}
+      projectName={selectedProject?.name}
+      users={users}
+      selectedUsers={selectedUsers}
+      onUserToggle={toggleUserSelection}
+      onSelectAll={selectAllUsers}
+      onDeselectAll={deselectAllUsers}
+      onSave={saveUserSelections}
+      loading={usersLoading}
+      error={usersError}
+    />
+
     </div>
   );
 };

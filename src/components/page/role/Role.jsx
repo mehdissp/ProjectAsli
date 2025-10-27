@@ -97,7 +97,7 @@ const Role = () => {
     console.log('👁️ Viewing role:', role);
     
     // گرفتن آیدی نقش - با توجه به ساختار داده‌های شما
-    const roleId = role.id || role.rowNum;
+    const roleId = role.id ;
     const name = role.name;
     
     if (roleId) {

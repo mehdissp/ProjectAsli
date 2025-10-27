@@ -20,6 +20,8 @@ import {
 import './MenuAccess.css';
 import { menuAccessService } from '../../../services/menuAccess';
 import { useLocation } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MenuAccess = () => {
   const [data, setData] = useState([]);
@@ -33,7 +35,8 @@ const MenuAccess = () => {
   
   const mobileMenuRef = useRef(null);
   const location = useLocation();
-  const roleId = location.state?.id;
+
+  const roleId = location.state?.roleId;
   const roleName = location.state?.name;
 
   // Check screen size
@@ -81,12 +84,36 @@ const MenuAccess = () => {
 //       setLoading(false);
 //     }
 //   };
+const handelClickSelect =async()=>{
+  try{  setLoading(true);
+  await menuAccessService.insertOrDeleteMenuAccess(selectedItems,roleId)
+      toast.success('عملیات با موفقیت انجام شد', {
+      position: "top-left",
+      autoClose: 5000,
+    });
+        setShowMobileMenu(false);
+
+  }
+  catch(err)
+  {
+      toast.error(err, {
+      position: "top-left",
+      autoClose: 5000,
+    });
+  }
+  finally{
+setLoading(false);
+  }
+
+}
+
   // Fetch data from API - آپدیت شده برای استفاده از isCheck
   const fetchData = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await menuAccessService.getMenuAccess();
+      console.log(roleId)
+      const response = await menuAccessService.getMenuAccess(roleId);
       setData(response.data);
       
       // ایجاد Set از آیتم‌های انتخاب شده بر اساس isCheck
@@ -376,6 +403,8 @@ const MenuAccess = () => {
     });
   };
 
+  
+
   // Count total children recursively
   const countChildren = (item) => {
     if (!item.children || item.children.length === 0) return 0;
@@ -563,6 +592,18 @@ const MenuAccess = () => {
 
   return (
     <div className="tree-list-page">
+          <ToastContainer
+      position="top-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={true}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
       {/* Mobile Header */}
       {isMobile && (
         <div className="mobile-header">
@@ -644,13 +685,13 @@ const MenuAccess = () => {
             </span>
             <div className="selection-buttons">
               <button 
-                className="btn btn-outline"
+                className="btn btn-primary"
                 onClick={() => handleMobileAction(selectAll)}
               >
                 انتخاب همه
               </button>
               <button 
-                className="btn btn-outline"
+                className="btn btn-info"
                 onClick={() => handleMobileAction(deselectAll)}
               >
                 لغو انتخاب
@@ -659,27 +700,15 @@ const MenuAccess = () => {
           </div>
 
           <div className="global-actions">
+         
             <button 
               className="btn btn-success"
-              onClick={() => setShowMobileMenu(false)}
-            >
-              <FaDownload />
-              {!isMobile && 'خروجی'}
-            </button>
-            <button 
-              className="btn btn-warning"
-              onClick={() => setShowMobileMenu(false)}
+              onClick={() => handelClickSelect()}
             >
               <FaEdit />
-              {!isMobile && 'ویرایش'}
+              {!isMobile && 'ذخیره تغییرات'}
             </button>
-            <button 
-              className="btn btn-danger"
-              onClick={() => setShowMobileMenu(false)}
-            >
-              <FaTrash />
-              {!isMobile && 'حذف'}
-            </button>
+    
           </div>
 
           {isMobile && (

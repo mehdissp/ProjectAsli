@@ -22,7 +22,8 @@ import './TodoBoard.css';
 //import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment-jalaali';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -186,7 +187,7 @@ const convertToJalaali = (dateString) => {
       };
 
       await todoStatusService.createTodoStatus(todoStatusData);
-      
+
       // رفرش لیست ستون‌ها
       await fetchColumns();
       
@@ -402,6 +403,7 @@ const handleEditTaskClick = (taskId, columnId) => {
 const handleCreateTask = async (e) => {
   e.preventDefault();
   if (!newTask.title.trim()) {
+
     alert('لطفا عنوان تسک را وارد کنید');
     return;
   }
@@ -446,6 +448,12 @@ const handleCreateTask = async (e) => {
 
     // فراخوانی API
     await todoService.createTodo(todoData);
+        toast.success('عملیات با موفقیت انجام شد', {
+      position: "top-left",
+      autoClose: 5000,
+    });
+    setTimeout(() => setSuccess(''), 3000);
+
 
     // رفرش داده‌ها
     await fetchColumns();
@@ -463,8 +471,8 @@ const handleCreateTask = async (e) => {
     setSelectedTags([]);
 
     // نمایش پیام موفقیت
-    setSuccess('تسک با موفقیت ایجاد شد');
-    setTimeout(() => setSuccess(''), 3000);
+   
+
 
   } catch (error) {
     console.error('❌ Error creating todo:', error);
@@ -489,7 +497,14 @@ const handleCreateTask = async (e) => {
     } catch (err) {
       console.log("aslan nemiyad")
       console.error('Error deleting column:', err);
-      setError(err.response.data.data.message || 'خطا در حذف ستون');
+    toast.error(err.response.data.data.message, {
+      position: "top-left",
+      autoClose: 5000,
+     className: 'custom-error-toast',
+  bodyClassName: 'custom-error-toast-body'
+    });
+
+    //  setError(err.response.data.data.message || 'خطا در حذف ستون');
       throw err;
     }
   };
@@ -733,6 +748,11 @@ const getOverdueClass = (overdueValue) => {
     if (window.confirm('آیا از حذف این تسک اطمینان دارید؟')) {
       try{
 await  todoService.deleteTodo(taskId);
+    toast.success('عملیات با موفقیت انجام شد', {
+      position: "top-left",
+      autoClose: 5000,
+    });
+
         setColumns(prev => ({
         ...prev,
         [columnId]: {
@@ -797,6 +817,7 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
 
   return (
     <div className="todo-board">
+
       {/* هدر */}
       <div className="board-header">
         <div className="header-content">
@@ -810,6 +831,18 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
               <button onClick={() => setError(null)} className="btn-close-error">×</button>
             </div>
           )}
+                    <ToastContainer
+      position="top-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={true}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
             {success && (
     <div className="success-banner">
       {success}
