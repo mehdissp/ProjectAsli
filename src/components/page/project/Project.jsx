@@ -312,6 +312,7 @@ const Project = () => {
       
       const response = await projectService.getProjects(pageNumber, pageSize);
       
+      
       // استفاده از ساختار جدید API
       setProjects(response.items || []);
       setPagination(prev => ({

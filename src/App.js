@@ -156,6 +156,7 @@ import Project from './components/page/project/Project';
 import TodoBoard from './components/page/todo/TodoBoard';
 import UserManagement from './components/page/user/UserManagement';
 import Profile from './components/page/profile/Profile';
+import MenuAccess from './components/page/menuAccess/MenuAccess';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -208,6 +209,8 @@ const AuthenticatedApp = () => {
    {/* <Route path="TodoBoard" element={<TodoBoard />} /> */}
    <Route path="/TodoBoard" element={<TodoBoard />} />
    <Route path="/UserManagement" element={<UserManagement />} />
+   <Route path="/MenuAccess" element={<MenuAccess />} />
+   
    <Route path="/profile" element={<Profile />} />
 
    
