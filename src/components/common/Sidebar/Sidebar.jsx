@@ -812,7 +812,7 @@ import {
   FaUser,
   FaChevronDown,
   FaChevronRight,
-  FaUserCircle
+  FaUserCircle,FaFingerprint 
 } from 'react-icons/fa';
 import { BiSolidDashboard, BiLogoWindows } from "react-icons/bi";
 import './Sidebar.css';
@@ -825,7 +825,7 @@ const iconComponents = {
   BiLogoWindows: BiLogoWindows,
   FaFile: FaFile,
   FaFolder: FaFolder,
-  FaRocket: FaRocket,
+  FaFingerprint: FaFingerprint,
   FaSignOutAlt: FaSignOutAlt,
   FaTimes: FaTimes,
   FaUserCircle: FaUserCircle,
