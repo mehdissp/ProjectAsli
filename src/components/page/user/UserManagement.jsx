@@ -846,7 +846,7 @@ const getRoleBadge = (user) => {
   return (
     <span className={`role-badge ${role.class}`}>
       <FaUserTag className="role-icon" />
-      {role.label}
+      {user.roleName}
     </span>
   );
 };

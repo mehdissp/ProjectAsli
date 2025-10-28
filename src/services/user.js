@@ -309,6 +309,45 @@ export const userService = {
     }
   },
 
+  async عحیشفثUser(userData) {
+    try {
+      // تبدیل ساختار داده به فرمت مورد انتظار API
+      const apiData = {
+        id:userData.id,
+        fullname: userData.fullname || userData.username, // اگر fullname ندارید از username استفاده کنید
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+        isActive: userData.isActive !== undefined ? userData.isActive : true,
+        roleId:userData.roleId,
+        mobileNumber: userData.mobileNumber || userData.phone // تبدیل phone به mobileNumber
+      };
+
+      console.log('🚀 Sending user data to API:', apiData);
+      const response = await http.post('/User/updateNewUser', apiData);
+      console.log('✅ User created successfully:', response);
+      
+      return response.data;
+    } catch (error) {
+      console.error('❌ Create user service error:', error);
+      
+      // نمایش خطاهای validation به صورت خوانا
+      if (error.response && error.response.status === 400) {
+        const validationErrors = error.response.data?.errors;
+        if (validationErrors) {
+          console.error('📋 Validation errors:', validationErrors);
+          // ایجاد پیام خطای فارسی
+          const errorMessages = Object.entries(validationErrors)
+            .map(([field, errors]) => `${field}: ${errors.join(', ')}`)
+            .join('\n');
+          throw new Error(`خطا در اعتبارسنجی:\n${errorMessages}`);
+        }
+      }
+      
+      throw error;
+    }
+  },
+  
   async getUsers(pageNumber = 1, pageSize = 10) {
     try {
       const response = await http.post('/User/GetUsers', {

@@ -260,3 +260,54 @@
     width: 100%;
   }
 }
+
+/* UserModals.css - بخش‌های جدید */
+
+.password-group {
+  position: relative;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  padding-right: 45px !important;
+  width: 100%;
+}
+
+.password-toggle-btn {
+     width: 10%;
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  color: #333;
+}
+
+.password-toggle-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: #007bff;
+}
+
+/* استایل‌های موجود را نگه دارید و موارد بالا را اضافه کنید */
+
