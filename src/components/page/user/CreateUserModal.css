@@ -13,14 +13,14 @@
 }
 
 .modal-content {
-  background: white;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  animation: modalAppear 0.3s ease-out;
+  background: white !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  max-width: 800px !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  animation: modalAppear 0.3s ease-out !important;
 }
 
 @keyframes modalAppear {

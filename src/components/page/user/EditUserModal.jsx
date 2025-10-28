@@ -8,7 +8,7 @@ import {
   FaCheckCircle,
   FaTimesCircle,
   FaSave,
-  FaSpinner
+  FaSpinner, FaLock, FaCheck
 } from 'react-icons/fa';
 import './UserModals.css';
 
@@ -18,10 +18,53 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
     username: '',
     mobileNumber: '',
     role: '',
-    isActive: true
+    isActive: true,
+    password: '', // اضافه کردن فیلد password
+    confirmPassword: '' // اضافه کردن فیلد confirmPassword
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const checkPasswordStrength = (password) => {
+    if (!password) return { strength: 0, requirements: {
+      length: false,
+      lowercase: false,
+      uppercase: false,
+      number: false,
+      special: false
+    }};
+    
+    let strength = 0;
+    const requirements = {
+      length: password.length >= 5,
+      lowercase: /[a-z]/.test(password),
+      uppercase: /[A-Z]/.test(password),
+      number: /[0-9]/.test(password),
+      special: /[^A-Za-z0-9]/.test(password)
+    };
+
+    strength = Object.values(requirements).filter(Boolean).length;
+
+    if (password.length === 0) return { strength: 0, requirements };
+    if (strength <= 2) return { strength: 1, requirements }; // weak
+    if (strength <= 3) return { strength: 2, requirements }; // medium
+    if (strength <= 4) return { strength: 3, requirements }; // strong
+    return { strength: 4, requirements }; // very strong
+  };
+
+  const passwordInfo = checkPasswordStrength(formData.password);
+  
+  // تابع handleInputChange یکپارچه برای همه فیلدها
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+    
+    // پاک کردن خطا هنگام تغییر
+    if (error) setError('');
+  };
 
   // وقتی کاربر تغییر کرد یا مودال باز شد، فرم را پر کن
   useEffect(() => {
@@ -31,25 +74,26 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
         username: user.username || '',
         mobileNumber: user.mobileNumber || '',
         role: user.role || '',
-        isActive: user.isActive !== undefined ? user.isActive : true
+        isActive: user.isActive !== undefined ? user.isActive : true,
+        password: '', // مقدار پیش‌فرض برای رمز عبور
+        confirmPassword: '' // مقدار پیش‌فرض برای تکرار رمز عبور
       });
       setError(null);
     }
   }, [user, isOpen]);
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // اعتبارسنجی فیلدهای ضروری
     if (!formData.fullname || !formData.username || !formData.role) {
       setError('لطفا فیلدهای ضروری را پر کنید');
+      return;
+    }
+
+    // اعتبارسنجی رمز عبور اگر وارد شده باشد
+    if (formData.password && formData.password !== formData.confirmPassword) {
+      setError('رمز عبور و تکرار آن مطابقت ندارند');
       return;
     }
 
@@ -163,6 +207,85 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">
+                  <FaLock className="input-icon" />
+                  رمز عبور جدید
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  className="form-input"
+                  disabled={loading}
+                  placeholder="رمز عبور جدید (اختیاری)"
+                />
+                
+                {formData.password && (
+                  <>
+                    <div className="password-strength">
+                      <div className={`strength-bar ${
+                        passwordInfo.strength === 1 ? 'strength-weak' :
+                        passwordInfo.strength === 2 ? 'strength-medium' :
+                        passwordInfo.strength === 3 ? 'strength-strong' :
+                        passwordInfo.strength === 4 ? 'strength-very-strong' : ''
+                      }`} />
+                    </div>
+                    
+                    <div className="password-requirements">
+                      <div className={`requirement ${passwordInfo.requirements.length ? 'met' : 'unmet'}`}>
+                        <span className="requirement-icon">
+                          {passwordInfo.requirements.length ? <FaCheck /> : <FaTimes />}
+                        </span>
+                        حداقل 5 کاراکتر
+                      </div>
+                      <div className={`requirement ${passwordInfo.requirements.lowercase ? 'met' : 'unmet'}`}>
+                        <span className="requirement-icon">
+                          {passwordInfo.requirements.lowercase ? <FaCheck /> : <FaTimes />}
+                        </span>
+                        حروف کوچک
+                      </div>
+                      <div className={`requirement ${passwordInfo.requirements.uppercase ? 'met' : 'unmet'}`}>
+                        <span className="requirement-icon">
+                          {passwordInfo.requirements.uppercase ? <FaCheck /> : <FaTimes />}
+                        </span>
+                        حروف بزرگ
+                      </div>
+                      <div className={`requirement ${passwordInfo.requirements.number ? 'met' : 'unmet'}`}>
+                        <span className="requirement-icon">
+                          {passwordInfo.requirements.number ? <FaCheck /> : <FaTimes />}
+                        </span>
+                        عدد
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">
+                  <FaLock className="input-icon" />
+                  تکرار رمز عبور
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  className={`form-input ${
+                    formData.confirmPassword && formData.password !== formData.confirmPassword ? 'input-error' : ''
+                  }`}
+                  disabled={loading}
+                  placeholder="تکرار رمز عبور جدید"
+                />
+                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                  <div className="input-error-message">رمز عبور و تکرار آن مطابقت ندارند</div>
+                )}
+              </div>
             </div>
 
             <div className="form-group checkbox-group">
