@@ -381,3 +381,48 @@
     grid-template-columns: 1fr;
   }
 }
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.role-icon {
+  margin-left: 4px;
+  font-size: 10px;
+}
+
+.role-مدیر {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.role-مدیریت {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.role-کاربر {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+/* یا اگر از نام انگلیسی استفاده می‌کنید */
+.role-admin {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.role-manager {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.role-user {
+  background-color: #dcfce7;
+  color: #16a34a;
+}

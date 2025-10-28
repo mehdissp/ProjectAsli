@@ -11,8 +11,8 @@ import {
   FaSpinner, FaLock, FaCheck
 } from 'react-icons/fa';
 import './UserModals.css';
-
-const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
+import { userService } from '../../../services/user';
+const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
   const [formData, setFormData] = useState({
     fullname: '',
     username: '',
@@ -22,8 +22,14 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
     password: '', // اضافه کردن فیلد password
     confirmPassword: '' // اضافه کردن فیلد confirmPassword
   });
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",user)
+    const [roles, setRoles] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+
+    const [rolesLoading, setRolesLoading] = useState(false);
 
   const checkPasswordStrength = (password) => {
     if (!password) return { strength: 0, requirements: {
@@ -66,6 +72,18 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
     if (error) setError('');
   };
 
+
+    const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // پاک کردن خطا هنگام تغییر
+    if (error) setError('');
+  };
+
   // وقتی کاربر تغییر کرد یا مودال باز شد، فرم را پر کن
   useEffect(() => {
     if (user && isOpen) {
@@ -79,6 +97,39 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
         confirmPassword: '' // مقدار پیش‌فرض برای تکرار رمز عبور
       });
       setError(null);
+       const fetchRoles = async () => {
+            if (!isOpen) return;
+            
+            try {
+              setRolesLoading(true);
+              const response = await userService.getRoles();
+              console.log('Roles response:', response);
+              
+              // با توجه به ساختار پاسخ API
+              const rolesData = response.data || response || [];
+              setRoles(rolesData);
+              
+              // اگر نقش‌ها بارگذاری شدند و roleId هنوز تنظیم نشده، اولین نقش را انتخاب کن
+              if (rolesData.length > 0 && !formData.roleId) {
+                setFormData(prev => ({
+                  ...prev,
+                  roleId: rolesData[0].id
+                }));
+              }
+            } catch (err) {
+              console.error('Error fetching roles:', err);
+              setError('خطا در دریافت لیست نقش‌ها');
+              // داده‌های نمونه برای مواقع خطا
+              setRoles([
+                { id: 'user', name: 'کاربر عادی' },
+                { id: 'manager', name: 'مدیر' }
+              ]);
+            } finally {
+              setRolesLoading(false);
+            }
+          };
+      
+          fetchRoles();
     }
   }, [user, isOpen]);
 
@@ -187,7 +238,7 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
                 placeholder="09xxxxxxxxx"
               />
             </div>
-
+{/* 
             <div className="form-group">
               <label className="form-label">
                 <FaUserTag className="input-icon" />
@@ -207,7 +258,34 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user, roles }) => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
+
+                  <div className="form-group">
+                        <label htmlFor="roleId">
+                          نقش کاربر
+                          {rolesLoading && (
+                            <FaSpinner className="spinner-icon" style={{ marginLeft: '8px' }} />
+                          )}
+                        </label>
+                        <select
+                          id="roleId"
+                          name="roleId"
+                          value={user.roleId}
+                          onChange={handleChange}
+                          disabled={loading || rolesLoading}
+                          required
+                        >
+                          <option value="">لطفا انتخاب کنید</option>
+                          {roles.map((role) => (
+                            <option key={role.id} value={role.id}>
+                              {role.name}
+                            </option>
+                          ))}
+                        </select>
+                        {rolesLoading && (
+                          <div className="loading-text">در حال دریافت نقش‌ها...</div>
+                        )}
+                      </div>
 
             <div className="form-row">
               <div className="form-group">

@@ -635,14 +635,15 @@ const UserManagement = () => {
       const response = await userService.getUsersCombo();
       console.log('✅ Roles fetched successfully:', response);
       
-      setRoles(response.data || []);
+      // setRoles(response.data || []);
     } catch (err) {
+      console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
       console.error('❌ Error fetching roles:', err);
-      setRoles([
-        { id: 'admin', name: 'مدیر' },
-        { id: 'user', name: 'کاربر' },
-        { id: 'manager', name: 'مدیریت' }
-      ]);
+      // setRoles([
+      //   { id: 'admin', name: 'مدیر' },
+      //   { id: 'user', name: 'کاربر' },
+      //   { id: 'manager', name: 'مدیریت' }
+      // ]);
     }
   }, []);
 
@@ -662,6 +663,7 @@ const UserManagement = () => {
     console.log(user)
     setUserToEdit(user);
     setIsEditModalOpen(true);
+   
   };
 
   const handleConfirmDelete = async () => {
@@ -712,10 +714,11 @@ const UserManagement = () => {
   // وقتی کاربر ویرایش شد
   const handleUserUpdated = useCallback(() => {
     console.log('🔄 Refreshing users list after update');
+ 
     setTimeout(() => {
-      fetchUsers(pagination.currentPage, pagination.pageSize);
+      fetchUsers(1, pagination.pageSize);
     }, 500);
-  }, [fetchUsers, pagination.currentPage, pagination.pageSize]);
+  }, [fetchUsers, pagination.pageSize]);
 
   // وقتی کاربر جدید ایجاد شد
   const handleUserCreated = useCallback(() => {
@@ -778,35 +781,75 @@ const UserManagement = () => {
     }
   };
 
+  // // نقش کاربر
+  // const getRoleBadge = (user) => {
+  //   console.log('nagsh',user)
+  //   // const userRole = roles.find(role => role.id === user.roleId);
+  //   //     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",roles)
+  //   // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",userRole)
+    
+  //   if (user.roleName) {
+  //     const roleClass = `role-${user.role}`;
+  //     return (
+  //       <span className={`role-badge ${roleClass}`}>
+  //         <FaUserTag className="role-icon" />
+  //         {user.roleName}
+  //       </span>
+  //     );
+  //   }
+    
+  //   const defaultRoles = {
+  //     admin: { label: 'مدیر', class: 'role-admin' },
+  //     user: { label: 'کاربر', class: 'role-user' },
+  //     manager: { label: 'مدیریت', class: 'role-manager' }
+  //   };
+    
+  //   const role = defaultRoles[user.roleName] || defaultRoles.user;
+  //   console.log(defaultRoles[user.roleName])
+  //   return (
+  //     <span className={`role-badge ${role.class}`}>
+  //       <FaUserTag className="role-icon" />
+  //       {role.label}
+  //     </span>
+  //   );
+  // };
+
   // نقش کاربر
-  const getRoleBadge = (user) => {
-    const userRole = roles.find(role => role.id === user.role);
-    
-    if (userRole) {
-      const roleClass = `role-${user.role}`;
-      return (
-        <span className={`role-badge ${roleClass}`}>
-          <FaUserTag className="role-icon" />
-          {userRole.name}
-        </span>
-      );
-    }
-    
-    const defaultRoles = {
-      admin: { label: 'مدیر', class: 'role-admin' },
-      user: { label: 'کاربر', class: 'role-user' },
-      manager: { label: 'مدیریت', class: 'role-manager' }
-    };
-    
-    const role = defaultRoles[user.role] || defaultRoles.user;
-    
+const getRoleBadge = (user) => {
+  console.log('User data for role:', user);
+  
+  if (user.roleName) {
+    // استفاده از roleName برای کلاس CSS (با حذف فاصله و کاراکترهای خاص)
+    const roleClass = `role-${user.roleName.replace(/\s+/g, '-').toLowerCase()}`;
     return (
-      <span className={`role-badge ${role.class}`}>
+      <span className={`role-badge ${roleClass}`}>
         <FaUserTag className="role-icon" />
-        {role.label}
+        {user.roleName}
       </span>
     );
+  }
+  
+  // fallback برای زمانی که roleName وجود ندارد
+  const defaultRoles = {
+    admin: { label: 'مدیر', class: 'role-admin' },
+    user: { label: 'کاربر', class: 'role-user' },
+    manager: { label: 'مدیریت', class: 'role-manager' }
   };
+  
+  // اگر roleId داریم، سعی کنیم نقش مربوطه را پیدا کنیم
+  if (user.roleId) {
+    // اینجا می‌توانید از لیست roles استفاده کنید اگر دارید
+    // const userRole = roles.find(role => role.id === user.roleId);
+  }
+  
+  const role = defaultRoles[user.roleName] || defaultRoles.user;
+  return (
+    <span className={`role-badge ${role.class}`}>
+      <FaUserTag className="role-icon" />
+      {role.label}
+    </span>
+  );
+};
 
   // محاسبه رکوردهای نمایش داده شده
   const getDisplayRange = () => {
@@ -1034,7 +1077,7 @@ const UserManagement = () => {
         onClose={() => setIsEditModalOpen(false)}
         onUserUpdated={handleUserUpdated}
         user={userToEdit}
-        roles={roles}
+        // roles={roles}
       />
 
       {/* Modal تأیید حذف */}
