@@ -58,6 +58,11 @@ const Project = () => {
     totalCount: 0,
     totalPages: 0
   });
+  const [access, setAccess] = useState({
+    checkAccess:false,
+    checkAccessAssigner:false,
+    checkAccessDelete:false,
+  });
 
   // دریافت پروژه‌ها از API
   const fetchProjects = useCallback(async (pageNumber = 1, pageSize = 10) => {
@@ -68,9 +73,18 @@ const Project = () => {
       
       const response = await projectService.getProjects(pageNumber, pageSize);
       
-      
+      console.log(response.items)
       // استفاده از ساختار جدید API
       setProjects(response.items || []);
+      setAccess(s=>({
+  
+        checkAccess:response.checkAccess,
+checkAccessAssigner:response.checkAccessAssigner,
+checkAccessDelete:response.checkAccessDelete
+
+      }))
+console.log("دسترسی ها",access)
+console.log("دسترسی ها",access.checkAccess)
       setPagination(prev => ({
         ...prev,
         currentPage: pageNumber,
@@ -482,6 +496,8 @@ const handleCloseUserModal = () => {
 
       <div className="project-actions">
         <div className="actions-left">
+
+       { access.checkAccess ?
           <button 
             className="btn btn-primary"
             onClick={() => setIsCreateModalOpen(true)}
@@ -489,7 +505,9 @@ const handleCloseUserModal = () => {
           >
                    <FaPlus className="btn-icon" />
             پروژه جدید
-          </button>
+          </button> : ""
+}
+
           <button 
             className="btn btn-secondary"
             onClick={() => fetchProjects(pagination.currentPage, pagination.pageSize)}
@@ -555,12 +573,15 @@ const handleCloseUserModal = () => {
                   <div className="no-data-content">
                     <span className="no-data-icon">📭</span>
                     <p>هیچ پروژه‌ای یافت نشد</p>
-                    <button 
+                  { access && access.checkAccess ?
+                      <button 
                       className="btn btn-primary"
                       onClick={() => setIsCreateModalOpen(true)}
                     >
                       ایجاد اولین پروژه
-                    </button>
+                    </button> : ''  
+                  }
+                
                   </div>
                 </td>
               </tr>
@@ -604,28 +625,33 @@ const handleCloseUserModal = () => {
                       </button>
                           
     {/* دکمه جدید برای مدیریت کاربران */}
-    <button 
+
+
+      {access.checkAccessDelete ?    <button 
       className="btn-action btn-users"
       title="مدیریت کاربران"
       onClick={() => handleUsersClick(project)}
       disabled={loading}
     >
       <FaUsers />
-    </button>
+    </button>: "" }
+
                       {/* <button 
                         className="btn-action btn-edit"
                         title="ویرایش"
                       >
                            <FaEdit />
                       </button> */}
-                 <button 
+
+                       {access.checkAccessDelete ?    <button 
                         className="btn-action btn-delete"
                         title="حذف"
                         onClick={() => handleDeleteClick(project)}
                         disabled={loading}
                       >
                         <FaTrash />
-                      </button>
+                      </button> : '' }
+             
                     </div>
                   </td>
                 </tr>
@@ -648,7 +674,7 @@ const handleCloseUserModal = () => {
           />
         </div>
       )}
-
+{ access.checkAccess ?
       <div className="project-stats">
         <div className="stat-card">
           <div className="stat-icon total">📊</div>
@@ -676,6 +702,9 @@ const handleCloseUserModal = () => {
           </div>
         </div>
       </div>
+  
+  : ""}  
+  
 
       {/* Modal ایجاد پروژه جدید */}
       <CreateProjectModal

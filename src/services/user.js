@@ -280,6 +280,7 @@ export const userService = {
         email: userData.email,
         password: userData.password,
         isActive: userData.isActive !== undefined ? userData.isActive : true,
+        roleId:userData.roleId,
         mobileNumber: userData.mobileNumber || userData.phone // تبدیل phone به mobileNumber
       };
 
@@ -324,13 +325,9 @@ export const userService = {
   },
 
   // userService.js
-async getUsersCombo(pageNumber = 1, pageSize = 10, search = '') {
+async getUsersCombo() {
   try {
-    const response = await http.post('/User/GetUsersCombo', {
-      PageNumber: pageNumber,
-      PageSize: pageSize,
-   //   Search: search // اگر API شما پارامتر جستجو پشتیبانی می‌کند
-    });
+    const response = await http.post('/User/GetRoleCombo');
     console.log('📦 Users combo response:', response);
     
     return response.data;

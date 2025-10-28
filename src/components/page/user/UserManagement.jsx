@@ -26,6 +26,7 @@ import './UserManagement.css';
 const UserManagement = () => {
   const { user } = useAuth();
   const [users, setUsers] = useState([]);
+    const [roles, setRoles] = useState([]); // حالت جدید برای نقش‌ها
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -91,8 +92,31 @@ const UserManagement = () => {
     }
   }, [pagination.pageSize]);
 
+// دریافت نقش‌های کاربر از API
+const fetchRoles = useCallback(async () => {
+  try {
+    console.log('🔄 Fetching user roles...');
+    const response = await userService.getUsersCombo();
+    console.log('✅ Roles fetched successfully:', response);
+    
+    // فرض بر این که response.data شامل آرایه‌ای از نقش‌ها است
+    setRoles(response.data || []);
+  } catch (err) {
+    console.error('❌ Error fetching roles:', err);
+    // در صورت خطا، نقش‌های پیش‌فرض را تنظیم کنید
+    setRoles([
+      { id: 'admin', name: 'مدیر' },
+      { id: 'user', name: 'کاربر' },
+      { id: 'manager', name: 'مدیریت' }
+    ]);
+  }
+}, []);
+
+
+
   useEffect(() => {
     fetchUsers(pagination.currentPage, pagination.pageSize);
+     fetchRoles(); // بارگذاری نقش‌ها
   }, [fetchUsers, pagination.currentPage, pagination.pageSize]);
 
   // مدیریت حذف کاربر
@@ -208,22 +232,38 @@ const UserManagement = () => {
   };
 
   // نقش کاربر
-  const getRoleBadge = (user) => {
-    const roles = {
-      admin: { label: 'مدیر', class: 'role-admin' },
-      user: { label: 'کاربر', class: 'role-user' },
-      manager: { label: 'مدیریت', class: 'role-manager' }
-    };
-    
-    const role = roles[user.role] || roles.user;
-    
+// نقش کاربر
+const getRoleBadge = (user) => {
+  // پیدا کردن نقش کاربر در لیست نقش‌ها
+  const userRole = roles.find(role => role.id === user.role);
+  
+  // اگر نقش پیدا شد از لیست API استفاده کن، در غیر این صورت از پیش‌فرض
+  if (userRole) {
+    const roleClass = `role-${user.role}`;
     return (
-      <span className={`role-badge ${role.class}`}>
+      <span className={`role-badge ${roleClass}`}>
         <FaUserTag className="role-icon" />
-        {role.label}
+        {userRole.name}
       </span>
     );
+  }
+  
+  // نقش‌های پیش‌فرض برای حالت fallback
+  const defaultRoles = {
+    admin: { label: 'مدیر', class: 'role-admin' },
+    user: { label: 'کاربر', class: 'role-user' },
+    manager: { label: 'مدیریت', class: 'role-manager' }
   };
+  
+  const role = defaultRoles[user.role] || defaultRoles.user;
+  
+  return (
+    <span className={`role-badge ${role.class}`}>
+      <FaUserTag className="role-icon" />
+      {role.label}
+    </span>
+  );
+};
 
   // محاسبه رکوردهای نمایش داده شده
   const getDisplayRange = () => {
@@ -441,6 +481,7 @@ const UserManagement = () => {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onUserCreated={handleUserCreated}
+          roles={roles} // ارسال لیست نقش‌ها به مودال
       />
 
       {/* Modal تأیید حذف */}

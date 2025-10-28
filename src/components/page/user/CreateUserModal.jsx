@@ -99,7 +99,7 @@ const CreateUserModal = ({ isOpen, onClose, onUserCreated }) => {
         username: formData.name,
         email: formData.email,
         phone: formData.phone || null,
-             roleId: formData.roleId, // ارسال ID نقش
+        roleId: formData.roleId, // ارسال ID نقش
         // role: formData.role,
         isActive:true,
         password: formData.password,
