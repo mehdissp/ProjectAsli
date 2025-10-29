@@ -3,6 +3,9 @@ import { useAuth } from '../../../context/AuthContext';
 import { authService } from '../../../services/auth';
 import Captcha from '../Captcha/Captcha';
 import './Login.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -24,6 +27,10 @@ const Login = () => {
       const data = await authService.getCaptcha();
       setCaptchaData(data);
     } catch (error) {
+              toast.success(error, {
+            position: "top-left",
+            autoClose: 5000,
+          });
       console.error('Failed to load captcha:', error);
     }
   };
@@ -43,11 +50,22 @@ const Login = () => {
       // لاگین
       const result = await login(credentials);
       if (!result.success) {
-        setError(result.error);
-        loadCaptcha();
+
+
+                loadCaptcha();
+                       toast.error(result.error, {
+            position: "top-left",
+            autoClose: 5000,
+          });
+//        setError(result.error);
+
       }
     } catch (error) {
-      setError('کپچا یا اطلاعات ورود نامعتبر است');
+                    toast.error('کپچا یا اطلاعات ورود نامعتبر است', {
+            position: "top-left",
+            autoClose: 5000,
+          });
+      //setError('کپچا یا اطلاعات ورود نامعتبر است');
       loadCaptcha();
     } finally {
       setLoading(false);
@@ -64,6 +82,18 @@ const Login = () => {
 
   return (
     <div className="login-container">
+                         <ToastContainer
+            position="top-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={true}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
       <div className="login-background">
         <div className="floating-shapes">
           <div className="shape shape-1"></div>

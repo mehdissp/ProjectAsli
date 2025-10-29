@@ -1004,14 +1004,14 @@ const getRoleBadge = (user) => {
                       >
                         <FaEdit />
                       </button>
-                      <button 
+                      {/* <button 
                         className="btn-action btn-delete"
                         title="حذف کاربر"
                         onClick={() => handleDeleteClick(user)}
                         disabled={loading}
                       >
                         <FaTrash />
-                      </button>
+                      </button> */}
                     </div>
                   </td>
                 </tr>
