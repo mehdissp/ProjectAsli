@@ -309,18 +309,20 @@ export const userService = {
     }
   },
 
-  async عحیشفثUser(userData) {
+  async updateuser(userData,checkChange) {
     try {
       // تبدیل ساختار داده به فرمت مورد انتظار API
       const apiData = {
-        id:userData.id,
+        userId:userData.id,
         fullname: userData.fullname || userData.username, // اگر fullname ندارید از username استفاده کنید
         username: userData.username,
         email: userData.email,
         password: userData.password,
         isActive: userData.isActive !== undefined ? userData.isActive : true,
         roleId:userData.roleId,
-        mobileNumber: userData.mobileNumber || userData.phone // تبدیل phone به mobileNumber
+        mobileNumber: userData.mobileNumber , // تبدیل phone به mobileNumber
+        isChangePassword:checkChange
+
       };
 
       console.log('🚀 Sending user data to API:', apiData);

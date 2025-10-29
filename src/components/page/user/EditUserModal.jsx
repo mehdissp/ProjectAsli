@@ -17,18 +17,19 @@ import {
 } from 'react-icons/fa';
 import './UserModals.css';
 import { userService } from '../../../services/user';
+import { RiCoinsLine } from 'react-icons/ri';
 
 const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
   const [formData, setFormData] = useState({
     fullname: '',
     username: '',
     mobileNumber: '',
-    role: '',
+    roleId: '',
     isActive: true,
     password: '',
     confirmPassword: ''
   });
-
+  
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPasswordSection, setShowPasswordSection] = useState(false);
@@ -37,7 +38,7 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
   const [error, setError] = useState(null);
   const [rolesLoading, setRolesLoading] = useState(false);
 
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", user);
+ console.log(user)
 
   const checkPasswordStrength = (password) => {
     if (!password) return { 
@@ -99,13 +100,16 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
 
   // تابع برای تغییر وضعیت نمایش تکرار رمز عبور
   const toggleConfirmPasswordVisibility = () => {
+
     setShowConfirmPassword(!showConfirmPassword);
+
   };
 
   // تابع برای تغییر وضعیت نمایش بخش رمز عبور
   const handlePasswordSectionToggle = (e) => {
     const isChecked = e.target.checked;
     setShowPasswordSection(isChecked);
+    console.log(showPasswordSection)
     
     // اگر چک‌باکس غیرفعال شد، فیلدهای رمز عبور را پاک کن
     if (!isChecked) {
@@ -120,10 +124,11 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
   useEffect(() => {
     if (user && isOpen) {
       setFormData({
+        id:user.id,
         fullname: user.fullname || '',
         username: user.username || '',
         mobileNumber: user.mobileNumber || '',
-        role: user.role || '',
+        roleId: user.roleId || '',
         isActive: user.isActive !== undefined ? user.isActive : true,
         password: '',
         confirmPassword: ''
@@ -165,15 +170,19 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
   }, [user, isOpen]);
 
   const handleSubmit = async (e) => {
+          console.log('🔄 Updating user:', formData,showPasswordSection);
     e.preventDefault();
     
-    if (!formData.fullname || !formData.username || !formData.role) {
+    if (!formData.fullname || !formData.username || !formData.roleId) {
+      console.log(1)
       setError('لطفا فیلدهای ضروری را پر کنید');
       return;
     }
 
     // اگر بخش رمز عبور فعال است، اعتبارسنجی رمز عبور را انجام بده
     if (showPasswordSection) {
+      console.log(2)
+         console.log('check',showPasswordSection)
       if (formData.password && formData.password !== formData.confirmPassword) {
         setError('رمز عبور و تکرار آن مطابقت ندارند');
         return;
@@ -183,9 +192,9 @@ const EditUserModal = ({ isOpen, onClose, onUserUpdated, user }) => {
     try {
       setLoading(true);
       setError(null);
-      
+      console.log('check',showPasswordSection)
       console.log('🔄 Updating user:', formData);
-      
+      await userService.updateuser(formData,showPasswordSection)
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       console.log('✅ User updated successfully');
