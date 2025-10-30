@@ -25,6 +25,10 @@ import moment from 'moment-jalaali';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import DatePicker from "react-multi-date-picker"
+import persian from "react-date-object/calendars/persian"
+import persian_en from "react-date-object/locales/persian_fa"
+
 
 
 const TodoBoard = () => {
@@ -129,7 +133,7 @@ const convertToJalaali = (dateString) => {
     const order = [];
       // تبدیل response API به فرمت داخلی
       const columnsData = {};
-    
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",  response.data.columns)
       response.data.columns.forEach(status => {
         columnsData[status.id] = {
           id: status.id.toString(),
@@ -140,7 +144,11 @@ const convertToJalaali = (dateString) => {
           isOverdute:status.isOverdute,
           tasks: status.tasks,
           deleteButton:status.deleteButton,
-          editButton:status.editButton
+          editButton:status.editButton,
+          deletetodoStatus:status.deleteTodoStatus,
+          editTodoStatus:status.editTodoStatus,
+          insertTodoStatus:status.insertTodoStatus,
+          viewTodoStatus:status.viewTodoStatus
         };
         console.log("ستون")
        
@@ -153,6 +161,7 @@ const convertToJalaali = (dateString) => {
         order.sort((a, b) => columnsData[a].orderNum - columnsData[b].orderNum);
     
     setColumns(columnsData);
+    console.log("areeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",columns)
     setColumnOrder(order);
     } catch (err) {
     //   console.error('Error fetching columns:', err);
@@ -434,7 +443,8 @@ const handleCreateTask = async (e) => {
       description: newTask.description || '',
       statusId: parseInt(selectedColumn),
       priority: getPriorityNumber(newTask.priority),
-      dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
+      // dueDate: newTask.dueDate || new Date().toLocaleDateString('fa-IR'),
+          dueDate: newTask.dueDate ? newTask.dueDate.format('YYYY/MM/DD') : null,
       todoTagsDtos: todoTagsDtos,
       userId: newTask.assignee || null // اضافه کردن assigneeId
     };
@@ -507,6 +517,15 @@ const handleCreateTask = async (e) => {
     //  setError(err.response.data.data.message || 'خطا در حذف ستون');
       throw err;
     }
+  };
+
+    // تابع تغییر تاریخ
+  const handleDateChange = (value) => {
+    console.log("tarikh",value)
+    setNewTask(prev => ({ 
+      ...prev, 
+      dueDate: value 
+    }));
   };
 
 // مدیریت کلیک روی تسک
@@ -857,13 +876,16 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
             <FiRefreshCw className={loading ? 'spinning' : ''} />
             بروزرسانی
           </button>
-          <button 
+            {/* {(columns[0].viewTodoStatus==true) ?  */}
+      <button 
             className="btn btn-secondary"
             onClick={() => setShowColumnManager(true)}
           >
             <FiColumns />
             مدیریت ستون‌ها ({Object.keys(columns).length})
           </button>
+            {/* } */}
+    
         </div>
       </div>
 
@@ -1574,12 +1596,27 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
 
         <div className="form-group">
           <label>تاریخ انجام</label>
-          <input
+          {/* <input
             type="text"
             value={newTask.dueDate}
             onChange={(e) => setNewTask(prev => ({ ...prev, dueDate: e.target.value }))}
             placeholder="مثال: 1402/10/25"
-          />
+          /> */}
+         <DatePicker
+        value={newTask.dueDate}
+        
+            onChange={handleDateChange} // بدون e.target.value
+        calendar={persian}
+        locale={persian_en}
+        calendarPosition="bottom-right"
+        timePicker={false}
+        isGregorian={false} // برای استفاده از تاریخ شمسی
+      />
+      
+      {/* برای نمایش مقدار انتخاب شده (اختیاری) */}
+      <div style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>
+        تاریخ انتخاب شده: {newTask.dueDate ? newTask.dueDate.format('YYYY/MM/DD') : 'انتخاب نشده'}
+      </div>
         </div>
 
         {/* مولتی سلکت تگ‌ها */}

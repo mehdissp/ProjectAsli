@@ -398,7 +398,7 @@ const SortableColumnItem = ({ column, onEdit, onDelete, canDelete, loading }) =>
     transform: CSS.Transform.toString(transform),
     transition,
   };
-
+console.log(column)
   return (
     <div
       ref={setNodeRef}
@@ -420,6 +420,7 @@ const SortableColumnItem = ({ column, onEdit, onDelete, canDelete, loading }) =>
       </div>
 
       <div className="column-actions">
+        {column.editTodoStatus ?
         <button
           className="btn-icon"
           onClick={() => onEdit(column.id)}
@@ -427,7 +428,9 @@ const SortableColumnItem = ({ column, onEdit, onDelete, canDelete, loading }) =>
           disabled={loading}
         >
           <FiEdit2 />
-        </button>
+        </button> : ""  
+      }
+           {column.deletetodoStatus ? 
         <button
           className="btn-icon btn-danger"
           onClick={() => onDelete(column.id)}
@@ -435,7 +438,9 @@ const SortableColumnItem = ({ column, onEdit, onDelete, canDelete, loading }) =>
           title="حذف"
         >
           <FiTrash2 />
-        </button>
+        </button> : ""
+            }
+
       </div>
     </div>
   );
@@ -498,7 +503,8 @@ const ColumnManager = ({
         id: columnId,
         title: column.title,
         color: column.color,
-        orderNum:column.orderNum
+        orderNum:column.orderNum,
+       
       });
     }
   };
@@ -669,14 +675,29 @@ const handleDragEnd = (event) => {
         <div className="columns-list">
           <div className="list-header">
             <h3>ستون‌های موجود ({Object.keys(columns).length})</h3>
-            <button
+
+{/*    
+    <button
               className="btn btn-primary btn-sm"
               onClick={() => setShowAddForm(true)}
               disabled={showAddForm || editingColumn || formLoading}
             >
               <FiPlus />
               افزودن ستون
-            </button>
+            </button>   */}
+
+            {Object.values(columns).some(column => column.insertTodoStatus) && (
+  <button
+    className="btn btn-primary btn-sm"
+    onClick={() => setShowAddForm(true)}
+    disabled={showAddForm || editingColumn || formLoading}
+  >
+    <FiPlus />
+    افزودن ستون
+  </button>
+)}
+           
+         
           </div>
 
           <DndContext

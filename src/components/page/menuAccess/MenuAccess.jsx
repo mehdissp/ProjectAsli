@@ -798,7 +798,7 @@ setLoading(false);
         </div>
 
         {/* Selected Items Panel */}
-        {selectedItems.size > 0 && (
+        {/* {selectedItems.size > 0 && (
           <div className={`selected-panel ${isMobile ? 'mobile' : ''}`}>
             <div className="panel-header">
               <h3>
@@ -841,7 +841,7 @@ setLoading(false);
               })}
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

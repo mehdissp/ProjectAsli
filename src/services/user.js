@@ -350,8 +350,9 @@ export const userService = {
     }
   },
   
-  async getUsers(pageNumber = 1, pageSize = 10) {
+  async getUsersGrid(pageNumber = 1, pageSize = 10) {
     try {
+
       const response = await http.post('/User/GetUsers', {
         PageNumber: pageNumber,
         PageSize: pageSize
@@ -366,13 +367,16 @@ export const userService = {
   },
 
   // userService.js
-async getUsersCombo() {
-  try {
-    const response = await http.post('/User/GetRoleCombo');
-    console.log('📦 Users combo response:', response);
-    
-    return response.data;
-  } catch (error) {
+async getUsersCombo(pageNumber = 1, pageSize = 10) {
+    try {
+      const response = await http.post('/User/GetUsersCombo', {
+        PageNumber: pageNumber,
+        PageSize: pageSize
+      });
+      console.log('📦 Users response:', response);
+      
+      return response.data;
+    } catch (error) {
     console.error('❌ Get users combo service error:', error);
     throw error;
   }

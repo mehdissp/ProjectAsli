@@ -586,7 +586,7 @@ const UserManagement = () => {
       setError(null);
       console.log(`🔄 Fetching users page ${pageNumber}...`);
       
-      const response = await userService.getUsers(pageNumber, pageSize);
+      const response = await userService.getUsersGrid(pageNumber, pageSize);
       console.log(response);
       console.log(response.data.items?.length);
       console.log(response.data);
