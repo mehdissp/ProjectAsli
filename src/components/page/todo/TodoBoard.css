@@ -77,7 +77,7 @@
 /* برد Kanban */
 .kanban-board {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
    /* grid-template-columns: repeat(5, 1fr); */
   gap: 24px;
   align-items: start;

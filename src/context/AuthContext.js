@@ -136,6 +136,8 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
+
+  
   const checkAuth = async () => {
     try {
       const token = getToken();
@@ -185,7 +187,27 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setMenus([]);
   };
-
+  // تابع جدید برای آپدیت پروفایل
+  const updateProfile = async (profileData) => {
+    try {
+      // فراخوانی سرویس آپدیت پروفایل
+    //  const updatedUser = await authService.updateProfile(profileData);
+      
+      // آپدیت state کاربر
+      setUser(prevUser => ({
+        ...prevUser,
+        ...profileData
+      }));
+      
+      return { success: true, user: profileData };
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Profile update failed' 
+      };
+    }
+  };
   const refreshToken = async () => {
     try {
       const refreshToken = getRefreshToken();
@@ -235,6 +257,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     refreshToken,
     updateMenus,
+        updateProfile, // اضافه شده
     findMenuByPath
   };
 

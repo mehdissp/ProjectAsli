@@ -105,7 +105,7 @@ const convertToJalaali = (dateString) => {
     try {
       setTagsLoading(true);
       // فرض می‌کنیم این تابع در todoStatusService موجود است
-      const response = await todoStatusService.getTags();
+      const response = await todoStatusService.getTags(projectId);
       console.log('Tags response:', response);
       setTags(response.data || response || []);
     } catch (error) {

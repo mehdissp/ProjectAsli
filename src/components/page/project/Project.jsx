@@ -7,6 +7,7 @@ import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
 import CreateProjectModal from './CreateProjectModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal/ConfirmDeleteModal';
 import UserSelectionModal from './UserSelectionModal/UserSelectionModal'
+import TagSelectionModal from './TagSelectionModal/TagSelectionModal'
 import Pagination from '../../common/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom'; // اضافه کردن useNavigate
 
@@ -24,7 +25,7 @@ import {
   FaRocket,
   FaCheckCircle,
   FaPlus,
-  FaRedo,FaUsers 
+  FaRedo,FaUsers ,FaTags
 } from 'react-icons/fa';
 import { 
   HiOutlineExclamationCircle 
@@ -51,6 +52,14 @@ const Project = () => {
   const [usersLoading, setUsersLoading] = useState(false);
   const [usersError, setUsersError] = useState(null);
   
+
+// در کامپوننت Project، stateهای جدید اضافه کنید:
+const [isTagModalOpen, setIsTagModalOpen] = useState(false);
+const [tags, setTags] = useState([]);
+const [selectedTags, setSelectedTags] = useState(new Set());
+const [tagsLoading, setTagsLoading] = useState(false);
+const [tagsError, setTagsError] = useState(null);
+
   // حالت‌های پیجینیشن
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -122,7 +131,133 @@ console.log("دسترسی ها",access.checkAccess)
 
 
   //***********انتخاب کاربر */
+// تابع برای باز کردن modal تگ‌ها
+const handleTagsClick = async (project) => {
+  try {
+        console.log('🏷️ Fetching tags for project:', project.id);
+            console.log('🏷️ Fetching tags for project:', project.name);
+    setSelectedProject(project);
+    setTagsLoading(true);
+    setTagsError(null);
+            console.log('🏷️ Fetching tags for project:', project.id);
+    
+    console.log('🏷️ Fetching tags for project:', project.name);
+    
+    // دریافت لیست تگ‌ها - باید سرویس مربوطه را اضافه کنید
+    const tagsResponse = await projectService.getTagsForProject(1,10,project.id);
+    console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$',tagsResponse.items )
+    setTags(tagsResponse.items);
+    
+    // ایجاد Set از تگ‌های انتخاب شده
+    const initiallySelected = new Set();
+    (tagsResponse.items || []).forEach(tag => {
+      if (tag.isSelected) {
+        initiallySelected.add(tag.id);
+      }
+    });
+    setSelectedTags(initiallySelected);
+    
+    setIsTagModalOpen(true);
+    
+  } catch (err) {
+    console.error('❌ Error fetching tags:', err);
+    setTagsError('خطا در دریافت لیست تگ‌ها');
+  } finally {
+    setTagsLoading(false);
+  }
+};
 
+// toggle انتخاب تگ
+const toggleTagSelection = (tagId) => {
+  const newSelectedTags = new Set(selectedTags);
+  if (newSelectedTags.has(tagId)) {
+    newSelectedTags.delete(tagId);
+  } else {
+    newSelectedTags.add(tagId);
+  }
+  setSelectedTags(newSelectedTags);
+
+    setTags(prevUsers => 
+    prevUsers.map(user => 
+      user.id === tagId 
+        ? { ...user, isCheck: !user.isCheck }
+        : user
+    )
+  );
+};
+
+// انتخاب همه تگ‌ها
+const selectAllTags = () => {
+  const allTagIds = tags.map(tag => tag.id);
+  setSelectedTags(new Set(allTagIds));
+};
+
+// لغو انتخاب همه تگ‌ها
+const deselectAllTags = () => {
+  setSelectedTags(new Set());
+};
+// ذخیره انتخاب‌های تگ‌ها
+const saveTagSelections = async () => {
+  try {
+    setTagsLoading(true);
+    
+    const selectedTagIds = Array.from(selectedTags);
+
+      const selectedUserIds = tags
+      .filter(user => user.isCheck)
+      .map(user => user.id);
+      console.log("###################################################",selectedUserIds)
+      console.log("###################################################",selectedTagIds)
+    
+    console.log('💾 Saving tag selections:', {
+      project: selectedProject?.id,
+      selectedTags: selectedTagIds
+    });
+    
+    const saveData = {
+      tagIds: selectedUserIds
+    };
+    
+    await projectService.insertOrDeleteTagProject(saveData, selectedProject?.id);
+    
+    toast.success('تگ‌ها با موفقیت ذخیره شدند', {
+      position: "top-left",
+      autoClose: 5000,
+    });
+    
+    console.log('✅ Tag assignments saved successfully');
+    
+    setIsTagModalOpen(false);
+    setSelectedProject(null);
+    
+  } catch (err) {
+    console.error('❌ Error saving tag selections:', err);
+    setTagsError('خطا در ذخیره تگ‌ها');
+  } finally {
+    setTagsLoading(false);
+  }
+};
+
+// ایجاد تگ جدید
+const handleCreateTag = async (tagName) => {
+  // این تابع باید سرویس ایجاد تگ را فراخوانی کند
+  const newTag = await projectService.createTag({
+    name: tagName,
+    description: '',
+    color: getRandomColor() // تابع برای تولید رنگ تصادفی
+  });
+  
+  // اضافه کردن تگ جدید به لیست
+  setTags(prev => [...prev, newTag]);
+  // انتخاب خودکار تگ جدید
+  setSelectedTags(prev => new Set(prev).add(newTag.id));
+};
+
+// تابع کمکی برای تولید رنگ تصادفی
+const getRandomColor = () => {
+  const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
 // تابع برای باز کردن modal کاربران
 const handleUsersClick = async (project) => {
   try {
@@ -634,7 +769,22 @@ const handleCloseUserModal = () => {
       disabled={loading}
     >
       <FaUsers />
-    </button>: "" }
+    </button>
+    
+    
+    : "" }
+    
+      {access.checkAccessDelete ?      <button 
+    className="btn-action btn-tags"
+    title="مدیریت تگ‌ها"
+    onClick={() => handleTagsClick(project)}
+    disabled={loading}
+  >
+      <FaTags />
+  </button>
+    
+    
+    : "" }
 
                       {/* <button 
                         className="btn-action btn-edit"
@@ -734,6 +884,27 @@ const handleCloseUserModal = () => {
       loading={usersLoading}
       error={usersError}
     />
+
+
+<TagSelectionModal
+  isOpen={isTagModalOpen}
+  onClose={() => {
+    setIsTagModalOpen(false);
+    setSelectedProject(null);
+    setSelectedTags(new Set());
+    setTagsError(null);
+  }}
+  projectName={selectedProject?.name}
+  tags={tags}
+  selectedTags={selectedTags}
+  onTagToggle={toggleTagSelection}
+  onSelectAll={selectAllTags}
+  onDeselectAll={deselectAllTags}
+  onSave={saveTagSelections}
+  onCreateTag={handleCreateTag}
+  loading={tagsLoading}
+  error={tagsError}
+/>
 
     </div>
   );

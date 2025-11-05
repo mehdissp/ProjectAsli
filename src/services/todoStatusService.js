@@ -14,9 +14,9 @@ export const todoStatusService = {
   },
 
 
-    getTags: async () => {
+    getTags: async (projectId) => {
     try {
-      const response = await api.get('/TodoStatus/GetTags');
+      const response = await api.get(`/TodoStatus/GetTags?projectId=${projectId}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching tags:', error);

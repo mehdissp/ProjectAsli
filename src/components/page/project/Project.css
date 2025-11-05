@@ -499,3 +499,14 @@
   background: #6c757d;
   cursor: not-allowed;
 }
+
+.btn-action.btn-tags {
+  /* background: #704ec0; */
+    background: #798603;
+  color: white;
+}
+
+.btn-action.btn-tags:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}

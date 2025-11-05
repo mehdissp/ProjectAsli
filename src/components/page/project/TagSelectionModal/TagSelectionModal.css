@@ -1,0 +1,468 @@
+/* components/project/Project/UserSelectionModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.user-selection-modal {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e1e5e9;
+  background: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-icon {
+  color: #6c757d;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.project-info-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e1e5e9;
+  background: #f8f9fa;
+}
+
+.project-info-section h3 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.project-info-section p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.selection-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.selected-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #28a745;
+  font-weight: 500;
+}
+
+.selection-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.users-grid-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px;
+}
+
+.users-grid {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); */
+   grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.usercard {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 12px;
+}
+
+.usercard:hover {
+  border-color: #007bff;
+  background: #f8f9fa;
+}
+
+.usercard.selected {
+  border-color: #007bff;
+  background: #e7f3ff;
+}
+
+.user-checkbox {
+  flex-shrink: 0;
+}
+
+.user-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.user-checkbox label {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.user-checkbox input[type="checkbox"]:checked + label {
+  background: #007bff;
+  border-color: #007bff;
+}
+
+.user-checkbox input[type="checkbox"]:checked + label::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.user-username {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.user-email {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.no-users {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.no-users-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid #e1e5e9;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+}
+
+.error-banner {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 16px;
+  margin: 0 24px;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #545b62;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: #6c757d;
+  color: white;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* اضافه کردن به UserSelectionModal.css */
+
+.pagination-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e1e5e9;
+  background: #f8f9fa;
+}
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-size-selector label {
+  font-size: 0.9rem;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.page-size-selector select {
+  padding: 6px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+  font-size: 0.9rem;
+}
+
+.page-size-selector select:disabled {
+  background: #e9ecef;
+  cursor: not-allowed;
+}
+
+.users-info {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.users-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.users-pagination {
+  padding: 20px 24px;
+  border-top: 1px solid #e1e5e9;
+  background: #f8f9fa;
+}
+
+/* استایل برای spinner */
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* بهبود استایل برای حالت loading */
+.usercard:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* بهبود responsive */
+@media (max-width: 768px) {
+  .pagination-info {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* در UserSelectionModal.css */
+
+.usercard {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 12px;
+}
+
+.usercard:hover {
+  border-color: #007bff;
+  background: #f8f9fa;
+}
+
+.usercard.selected {
+  border-color: #007bff;
+  background: #e7f3ff;
+}
+
+/* بقیه استایل‌ها مانند قبل */
+.user-checkbox {
+  flex-shrink: 0;
+}
+
+.user-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.user-checkbox label {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.user-checkbox input[type="checkbox"]:checked + label {
+  background: #007bff;
+  border-color: #007bff;
+}
+
+.user-checkbox input[type="checkbox"]:checked + label::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-username {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+/* grid 3 تایی */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 20px 0;
+}
+
+@media (max-width: 1024px) {
+  .users-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tag-card {
+  border: 2px solid var(--tag-color, #667eea);
+  color: var(--tag-color, #667eea);
+  background: white;
+}
+
+.tag-card .tag-name,
+.tag-card .tag-description {
+  color: inherit;
+}
+
+.tag-card.selected {
+  background-color: var(--tag-color, #667eea);
+  color: white;
+}
+
+.tag-card.selected .tag-name,
+.tag-card.selected .tag-description {
+  color: inherit;
+}
