@@ -51,7 +51,7 @@ const Profile = () => {
         department: user.department || 'فناوری اطلاعات',
         website: user.website || 'www.example.com',
         linkedin: user.linkedin || 'linkedin.com/in/username',
-        twitter: user.twitter || 'twitter.com/username',
+        roleName: user.roleName || 'twitter.com/username',
         profileImage: user.avatar || '' // اضافه کردن profileImage
       });
     }
@@ -247,7 +247,7 @@ const Profile = () => {
               </div>
               <div className="user-info-summary">
                 <h2 className="user-display-name">{formData.name}</h2>
-                <p className="user-role">{user?.role || 'مدیر سیستم'}</p>
+                <p className="user-role">{user?.roleName || 'مدیر سیستم'}</p>
                 <div className="user-stats">
                   <div className="stat-item">
                     <span className="stat-number">۵</span>

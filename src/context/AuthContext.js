@@ -165,6 +165,7 @@ export const AuthProvider = ({ children }) => {
       setRefreshToken(result.refreshToken);
       
       const userProfile = await authService.getProfile();
+      console.log(userProfile)
       setUser(userProfile);
       setIsAuthenticated(true);
       

@@ -943,7 +943,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           </div>
           <div className="user-details-compact">
             <div className="user-name-compact">{user?.username || 'کاربر'}</div>
-            <div className="user-role-compact">{user?.role || 'مدیر سیستم'}</div>
+            <div className="user-role-compact">{user?.roleName || 'مدیر سیستم'}</div>
           </div>
           <div className="profile-arrow">
             <FaUserCircle />
@@ -956,7 +956,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             {renderMenuItems(menus)}
             
             {/* آیتم پروفایل در منو */}
-            <div className="menu-item">
+            {/* <div className="menu-item">
               <NavLink
                 to="/profile"
                 className={({ isActive }) => 
@@ -970,7 +970,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <span className="menu-text">پروفایل من</span>
                 <div className="active-indicator"></div>
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </nav>
 
