@@ -919,7 +919,8 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="sidebar-header">
           <div className="logo">
             <div className="logo-icon">
-              <FaRocket />
+      
+            <img src="/image/Green and Yellow Ball Icon Soccer Logo (2).png" className='user-avatar  profile-image' alt="لوگو سیستم" />
             </div>
             <span className="logo-text">سیستم مدیریت</span>
           </div>

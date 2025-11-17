@@ -384,7 +384,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import './ColumnManager.css';
 
-const SortableColumnItem = ({ column, onEdit, onDelete, canDelete, loading }) => {
+const SortableColumnItem = ({ column, onEdit, onDelete, canDelete, loading ,access}) => {
   const {
     attributes,
     listeners,
@@ -420,7 +420,7 @@ console.log(column)
       </div>
 
       <div className="column-actions">
-        {column.editTodoStatus ?
+        {access.editTodoStatus ?
         <button
           className="btn-icon"
           onClick={() => onEdit(column.id)}
@@ -430,7 +430,8 @@ console.log(column)
           <FiEdit2 />
         </button> : ""  
       }
-           {column.deletetodoStatus ? 
+           {/* {column.deletetodoStatus ?  */}
+           {access.deleteTodoStatus ? 
         <button
           className="btn-icon btn-danger"
           onClick={() => onDelete(column.id)}
@@ -450,7 +451,9 @@ const ColumnManager = ({
   isOpen, 
   onClose, 
   columns, 
-    columnOrder, // این رو اضافه کن
+  access,  
+  columnOrder, // این رو اضافه کن
+
   onAddColumn, 
   onEditColumn, 
   onDeleteColumn,
@@ -464,7 +467,7 @@ const ColumnManager = ({
     title: '',
     color: '#3b82f6'
   });
-
+console.log("accessssssssssssssssssssssssssss",access)
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -686,7 +689,8 @@ const handleDragEnd = (event) => {
               افزودن ستون
             </button>   */}
 
-            {Object.values(columns).some(column => column.insertTodoStatus) && (
+            {/* {Object.values(access).some(column => column.insertTodoStatus) && ( */}
+             {access.insertTodoStatus && (
   <button
     className="btn btn-primary btn-sm"
     onClick={() => setShowAddForm(true)}
@@ -722,9 +726,11 @@ const handleDragEnd = (event) => {
         <SortableColumnItem
           key={column.id}
           column={column}
+          access={access}
           onEdit={handleEditColumn}
           onDelete={handleDeleteColumn}
-         canDelete={(columnOrder || Object.keys(columns)).length > 1} // اینجا هم درست کن
+        //  canDelete={(columnOrder || Object.keys(columns)).length > 1} // اینجا هم درست کن
+        canDelete={access.deleteTodoStatus} 
           loading={formLoading}
         />
       );

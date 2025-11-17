@@ -33,6 +33,7 @@ import persian_en from "react-date-object/locales/persian_fa"
 
 const TodoBoard = () => {
   const [columns, setColumns] = useState({});
+  const [accessCloumn, setAccessCloumn] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState('');
@@ -133,7 +134,9 @@ const convertToJalaali = (dateString) => {
     const order = [];
       // تبدیل response API به فرمت داخلی
       const columnsData = {};
+      const accessColumn={};
     console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",  response.data.columns)
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",  response.data.access)
       response.data.columns.forEach(status => {
         columnsData[status.id] = {
           id: status.id.toString(),
@@ -161,7 +164,9 @@ const convertToJalaali = (dateString) => {
         order.sort((a, b) => columnsData[a].orderNum - columnsData[b].orderNum);
     
     setColumns(columnsData);
+    setAccessCloumn(response.data.access)
     console.log("areeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",columns)
+     console.log("areeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",accessCloumn)
     setColumnOrder(order);
     } catch (err) {
     //   console.error('Error fetching columns:', err);
@@ -1047,6 +1052,7 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
         isOpen={showColumnManager}
         onClose={() => setShowColumnManager(false)}
         columns={columns}
+        access={accessCloumn}
           columnOrder={columnOrder} // اضافه کردن
         onAddColumn={handleAddColumn}
         onEditColumn={handleEditColumn}
