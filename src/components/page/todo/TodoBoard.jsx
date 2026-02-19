@@ -11,7 +11,7 @@ import {
   FiColumns,
   FiX,
   FiSave,
-  FiRefreshCw  ,FiEye ,FiMessageSquare,FiUserCheck   // اضافه کردن آیکون چشم
+  FiRefreshCw  ,FiEye ,FiMessageSquare,FiUserCheck ,FiChevronUp, FiChevronDown   // اضافه کردن آیکون چشم
 } from 'react-icons/fi';
 import ColumnManager from './ColumnManager';
 import UserSearchSelect from './UserSearchSelect'
@@ -57,6 +57,8 @@ const [comments, setComments] = useState([]);
 const [newComment, setNewComment] = useState('');
 const [commentLoading, setCommentLoading] = useState(false);
 
+
+ const [minimizedColumns, setMinimizedColumns] = useState({});
   
   // دریافت projectId از state
   const projectId = location.state?.projectId;
@@ -78,6 +80,16 @@ const [commentLoading, setCommentLoading] = useState(false);
       assignee: '', // اینجا ID کاربر ذخیره می‌شود
     tags: []
   });
+
+
+
+  // تابع toggle برای minimize/maximize
+  const toggleColumnMinimize = (columnId) => {
+    setMinimizedColumns(prev => ({
+      ...prev,
+      [columnId]: !prev[columnId]
+    }));
+  };
 
 // تابع تبدیل تاریخ به شمسی
 const convertToJalaali = (dateString) => {
@@ -901,7 +913,8 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
         .map(column => (
           <div
             key={column.id}
-            className="kanban-column"
+            // className="kanban-column"
+              className={`kanban-column ${minimizedColumns[column.id] ? 'minimized' : ''}`}
             onDragOver={(e) => handleDragOver(e, column.id)}
             onDragLeave={handleDragLeave}
             onDrop={(e) => handleDrop(e, column.id)}
@@ -917,6 +930,13 @@ const commentsResponse = await commentService.getTaskComments(selectedTask.id);
                 <span className="task-count">{column.tasks.length}</span>
               </div>
               <div className="column-actions">
+<button 
+  className="btn-minimize"
+  onClick={() => toggleColumnMinimize(column.id)}
+  title={minimizedColumns[column.id] ? "باز کردن ستون" : "جمع کردن ستون"}
+>
+  {minimizedColumns[column.id] ? <FiChevronDown /> : <FiChevronUp />}
+</button>
                 <button 
                   className="btn-add-task"
                   onClick={() => handleAddTaskClick(column.id)}

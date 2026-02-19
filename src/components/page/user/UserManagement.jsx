@@ -963,7 +963,16 @@ const getRoleBadge = (user) => {
                   <td className="user-info-cell">
                     <div className="user-info-content">
                       <span className="user-avatar">
-                        <FaUser />
+                        {/* <FaUser /> */}
+             {user.avatar ? (
+  <img 
+    src={user.avatar} 
+    alt="Profile" 
+    className="user-avatar profile-image"
+  />
+) : (
+  <FaUser />
+)}
                       </span>
                       <div>
                         <div className="user-name">{user.fullname}</div>

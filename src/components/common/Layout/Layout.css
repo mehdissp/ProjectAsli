@@ -13,7 +13,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: calc(100% - 280px); /* عرض کل منهای عرض سایدبار */
+  width: calc(100% ); 
+  /* عرض کل منهای عرض سایدبار */
   margin-right: 0;
   margin-left: auto; /* برای راست‌چین شدن */
   transition: var(--transition);

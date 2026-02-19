@@ -21,7 +21,7 @@ const Header = ({ onToggleSidebar }) => {
         time: '۲ دقیقه پیش',
         type: 'success',
         read: false,
-        icon: '🛒'
+        icon: '🔔'
       },
       {
         id: 2,

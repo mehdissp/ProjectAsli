@@ -31,9 +31,7 @@
   flex-wrap: wrap;
 }
 
-.btn-icon {
-  margin-left: 0.5rem;
-}
+
 
 .error-banner {
   background: linear-gradient(135deg, #fee2e2, #fecaca);
@@ -225,33 +223,7 @@
   justify-content: center;
 }
 
-.btn-action {
-  padding: 6px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 1.1rem;
-  background: transparent;
-}
 
-.btn-view:hover {
-  background: var(--primary-color);
-  color: white;
-  transform: scale(1.1);
-}
-
-.btn-edit:hover {
-  background: var(--accent-color);
-  color: white;
-  transform: scale(1.1);
-}
-
-.btn-delete:hover {
-  background: #ef4444;
-  color: white;
-  transform: scale(1.1);
-}
 
 /* استایل برای داده‌های خالی */
 .no-data {
@@ -275,7 +247,7 @@
 /* آمار پایین صفحه */
 .project-stats {
   display: grid;
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   margin-top: 2rem;
 }
@@ -472,41 +444,37 @@
   opacity: 0.7;
 }
 
-/* به Project.css اضافه کنید */
-.btn-action:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none !important;
+
+/* در فایل Archive.css */
+.tag-item {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  background: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-family: sans-serif;
+
+  /* border: 1px solid #dee2e6; */
 }
 
-.btn-action:disabled:hover {
-  background: transparent;
-  color: var(--text-secondary);
+.color-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 6px;
+  display: inline-block;
+  /* border: 1px solid #ccc; */
 }
 
-
-/* در Project.css به action-buttons اضافه کنید */
-.btn-action.btn-users {
-  background: #17a2b8;
-  color: white;
+.tag-name {
+  font-size: 12px;
+  color: #495057;
 }
 
-.btn-action.btn-users:hover {
-  background: #138496;
-}
-
-.btn-action.btn-users:disabled {
-  background: #6c757d;
-  cursor: not-allowed;
-}
-
-.btn-action.btn-tags {
-  /* background: #704ec0; */
-    background: #798603;
-  color: white;
-}
-
-.btn-action.btn-tags:disabled {
-  background: #6c757d;
-  cursor: not-allowed;
+.project-code {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }

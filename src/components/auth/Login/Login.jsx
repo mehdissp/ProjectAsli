@@ -5,7 +5,7 @@ import Captcha from '../Captcha/Captcha';
 import './Login.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from 'react-router-dom'; // اضافه کردن useNavigate
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -17,7 +17,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { login } = useAuth();
-
+    const navigate = useNavigate(); // استفاده از useNavigate
   useEffect(() => {
     loadCaptcha();
   }, []);
@@ -60,6 +60,7 @@ const Login = () => {
 //        setError(result.error);
 
       }
+               navigate('/dashboard');
     } catch (error) {
                     toast.error('کپچا یا اطلاعات ورود نامعتبر است', {
             position: "top-left",

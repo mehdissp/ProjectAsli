@@ -4,7 +4,26 @@ import api from './api';
 export const todoService = {
   // دریافت لیست وضعیت‌ها
 
-
+  async getArchive(projectId,pageNumber = 1, pageSize = 10) {
+    try {
+      const response = await api.post('/todo/GetTodoWithTagsViewsAsyncArchive', {
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Id:projectId
+      });
+      console.log('📦 Archive data received:', response.data);
+      
+      // استفاده از ساختار جدید API
+      return response.data.data || {
+        items: [],
+        totalCount: 0,
+        totalPages: 0
+      };
+    } catch (error) {
+      console.error('❌ Get Archive service error:', error);
+      throw error;
+    }
+  },
   // ایجاد وضعیت جدید
 async createTodo(todoData) {
   try {

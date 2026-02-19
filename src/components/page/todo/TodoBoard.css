@@ -78,7 +78,7 @@
 .kanban-board {
   display: grid;
   /* grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); */
-   grid-template-columns: repeat(10, minmax(320px, 1fr));
+   /* grid-template-columns: repeat(10, minmax(320px, 1fr)); */
    /* grid-template-columns: repeat(5, 1fr); */
   gap: 24px;
   align-items: start;
@@ -1250,4 +1250,66 @@
   content: '📁';
   margin-left: 8px;
   font-size: 16px;
+}
+
+/* استایل‌های minimize */
+.kanban-column.minimized {
+  min-height: auto;
+  height: fit-content;
+}
+
+.kanban-column.minimized .task-list {
+  display: none;
+}
+
+.kanban-column.minimized .empty-column {
+  display: none;
+}
+
+.kanban-column.minimized .column-header {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+/* دکمه minimize */
+.btn-minimize {
+  background: none;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn-minimize:hover {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* نمایش تعداد تسک‌ها در حالت minimized */
+.column-title .task-count.minimized {
+  background: #3b82f6;
+  color: white;
+}
+
+/* responsive برای حالت minimized */
+@media (max-width: 768px) {
+  .kanban-column.minimized {
+    width: 80px;
+    min-width: 80px;
+  }
+  
+  .kanban-column.minimized .column-title h3 {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 12px;
+  }
 }

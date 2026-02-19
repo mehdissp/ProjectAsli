@@ -1,13 +1,10 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
-import { projectService } from '../../../services/project';
-import { userService } from '../../../services/user'; // اضافه کردن سرویس کاربران
+
+import { todoService } from '../../../services/todo';
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
-import CreateProjectModal from './CreateProjectModal';
-import ConfirmDeleteModal from './ConfirmDeleteModal/ConfirmDeleteModal';
-import UserSelectionModal from './UserSelectionModal/UserSelectionModal'
-import TagSelectionModal from './TagSelectionModal/TagSelectionModal'
+import { useLocation } from 'react-router-dom';
 import Pagination from '../../common/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom'; // اضافه کردن useNavigate
 
@@ -25,14 +22,14 @@ import {
   FaRocket,
   FaCheckCircle,
   FaPlus,
-  FaRedo,FaUsers ,FaTags,FaArchive
+  FaRedo,FaUsers ,FaTags,  FaUser,
 } from 'react-icons/fa';
 import { 
   HiOutlineExclamationCircle 
 } from 'react-icons/hi';
-import './Project.css';
+import './Archive.css';
 
-const Project = () => {
+const Archive = () => {
   const { user } = useAuth();
     const navigate = useNavigate(); // استفاده از useNavigate
   const [projects, setProjects] = useState([]);
@@ -52,7 +49,9 @@ const Project = () => {
   const [usersLoading, setUsersLoading] = useState(false);
   const [usersError, setUsersError] = useState(null);
   
-
+  const location = useLocation();
+    const projectId = location.state?.projectId;
+  const projectName=location.state?.name
 // در کامپوننت Project، stateهای جدید اضافه کنید:
 const [isTagModalOpen, setIsTagModalOpen] = useState(false);
 const [tags, setTags] = useState([]);
@@ -74,26 +73,19 @@ const [tagsError, setTagsError] = useState(null);
   });
 
   // دریافت پروژه‌ها از API
-  const fetchProjects = useCallback(async (pageNumber = 1, pageSize = 10) => {
+  const fetchArchive = useCallback(async (pageNumber = 1, pageSize = 10) => {
     try {
       setLoading(true);
       setError(null);
       console.log(`🔄 Fetching projects page ${pageNumber}...`);
       
-      const response = await projectService.getProjects(pageNumber, pageSize);
+const response = await todoService.getArchive(projectId,pageNumber,pageSize);
       
       console.log(response.items)
       // استفاده از ساختار جدید API
-      setProjects(response.items || []);
-      setAccess(s=>({
-  
-        checkAccess:response.checkAccess,
-checkAccessAssigner:response.checkAccessAssigner,
-checkAccessDelete:response.checkAccessDelete
+      setProjects(response.items|| []);
 
-      }))
-console.log("دسترسی ها",access)
-console.log("دسترسی ها",access.checkAccess)
+
       setPagination(prev => ({
         ...prev,
         currentPage: pageNumber,
@@ -131,172 +123,13 @@ console.log("دسترسی ها",access.checkAccess)
 
 
   //***********انتخاب کاربر */
-// تابع برای باز کردن modal تگ‌ها
-const handleTagsClick = async (project) => {
-  try {
-        console.log('🏷️ Fetching tags for project:', project.id);
-            console.log('🏷️ Fetching tags for project:', project.name);
-    setSelectedProject(project);
-    setTagsLoading(true);
-    setTagsError(null);
-            console.log('🏷️ Fetching tags for project:', project.id);
-    
-    console.log('🏷️ Fetching tags for project:', project.name);
-    
-    // دریافت لیست تگ‌ها - باید سرویس مربوطه را اضافه کنید
-    const tagsResponse = await projectService.getTagsForProject(1,10,project.id);
-    console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$',tagsResponse.items )
-    setTags(tagsResponse.items);
-    
-    // ایجاد Set از تگ‌های انتخاب شده
-    const initiallySelected = new Set();
-    (tagsResponse.items || []).forEach(tag => {
-      if (tag.isSelected) {
-        initiallySelected.add(tag.id);
-      }
-    });
-    setSelectedTags(initiallySelected);
-    
-    setIsTagModalOpen(true);
-    
-  } catch (err) {
-    console.error('❌ Error fetching tags:', err);
-    setTagsError('خطا در دریافت لیست تگ‌ها');
-  } finally {
-    setTagsLoading(false);
-  }
-};
 
-// toggle انتخاب تگ
-const toggleTagSelection = (tagId) => {
-  const newSelectedTags = new Set(selectedTags);
-  if (newSelectedTags.has(tagId)) {
-    newSelectedTags.delete(tagId);
-  } else {
-    newSelectedTags.add(tagId);
-  }
-  setSelectedTags(newSelectedTags);
 
-    setTags(prevUsers => 
-    prevUsers.map(user => 
-      user.id === tagId 
-        ? { ...user, isCheck: !user.isCheck }
-        : user
-    )
-  );
-};
-
-// انتخاب همه تگ‌ها
-const selectAllTags = () => {
-  const allTagIds = tags.map(tag => tag.id);
-  setSelectedTags(new Set(allTagIds));
-};
-
-// لغو انتخاب همه تگ‌ها
-const deselectAllTags = () => {
-  setSelectedTags(new Set());
-};
-// ذخیره انتخاب‌های تگ‌ها
-const saveTagSelections = async () => {
-  try {
-    setTagsLoading(true);
-    
-    const selectedTagIds = Array.from(selectedTags);
-
-      const selectedUserIds = tags
-      .filter(user => user.isCheck)
-      .map(user => user.id);
-      console.log("###################################################",selectedUserIds)
-      console.log("###################################################",selectedTagIds)
-    
-    console.log('💾 Saving tag selections:', {
-      project: selectedProject?.id,
-      selectedTags: selectedTagIds
-    });
-    
-    const saveData = {
-      tagIds: selectedUserIds
-    };
-    
-    await projectService.insertOrDeleteTagProject(saveData, selectedProject?.id);
-    
-    toast.success('تگ‌ها با موفقیت ذخیره شدند', {
-      position: "top-left",
-      autoClose: 5000,
-    });
-    
-    console.log('✅ Tag assignments saved successfully');
-    
-    setIsTagModalOpen(false);
-    setSelectedProject(null);
-    
-  } catch (err) {
-    console.error('❌ Error saving tag selections:', err);
-    setTagsError('خطا در ذخیره تگ‌ها');
-  } finally {
-    setTagsLoading(false);
-  }
-};
 
 // ایجاد تگ جدید
-const handleCreateTag = async (tagName) => {
-  // این تابع باید سرویس ایجاد تگ را فراخوانی کند
-  const newTag = await projectService.createTag({
-    name: tagName,
-    description: '',
-    color: getRandomColor() // تابع برای تولید رنگ تصادفی
-  });
-  
-  // اضافه کردن تگ جدید به لیست
-  setTags(prev => [...prev, newTag]);
-  // انتخاب خودکار تگ جدید
-  setSelectedTags(prev => new Set(prev).add(newTag.id));
-};
 
-// تابع کمکی برای تولید رنگ تصادفی
-const getRandomColor = () => {
-  const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'];
-  return colors[Math.floor(Math.random() * colors.length)];
-};
-// تابع برای باز کردن modal کاربران
-const handleUsersClick = async (project) => {
-  try {
-    setSelectedProject(project);
-    setUsersLoading(true);
-    setUsersError(null);
-    
-    console.log('👥 Fetching users for project:', project.name);
-    
-    // دریافت لیست کاربران
-    const usersResponse = await projectService.getUserForProject(1, 100,project.id); // صفحه اول با 100 آیتم
-    console.log("userrrrrrrrrrrr")
-    console.log(usersResponse.items)
-    setUsers(usersResponse.items || []);
-      // ایجاد Set از کاربران انتخاب شده بر اساس isCheck
-    const initiallySelected = new Set();
-    (usersResponse.items || []).forEach(user => {
-      if (user.isCheck) {
-        initiallySelected.add(user.id);
-      }
-    });
-    setSelectedUsers(initiallySelected);
-    // در اینجا می‌توانید کاربران انتخاب شده قبلی را از API دریافت کنید
-    // فعلاً یک Set خالی قرار می‌دهیم
-    setSelectedUsers(new Set());
-    
-    setIsUserModalOpen(true);
-    
-  } catch (err) {
-          toast.error('عملیات با موفقیت انجام شد', {
-      position: "top-left",
-      autoClose: 5000,
-    });
-    console.error('❌ Error fetching users:', err);
-    setUsersError('خطا در دریافت لیست کاربران');
-  } finally {
-    setUsersLoading(false);
-  }
-};
+
+
 
 // تoggle انتخاب کاربر
 // const toggleUserSelection = (userId) => {
@@ -309,120 +142,15 @@ const handleUsersClick = async (project) => {
 //   setSelectedUsers(newSelectedUsers);
 // };
 
-const toggleUserSelection = (userId) => {
-  // آپدیت state selectedUsers
-  const newSelectedUsers = new Set(selectedUsers);
-  console.log("checkkkkkkk",newSelectedUsers)
-  if (newSelectedUsers.has(userId)) {
-    newSelectedUsers.delete(userId);
-  } else {
-    newSelectedUsers.add(userId);
-  }
-  setSelectedUsers(newSelectedUsers);
-
-  // آپدیت isCheck در داده‌های users
-  setUsers(prevUsers => 
-    prevUsers.map(user => 
-      user.id === userId 
-        ? { ...user, isCheck: !user.isCheck }
-        : user
-    )
-  );
-};
-
-// انتخاب همه کاربران
-// توابع selectAll و deselectAll را آپدیت کنید
-const selectAllUsers = () => {
-  const currentPageUserIds = users.map(user => user.id);
-  const newSelectedUsers = new Set(selectedUsers);
-  
-  currentPageUserIds.forEach(userId => {
-    newSelectedUsers.add(userId);
-  });
-  
-  setSelectedUsers(newSelectedUsers);
-  
-  // آپدیت isCheck در داده‌ها
-  setUsers(prevUsers => 
-    prevUsers.map(user => ({
-      ...user,
-      isCheck: true
-    }))
-  );
-};
 
 
-// لغو انتخاب همه کاربران
-const deselectAllUsers = () => {
-  const currentPageUserIds = users.map(user => user.id);
-  const newSelectedUsers = new Set(selectedUsers);
-  
-  currentPageUserIds.forEach(userId => {
-    newSelectedUsers.delete(userId);
-  });
-  
-  setSelectedUsers(newSelectedUsers);
-  
-  // آپدیت isCheck در داده‌ها
-  setUsers(prevUsers => 
-    prevUsers.map(user => ({
-      ...user,
-      isCheck: false
-    }))
-  );
-};
 
-// ذخیره انتخاب‌های کاربران
-// تابع saveUserSelections - بر اساس isCheck
-const saveUserSelections = async () => {
-  try {
-    setUsersLoading(true);
-    
-    // گرفتن کاربران انتخاب شده بر اساس isCheck
-    const selectedUserIds = users
-      .filter(user => user.isCheck)
-      .map(user => user.id);
-    
-    console.log('💾 Saving user selections:', {
-      project: selectedProject?.id,
-      selectedUsers: selectedUserIds
-    });
-    
-    const saveData = {
 
-      userIds: selectedUserIds
-    };
-    
-    await projectService.insertOrDeleteMenuAccess(saveData,selectedProject?.id);
-            toast.success('عملیات با موفقیت انجام شد', {
-          position: "top-left",
-          autoClose: 5000,
-        });
-    console.log('✅ User assignments saved successfully');
-    
-    setIsUserModalOpen(false);
-    setSelectedProject(null);
-    
-  } catch (err) {
-    console.error('❌ Error saving user selections:', err);
-    setUsersError('خطا در ذخیره انتخاب‌ها');
-  } finally {
-    setUsersLoading(false);
-  }
-};
-
-// بستن modal کاربران
-const handleCloseUserModal = () => {
-  setIsUserModalOpen(false);
-  setSelectedProject(null);
-  setSelectedUsers(new Set());
-  setUsersError(null);
-};
   /************************ */
 
   useEffect(() => {
-    fetchProjects(pagination.currentPage, pagination.pageSize);
-  }, [fetchProjects, pagination.currentPage, pagination.pageSize]);
+    fetchArchive(pagination.currentPage, pagination.pageSize);
+  }, [fetchArchive, pagination.currentPage, pagination.pageSize]);
   // مدیریت حذف پروژه
   const handleDeleteClick = (project) => {
     console.log('delete')
@@ -455,30 +183,6 @@ const handleCloseUserModal = () => {
       setError('آیدی پروژه یافت نشد');
     }
   };
-      // مدیریت کلیک روی دکمه مشاهده
-  const handleArchiveClick = (project) => {
-    console.log('👁️ Viewing project:', project);
-    
-    // گرفتن آیدی پروژه - با توجه به ساختار داده‌های شما
-    const projectId = project.id || project.rowNum;
-    const name=project.name
-    
-    if (projectId) {
-      console.log(`📍 Navigating to TodoBoard with projectId: ${projectId}`);
-      
-      // navigate به صفحه TodoBoard با آیدی پروژه
-      // navigate(`/TodoBoard/${projectId}`);
-        navigate('/Archive', { 
-    state: { projectId: projectId,
-
-         name: project.name 
-     }
-  });
-    } else {
-      console.error('❌ Project ID not found:', project);
-      setError('آیدی پروژه یافت نشد');
-    }
-  };
 
   const handleConfirmDelete = async () => {
     if (!projectToDelete) return;
@@ -487,7 +191,7 @@ const handleCloseUserModal = () => {
       setDeleteLoading(true);
       console.log('🗑️ Deleting project:', projectToDelete.name);
       
-      await projectService.deleteProject(projectToDelete.id || projectToDelete.rowNum);
+    
       
       console.log('✅ Project deleted successfully');
       
@@ -500,7 +204,7 @@ const handleCloseUserModal = () => {
       
       // بروزرسانی لیست
       setTimeout(() => {
-        fetchProjects(pagination.currentPage, pagination.pageSize);
+        fetchArchive(pagination.currentPage, pagination.pageSize);
       }, 500);
       
     }  catch (err) {
@@ -552,15 +256,15 @@ const handleCloseUserModal = () => {
     // بازگشت به صفحه اول و بروزرسانی
     setPagination(prev => ({ ...prev, currentPage: 1 }));
     setTimeout(() => {
-      fetchProjects(1, pagination.pageSize);
+      fetchArchive(1, pagination.pageSize);
     }, 500);
-  }, [fetchProjects, pagination.pageSize]);
+  }, [fetchArchive, pagination.pageSize]);
 
   // مدیریت خطا
   const handleRetry = useCallback(() => {
     setError(null);
-    fetchProjects(pagination.currentPage, pagination.pageSize);
-  }, [fetchProjects, pagination.currentPage, pagination.pageSize]);
+    fetchArchive(pagination.currentPage, pagination.pageSize);
+  }, [fetchArchive, pagination.currentPage, pagination.pageSize]);
 
   // فرمت کردن تاریخ
   const formatDate = (dateString) => {
@@ -628,7 +332,7 @@ const handleCloseUserModal = () => {
   const { start, end } = getDisplayRange();
 
   // گرفتن maxProjects از اولین پروژه (همانطور که در API برگردانده شده)
-  const maxProjects = projects.length > 0 ? projects[0].maxProjects : 0;
+
 
   if (loading && projects.length === 0) {
     return <LoadingSpinner text="در حال دریافت اطلاعات پروژه‌ها..." />;
@@ -637,8 +341,8 @@ const handleCloseUserModal = () => {
   return (
     <div className="project-page">
       <div className="page-header">
-        <h1>مدیریت پروژه‌ها</h1>
-        <p>لیست تمام پروژه‌های سیستم</p>
+        <h1>تسک های  آرشیو {projectName}</h1>
+        <p>لیست تمام آرشیوها</p>
       </div>
                           <ToastContainer
             position="top-left"
@@ -654,28 +358,7 @@ const handleCloseUserModal = () => {
           />
 
       <div className="project-actions">
-        <div className="actions-left">
-
-       { access.checkAccess ?
-          <button 
-            className="btn btn-primary"
-            onClick={() => setIsCreateModalOpen(true)}
-            disabled={loading}
-          >
-                   <FaPlus className="btn-icon" />
-            پروژه جدید
-          </button> : ""
-}
-
-          <button 
-            className="btn btn-secondary"
-            onClick={() => fetchProjects(pagination.currentPage, pagination.pageSize)}
-            disabled={loading}
-          >
-              <FaRedo className="btn-icon" />
-            {loading ? 'در حال بروزرسانی...' : 'بروزرسانی'}
-          </button>
-        </div>
+     
 
         <div className="page-size-selector">
           <label>تعداد در صفحه:</label>
@@ -716,12 +399,15 @@ const handleCloseUserModal = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>نام پروژه</th>
+              <th>کاربر مسئول</th>
+              <th>عنوان</th>
+               <th>توضیحات</th>
+               <th>وضعیت تسک</th>
               {/* <th>توضیحات</th>
               <th>وضعیت</th> */}
      
               <th>تاریخ ایجاد</th>
-  
+            <th>تاریخ ددلاین</th>
               <th>عملیات</th>
             </tr>
           </thead>
@@ -731,15 +417,8 @@ const handleCloseUserModal = () => {
                 <td colSpan="8" className="no-data">
                   <div className="no-data-content">
                     <span className="no-data-icon">📭</span>
-                    <p>هیچ پروژه‌ای یافت نشد</p>
-                  { access && access.checkAccess ?
-                      <button 
-                      className="btn btn-primary"
-                      onClick={() => setIsCreateModalOpen(true)}
-                    >
-                      ایجاد اولین پروژه
-                    </button> : ''  
-                  }
+                    <p>هیچ آرشیئ یافت نشد</p>
+             
                 
                   </div>
                 </td>
@@ -750,14 +429,64 @@ const handleCloseUserModal = () => {
                   <td className="index-cell">
                     {((pagination.currentPage - 1) * pagination.pageSize) + index + 1}
                   </td>
+                  
                   <td className="project-name">
                     <div className="project-name-content">
-                      <span className="project-icon">📁</span>
+            
                       <div>
-                        <div className="project-title">{project.name}</div>
-                        <div className="project-code">ردیف: {project.rowNum}</div>
+                        <div className="project-title">{project.title}</div>
+<div className="project-code">
+
+  {Array.isArray(project.tags) 
+    ? project.tags.map((tag, index) => (
+        <div key={tag.id || index} className="tag-item"
+               style={{ backgroundColor: tag.color || '#2272b8ff' }}
+        >
+          
+          <span className="tag-name">{tag.name}</span>
+        </div>
+      ))
+    : project.tags ? (
+        <div className="tag-item">
+          <span 
+            className="color-indicator"
+            style={{ backgroundColor: project.tags.color || '#2272b8ff' }}
+          />
+          <span className="tag-name">{project.tags.name}</span>
+        </div>
+      ) : 'بدون تگ'
+  }
+</div>
                       </div>
                     </div>
+                  </td>
+<td>
+  <div className="user-info-content" style={{padding:'15px'}}>
+    <span className="user-avatar">
+      {project.avatar && project.avatar !== "" ? (
+        <img 
+          src={project.avatar} 
+          alt="Profile" 
+          className="user-avatar profile-image"
+        />
+      ) : (
+        <FaUser />
+      )}
+    </span>
+    <div>
+      <div className="user-name">{project.userNameTodo || project.name}</div>
+    </div>
+  </div>
+</td>
+
+
+                  <td className="project-description">
+                    {project.description || 'بدون توضیحات'}
+                  </td>
+                            <td className="project-description"
+                                 style={{ backgroundColor: project.statusColor || '#2272b8ff' }}
+                            >
+                    {project.statusName || 'بدون وضعیت'}
                   </td>
                   {/* <td className="project-description">
                     {project.description || 'بدون توضیحات'}
@@ -772,6 +501,12 @@ const handleCloseUserModal = () => {
                       {formatDate(project.createdAt)}
                     </div>
                   </td>
+                         <td className="date-cell">
+                    <div className="date-content">
+                      <span className="date-icon">📅</span>
+                      {formatDate(project.dueDate)}
+                    </div>
+                  </td>
            
                   <td className="actions-cell">
                     <div className="action-buttons">
@@ -783,41 +518,8 @@ const handleCloseUserModal = () => {
                             <FaEye />
                       </button>
                           
-                    <button 
-                        className="btn-action btn-warning"
-                        title="آرشیو"
-                            onClick={() => handleArchiveClick(project)}
-                      >
-                            <FaArchive />
-                      </button>
-
-                          
     {/* دکمه جدید برای مدیریت کاربران */}
 
-
-      {access.checkAccessDelete ?    <button 
-      className="btn-action btn-users"
-      title="مدیریت کاربران"
-      onClick={() => handleUsersClick(project)}
-      disabled={loading}
-    >
-      <FaUsers />
-    </button>
-    
-    
-    : "" }
-    
-      {access.checkAccessDelete ?      <button 
-    className="btn-action btn-tags"
-    title="مدیریت تگ‌ها"
-    onClick={() => handleTagsClick(project)}
-    disabled={loading}
-  >
-      <FaTags />
-  </button>
-    
-    
-    : "" }
 
                       {/* <button 
                         className="btn-action btn-edit"
@@ -857,87 +559,15 @@ const handleCloseUserModal = () => {
           />
         </div>
       )}
-{ access.checkAccess ?
-      <div className="project-stats">
-        <div className="stat-card">
-          <div className="stat-icon total">📊</div>
-          <div className="stat-content">
-            <div className="stat-value">{pagination.totalCount}</div>
-            <div className="stat-label">کل پروژه‌ها</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon active">🚀</div>
-          <div className="stat-content">
-            <div className="stat-value">
-              {maxProjects}
-            </div>
-            <div className="stat-label">سقف مجاز پروژه‌ها</div>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon completed">✅</div>
-          <div className="stat-content">
-            <div className="stat-value">
-              {maxProjects - pagination.totalCount}
-            </div>
-            <div className="stat-label">مانده مجاز</div>
-          </div>
-        </div>
-      </div>
-  
-  : ""}  
+
   
 
       {/* Modal ایجاد پروژه جدید */}
-      <CreateProjectModal
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-        onProjectCreated={handleProjectCreated}
-      />
-            {/* Modal تأیید حذف */}
-      <ConfirmDeleteModal
-        isOpen={isDeleteModalOpen}
-        onClose={handleCancelDelete}
-        onConfirm={handleConfirmDelete}
-        projectName={projectToDelete?.name}
-        loading={deleteLoading}
-        
-      />
-    <UserSelectionModal
-      isOpen={isUserModalOpen}
-      onClose={handleCloseUserModal}
-      projectName={selectedProject?.name}
-      users={users}
-      selectedUsers={selectedUsers}
-      onUserToggle={toggleUserSelection}
-      onSelectAll={selectAllUsers}
-      onDeselectAll={deselectAllUsers}
-      onSave={saveUserSelections}
-      loading={usersLoading}
-      error={usersError}
-    />
+  
 
 
-<TagSelectionModal
-  isOpen={isTagModalOpen}
-  onClose={() => {
-    setIsTagModalOpen(false);
-    setSelectedProject(null);
-    setSelectedTags(new Set());
-    setTagsError(null);
-  }}
-  projectName={selectedProject?.name}
-  tags={tags}
-  selectedTags={selectedTags}
-  onTagToggle={toggleTagSelection}
-  onSelectAll={selectAllTags}
-  onDeselectAll={deselectAllTags}
-  onSave={saveTagSelections}
-  onCreateTag={handleCreateTag}
-  loading={tagsLoading}
-  error={tagsError}
-/>
+
+
 
     </div>
   );
@@ -968,4 +598,4 @@ const getSampleProjects = () => [
   }
 ];
 
-export default Project;
+export default Archive;
