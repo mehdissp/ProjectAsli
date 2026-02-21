@@ -1,0 +1,128 @@
+/* MobileFilterMenu.css */
+.mobile-filter-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  direction: rtl;
+}
+
+.filter-icon {
+  font-size: 1.2rem;
+}
+
+.filter-badge-mobile {
+  background: white;
+  color: #4a90e2;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.mobile-filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.3s;
+}
+
+.mobile-filter-container {
+  background: white;
+  width: 100%;
+  max-height: 85vh;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s;
+}
+
+.mobile-filter-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+}
+
+.mobile-filter-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.mobile-filter-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  padding: 4px 8px;
+}
+
+.mobile-filter-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  max-height: calc(85vh - 130px);
+}
+
+.mobile-filter-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #eaeaea;
+  background: #f8f9fa;
+}
+
+.mobile-filter-apply {
+  width: 100%;
+  padding: 14px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.mobile-filter-apply:hover {
+  background: #357abd;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

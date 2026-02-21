@@ -811,6 +811,8 @@ import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import { useAuth } from '../../../context/AuthContext';
 import { 
   buyCategoriesData, 
   rentCategoriesData, 
@@ -828,7 +830,7 @@ const RealEstatePage = () => {
   const [loading, setLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState(null);
   const [searchText, setSearchText] = useState('');
-
+  const { user } = useAuth();
   // دریافت داده‌های دسته‌بندی و آژانس
   useEffect(() => {
     const fetchData = async () => {
@@ -893,11 +895,14 @@ const RealEstatePage = () => {
   const goToHotelPage = () => {
     navigate('/hotel');
   };
-
-  const goToHotelPageWithCategory = (category) => {
-    navigate(`/hotel?category=${category.title}&type=${activeTab}`);
-
-  };
+const goToHotelPageWithCategory = (category) => {
+    navigate('/RealEstatePageDetail', {
+        state: { 
+            tabId: category.id,
+            type: activeTab 
+        }
+    });
+};
 
   const formatpropertiesTab=(property)=>{
      console.log(property)
@@ -1231,19 +1236,12 @@ const sliderSettingsAjans = {
               ))}
             </div>
           ) : (
-            <div className="agencies-slider-wrapper">
+           <div className="agencies-slider-wrapper compact"> 
               <Slider {...sliderSettingsAjans}>
                 {agencies.map(agency => (
                   <div key={agency.id} className="agency-card-wrapper">
                     <div className="agency-card">
-                      <div className="agency-image">
-                        <img src={agency.image} alt={agency.name} />
-                        <div className="agency-image-overlay"></div>
-                        <div className="agency-rating">
-                          <span className="rating-star">★</span>
-                          <span className="rating-value">۴.۸</span>
-                        </div>
-                      </div>
+                   
                       <div className="agency-info">
                         <h3 className="agency-name">{agency.name}</h3>
                         <p className="agency-location">
@@ -1308,11 +1306,14 @@ const sliderSettingsAjans = {
                       }}
                     />
                     <div className="property-image-overlay"></div>
-                    <span className="property-badge">
-                      {formattedProperty.type}
-                    </span>
+                 
                     <button className="property-favorite">
-                      <span>🤍</span>
+                      <span>
+  {user ? (
+    <FaRegBookmark />
+      ):(  <FaBookmark />  )}
+                      
+                      </span>
                     </button>
                   </div>
                   <div className="property-info">

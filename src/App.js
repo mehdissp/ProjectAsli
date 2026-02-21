@@ -517,6 +517,7 @@ import HomePage from './components/page/homePage/HomePage';
 import Archive from './components/page/archive/Archive';
 import HotelPage from './components/page/hotel/HotelPage';
 import RealEstatePage from './components/page/realestate/RealEstatePage';
+import RealEstatePageDetail from './components/page/realEstateDetails/RealEstatePageDetail'
 import MainLayout from './components/layout/MainLayout';  // <==== ایمپورت MainLayout
 import './styles/globals.css';
 import './styles/animations.css';
@@ -546,6 +547,8 @@ const AppContent = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<RealEstatePage />} />
         <Route path="realestate" element={<RealEstatePage />} />
+              <Route path="RealEstatePageDetail" element={<RealEstatePageDetail />} />
+        
         <Route path="hotel" element={<HotelPage />} />
         <Route path="hotel/tehran" element={<HotelPage />} />
       </Route>
