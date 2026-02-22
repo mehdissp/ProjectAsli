@@ -922,7 +922,7 @@ const goToHotelPageWithCategory = (category) => {
     // ساخت آدرس کامل تصویر
     const imageUrl = property.address 
       ? `https://localhost:7178/uploads/images/${property.address}` 
-      : 'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=400';
+      : 'https://localhost:7178/uploads/images/noHome.png';
     
     // قیمت تصادفی برای نمایش
     const price = Math.floor(Math.random() * 5000000000) + 2000000000;

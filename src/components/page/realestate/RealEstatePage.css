@@ -818,6 +818,7 @@
 }
 
 .property-info {
+  direction: rtl;
   padding: 25px;
 }
 

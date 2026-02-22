@@ -504,7 +504,7 @@ const RealEstatePageDetail = () => {
   const getColumnsCount = () => {
     if (screenSize.isMobile) return 1;
     if (screenSize.isTablet) return 2;
-    return 3; // دسکتاپ ۳ ستون
+    return 4; // دسکتاپ ۳ ستون
   };
 
   // رندر ملک‌ها با بنر بین ردیف‌ها
