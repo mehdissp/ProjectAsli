@@ -1563,6 +1563,7 @@
 // };
 
 // export default RealEstateCard;
+
 import React, { useState } from 'react';
 import ImageSlider from './ImageSlider';
 
@@ -1597,7 +1598,7 @@ const RealEstateCard = ({ property }) => {
 
   const getAgeBadge = () => {
     if (!age || age < 0) return null;
-    if (age <= 2) return { text: 'نوساز', color: '#4caf50' };
+    // if (age <= 2) return { text: 'نوساز', color: '#4caf50' };
     return null;
   };
 
@@ -1756,7 +1757,29 @@ const RealEstateCard = ({ property }) => {
           </div>
         )}
       </div>
-
+{/* تاریخ ایجاد - اضافه شده */}
+{/* {property.createdAtPersianRelative && (
+  <div style={{
+    position: 'absolute',
+    top: '10px',
+    right: '45px',  // فاصله از بوکمارک
+    zIndex: 20,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    padding: '4px 10px',
+    borderRadius: '20px',
+    fontSize: '10px',
+    color: '#2c3e50',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+    backdropFilter: 'blur(4px)',
+    border: '1px solid rgba(255,255,255,0.3)'
+  }}>
+    <span style={{ color: '#95a5a6' }}>🕒</span>
+    <span>{property.createdAtPersianRelative}</span>
+  </div>
+)} */}
       {/* محتوای کارت */}
       <div style={{ padding: '10px 12px 12px 12px', flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
         {/* عنوان */}
@@ -1771,6 +1794,20 @@ const RealEstateCard = ({ property }) => {
         }}>
           {property.title || 'ملک مسکونی'}
         </h3>
+        {/* تاریخ ایجاد - زیر عنوان */}
+{property.createdAtPersianRelative && (
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+    fontSize: '10px',
+    color: '#95a5a6',
+    marginTop: '2px'
+  }}>
+    <span>🕒</span>
+    <span>{property.createdAtPersianRelative}</span>
+  </div>
+)}
         
         {/* موقعیت */}
         <div style={{
