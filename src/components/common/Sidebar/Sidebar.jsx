@@ -863,6 +863,11 @@ const Sidebar = ({ isOpen, onClose }) => {
     navigate('/profile');
     if (isOpen) onClose(); // بستن سایدبار در حالت موبایل
   };
+    // تابع برای رفتن به صفحه پروفایل
+  const handleGotoHomeClick = () => {
+    navigate('/');
+    if (isOpen) onClose(); // بستن سایدبار در حالت موبایل
+  };
 
   const renderMenuItems = (menuItems, level = 0) => {
     return menuItems.map((item) => (
@@ -922,7 +927,9 @@ const Sidebar = ({ isOpen, onClose }) => {
       
             <img src="/image/Green and Yellow Ball Icon Soccer Logo (2).png" className='user-avatar  profile-image' alt="لوگو سیستم" />
             </div>
-            <span className="logo-text">سیستم مدیریت</span>
+            <span className="logo-text"
+                  onClick={handleGotoHomeClick}
+            >ملک چی</span>
           </div>
           <button 
             className="sidebar-close"

@@ -1566,7 +1566,7 @@
 
 import React, { useState } from 'react';
 import ImageSlider from './ImageSlider';
-
+import { useNavigate } from 'react-router-dom';
 // ایمپورت FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -1589,6 +1589,7 @@ import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
 library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark, farBookmark);
 
 const RealEstateCard = ({ property }) => {
+    const navigate = useNavigate();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   if (!property) return null;
@@ -1644,6 +1645,7 @@ const RealEstateCard = ({ property }) => {
   return (
     <article 
       style={cardStyle}
+     onClick={() => navigate(`/realEstateDetailPageItem?id=${property.id}`)}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-4px)';
         e.currentTarget.style.boxShadow = '0 8px 16px rgba(0,0,0,0.1)';
@@ -1653,6 +1655,105 @@ const RealEstateCard = ({ property }) => {
         e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
       }}
     >
+         {/* میکرو‌داده‌های مخفی برای SEO */}
+     <meta itemProp="name" content={property.title} />
+      <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+       {property.price && <meta itemProp="offers" content={property.price.toString()} />}
+
+{/* میکرو‌دیتای اصلی محصول */}
+  <meta itemProp="name" content={property.title} />
+  <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}${property.constructionYear ? ' - ساخت ' + property.constructionYear : ''}`} />
+  <meta itemProp="sku" content={property.id} />
+  <meta itemProp="brand" content="املاک مستربلیط" />
+  <meta itemProp="category" content="آپارتمان فروشی" />
+  
+  {/* تصویر محصول */}
+  {property.imageUrl && property.imageUrl[0] && (
+    <meta itemProp="image" content={property.imageUrl[0]} />
+  )}
+  
+  {/* آدرس کامل */}
+  <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+    <meta itemProp="addressLocality" content={property.regionName || ''} />
+    <meta itemProp="addressRegion" content={property.parentName || ''} />
+    <meta itemProp="addressCountry" content="IR" />
+  </div>
+
+  {/* قیمت و اطلاعات مالی */}
+  {property.price && (
+    <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+      <meta itemProp="price" content={property.price.toString()} />
+      <meta itemProp="priceCurrency" content="IRR" />
+      <meta itemProp="availability" content="https://schema.org/InStock" />
+      <meta itemProp="priceValidUntil" content={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]} />
+    </div>
+  )}
+
+  {/* ویژگی‌های ملک */}
+  <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+    <meta itemProp="name" content="متراژ" />
+    <meta itemProp="value" content={property.additionalInformation || ''} />
+  </div>
+  
+  <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+    <meta itemProp="name" content="سال ساخت" />
+    <meta itemProp="value" content={property.constructionYear || ''} />
+  </div>
+  
+  {property.countFloor > 0 && (
+    <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+      <meta itemProp="name" content="تعداد طبقات" />
+      <meta itemProp="value" content={property.countFloor.toString()} />
+    </div>
+  )}
+
+  {/* امکانات */}
+  {property.isHasElevator && (
+    <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+      <meta itemProp="name" content="آسانسور" />
+      <meta itemProp="value" content="true" />
+    </div>
+  )}
+  
+  {property.isHasParking && (
+    <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+      <meta itemProp="name" content="پارکینگ" />
+      <meta itemProp="value" content="true" />
+    </div>
+  )}
+  
+  {property.isHasPool && (
+    <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+      <meta itemProp="name" content="استخر" />
+      <meta itemProp="value" content="true" />
+    </div>
+  )}
+  
+  {property.isHasStoreRoom && (
+    <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+      <meta itemProp="name" content="انباری" />
+      <meta itemProp="value" content="true" />
+    </div>
+  )}
+
+  {/* Open Graph tags برای شبکه‌های اجتماعی */}
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content={property.title} />
+  <meta property="og:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+  {property.imageUrl && property.imageUrl[0] && (
+    <meta property="og:image" content={property.imageUrl[0]} />
+  )}
+  <meta property="og:url" content={`https://yourdomain.com/property/${property.id}`} />
+  <meta property="og:locale" content="fa_IR" />
+  
+  {/* Twitter Card tags */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={property.title} />
+  <meta name="twitter:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+  {property.imageUrl && property.imageUrl[0] && (
+    <meta name="twitter:image" content={property.imageUrl[0]} />
+  )}
+
       {/* برچسب سن */}
       {ageBadge && (
         <div style={{
@@ -1731,6 +1832,7 @@ const RealEstateCard = ({ property }) => {
       images={getPropertyImages()} 
       hotelName={property.title || ''}
       propertyId={property.id}
+        alt={`${property.title || 'ملک'} - ${property.additionalInformation || ''} متری - ${property.regionName || ''}`} // این خط رو اضافه کن
     />
   </div>
 </div>
@@ -1796,7 +1898,9 @@ const RealEstateCard = ({ property }) => {
         </h3>
         {/* تاریخ ایجاد - زیر عنوان */}
 {property.createdAtPersianRelative && (
-  <div style={{
+  <div
+      datetime={property.createdAt} 
+  style={{
     display: 'flex',
     alignItems: 'center',
     gap: '4px',

@@ -30,7 +30,7 @@ console.log({ stats, statsLoading, statsError }, '********** وضعیت API ****
   const menuItems = [
     { path: '/', label: 'صفحه اصلی', icon: '🏠' },
     { path: '/search', label: 'جستجوی ملک', icon: '🔍' },
-    { path: '/register', label: 'ثبت آگهی', icon: '📝' },
+    { path: '/UserPropertiesPanel', label: 'ثبت آگهی', icon: '📝' },
     { path: '/agencies', label: 'آژانس‌های ملک', icon: '🏢' },
     { path: '/cities', label: 'ایران شهرستان', icon: '🌍' }
   ];
@@ -148,7 +148,7 @@ console.log({ stats, statsLoading, statsError }, '********** وضعیت API ****
             <ul>
               <li><Link to="/">صفحه اصلی</Link></li>
               <li><Link to="/search">جستجوی ملک</Link></li>
-              <li><Link to="/register">ثبت آگهی</Link></li>
+              <li><Link to="/UserPropertiesPanel">ثبت آگهی</Link></li>
               <li><Link to="/agencies">آژانس‌ها</Link></li>
             </ul>
           </div>

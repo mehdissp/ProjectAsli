@@ -504,6 +504,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/common/Layout/Layout';
 import Login from './components/auth/Login/Login';
+import OTPLogin from './components/auth/Login/OTPLogin';
 import Dashboard from './components/dashboard/Dashboard/Dashboard';
 import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner';
 import Project from './components/page/project/Project';
@@ -518,7 +519,9 @@ import Archive from './components/page/archive/Archive';
 import HotelPage from './components/page/hotel/HotelPage';
 import RealEstatePage from './components/page/realestate/RealEstatePage';
 import RealEstatePageDetail from './components/page/realEstateDetails/RealEstatePageDetail'
+import RealEstateDetailPageItem from './components/page/RealEstateDetailPageItem/RealEstateDetailPageItem'
 import MainLayout from './components/layout/MainLayout';  // <==== ایمپورت MainLayout
+import UserPropertiesPanel from '../src/components/page/manager/realEstate/UserPropertiesPanel'
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -548,6 +551,8 @@ const AppContent = () => {
         <Route index element={<RealEstatePage />} />
         <Route path="realestate" element={<RealEstatePage />} />
               <Route path="RealEstatePageDetail" element={<RealEstatePageDetail />} />
+  <Route path="RealEstateDetailPageItem" element={<RealEstateDetailPageItem />} />
+              
         
         <Route path="hotel" element={<HotelPage />} />
         <Route path="hotel/tehran" element={<HotelPage />} />
@@ -555,9 +560,10 @@ const AppContent = () => {
       
       {/* روت‌های عمومی */}
       <Route path="/login" element={<Login />} />
+      <Route path="/otp-login" element={<OTPLogin />} />
       
       {/* روت‌های محافظت شده */}
-      <Route path="/dashboard/*" element={
+      <Route path="/*" element={
         isAuthenticated ? <AuthenticatedApp /> : <Navigate to="/login" replace />
       } />
     </Routes>
@@ -583,6 +589,8 @@ const AuthenticatedApp = () => {
         <Route path="Role" element={<Role />} />
         <Route path="Tag" element={<Tag />} />
         <Route path="profile" element={<Profile />} />
+<Route path="UserPropertiesPanel" element={<UserPropertiesPanel />} />
+        
         
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}

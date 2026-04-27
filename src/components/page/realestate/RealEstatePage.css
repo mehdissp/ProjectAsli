@@ -15,7 +15,7 @@
 /* ===== بخش هدر سینمایی ===== */
 .hero-section {
   position: relative;
-  min-height: 700px;
+  min-height: 500px; /** 700px*/ 
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -1772,3 +1772,5 @@
   padding: 6px 12px !important;
   font-size: 11px !important;
 }
+
+

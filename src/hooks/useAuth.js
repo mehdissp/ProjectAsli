@@ -53,6 +53,29 @@ export const useAuth = () => {
       setIsLoading(false);
     }
   };
+    // لاگین
+  const loginByMobile = async (credentials) => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const result = await authService.loginByMobile(credentials);
+      setToken(result.token);
+      setRefreshToken(result.refreshToken);
+
+      const userProfile = await authService.getProfile();
+      setUser(userProfile);
+      setIsAuthenticated(true);
+
+      return { success: true };
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || 'Login failed';
+      setError(errorMessage);
+      return { success: false, error: errorMessage };
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // لاگاوت
   const logout = useCallback(() => {

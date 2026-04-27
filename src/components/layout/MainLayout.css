@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 15px;
 }
 
 /* Logo */
@@ -36,6 +37,7 @@
   gap: 8px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .logo:hover {
@@ -58,6 +60,8 @@
 .desktop-menu {
   display: flex;
   gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .menu-item {
@@ -71,6 +75,7 @@
   font-weight: 500;
   transition: all 0.3s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .menu-item:hover {
@@ -96,6 +101,7 @@
 .auth-buttons {
   display: flex;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .btn-login {
@@ -110,6 +116,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .btn-login:hover {
@@ -128,6 +135,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  white-space: nowrap;
 }
 
 .btn-register:hover {
@@ -147,6 +155,7 @@
   cursor: pointer;
   padding: 0;
   z-index: 1001;
+  flex-shrink: 0;
 }
 
 .mobile-menu-btn span {
@@ -181,6 +190,7 @@
   transition: right 0.3s ease;
   z-index: 1000;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .mobile-menu.open {
@@ -314,12 +324,15 @@
   font-size: 14px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ========== RESPONSIVE BREAKPOINTS ========== */
+
+/* تبلت‌های بزرگ و متوسط - نمایش منوی همبرگر */
+@media (max-width: 1024px) {
   .header-container {
     padding: 15px 20px;
   }
 
+  /* مخفی کردن منوی دسکتاپ و دکمه‌های احراز هویت در تبلت */
   .desktop-menu {
     display: none;
   }
@@ -328,17 +341,111 @@
     display: none;
   }
 
+  /* نمایش دکمه همبرگر */
   .mobile-menu-btn {
     display: flex;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .logo-icon {
+    font-size: 24px;
+  }
+}
+
+/* تبلت‌های کوچک و موبایل‌های بزرگ (حداکثر 768px) */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 12px 16px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .logo-icon {
+    font-size: 22px;
   }
 
   .footer-container {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .footer-section {
+    text-align: center;
   }
 }
 
-@media (min-width: 769px) {
+/* موبایل‌های کوچک (حداکثر 480px) */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 10px 16px;
+  }
+
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .logo-icon {
+    font-size: 20px;
+  }
+
+  .mobile-menu {
+    width: 85%;
+    max-width: 280px;
+  }
+
+  .mobile-menu-item {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .footer-section h4 {
+    font-size: 16px;
+  }
+
+  .footer-section p,
+  .footer-section ul li a {
+    font-size: 13px;
+  }
+
+  .copyright {
+    font-size: 12px;
+    padding: 0 16px;
+    text-align: center;
+  }
+}
+
+/* حالت افقی تبلت (Landscape) */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .main-header {
+    position: sticky;
+  }
+
+  .header-container {
+    padding: 8px 20px;
+  }
+
+  .mobile-menu {
+    padding: 60px 20px 20px;
+  }
+
+  .mobile-menu-item {
+    padding: 10px 16px;
+  }
+
+  .mobile-auth {
+    margin-top: 20px;
+  }
+}
+
+/* نمایش منوی دسکتاپ فقط در سایزهای بزرگتر از 1024px */
+@media (min-width: 1025px) {
   .mobile-menu,
   .mobile-overlay {
     display: none;

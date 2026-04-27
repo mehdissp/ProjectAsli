@@ -1067,7 +1067,7 @@ const sliderSettingsAjans = {
             </p>
 
             {/* باکس جستجوی پیشرفته */}
-            <div className="hero-search-card">
+            {/* <div className="hero-search-card">
     <div className="search-tabs">
   <button 
     className={`search-tab ${activeTab === 'buy' ? 'active' : ''}`}
@@ -1121,10 +1121,10 @@ const sliderSettingsAjans = {
                 <button className="quick-filter-tag">دفتر کار</button>
                 <button className="quick-filter-tag">انبار</button>
               </div>
-            </div>
+            </div> */}
 
             {/* آمارهای جذاب */}
-            <div className="hero-stats">
+            {/* <div className="hero-stats">
               <div className="stat-item">
                 <span className="stat-number">۱۵,۲۳۴</span>
                 <span className="stat-label">ملک فعال</span>
@@ -1141,7 +1141,7 @@ const sliderSettingsAjans = {
                 <span className="stat-number">۱۵,۴۳۲</span>
                 <span className="stat-label">کاربر راضی</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

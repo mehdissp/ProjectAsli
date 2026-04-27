@@ -308,6 +308,7 @@
 
 // export default RealEstatePageDetail;
 // RealEstatePage.jsx
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import RealEstateCard from './RealEstateCard';
@@ -391,7 +392,7 @@ const RealEstatePageDetail = () => {
         // اضافه کردن عکس تصادفی برای نمایش
         const itemsWithImages = result.data.items.map(item => ({
           ...item,
-          imageUrl: [`https://localhost:7178/uploads/images/${item.address}`] // عکس تصادفی
+          imageUrl: [`https://localhost:7178/${item.address}`] // عکس تصادفی
         }));
         
         setProperties(itemsWithImages);

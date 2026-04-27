@@ -160,7 +160,32 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
+
       const result = await authService.login(credentials);
+      setToken(result.token);
+      setRefreshToken(result.refreshToken);
+      
+      const userProfile = await authService.getProfile();
+      console.log(userProfile)
+      setUser(userProfile);
+      setIsAuthenticated(true);
+      
+      // دریافت منوها بعد از لاگین
+      const userMenus = await authService.getMenus();
+      setMenus(userMenus);
+      
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Login failed' 
+      };
+    }
+  };
+    const loginByMobile = async (credentials) => {
+    try {
+        
+      const result = await authService.loginByMobile(credentials);
       setToken(result.token);
       setRefreshToken(result.refreshToken);
       
@@ -254,7 +279,7 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     isLoading,
     menus,
-    login,
+    login,loginByMobile,
     logout,
     refreshToken,
     updateMenus,

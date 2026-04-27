@@ -18,6 +18,22 @@ class AuthService {
     }
   }
 
+    // لاگین کاربر
+  async loginByMobile(credentials) {
+    try {
+      const response = await http.post('/auth/Verify-Otp', credentials);
+      
+      if (!response.data || !response.data.data) {
+        throw new Error('Invalid response format');
+      }
+      
+      return response.data.data;
+    } catch (error) {
+      console.error('Login service error:', error);
+      throw this.handleError(error);
+    }
+  }
+
   // رفرش توکن
   async refreshToken(refreshData) {
     try {
@@ -38,6 +54,22 @@ class AuthService {
   async getProfile() {
     try {
       const response = await http.get('/auth/profile');
+      
+      if (!response.data || !response.data.data) {
+        throw new Error('Invalid response format');
+      }
+      
+      return response.data.data;
+    } catch (error) {
+      console.error('Get profile service error:', error);
+      throw this.handleError(error);
+    }
+  }
+
+    // دریافت پروفایل کاربر
+  async getRealStatePanel() {
+    try {
+      const response = await http.get('/RealEstatePage/GetRealEstatePanel');
       
       if (!response.data || !response.data.data) {
         throw new Error('Invalid response format');
