@@ -1561,3 +1561,161 @@
 .searchable-select-dropdown::-webkit-scrollbar-thumb:hover {
   background: var(--gray-400);
 }
+
+/* استایل‌های رادیو باتن بازسازی */
+.renovation-radio-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.renovation-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: var(--gray-50);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex: 1;
+  justify-content: center;
+}
+
+.renovation-radio:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+.renovation-radio.active {
+  background: var(--primary-light);
+  border-color: var(--primary-color);
+}
+
+.renovation-radio input[type="radio"] {
+  display: none;
+}
+
+.radio-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gray-400);
+  border-radius: 50%;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.renovation-radio.active .radio-custom {
+  border-color: var(--primary-color);
+}
+
+.renovation-radio.active .radio-custom::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--primary-color);
+  border-radius: 50%;
+}
+
+.radio-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.renovation-radio.active .radio-label {
+  color: var(--primary-dark);
+}
+
+/* استایل‌های دکمه‌های نوع سند */
+.document-type-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.document-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.document-type-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.document-type-btn.active {
+  background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.document-type-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.doc-icon {
+  font-size: 2rem;
+}
+
+.doc-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+.doc-desc {
+  font-size: 0.7rem;
+  color: var(--gray-500);
+}
+
+.document-type-btn.active .doc-title {
+  color: var(--primary-dark);
+}
+
+.document-type-btn.active .doc-desc {
+  color: var(--primary-color);
+}
+
+/* ریسپانسیو برای موبایل */
+@media (max-width: 768px) {
+  .renovation-radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .renovation-radio {
+    padding: 8px 16px;
+  }
+  
+  .document-type-group {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .document-type-btn {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 12px;
+  }
+  
+  .doc-icon {
+    font-size: 1.5rem;
+  }
+}

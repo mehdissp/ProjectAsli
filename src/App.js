@@ -525,6 +525,8 @@ import UserPropertiesPanel from '../src/components/page/manager/realEstate/UserP
 import './styles/globals.css';
 import './styles/animations.css';
 
+import PaymentReturn from '../src/components/page/manager/realEstate/PaymentReturn'
+
 // Layout wrapper با Outlet
 const LayoutWrapper = () => {
   return (
@@ -552,6 +554,7 @@ const AppContent = () => {
         <Route path="realestate" element={<RealEstatePage />} />
               <Route path="RealEstatePageDetail" element={<RealEstatePageDetail />} />
   <Route path="RealEstateDetailPageItem" element={<RealEstateDetailPageItem />} />
+  <Route path="payment-return" element={<PaymentReturn />} />
               
         
         <Route path="hotel" element={<HotelPage />} />

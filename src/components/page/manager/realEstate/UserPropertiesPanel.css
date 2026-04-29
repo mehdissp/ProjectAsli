@@ -1653,3 +1653,438 @@
     gap: 8px;
   }
 }
+
+/* استایل‌های دکمه پرداخت */
+.compact-payment-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.compact-payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.compact-payment-btn-sm {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.compact-payment-btn-sm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* استایل‌های مودال پرداخت */
+.payment-modal {
+  max-width: 450px;
+}
+
+.payment-details {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+.payment-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.payment-detail-row:last-child {
+  border-bottom: none;
+}
+
+.payment-amount {
+  color: #28a745;
+  font-size: 18px;
+}
+
+.payment-info {
+  background: #e3f2fd;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.payment-info p {
+  margin: 6px 0;
+}
+
+.payment-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.compact-pay-btn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.compact-pay-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.compact-pay-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* صفحه callback پرداخت */
+.payment-callback-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.payment-result {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.payment-result.success {
+  border-top: 5px solid #28a745;
+}
+
+.payment-result.error {
+  border-top: 5px solid #dc3545;
+}
+
+.payment-result-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.payment-result h3 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+}
+
+.payment-result p {
+  color: #666;
+  margin: 10px 0;
+}
+/* استایل‌های نتیجه پرداخت */
+.payment-result-modal {
+  max-width: 400px;
+  text-align: center;
+}
+
+.result-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.result-icon.success {
+  color: #28a745;
+}
+
+.result-icon.error {
+  color: #dc3545;
+}
+
+.ref-id {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 20px 0;
+  direction: ltr;
+  text-align: center;
+}
+
+.ref-id span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.ref-id strong {
+  font-size: 16px;
+  color: #333;
+  font-family: monospace;
+}
+
+.compact-close-result {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.compact-close-result:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* استایل برای دکمه پرداخت در حالت pending */
+.status-payment-pending {
+  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+  color: white;
+}
+
+.compact-payment-btn, .compact-payment-btn-sm {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 87, 108, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 87, 108, 0);
+  }
+}
+.compact-loading-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  min-width: 300px;
+}
+
+.compact-loading-modal .compact-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 16px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* روش‌های پرداخت با رادیو باتن */
+.payment-methods {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.payment-methods-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #495057;
+}
+
+.payment-method-radio {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-method-radio:last-child {
+  margin-bottom: 0;
+}
+
+.payment-method-radio:hover:not(.disabled) {
+  border-color: #28a745;
+  background: #f0fff4;
+  transform: translateX(5px);
+}
+
+.payment-method-radio.selected {
+  border-color: #28a745;
+  background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+}
+
+.payment-method-radio.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f8f9fa;
+}
+
+.payment-method-radio.selected-disabled {
+  border-color: #ffc107;
+  background: #fffbf0;
+}
+
+/* رادیو باتن سفارشی */
+.radio-container {
+  position: relative;
+  display: inline-block;
+}
+
+.payment-method-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-radio {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 2px solid #ced4da;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.custom-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: #28a745;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.payment-method-radio input[type="radio"]:checked + .custom-radio {
+  border-color: #28a745;
+  background: white;
+}
+
+.payment-method-radio input[type="radio"]:checked + .custom-radio::after {
+  opacity: 1;
+}
+
+.custom-radio.disabled-radio {
+  border-color: #dee2e6;
+  background: #e9ecef;
+}
+
+.payment-method-radio.disabled input[type="radio"]:checked + .custom-radio {
+  border-color: #ffc107;
+}
+
+.payment-method-radio.disabled input[type="radio"]:checked + .custom-radio::after {
+  background: #ffc107;
+}
+
+/* محتوای روش پرداخت */
+.payment-method-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment-method-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-method-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.payment-method-info {
+  flex: 1;
+}
+
+.payment-method-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 4px;
+}
+
+.payment-method-desc {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.payment-method-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.active-badge {
+  background: #d4edda;
+  color: #155724;
+}
+
+.disabled-badge {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ریسپانسیو */
+@media (max-width: 480px) {
+  .payment-method-content {
+    flex-wrap: wrap;
+  }
+  
+  .payment-method-badge {
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  .payment-method-radio {
+    padding: 10px;
+  }
+}
