@@ -494,12 +494,10 @@ const OTPLogin = () => {
   const loadCaptcha = async () => {
     setCaptchaLoading(true);
     try {
-      const token = localStorage.getItem('token');
+    
       const response = await fetch('https://localhost:7178/api/auth/captcha', {
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
+   
       });
 
       const data = await response.json();
@@ -552,12 +550,12 @@ const OTPLogin = () => {
     setError('');
 
     try {
-      const token = localStorage.getItem('token');
+ 
       const response = await fetch('https://localhost:7178/api/auth/send-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+        
         },
         body: JSON.stringify({ 
           mobile: mobileNumber,

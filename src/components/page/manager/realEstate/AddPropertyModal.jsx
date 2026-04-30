@@ -2372,6 +2372,11 @@ const wgs84ToWebMercator = (lng, lat) => {
     y: Math.log(Math.tan((90 + lat) * Math.PI / 360)) * R
   };
 };
+const floorOptions = [
+  { value: -1, label: 'زیر همکف' },
+  { value: 0, label: 'همکف' },
+  ...Array.from({ length: 30 }, (_, i) => ({ value: i + 1, label: (i + 1).toString() }))
+];
 
 const webMercatorToWgs84 = (x, y) => {
   const R = 6378137;
@@ -3393,7 +3398,7 @@ const AddPropertyModal = ({ isOpen, onClose, onSuccess }) => {
                 disabled={isSubmitting}
               />
             </div>
-            <div className="add-form-group">
+            {/* <div className="add-form-group">
               <label>طبقه واحد</label>
               <input 
                 type="number" 
@@ -3402,7 +3407,19 @@ const AddPropertyModal = ({ isOpen, onClose, onSuccess }) => {
                 min="1" 
                 disabled={isSubmitting}
               />
-            </div>
+            </div> */}
+            <div className="add-form-group">
+  <label>طبقه واحد</label>
+  <select
+    value={formData.floor}
+    onChange={(e) => updateFormField('floor', parseInt(e.target.value))}
+    disabled={isSubmitting}
+  >
+    {floorOptions.map(opt => (
+      <option key={opt.value} value={opt.value}>{opt.label}</option>
+    ))}
+  </select>
+</div>
           </div>
           
           <div className="add-form-group full-width">

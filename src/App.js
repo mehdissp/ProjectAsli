@@ -522,8 +522,10 @@ import RealEstatePageDetail from './components/page/realEstateDetails/RealEstate
 import RealEstateDetailPageItem from './components/page/RealEstateDetailPageItem/RealEstateDetailPageItem'
 import MainLayout from './components/layout/MainLayout';  // <==== ایمپورت MainLayout
 import UserPropertiesPanel from '../src/components/page/manager/realEstate/UserPropertiesPanel'
+import RealEstateDetailPageItemForDemo from '../src/components/page/manager/realEstate/RealEstateDetailPageItemForDemo'
 import './styles/globals.css';
 import './styles/animations.css';
+
 
 import PaymentReturn from '../src/components/page/manager/realEstate/PaymentReturn'
 
@@ -593,6 +595,8 @@ const AuthenticatedApp = () => {
         <Route path="Tag" element={<Tag />} />
         <Route path="profile" element={<Profile />} />
 <Route path="UserPropertiesPanel" element={<UserPropertiesPanel />} />
+<Route path="RealEstateDetailPageItemForDemo" element={<RealEstateDetailPageItemForDemo />}/>
+
         
         
         {/* روت‌های داینامیک */}

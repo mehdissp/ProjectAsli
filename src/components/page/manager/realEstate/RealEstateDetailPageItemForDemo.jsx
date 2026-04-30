@@ -39,7 +39,7 @@ import "@neshan-maps-platform/react-openlayers/dist/style.css";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './RealEstateDetailPageItem.css';
+import './RealEstateDetailPageItemForDemo.css';
 
 // ==================== هِلمت جایگزین با استفاده از useEffect ====================
 const PageMetadata = ({ property, isForSale, isForRent }) => {
@@ -356,14 +356,15 @@ const DetailSkeleton = () => (
 );
 
 // ==================== کامپوننت اصلی ====================
-const RealEstateDetailPageItem = memo(() => {
+const RealEstateDetailPageItemForDemo = memo(() => {
   const location = useLocation();
   const navigate = useNavigate();
   const { id: paramId } = useParams();
   
   // پشتیبانی از هر دو روش (query param و param)
   const queryParams = new URLSearchParams(location.search);
-  const id = paramId || queryParams.get('id');
+//   const id = paramId || queryParams.get('id');
+const id = location.state?.propertyId;
   
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -375,7 +376,14 @@ const RealEstateDetailPageItem = memo(() => {
   const [imagesLoaded, setImagesLoaded] = useState({});
 
 const ENCRYPTION_KEY = "xK9mN2pQ5rS7uV8wX1yZ3aB4cD6eF0gH2jK5lL8nP9qR1sT3uV5wX7yZ9="; // کلید 256 بیتی
-
+ const getToken = () => {
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      console.warn('توکن یافت نشد');
+      return null;
+    }
+    return token;
+  };
 // تابع رمزگشایی
 const decryptResponse = (encryptedData, iv) => {
   try {
@@ -423,10 +431,23 @@ const decryptResponse = (encryptedData, iv) => {
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
-        
+            const token = getToken();
+    if (!token) {
+      setError('لطفاً ابتدا وارد شوید');
+      setTimeout(() => navigate('/login'), 2000);
+      setLoading(false);
+      return;
+    }
         const response = await fetch(
-          `https://localhost:7178/api/RealEstatePage/GetRealEstateDetails?id=${id}`,
-          { signal: controller.signal }
+          `https://localhost:7178/api/RealEstatePage/GetRealEstateDetailsForDemo?id=${id}`,
+          { signal: controller.signal ,
+
+                     headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+         },
+          },
+          
         );
         
         clearTimeout(timeoutId);
@@ -632,7 +653,7 @@ const decryptResponse = (encryptedData, iv) => {
       <div className="detail-container" itemScope itemType="https://schema.org/Product">
         
         {/* ===== Breadcrumb Navigation ===== */}
-        <nav aria-label="مسیر راهنما" className="breadcrumb-nav">
+        {/* <nav aria-label="مسیر راهنما" className="breadcrumb-nav">
           <ol className="breadcrumb-list">
             <li className="breadcrumb-item">
               <a href="/" className="breadcrumb-link">خانه</a>
@@ -651,7 +672,7 @@ const decryptResponse = (encryptedData, iv) => {
               {property.title.substring(0, 50)}...
             </li>
           </ol>
-        </nav>
+        </nav> */}
         
         {/* ===== Header ===== */}
         <div className="detail-header">
@@ -659,7 +680,7 @@ const decryptResponse = (encryptedData, iv) => {
             <FaArrowRight aria-hidden="true" />
           </button>
           <h1 className="header-title" itemProp="name">{property.title}</h1>
-          <button className="header-btn" onClick={handleShare} aria-label="اشتراک‌گذاری">
+          <button className="header-btn" onClick={handleShare} aria-label="اشتراک‌گذاری" >
             <FaShare aria-hidden="true" />
           </button>
         </div>
@@ -706,14 +727,14 @@ const decryptResponse = (encryptedData, iv) => {
             )}
           </Swiper>
           
-          <button 
+          {/* <button 
             className={`favorite-btn ${isFavorite ? 'active' : ''}`}
             onClick={handleFavoriteToggle}
             aria-label={isFavorite ? 'حذف از علاقه‌مندی‌ها' : 'افزودن به علاقه‌مندی‌ها'}
             aria-pressed={isFavorite}
           >
             {isFavorite ? <FaHeart aria-hidden="true" /> : <FaRegHeart aria-hidden="true" />}
-          </button>
+          </button> */}
           
           <div className="image-counter" aria-label={`تصویر ${selectedImage + 1} از ${property.images.length || 1}`}>
             {selectedImage + 1} / {property.images.length || 1}
@@ -1100,6 +1121,6 @@ const decryptResponse = (encryptedData, iv) => {
   );
 });
 
-RealEstateDetailPageItem.displayName = 'RealEstateDetailPageItem';
+RealEstateDetailPageItemForDemo.displayName = 'RealEstateDetailPageItemForDemo';
 
-export default RealEstateDetailPageItem;
+export default RealEstateDetailPageItemForDemo;
