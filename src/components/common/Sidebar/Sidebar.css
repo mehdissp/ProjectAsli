@@ -1,17 +1,17 @@
 /* متغیرهای CSS */
 :root {
   --sidebar-width: 280px;
-  --primary-color: #1e293b;
-  --primary-dark: #0f172a;
-  --accent-color: #3b82f6;
-  --accent-hover: #2563eb;
-  --text-primary: #ffffff; /* رنگ سفید برای متن */
+  --primary-color: #1a1a1a;
+  --primary-dark: #0f0f0f;
+  --accent-color: #7d0000;
+  --accent-hover: #a30000;
+  --text-primary: #ffffff;
   --text-secondary: #e2e8f0;
   --text-muted: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(125, 0, 0, 0.3);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --radius: 8px;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 10px 15px -3px rgba(125, 0, 0, 0.2), 0 4px 6px -2px rgba(125, 0, 0, 0.1);
 }
 
 .sidebar {
@@ -20,8 +20,8 @@
   right: 0;
   width: var(--sidebar-width);
   height: 100vh;
-  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  color: var(--text-primary); /* رنگ متن اصلی سفید */
+  background: linear-gradient(180deg, #1a1a1a 0%, #2d1a1a 100%);
+  color: var(--text-primary);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -37,12 +37,12 @@
 }
 
 .sidebar-header {
-  padding: 1.25rem 1.5rem; /* کاهش پدینگ */
+  padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(125, 0, 0, 0.1);
   backdrop-filter: blur(10px);
 }
 
@@ -54,8 +54,8 @@
 
 .logo-icon {
   font-size: 1.75rem;
-  color: var(--accent-color);
-  background: rgba(59, 130, 246, 0.1);
+  color: #cc0000;
+  background: rgba(125, 0, 0, 0.2);
   padding: 0.5rem;
   border-radius: var(--radius);
   display: flex;
@@ -66,32 +66,34 @@
 .logo-text {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-primary); /* رنگ سفید */
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* بخش کاربر کامپکت */
 .user-info-compact {
-  padding: 1rem 1.5rem; /* کاهش قابل توجه پدینگ */
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* کاهش فاصله */
+  gap: 0.75rem;
   border-bottom: 1px solid var(--border-color);
-  background: rgba(255, 255, 255, 0.03);
-  margin-bottom: 0.5rem; /* فاصله کم با منوها */
+  background: rgba(125, 0, 0, 0.08);
+  margin-bottom: 0.5rem;
 }
 
 .user-avatar-compact {
-  width: 40px; /* سایز کوچک‌تر */
+  width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  background: linear-gradient(135deg, #7d0000, #cc0000);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 1rem; /* فونت کوچک‌تر */
+  font-size: 1rem;
   color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(125, 0, 0, 0.3);
 }
 
 .user-details-compact {
@@ -100,23 +102,23 @@
 
 .user-name-compact {
   font-weight: 600;
-  margin-bottom: 0.125rem; /* کاهش فاصله */
+  margin-bottom: 0.125rem;
   font-size: 0.95rem;
-color: bisque;
+  color: #ffcccc;
 }
 
 .user-role-compact {
-  font-size: 0.8rem; /* سایز کوچک‌تر */
-  color: antiquewhite;
+  font-size: 0.8rem;
+  color: #ffaaaa;
   font-weight: 500;
 }
 
 .sidebar-nav {
   flex: 1;
-  padding: 0.5rem 0; /* کاهش پدینگ */
+  padding: 0.5rem 0;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-color: rgba(125, 0, 0, 0.4) transparent;
 }
 
 .sidebar-nav::-webkit-scrollbar {
@@ -128,24 +130,24 @@ color: bisque;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(125, 0, 0, 0.4);
   border-radius: 2px;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(125, 0, 0, 0.6);
 }
 
 .nav-section {
-  margin-bottom: 1rem; /* کاهش فاصله */
+  margin-bottom: 1rem;
 }
 
 .section-label {
-  padding: 0 1.5rem 0.5rem; /* کاهش فاصله */
+  padding: 0 1.5rem 0.5rem;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text-muted);
+  color: #b88686;
   font-weight: 600;
 }
 
@@ -157,8 +159,8 @@ color: bisque;
 .menu-header {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1.5rem; /* کاهش پدینگ */
-  color: var(--text-primary); /* رنگ سفید برای همه متن‌ها */
+  padding: 0.75rem 1.5rem;
+  color: #f0f0f0;
   text-decoration: none;
   transition: var(--transition);
   position: relative;
@@ -176,23 +178,23 @@ color: bisque;
 
 .menu-link:hover,
 .menu-header:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-primary);
+  background: rgba(125, 0, 0, 0.2);
+  color: #ffffff;
   padding-right: 1.625rem;
 }
 
 .menu-link.active {
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--text-primary);
-  border-right: 3px solid var(--accent-color);
+  background: rgba(125, 0, 0, 0.25);
+  color: #ffffff;
+  border-right: 3px solid #cc0000;
 }
 
 .menu-link.active .menu-icon {
-  color: var(--accent-color);
+  color: #cc0000;
 }
 
 .menu-icon {
-  color:whitesmoke !important;
+  color: #ffaaaa !important;
   margin-left: 0.75rem;
   font-size: 1.125rem;
   width: 20px;
@@ -200,21 +202,19 @@ color: bisque;
   align-items: center;
   justify-content: center;
   transition: var(--transition);
-  color: var(--text-secondary);
 }
 
 .menu-text {
   flex: 1;
   font-weight: 500;
   font-size: 0.9rem;
-  /* color: var(--text-primary);  */
-  color: antiquewhite;
+  color: #f5e6d3;
 }
 
 .expand-icon {
   transition: var(--transition);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #b88686;
 }
 
 .expand-icon.expanded {
@@ -225,7 +225,7 @@ color: bisque;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(125, 0, 0, 0.05);
 }
 
 .submenu.expanded {
@@ -250,7 +250,7 @@ color: bisque;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent-color);
+  background: #cc0000;
   opacity: 0;
   transition: var(--transition);
 }
@@ -261,21 +261,22 @@ color: bisque;
 }
 
 .sidebar-footer {
-  padding: 1rem 1.5rem; /* کاهش پدینگ */
+  padding: 1rem 1.5rem;
   border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; /* کاهش فاصله */
-  background: rgba(255, 255, 255, 0.03);
+  gap: 0.75rem;
+  background: rgba(125, 0, 0, 0.05);
 }
 
 .current-time {
   text-align: center;
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: #b88686;
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(125, 0, 0, 0.15);
   border-radius: var(--radius);
+  border: 1px solid rgba(125, 0, 0, 0.2);
 }
 
 .logout-btn {
@@ -284,10 +285,10 @@ color: bisque;
   justify-content: center;
   gap: 0.75rem;
   width: 100%;
-  padding: 0.75rem 1rem; /* کاهش پدینگ */
-  background: rgba(239, 68, 68, 0.1);
-  color: #fecaca;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 0.75rem 1rem;
+  background: rgba(204, 0, 0, 0.15);
+  color: #ffaaaa;
+  border: 1px solid rgba(204, 0, 0, 0.3);
   border-radius: var(--radius);
   font-family: 'Vazirmatn', sans-serif;
   font-size: 0.9rem;
@@ -297,9 +298,10 @@ color: bisque;
 }
 
 .logout-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
+  background: rgba(204, 0, 0, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(125, 0, 0, 0.3);
+  color: #ffffff;
 }
 
 .logout-icon {
@@ -313,7 +315,7 @@ color: bisque;
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 999;
   animation: fadeIn 0.3s ease-out;
 }
@@ -330,9 +332,9 @@ color: bisque;
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
 }
 
 /* حالت دسکتاپ */
@@ -381,5 +383,13 @@ color: bisque;
   
   .sidebar-footer {
     padding: 0.75rem 1.25rem;
+  }
+  
+  .logo-text {
+    font-size: 1rem;
+  }
+  
+  .logo-icon {
+    font-size: 1.5rem;
   }
 }

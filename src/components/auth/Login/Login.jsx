@@ -337,7 +337,7 @@ const Login = () => {
           <button 
             type="submit" 
             disabled={loading}
-            className={`login-button btn btn-primary ${loading ? 'loading' : ''}`}
+            className={`login-button btn  ${loading ? 'loading' : ''}`}
           >
             {loading ? (
               <>

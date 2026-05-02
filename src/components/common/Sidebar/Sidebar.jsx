@@ -925,11 +925,11 @@ const Sidebar = ({ isOpen, onClose }) => {
           <div className="logo">
             <div className="logo-icon">
       
-            <img src="/image/Green and Yellow Ball Icon Soccer Logo (2).png" className='user-avatar  profile-image' alt="لوگو سیستم" />
+            <img src="/image/logo.png" className='user-avatar  profile-image' alt="لوگو سیستم" />
             </div>
             <span className="logo-text"
                   onClick={handleGotoHomeClick}
-            >ملک چی</span>
+            >خونه یاب </span>
           </div>
           <button 
             className="sidebar-close"

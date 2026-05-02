@@ -1021,7 +1021,7 @@ const sliderSettingsAjans = {
     {
       breakpoint: 768, // تا 768px - تبلت
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false
       }

@@ -1,4 +1,4 @@
-/* UserPropertiesPanel.css - نسخه تمیز و حرفه‌ای طوسی/سفید */
+/* UserPropertiesPanel.css - نسخه کامل با تم قرمز تیره */
 
 * {
   margin: 0;
@@ -14,7 +14,10 @@
   direction: rtl;
 }
 
+/* ======================================== */
 /* Toast Notification */
+/* ======================================== */
+
 .compact-toast {
   position: fixed;
   top: 20px;
@@ -35,7 +38,7 @@
 }
 
 .compact-toast.error { 
-  background: #ef4444; 
+  background: #7d0000; 
 }
 
 @keyframes slideDown {
@@ -49,7 +52,10 @@
   }
 }
 
-/* Header - سفید */
+/* ======================================== */
+/* Header */
+/* ======================================== */
+
 .compact-header {
   background: white;
   border-radius: 16px;
@@ -78,7 +84,7 @@
 }
 
 .compact-add-btn {
-  background: #3b82f6;
+  background: #7d0000;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -93,12 +99,15 @@
 }
 
 .compact-add-btn:hover {
-  background: #2563eb;
+  background: #a30000;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+  box-shadow: 0 4px 12px rgba(125,0,0,0.2);
 }
 
-/* Stats Cards - کارت‌های سفید */
+/* ======================================== */
+/* Stats Cards */
+/* ======================================== */
+
 .compact-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -121,7 +130,7 @@
 .compact-stat:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border-color: #d1d5db;
+  border-color: #7d0000;
 }
 
 .compact-stat-icon {
@@ -131,7 +140,7 @@
 .compact-stat-number {
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #7d0000;
   line-height: 1.2;
 }
 
@@ -142,7 +151,10 @@
   font-weight: 500;
 }
 
-/* Toolbar - سفید */
+/* ======================================== */
+/* Toolbar */
+/* ======================================== */
+
 .compact-toolbar {
   background: white;
   border-radius: 16px;
@@ -175,9 +187,9 @@
 
 .compact-search input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #7d0000;
   background: white;
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  box-shadow: 0 0 0 3px rgba(125,0,0,0.1);
 }
 
 .compact-search span {
@@ -205,7 +217,7 @@
 }
 
 .compact-controls select:hover {
-  border-color: #cbd5e1;
+  border-color: #7d0000;
 }
 
 .compact-view-toggle {
@@ -228,11 +240,14 @@
 
 .compact-view-toggle button.active {
   background: white;
-  color: #3b82f6;
+  color: #7d0000;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Grid View - کارت‌های سفید */
+/* ======================================== */
+/* Grid View Cards */
+/* ======================================== */
+
 .compact-properties.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -251,7 +266,7 @@
 .compact-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  border-color: #d1d5db;
+  border-color: #7d0000;
 }
 
 .compact-card-image {
@@ -277,6 +292,9 @@
   font-weight: 600;
   color: white;
   backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .compact-special {
@@ -318,7 +336,7 @@
 .compact-card-price {
   font-size: 16px;
   font-weight: 700;
-  color: #3b82f6;
+  color: #7d0000;
   margin-bottom: 10px;
 }
 
@@ -344,6 +362,7 @@
 .compact-card-actions {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .compact-card-actions select {
@@ -358,7 +377,7 @@
 }
 
 .compact-card-actions select:hover {
-  border-color: #cbd5e1;
+  border-color: #7d0000;
 }
 
 .compact-edit, .compact-delete {
@@ -375,12 +394,12 @@
 }
 
 .compact-edit {
-  background: #eff6ff;
-  color: #3b82f6;
+  background: #fff0f0;
+  color: #7d0000;
 }
 
 .compact-edit:hover {
-  background: #3b82f6;
+  background: #7d0000;
   color: white;
 }
 
@@ -394,7 +413,10 @@
   color: white;
 }
 
-/* List View - کارت‌های سفید */
+/* ======================================== */
+/* List View Items */
+/* ======================================== */
+
 .compact-properties.list {
   display: flex;
   flex-direction: column;
@@ -415,7 +437,7 @@
 .compact-list-item:hover {
   transform: translateX(-4px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  border-color: #d1d5db;
+  border-color: #7d0000;
 }
 
 .compact-list-image {
@@ -464,6 +486,10 @@
   font-size: 10px;
   font-weight: 600;
   color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
 }
 
 .compact-list-info {
@@ -479,6 +505,7 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .compact-list-edit, .compact-list-delete {
@@ -492,12 +519,12 @@
 }
 
 .compact-list-edit {
-  background: #eff6ff;
-  color: #3b82f6;
+  background: #fff0f0;
+  color: #7d0000;
 }
 
 .compact-list-edit:hover {
-  background: #3b82f6;
+  background: #7d0000;
   color: white;
 }
 
@@ -520,13 +547,24 @@
   cursor: pointer;
 }
 
+.compact-list-actions select:hover {
+  border-color: #7d0000;
+}
+
+/* ======================================== */
 /* Status Colors */
+/* ======================================== */
+
 .status-active { background: #10b981; }
 .status-pending { background: #f59e0b; }
 .status-sold { background: #ef4444; }
+.status-archived { background: #6b7280; }
 .status-inactive { background: #94a3b8; }
 
-/* Loading */
+/* ======================================== */
+/* Loading States */
+/* ======================================== */
+
 .compact-loading {
   min-height: 100vh;
   display: flex;
@@ -541,7 +579,7 @@
   width: 36px;
   height: 36px;
   border: 3px solid #e2e8f0;
-  border-top-color: #3b82f6;
+  border-top-color: #7d0000;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin-bottom: 16px;
@@ -551,777 +589,11 @@
   to { transform: rotate(360deg); }
 }
 
-/* Empty State */
-.compact-empty {
-  text-align: center;
-  padding: 60px 20px;
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #e9ecef;
-}
-
-.compact-empty > div {
-  font-size: 64px;
-  margin-bottom: 16px;
-}
-
-.compact-empty h4 {
-  margin: 0 0 10px 0;
-  color: #1e293b;
-  font-size: 18px;
-}
-
-.compact-empty p {
-  color: #64748b;
-  font-size: 13px;
-}
-
-.compact-empty button {
-  margin-top: 20px;
-  padding: 10px 24px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.compact-empty button:hover {
-  background: #2563eb;
-}
-
-/* Error */
-.compact-error {
-  text-align: center;
-  padding: 40px;
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #fee2e2;
-}
-
-.compact-error p {
-  color: #ef4444;
-  margin-bottom: 16px;
-}
-
-.compact-error button {
-  padding: 8px 20px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* Delete Modal */
-.compact-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
-}
-
-.compact-modal {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  text-align: center;
-  max-width: 320px;
-  width: 90%;
-  animation: modalSlide 0.2s ease;
-}
-
-@keyframes modalSlide {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.compact-modal-icon {
-  font-size: 48px;
-  margin-bottom: 12px;
-}
-
-.compact-modal h4 {
-  margin: 0 0 8px 0;
-  color: #1e293b;
-  font-size: 18px;
-}
-
-.compact-modal p {
-  font-size: 13px;
-  color: #64748b;
-  margin-bottom: 20px;
-}
-
-.compact-modal-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.compact-confirm-btn, .compact-cancel-btn {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.compact-confirm-btn {
-  background: #ef4444;
-  color: white;
-}
-
-.compact-confirm-btn:hover {
-  background: #dc2626;
-}
-
-.compact-cancel-btn {
-  background: #f1f5f9;
-  color: #64748b;
-}
-
-.compact-cancel-btn:hover {
-  background: #e2e8f0;
-}
-
-/* Edit Modal */
-.compact-edit-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
-}
-
-.compact-edit-content {
-  background: white;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 450px;
-  animation: modalSlide 0.2s ease;
-}
-
-.compact-edit-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.compact-edit-header h4 {
-  margin: 0;
-  font-size: 18px;
-  color: #1e293b;
-}
-
-.compact-edit-header button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #94a3b8;
-  transition: all 0.2s;
-}
-
-.compact-edit-header button:hover {
-  color: #1e293b;
-}
-
-.compact-edit-content form {
-  padding: 20px;
-}
-
-.compact-edit-content input,
-.compact-edit-content textarea {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 14px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 13px;
-  transition: all 0.2s;
-  background: #f8fafc;
-}
-
-.compact-edit-content input:focus,
-.compact-edit-content textarea:focus {
-  outline: none;
-  border-color: #3b82f6;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-}
-
-.compact-edit-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.compact-save, .compact-edit-actions button:last-child {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.compact-save {
-  background: #10b981;
-  color: white;
-}
-
-.compact-save:hover {
-  background: #059669;
-}
-
-.compact-edit-actions button:last-child {
-  background: #f1f5f9;
-  color: #64748b;
-}
-
-.compact-edit-actions button:last-child:hover {
-  background: #e2e8f0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .user-properties-compact {
-    padding: 12px;
-  }
-  
-  .compact-header {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .compact-stats {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  
-  .compact-stat {
-    padding: 12px;
-  }
-  
-  .compact-stat-icon {
-    font-size: 24px;
-  }
-  
-  .compact-stat-number {
-    font-size: 18px;
-  }
-  
-  .compact-properties.grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .compact-toolbar {
-    flex-direction: column;
-  }
-  
-  .compact-search {
-    max-width: 100%;
-    width: 100%;
-  }
-  
-  .compact-controls {
-    width: 100%;
-  }
-  
-  .compact-controls select {
-    flex: 1;
-  }
-  
-  .compact-list-item {
-    flex-direction: column;
-  }
-  
-  .compact-list-image {
-    width: 100%;
-    height: 140px;
-  }
-  
-  .compact-list-header {
-    flex-direction: column;
-  }
-}
-
-/* اضافه کنید به انتهای فایل CSS قبلی */
-
-/* دکمه‌های وضعیت در حالت گرید */
-.compact-card-actions {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.compact-status-btn {
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.compact-status-btn.active-btn {
-  background: #eff6ff;
-  color: #3b82f6;
-}
-
-.compact-status-btn.active-btn:hover {
-  background: #3b82f6;
-  color: white;
-  transform: scale(1.05);
-}
-
-.compact-status-btn.pending-btn {
-  background: #fffbeb;
-  color: #eeeb4b;
-}
-
-.compact-status-btn.pending-btn:hover {
-  background: #eeeb4b;
-  color: white;
-  transform: scale(1.05);
-}
-
-.compact-status-btn.sold-btn {
-  background: #fef2f2;
-  color: #ef4444;
-}
-
-.compact-status-btn.sold-btn:hover {
-  background: #ef4444;
-  color: white;
-  transform: scale(1.05);
-}
-
-.compact-status-btn.archived-btn {
-  background: #f3f4f6;
-  color: #6b7280;
-}
-
-.compact-status-btn.archived-btn:hover {
-  background: #6b7280;
-  color: white;
-  transform: scale(1.05);
-}
-
-/* دکمه‌های وضعیت در حالت لیست */
-.compact-list-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.compact-status-btn-sm {
-  padding: 5px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.compact-status-btn-sm.active-btn {
-  background: #eff6ff;
-  color: #3b82f6;
-}
-
-.compact-status-btn-sm.active-btn:hover {
-  background: #3b82f6;
-  color: white;
-}
-
-.compact-status-btn-sm.pending-btn {
-  background: #fffbeb;
-  color: #eeeb4b;
-}
-
-.compact-status-btn-sm.pending-btn:hover {
-  background: #eeeb4b;
-  color: white;
-}
-
-.compact-status-btn-sm.sold-btn {
-  background: #fef2f2;
-  color: #ef4444;
-}
-
-.compact-status-btn-sm.sold-btn:hover {
-  background: #ef4444;
-  color: white;
-}
-
-.compact-status-btn-sm.archived-btn {
-  background: #f3f4f6;
-  color: #6b7280;
-}
-
-.compact-status-btn-sm.archived-btn:hover {
-  background: #6b7280;
-  color: white;
-}
-
-/* تگ‌های وضعیت - آپدیت شده با آیکون */
-.compact-card-status {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  color: white;
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.compact-list-status {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  color: white;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  white-space: nowrap;
-}
-
-/* رنگ‌های وضعیت */
-.status-active { background: #10b981; }
-.status-pending { background: #f59e0b; }
-.status-sold { background: #ef4444; }
-.status-archived { background: #6b7280; }
-
-/* Responsive برای دکمه‌ها */
-@media (max-width: 768px) {
-  .compact-card-actions {
-    justify-content: center;
-  }
-  
-  .compact-status-btn {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .compact-list-actions {
-    justify-content: flex-start;
-  }
-  
-  .compact-status-btn-sm {
-    padding: 4px 10px;
-    font-size: 10px;
-  }
-}
-
-/* ======================================== */
-/* مولتی‌سلکت امکانات رفاحی (Amenities)      */
-/* ======================================== */
-
-.amenities-multiselect {
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  background: white;
-  overflow: hidden;
-  transition: all 0.2s;
-}
-
-.amenities-multiselect:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.amenities-search-container {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  border-bottom: 1px solid #f1f5f9;
-  background: #fafcff;
-}
-
-.amenities-input {
-  flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 13px;
-  transition: all 0.2s;
-  direction: rtl;
-}
-
-.amenities-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-}
-
-.add-amenity-btn {
-  padding: 10px 16px;
-  background: #10b981;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.add-amenity-btn:hover:not(:disabled) {
-  background: #059669;
-  transform: translateY(-1px);
-}
-
-.add-amenity-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.amenities-suggestions {
-  padding: 8px 12px;
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.suggestion-item {
-  padding: 6px 12px;
-  background: #f1f5f9;
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #334155;
-}
-
-.suggestion-item:hover {
-  background: #3b82f6;
-  color: white;
-  transform: translateY(-1px);
-}
-
-.selected-amenities {
-  padding: 12px;
-  min-height: 80px;
-  max-height: 160px;
-  overflow-y: auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: flex-start;
-  background: #fefce8;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.no-amenities {
-  color: #94a3b8;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px;
-  width: 100%;
-  justify-content: center;
-}
-
-.amenity-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: white;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s;
-  animation: tagFadeIn 0.2s ease;
-}
-
-@keyframes tagFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.amenity-tag span {
-  max-width: 120px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.remove-amenity {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.2s;
-}
-
-.remove-amenity:hover {
-  background: rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
-}
-
-.popular-amenities {
-  padding: 12px;
-  background: #f8fafc;
-}
-
-.popular-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.popular-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.popular-amenity-btn {
-  padding: 6px 12px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #334155;
-}
-
-.popular-amenity-btn:hover:not(.disabled) {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: white;
-  transform: translateY(-1px);
-}
-
-.popular-amenity-btn.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background: #f1f5f9;
-}
-
-/* اسکرول بار برای بخش امکانات انتخاب شده */
-.selected-amenities::-webkit-scrollbar {
-  width: 6px;
-}
-
-.selected-amenities::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.selected-amenities::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
-}
-
-.selected-amenities::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Responsive برای مولتی‌سلکت */
-@media (max-width: 640px) {
-  .amenities-search-container {
-    flex-direction: column;
-  }
-  
-  .add-amenity-btn {
-    justify-content: center;
-  }
-  
-  .amenity-tag span {
-    max-width: 80px;
-  }
-  
-  .popular-list {
-    max-height: 100px;
-    overflow-y: auto;
-  }
-}
-
-/* ======================================== */
-/* Skeleton Loading Styles                  */
-/* ======================================== */
-
-/* Skeleton base animation */
+/* Skeleton loading */
 @keyframes skeleton-pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .skeleton {
@@ -1331,7 +603,6 @@
   border-radius: 8px;
 }
 
-/* Skeleton for Stats Cards */
 .skeleton-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -1375,7 +646,6 @@
   border-radius: 4px;
 }
 
-/* Skeleton for Toolbar */
 .skeleton-toolbar {
   background: white;
   border-radius: 16px;
@@ -1416,7 +686,6 @@
   border-radius: 12px;
 }
 
-/* Skeleton for Grid View Cards */
 .skeleton-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1504,89 +773,11 @@
   border-radius: 10px;
 }
 
-/* Skeleton for List View Items */
-.skeleton-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+/* ======================================== */
+/* Empty & Error States */
+/* ======================================== */
 
-.skeleton-list-item {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  display: flex;
-  gap: 16px;
-  border: 1px solid #e9ecef;
-}
-
-.skeleton-list-image {
-  width: 100px;
-  height: 100px;
-  background: #e2e8f0;
-  border-radius: 12px;
-  flex-shrink: 0;
-}
-
-.skeleton-list-content {
-  flex: 1;
-}
-
-.skeleton-list-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.skeleton-list-title {
-  height: 20px;
-  width: 200px;
-  background: #e2e8f0;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
-
-.skeleton-list-address {
-  height: 14px;
-  width: 150px;
-  background: #e2e8f0;
-  border-radius: 4px;
-}
-
-.skeleton-list-status {
-  width: 100px;
-  height: 28px;
-  background: #e2e8f0;
-  border-radius: 20px;
-}
-
-.skeleton-list-info {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-.skeleton-list-info-item {
-  height: 16px;
-  width: 70px;
-  background: #e2e8f0;
-  border-radius: 4px;
-}
-
-.skeleton-list-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.skeleton-list-action {
-  width: 60px;
-  height: 32px;
-  background: #e2e8f0;
-  border-radius: 8px;
-}
-
-/* Skeleton for Empty Filter State */
-.skeleton-empty-filter {
+.compact-empty {
   text-align: center;
   padding: 60px 20px;
   background: white;
@@ -1594,69 +785,384 @@
   border: 1px solid #e9ecef;
 }
 
-.skeleton-empty-icon {
-  width: 64px;
-  height: 64px;
-  background: #e2e8f0;
-  border-radius: 50%;
-  margin: 0 auto 16px;
+.compact-empty > div {
+  font-size: 64px;
+  margin-bottom: 16px;
 }
 
-.skeleton-empty-title {
-  height: 24px;
-  width: 200px;
+.compact-empty h4 {
+  margin: 0 0 10px 0;
+  color: #1e293b;
+  font-size: 18px;
+}
+
+.compact-empty p {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.compact-empty button {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background: #7d0000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.compact-empty button:hover {
+  background: #a30000;
+}
+
+.compact-error {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #fee2e2;
+}
+
+.compact-error p {
+  color: #ef4444;
+  margin-bottom: 16px;
+}
+
+.compact-error button {
+  padding: 8px 20px;
+  background: #7d0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.compact-error button:hover {
+  background: #a30000;
+}
+
+/* ======================================== */
+/* Delete Modal */
+/* ======================================== */
+
+.compact-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.compact-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  animation: modalSlide 0.2s ease;
+}
+
+@keyframes modalSlide {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.compact-modal-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.compact-modal h4 {
+  margin: 0 0 8px 0;
+  color: #1e293b;
+  font-size: 18px;
+}
+
+.compact-modal p {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.compact-modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.compact-confirm-btn, .compact-cancel-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.compact-confirm-btn {
+  background: #7d0000;
+  color: white;
+}
+
+.compact-confirm-btn:hover {
+  background: #a30000;
+}
+
+.compact-cancel-btn {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.compact-cancel-btn:hover {
   background: #e2e8f0;
+}
+
+/* ======================================== */
+/* Edit Modal */
+/* ======================================== */
+
+.compact-edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.compact-edit-content {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  animation: modalSlide 0.2s ease;
+}
+
+.compact-edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.compact-edit-header h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.compact-edit-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: all 0.2s;
+}
+
+.compact-edit-header button:hover {
+  color: #1e293b;
+}
+
+.compact-edit-content form {
+  padding: 20px;
+}
+
+.compact-edit-content input,
+.compact-edit-content textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 13px;
+  transition: all 0.2s;
+  background: #f8fafc;
+}
+
+.compact-edit-content input:focus,
+.compact-edit-content textarea:focus {
+  outline: none;
+  border-color: #7d0000;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(125,0,0,0.1);
+}
+
+.compact-edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.compact-save, .compact-edit-actions button:last-child {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.compact-save {
+  background: #10b981;
+  color: white;
+}
+
+.compact-save:hover {
+  background: #059669;
+}
+
+.compact-edit-actions button:last-child {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.compact-edit-actions button:last-child:hover {
+  background: #e2e8f0;
+}
+
+/* ======================================== */
+/* Status Buttons */
+/* ======================================== */
+
+.compact-status-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compact-status-btn.active-btn {
+  background: #fff0f0;
+  color: #7d0000;
+}
+
+.compact-status-btn.active-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: scale(1.05);
+}
+
+.compact-status-btn.pending-btn {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.compact-status-btn.pending-btn:hover {
+  background: #f59e0b;
+  color: white;
+  transform: scale(1.05);
+}
+
+.compact-status-btn.sold-btn {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.compact-status-btn.sold-btn:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.05);
+}
+
+.compact-status-btn.archived-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.compact-status-btn.archived-btn:hover {
+  background: #6b7280;
+  color: white;
+  transform: scale(1.05);
+}
+
+.compact-status-btn-sm {
+  padding: 5px 12px;
+  border: none;
   border-radius: 6px;
-  margin: 0 auto 10px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.skeleton-empty-text {
-  height: 16px;
-  width: 250px;
-  background: #e2e8f0;
-  border-radius: 4px;
-  margin: 0 auto;
+.compact-status-btn-sm.active-btn {
+  background: #fff0f0;
+  color: #7d0000;
 }
 
-/* Responsive Skeleton */
-@media (max-width: 768px) {
-  .skeleton-stats {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  
-  .skeleton-stat-card {
-    padding: 12px;
-  }
-  
-  .skeleton-stat-icon {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .skeleton-stat-number {
-    height: 22px;
-    width: 45px;
-  }
-  
-  .skeleton-list-item {
-    flex-direction: column;
-  }
-  
-  .skeleton-list-image {
-    width: 100%;
-    height: 140px;
-  }
-  
-  .skeleton-list-header {
-    flex-direction: column;
-    gap: 8px;
-  }
+.compact-status-btn-sm.active-btn:hover {
+  background: #7d0000;
+  color: white;
 }
 
-/* استایل‌های دکمه پرداخت */
+.compact-status-btn-sm.pending-btn {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.compact-status-btn-sm.pending-btn:hover {
+  background: #f59e0b;
+  color: white;
+}
+
+.compact-status-btn-sm.sold-btn {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.compact-status-btn-sm.sold-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.compact-status-btn-sm.archived-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.compact-status-btn-sm.archived-btn:hover {
+  background: #6b7280;
+  color: white;
+}
+
+/* ======================================== */
+/* Payment Button */
+/* ======================================== */
+
 .compact-payment-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #a30000 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1669,11 +1175,11 @@
 
 .compact-payment-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(125,0,0,0.4);
 }
 
 .compact-payment-btn-sm {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #a30000 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -1686,121 +1192,652 @@
 
 .compact-payment-btn-sm:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 2px 8px rgba(125,0,0,0.4);
 }
 
-/* استایل‌های مودال پرداخت */
+/* ======================================== */
+/* Payment Modal */
+/* ======================================== */
+
 .payment-modal {
-  max-width: 450px;
+  max-width: 500px;
+  width: 90%;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  animation: modalSlide 0.3s ease;
+}
+
+.payment-modal-header {
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  padding: 20px 24px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-modal-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.payment-modal-close:hover {
+  background: rgba(255,255,255,0.3);
+  transform: rotate(90deg);
+}
+
+.payment-modal-body {
+  padding: 24px;
 }
 
 .payment-details {
   background: #f8f9fa;
-  padding: 16px;
-  border-radius: 12px;
-  margin: 16px 0;
+  padding: 16px 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e9ecef;
 }
 
 .payment-detail-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #e9ecef;
 }
 
 .payment-detail-row:last-child {
   border-bottom: none;
+  padding-bottom: 0;
+}
+
+.payment-detail-row:first-child {
+  padding-top: 0;
+}
+
+.payment-detail-label {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.payment-detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
 }
 
 .payment-amount {
-  color: #28a745;
-  font-size: 18px;
+  color: #7d0000;
+  font-size: 20px;
+  font-weight: 800;
 }
 
 .payment-info {
-  background: #e3f2fd;
-  padding: 12px;
-  border-radius: 8px;
+  background: #fff5f5;
+  padding: 14px 16px;
+  border-radius: 12px;
   margin: 16px 0;
-  font-size: 13px;
+  font-size: 12px;
+  border: 1px solid #ffe0e0;
+  color: #7d0000;
 }
 
 .payment-info p {
   margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .payment-error {
   background: #f8d7da;
   color: #721c24;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 12px 0;
-  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin: 16px 0;
+  font-size: 13px;
+  border: 1px solid #f5c6cb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .compact-pay-btn {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  width: 100%;
+  background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 14px 24px;
+  border-radius: 14px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .compact-pay-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  box-shadow: 0 6px 20px rgba(125, 0, 0, 0.3);
+  background: linear-gradient(135deg, #9a0000, #c40000);
 }
 
 .compact-pay-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* صفحه callback پرداخت */
-.payment-callback-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.payment-result {
-  background: white;
-  border-radius: 20px;
-  padding: 40px;
+.payment-loading {
   text-align: center;
-  max-width: 400px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
 }
 
-.payment-result.success {
-  border-top: 5px solid #28a745;
+.payment-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #7d0000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
 }
 
-.payment-result.error {
-  border-top: 5px solid #dc3545;
+/* ======================================== */
+/* Payment Methods - Modern Design */
+/* ======================================== */
+
+.payment-methods {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
 }
 
-.payment-result-icon {
-  font-size: 64px;
-  margin-bottom: 20px;
+.payment-methods-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #7d0000;
 }
 
-.payment-result h3 {
-  margin: 0 0 10px 0;
-  font-size: 24px;
+.payment-methods-title span {
+  font-size: 20px;
 }
 
-.payment-result p {
-  color: #666;
-  margin: 10px 0;
+.payment-method-radio {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
-/* استایل‌های نتیجه پرداخت */
+
+.payment-method-radio:last-child {
+  margin-bottom: 0;
+}
+
+.payment-method-radio:hover:not(.disabled) {
+  border-color: #7d0000;
+  background: #fff5f5;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(125, 0, 0, 0.1);
+}
+
+.payment-method-radio.selected {
+  border-color: #7d0000;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.15);
+}
+
+.payment-method-radio.selected::before {
+  content: '✓';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  background: #7d0000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom-right-radius: 12px;
+}
+
+.payment-method-radio.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f8f9fa;
+}
+
+.payment-method-radio.selected-disabled {
+  border-color: #f59e0b;
+  background: #fffbf0;
+}
+
+/* Custom Radio Button */
+.radio-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.payment-method-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.custom-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: #7d0000;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.payment-method-radio input[type="radio"]:checked + .custom-radio {
+  border-color: #7d0000;
+  background: white;
+}
+
+.payment-method-radio input[type="radio"]:checked + .custom-radio::after {
+  opacity: 1;
+}
+
+.custom-radio.disabled-radio {
+  border-color: #dee2e6;
+  background: #e9ecef;
+}
+
+.payment-method-radio.disabled input[type="radio"]:checked + .custom-radio {
+  border-color: #f59e0b;
+}
+
+.payment-method-radio.disabled input[type="radio"]:checked + .custom-radio::after {
+  background: #f59e0b;
+}
+
+/* Payment Method Content */
+.payment-method-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.payment-method-icon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 14px;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.payment-method-radio:hover .payment-method-icon {
+  background: #fff0f0;
+  transform: scale(1.05);
+}
+
+.payment-method-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.payment-method-icon-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  border-radius: 12px;
+  color: white;
+}
+
+.payment-method-info {
+  flex: 1;
+  min-width: 150px;
+}
+
+.payment-method-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payment-method-desc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.payment-method-badge {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.active-badge {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  color: #155724;
+  border: 1px solid #b8dfc2;
+}
+
+.disabled-badge {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  color: #721c24;
+  border: 1px solid #f1b0b7;
+}
+
+/* ZarinPal Special Style */
+.payment-method-radio.zarinpal .payment-method-icon {
+  background: #fff8f0;
+}
+
+.payment-method-radio.zarinpal.selected {
+  border-color: #7d0000;
+}
+
+/* SnappPay Special Style */
+.payment-method-radio.snapppay .payment-method-icon {
+  background: #e8f5e9;
+}
+
+.payment-method-radio.snapppay.selected {
+  border-color: #7d0000;
+}
+
+/* ======================================== */
+/* Amenities Multiselect */
+/* ======================================== */
+
+.amenities-multiselect {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.amenities-multiselect:focus-within {
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125,0,0,0.1);
+}
+
+.amenities-search-container {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafcff;
+}
+
+.amenities-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 13px;
+  transition: all 0.2s;
+  direction: rtl;
+}
+
+.amenities-input:focus {
+  outline: none;
+  border-color: #7d0000;
+}
+
+.add-amenity-btn {
+  padding: 10px 16px;
+  background: #7d0000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.add-amenity-btn:hover:not(:disabled) {
+  background: #a30000;
+  transform: translateY(-1px);
+}
+
+.add-amenity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.amenities-suggestions {
+  padding: 8px 12px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-item {
+  padding: 6px 12px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #334155;
+}
+
+.suggestion-item:hover {
+  background: #7d0000;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.selected-amenities {
+  padding: 12px;
+  min-height: 80px;
+  max-height: 160px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  background: #fff5f5;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.no-amenities {
+  color: #94a3b8;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.amenity-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #7d0000 0%, #a30000 100%);
+  color: white;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  animation: tagFadeIn 0.2s ease;
+}
+
+@keyframes tagFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.amenity-tag span {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.remove-amenity {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.remove-amenity:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.popular-amenities {
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.popular-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.popular-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.popular-amenity-btn {
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #334155;
+}
+
+.popular-amenity-btn:hover:not(.disabled) {
+  background: #7d0000;
+  border-color: #7d0000;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.popular-amenity-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+}
+
+/* ======================================== */
+/* Payment Result Modal */
+/* ======================================== */
+
 .payment-result-modal {
   max-width: 400px;
   text-align: center;
@@ -1842,7 +1879,7 @@
 }
 
 .compact-close-result {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -1855,236 +1892,177 @@
 
 .compact-close-result:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(125, 0, 0, 0.4);
 }
 
-/* استایل برای دکمه پرداخت در حالت pending */
-.status-payment-pending {
-  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-  color: white;
-}
+/* ======================================== */
+/* Responsive Design */
+/* ======================================== */
 
-.compact-payment-btn, .compact-payment-btn-sm {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7);
+@media (max-width: 768px) {
+  .user-properties-compact {
+    padding: 12px;
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(245, 87, 108, 0);
+  
+  .compact-header {
+    flex-direction: column;
+    text-align: center;
   }
-  100% {
-    box-shadow: 0 0 0 0 rgba(245, 87, 108, 0);
+  
+  .compact-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .compact-stat {
+    padding: 12px;
+  }
+  
+  .compact-stat-icon {
+    font-size: 24px;
+  }
+  
+  .compact-stat-number {
+    font-size: 18px;
+  }
+  
+  .compact-properties.grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .compact-toolbar {
+    flex-direction: column;
+  }
+  
+  .compact-search {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .compact-controls {
+    width: 100%;
+  }
+  
+  .compact-controls select {
+    flex: 1;
+  }
+  
+  .compact-list-item {
+    flex-direction: column;
+  }
+  
+  .compact-list-image {
+    width: 100%;
+    height: 140px;
+  }
+  
+  .compact-list-header {
+    flex-direction: column;
+  }
+  
+  .compact-card-actions {
+    justify-content: center;
+  }
+  
+  .compact-status-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .compact-list-actions {
+    justify-content: flex-start;
+  }
+  
+  .payment-methods {
+    padding: 15px;
+  }
+  
+  .amenities-search-container {
+    flex-direction: column;
+  }
+  
+  .add-amenity-btn {
+    justify-content: center;
   }
 }
-.compact-loading-modal {
-  background: white;
-  border-radius: 16px;
-  padding: 32px;
-  text-align: center;
-  min-width: 300px;
-}
 
-.compact-loading-modal .compact-spinner {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto 16px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #667eea;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* روش‌های پرداخت با رادیو باتن */
-.payment-methods {
-  margin: 20px 0;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 12px;
-}
-
-.payment-methods-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #495057;
-}
-
-.payment-method-radio {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px;
-  margin-bottom: 10px;
-  background: white;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.payment-method-radio:last-child {
-  margin-bottom: 0;
-}
-
-.payment-method-radio:hover:not(.disabled) {
-  border-color: #28a745;
-  background: #f0fff4;
-  transform: translateX(5px);
-}
-
-.payment-method-radio.selected {
-  border-color: #28a745;
-  background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
-  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
-}
-
-.payment-method-radio.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background: #f8f9fa;
-}
-
-.payment-method-radio.selected-disabled {
-  border-color: #ffc107;
-  background: #fffbf0;
-}
-
-/* رادیو باتن سفارشی */
-.radio-container {
-  position: relative;
-  display: inline-block;
-}
-
-.payment-method-radio input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.custom-radio {
-  position: relative;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: white;
-  border: 2px solid #ced4da;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-}
-
-.custom-radio::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  background: #28a745;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.payment-method-radio input[type="radio"]:checked + .custom-radio {
-  border-color: #28a745;
-  background: white;
-}
-
-.payment-method-radio input[type="radio"]:checked + .custom-radio::after {
-  opacity: 1;
-}
-
-.custom-radio.disabled-radio {
-  border-color: #dee2e6;
-  background: #e9ecef;
-}
-
-.payment-method-radio.disabled input[type="radio"]:checked + .custom-radio {
-  border-color: #ffc107;
-}
-
-.payment-method-radio.disabled input[type="radio"]:checked + .custom-radio::after {
-  background: #ffc107;
-}
-
-/* محتوای روش پرداخت */
-.payment-method-content {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.payment-method-icon {
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.payment-method-icon img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.payment-method-info {
-  flex: 1;
-}
-
-.payment-method-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: #212529;
-  margin-bottom: 4px;
-}
-
-.payment-method-desc {
-  font-size: 11px;
-  color: #6c757d;
-}
-
-.payment-method-badge {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 500;
-}
-
-.active-badge {
-  background: #d4edda;
-  color: #155724;
-}
-
-.disabled-badge {
-  background: #f8d7da;
-  color: #721c24;
-}
-
-/* ریسپانسیو */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .payment-method-content {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .payment-method-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .payment-method-icon-placeholder {
+    font-size: 22px;
+  }
+  
+  .payment-method-name {
+    font-size: 14px;
+  }
+  
+  .payment-method-desc {
+    font-size: 11px;
   }
   
   .payment-method-badge {
-    width: 100%;
-    text-align: center;
-    margin-top: 8px;
+    font-size: 10px;
+    padding: 3px 10px;
+    align-self: flex-start;
+  }
+  
+  .payment-method-radio.selected::before {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
   }
   
   .payment-method-radio {
-    padding: 10px;
+    padding: 12px;
   }
+}
+
+@media (max-width: 480px) {
+  .payment-method-badge {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .payment-method-info {
+    width: 100%;
+  }
+  
+  .amenity-tag span {
+    max-width: 80px;
+  }
+  
+  .popular-list {
+    max-height: 100px;
+    overflow-y: auto;
+  }
+}
+
+/* Scrollbar Styling */
+.selected-amenities::-webkit-scrollbar {
+  width: 6px;
+}
+
+.selected-amenities::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.selected-amenities::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.selected-amenities::-webkit-scrollbar-thumb:hover {
+  background: #7d0000;
 }
