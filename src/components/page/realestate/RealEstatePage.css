@@ -99,7 +99,7 @@
 
 .hero-title-gradient {
   display: block;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 72px;
@@ -112,12 +112,114 @@
   margin: 0 auto 40px;
   animation: fadeInUp 0.6s ease 0.2s both;
 }
+/* ===== بخش هدر سینمایی ===== */
+.hero-section {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d1a1a 50%, #3d1a1a 100%);
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(125,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+  z-index: 2;
+}
+
+.hero-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, rgba(125,0,0,0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(125,0,0,0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(125,0,0,0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(125,0,0,0.05) 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  z-index: 3;
+  opacity: 0.5;
+  animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+  0% { background-position: 0 0, 0 30px, 30px -30px, -30px 0px; }
+  100% { background-position: 60px 60px, 60px 90px, 90px 30px, 30px 60px; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(125,0,0,0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(125,0,0,0.5);
+  border-radius: 40px;
+  font-size: 14px;
+  margin-bottom: 30px;
+  animation: fadeInUp 0.6s ease;
+  color: #ffaaaa;
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.hero-title-main {
+  display: block;
+  color: white;
+}
+
+.hero-title-gradient {
+  display: block;
+  background: linear-gradient(135deg, #ff6b6b, #cc0000, #7d0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 72px;
+}
+
+.hero-description {
+  font-size: 18px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  color: #e0e0e0;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
 
 /* باکس جستجو */
 .hero-search-card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(125,0,0,0.4);
   border-radius: 30px;
   padding: 30px;
   max-width: 900px;
@@ -130,7 +232,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 25px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(125,0,0,0.3);
   padding-bottom: 15px;
 }
 
@@ -148,12 +250,12 @@
 
 .search-tab:hover {
   color: white;
-  background: rgba(255,255,255,0.1);
+  background: rgba(125,0,0,0.3);
 }
 
 .search-tab.active {
-  background: linear-gradient(135deg, #6877e0, #715ab8);
-  color: #1a1a2e;
+  background: linear-gradient(135deg, #7d0000, #5c0000);
+  color: white;
 }
 
 .search-input-group {
@@ -168,16 +270,16 @@
   display: flex;
   align-items: center;
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(125,0,0,0.3);
   border-radius: 16px;
   padding: 0 20px;
   transition: all 0.3s ease;
 }
 
 .search-input-wrapper:focus-within {
-  background: rgba(255,255,255,0.1);
-  border-color: #6877e0;
-  box-shadow: 0 0 0 4px rgba(255,215,0,0.2);
+  background: rgba(125,0,0,0.1);
+  border-color: #7d0000;
+  box-shadow: 0 0 0 4px rgba(125,0,0,0.3);
 }
 
 .search-icon {
@@ -207,8 +309,8 @@
 .search-select {
   flex: 1;
   padding: 0 20px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(125,0,0,0.3);
   border-radius: 16px;
   color: white;
   font-family: 'Vazirmatn', sans-serif;
@@ -217,30 +319,32 @@
 }
 
 .search-select:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(125,0,0,0.2);
+  border-color: #7d0000;
 }
 
 .search-select option {
-  background: #1a1a2e;
+  background: #1a1a1a;
   color: white;
 }
 
 .search-submit {
   padding: 16px 40px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #cc0000);
   border: none;
   border-radius: 16px;
-  color: #1a1a2e;
+  color: white;
   font-weight: 700;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+  box-shadow: 0 10px 20px rgba(125,0,0,0.4);
 }
 
 .search-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(255,215,0,0.4);
+  box-shadow: 0 15px 30px rgba(125,0,0,0.5);
+  background: linear-gradient(135deg, #9a0000, #e60000);
 }
 
 .search-quick-filters {
@@ -258,8 +362,8 @@
 
 .quick-filter-tag {
   padding: 6px 16px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(125,0,0,0.3);
   border-radius: 30px;
   color: rgba(255,255,255,0.8);
   font-size: 13px;
@@ -268,9 +372,9 @@
 }
 
 .quick-filter-tag:hover {
-  background: rgba(255,215,0,0.2);
-  border-color: #6877e0;
-  color: #6877e0;
+  background: rgba(125,0,0,0.4);
+  border-color: #7d0000;
+  color: #ffaaaa;
   transform: translateY(-2px);
 }
 
@@ -290,16 +394,16 @@
   display: block;
   font-size: 36px;
   font-weight: 800;
-  color: #6877e0;
+  color: #cc0000;
   margin-bottom: 5px;
-  text-shadow: 0 0 20px rgba(255,215,0,0.5);
+  text-shadow: 0 0 20px rgba(125,0,0,0.6);
 }
 
 .stat-label {
   font-size: 14px;
   opacity: 0.8;
+  color: #e0e0e0;
 }
-
 /* ===== بخش تب‌ها ===== */
 .tabs-section {
   padding: 80px 0;
@@ -328,7 +432,7 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   border-radius: 2px;
 }
 
@@ -375,7 +479,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
@@ -386,14 +490,14 @@
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, #6877e0, #715ab8);
-  box-shadow: 0 20px 40px rgb(24 0 255 / 30%);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
+  box-shadow: 0 20px 40px rgba(125,0,0,0.3);
 }
 
 .tab-btn.active .tab-icon,
 .tab-btn.active .tab-text,
 .tab-btn.active .tab-count {
-  color: #1a1a2e;
+  color: #7d0000;
   position: relative;
   z-index: 2;
 }
@@ -458,7 +562,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   transform: translateX(-100%);
   transition: transform 0.4s ease;
 }
@@ -492,7 +596,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+  background: linear-gradient(135deg, rgba(125,0,0,0.1), rgba(92,0,0,0.1));
   border-radius: 50%;
   transform: scale(0.8);
   transition: transform 0.3s ease;
@@ -521,7 +625,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255,215,0,0.1), transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(125,0,0,0.1), transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -550,17 +654,17 @@
   gap: 10px;
   padding: 12px 25px;
   background: transparent;
-  border: 2px solid #6877e0;
+  border: 2px solid #7d0000;
   border-radius: 40px;
-  color: #6877e0;
+  color: #7d0000;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .section-more-btn:hover {
-  background: #6877e0;
-  color: #1a1a2e;
+  background: #7d0000;
+  color: white;
   transform: translateX(-5px);
 }
 
@@ -588,7 +692,7 @@
 .agency-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-  border-color: #6877e0;
+  border-color: #7d0000;
 }
 
 .agency-image {
@@ -627,10 +731,10 @@
   position: absolute;
   bottom: 15px;
   right: 15px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   padding: 5px 12px;
   border-radius: 30px;
-  color: #1a1a2e;
+  color: white;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -683,16 +787,16 @@
 }
 
 .stat-icon {
-  color: #6877e0;
+  color: #7d0000;
 }
 
 .agency-btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   border: none;
   border-radius: 40px;
-  color: #1a1a2e;
+  color: white;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -742,7 +846,7 @@
 .property-card:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 30px 60px rgba(0,0,0,0.15);
-  border-color: #6877e0;
+  border-color: #7d0000;
 }
 
 .property-image {
@@ -781,14 +885,14 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   padding: 8px 20px;
   border-radius: 40px;
-  color: #1a1a2e;
+  color: white;
   font-weight: 600;
   font-size: 14px;
   z-index: 2;
-  box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+  box-shadow: 0 5px 15px rgba(125,0,0,0.3);
 }
 
 .property-favorite {
@@ -812,8 +916,8 @@
 }
 
 .property-favorite:hover {
-  background: #6877e0;
-  color: #1a1a2e;
+  background: #7d0000;
+  color: white;
   transform: scale(1.1);
 }
 
@@ -839,7 +943,7 @@
 }
 
 .location-icon {
-  color: #6877e0;
+  color: #7d0000;
 }
 
 .property-price-section {
@@ -858,7 +962,7 @@
 }
 
 .property-price {
-  color: #6877e0;
+  color: #7d0000;
   font-size: 22px;
   font-weight: 700;
 }
@@ -880,7 +984,7 @@
 }
 
 .feature-icon {
-  color: #6877e0;
+  color: #7d0000;
 }
 
 .property-footer {
@@ -897,9 +1001,9 @@
 .property-view-btn {
   padding: 8px 20px;
   background: transparent;
-  border: 2px solid #6877e0;
+  border: 2px solid #7d0000;
   border-radius: 30px;
-  color: #6877e0;
+  color: #7d0000;
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
@@ -907,8 +1011,8 @@
 }
 
 .property-view-btn:hover {
-  background: #6877e0;
-  color: #1a1a2e;
+  background: #7d0000;
+  color: white;
 }
 
 /* دکمه مشاهده همه */
@@ -921,20 +1025,20 @@
   align-items: center;
   gap: 10px;
   padding: 16px 50px;
-  background: linear-gradient(135deg, #6877e0, #715ab8);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
   border: none;
   border-radius: 60px;
-  color: #1a1a2e;
+  color: white;
   font-weight: 700;
   font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 20px 40px rgb(24 0 255 / 30%);
+  box-shadow: 0 20px 40px rgba(125,0,0,0.3);
 }
 
 .view-all-btn:hover {
   transform: translateY(-5px);
-  box-shadow:0 20px 40px rgb(24 0 255 / 30%);
+  box-shadow: 0 20px 40px rgba(125,0,0,0.3);
 }
 
 .view-all-icon {
@@ -952,14 +1056,14 @@
 }
 
 .consult-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   border-radius: 40px;
   padding: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: white;
-  box-shadow: 0 30px 60px rgba(102,126,234,0.3);
+  box-shadow: 0 30px 60px rgba(125,0,0,0.3);
   position: relative;
   overflow: hidden;
 }
@@ -1017,7 +1121,7 @@
 
 .consult-phone {
   background: white;
-  color: #667eea;
+  color: #7d0000;
 }
 
 .consult-phone:hover {
@@ -1314,13 +1418,13 @@
 
 .properties-slider-wrapper .slick-prev:hover,
 .properties-slider-wrapper .slick-next:hover {
-  background: linear-gradient(135deg, #6877e0, #715ab8);;
-  box-shadow: 0 6px 16px rgba(255,215,0,0.3);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
+  box-shadow: 0 6px 16px rgba(125,0,0,0.3);
 }
 
 .properties-slider-wrapper .slick-prev:hover:before,
 .properties-slider-wrapper .slick-next:hover:before {
-  color: #1a1a2e;
+  color: white;
 }
 
 .properties-slider-wrapper .slick-prev {
@@ -1333,7 +1437,7 @@
 
 .properties-slider-wrapper .slick-prev:before,
 .properties-slider-wrapper .slick-next:before {
-  color: #6877e0;
+  color: #7d0000;
   font-size: 20px;
   opacity: 1;
   transition: color 0.3s ease;
@@ -1346,7 +1450,7 @@
 
 .properties-slider-wrapper .slick-dots li button:before {
   font-size: 10px;
-  color: #6877e0;
+  color: #7d0000;
   opacity: 0.3;
   transition: all 0.3s ease;
 }
@@ -1354,7 +1458,7 @@
 .properties-slider-wrapper .slick-dots li.slick-active button:before {
   opacity: 1;
   transform: scale(1.2);
-  color: #715ab8;
+  color: #5c0000;
 }
 
 /* ریسپانسیو */
@@ -1463,20 +1567,20 @@
   width: 75px;
   height: 75px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   padding: 3px;
   animation: pulse-ring 2s infinite;
 }
 
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+    box-shadow: 0 0 0 0 rgba(125,0,0,0.4);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+    box-shadow: 0 0 0 10px rgba(125,0,0,0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    box-shadow: 0 0 0 0 rgba(125,0,0,0);
   }
 }
 
@@ -1620,7 +1724,7 @@
 
 .story-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, #7d0000, #5c0000);
   width: 0%;
   transition: width 10s linear;
 }
@@ -1772,5 +1876,3 @@
   padding: 6px 12px !important;
   font-size: 11px !important;
 }
-
-

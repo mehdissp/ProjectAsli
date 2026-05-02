@@ -51,7 +51,7 @@
 .logo-text {
   font-size: 22px;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -80,13 +80,13 @@
 
 .menu-item:hover {
   background: #f7fafc;
-  color: #667eea;
+  color: #7d0000;
 }
 
 .menu-item.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.4);
 }
 
 .menu-item.active .menu-icon {
@@ -109,9 +109,9 @@
   align-items: center;
   gap: 8px;
   padding: 8px 20px;
-  border: 1px solid #667eea;
+  border: 1px solid #7d0000;
   background: transparent;
-  color: #667eea;
+  color: #7d0000;
   border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
@@ -120,27 +120,27 @@
 }
 
 .btn-login:hover {
-  background: #667eea;
+  background: #7d0000;
   color: white;
   transform: translateY(-2px);
 }
 
 .btn-register {
   padding: 8px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   color: white;
   border: none;
   border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.4);
   white-space: nowrap;
 }
 
 .btn-register:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 6px 20px rgba(125, 0, 0, 0.5);
 }
 
 /* Mobile Menu Button */
@@ -213,10 +213,11 @@
 
 .mobile-menu-item:hover {
   background: #f7fafc;
+  color: #7d0000;
 }
 
 .mobile-menu-item.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   color: white;
 }
 
@@ -235,17 +236,22 @@
   justify-content: center;
   gap: 8px;
   padding: 12px;
-  border: 1px solid #667eea;
+  border: 1px solid #7d0000;
   background: transparent;
-  color: #667eea;
+  color: #7d0000;
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
 }
 
+.mobile-login:hover {
+  background: #7d0000;
+  color: white;
+}
+
 .mobile-register {
   padding: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #5c0000 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -271,7 +277,7 @@
 
 /* Footer */
 .main-footer {
-  background: #2d3748;
+  background: #7d0000;
   color: white;
   padding: 60px 0 20px;
 }
@@ -312,7 +318,7 @@
 }
 
 .footer-section ul li a:hover {
-  color: #667eea;
+  color: #7d0000;
 }
 
 .copyright {
