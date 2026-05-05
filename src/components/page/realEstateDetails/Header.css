@@ -22,7 +22,7 @@
 .header-logo h1 {
   margin: 0;
   font-size: 1.5rem;
-  color: #4a90e2;
+  color: #7d0000;
   font-weight: 700;
 }
 
@@ -70,7 +70,7 @@
 
 .stats-badge {
   background: #f0f7ff;
-  color: #4a90e2;
+  color: #7d0000;
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: 500;

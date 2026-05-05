@@ -49,7 +49,7 @@
 }
 
 .filter-badge {
-  background: #4a90e2;
+  background: #7d0000;
   color: white;
   padding: 2px 8px;
   border-radius: 12px;
@@ -145,7 +145,7 @@
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #4a90e2;
+  accent-color: #7d0000;
 }
 
 .checkbox-label {
@@ -183,7 +183,7 @@
 }
 
 .badge-good {
-  background: #2196f3;
+  background: #7d0000;
   color: white;
 }
 
@@ -258,6 +258,6 @@
 
 /* استایل برای چک‌باکس‌های فعال */
 .filter-checkbox input[type="checkbox"]:checked + .checkbox-label {
-  color: #4a90e2;
+  color: #7d0000;
   font-weight: 500;
 }

@@ -12,13 +12,17 @@
   padding: 20px;
 }
 
+/* ======================================== */
 /* هدر صفحه */
+/* ======================================== */
+
 .real-estate-header {
   background-color: white;
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-right: 4px solid #7d0000;
 }
 
 .property-breadcrumb {
@@ -37,8 +41,8 @@
 }
 
 .property-breadcrumb .current {
-  color: #2c3e50;
-  font-weight: 500;
+  color: #7d0000;
+  font-weight: 600;
 }
 
 .property-header-row {
@@ -53,18 +57,33 @@
 .property-title {
   font-size: 20px;
   font-weight: 700;
-  color: #2c3e50;
+  color: #1e293b;
   margin: 0;
+  position: relative;
+  padding-right: 12px;
+}
+
+.property-title::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: #7d0000;
+  border-radius: 2px;
 }
 
 .property-date {
-  background-color: #e1f5fe;
+  background-color: #fff0f0;
   padding: 8px 20px;
   border-radius: 30px;
-  color: #0288d1;
-  font-weight: 500;
+  color: #7d0000;
+  font-weight: 600;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(2, 136, 209, 0.1);
+  box-shadow: 0 2px 4px rgba(125, 0, 0, 0.1);
+  border: 1px solid #ffe0e0;
 }
 
 .property-date .date-range {
@@ -72,36 +91,51 @@
 }
 
 .property-count {
-  color: #7f8c8d;
+  color: #64748b;
   font-size: 15px;
   margin: 0;
   border-top: 1px solid #ecf0f1;
   padding-top: 16px;
 }
 
+/* ======================================== */
 /* نوار مرتب‌سازی */
+/* ======================================== */
+
 .sort-bar-container {
   margin-bottom: 24px;
 }
 
+/* ======================================== */
 /* محتوای اصلی */
+/* ======================================== */
+
 .real-estate-content {
   display: flex;
   gap: 24px;
 }
 
+/* ======================================== */
 /* سایدبار */
+/* ======================================== */
+
 .real-estate-sidebar {
   width: 280px;
   flex-shrink: 0;
 }
 
+/* ======================================== */
 /* لیست املاک */
+/* ======================================== */
+
 .real-estate-list {
   flex: 1;
 }
 
+/* ======================================== */
 /* ردیف املاک */
+/* ======================================== */
+
 .property-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -109,7 +143,168 @@
   margin-bottom: 24px;
 }
 
+/* ======================================== */
+/* کارت ملک - استایل حرفه‌ای */
+/* ======================================== */
+
+.property-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(125, 0, 0, 0.12);
+  border-color: #7d0000;
+}
+
+.property-card-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.property-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.property-card:hover .property-card-image img {
+  transform: scale(1.05);
+}
+
+.property-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  background: #7d0000;
+  z-index: 2;
+}
+
+.property-card-type {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.property-card-content {
+  padding: 16px;
+}
+
+.property-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.property-card-address {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.property-card-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #7d0000;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.property-card-price small {
+  font-size: 11px;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.property-card-features {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 12px;
+}
+
+.property-card-feature {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.property-card-feature span:first-child {
+  font-size: 13px;
+}
+
+.property-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.property-card-code {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.property-card-view-btn {
+  padding: 6px 16px;
+  background: transparent;
+  border: 2px solid #7d0000;
+  border-radius: 30px;
+  color: #7d0000;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.property-card-view-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: translateX(-3px);
+}
+
+/* ======================================== */
 /* اسکلتون گرید */
+/* ======================================== */
+
 .skeleton-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -120,30 +315,213 @@
   width: 100%;
 }
 
-/* بنر */
+.skeleton-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+.skeleton-image {
+  height: 180px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-content {
+  padding: 16px;
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 80%;
+  background: #e2e8f0;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-address {
+  height: 14px;
+  width: 90%;
+  background: #e2e8f0;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-price {
+  height: 22px;
+  width: 50%;
+  background: #e2e8f0;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-features {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 12px;
+}
+
+.skeleton-feature {
+  height: 16px;
+  width: 50px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skeleton-code {
+  height: 14px;
+  width: 60px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-btn {
+  height: 30px;
+  width: 70px;
+  background: #e2e8f0;
+  border-radius: 30px;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ======================================== */
+/* بنر تبلیغاتی */
+/* ======================================== */
+
 .banner-container {
   width: 100%;
   margin: 16px 0 24px 0;
 }
 
 .ad-banner {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7d0000 0%, #a30000 50%, #cc0000 100%);
   height: 120px;
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 1.2rem;
   font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* خطا */
+.ad-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.ad-banner:hover::before {
+  left: 100%;
+}
+
+.ad-banner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(125, 0, 0, 0.3);
+}
+
+.ad-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+
+.ad-banner-icon {
+  font-size: 32px;
+}
+
+.ad-banner-text {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ad-banner-subtext {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* ======================================== */
+/* دکمه بارگذاری بیشتر */
+/* ======================================== */
+
+.load-more-container {
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 20px;
+}
+
+.load-more-btn {
+  background: transparent;
+  border: 2px solid #7d0000;
+  color: #7d0000;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.load-more-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(125, 0, 0, 0.3);
+}
+
+.load-more-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ======================================== */
+/* خطا و وضعیت خالی */
+/* ======================================== */
+
 .error-container {
   text-align: center;
   padding: 48px 20px;
   background: white;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid #fee2e2;
 }
 
 .error-message {
@@ -153,28 +531,58 @@
 }
 
 .retry-button {
-  background: #4a90e2;
+  background: #7d0000;
   color: white;
   border: none;
   padding: 10px 24px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .retry-button:hover {
-  background: #357abd;
+  background: #a30000;
+  transform: translateY(-2px);
 }
 
-/* ریسپانسیو - تبلت */
+.empty-container {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-container h3 {
+  color: #1e293b;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.empty-container p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* ======================================== */
+/* ریسپانسیو */
+/* ======================================== */
+
+/* تبلت */
 @media (max-width: 1024px) {
   .real-estate-page-container {
     padding: 16px;
   }
 
   .property-title {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   .real-estate-sidebar {
@@ -190,9 +598,17 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+
+  .ad-banner {
+    height: 100px;
+  }
+  
+  .ad-banner-text {
+    font-size: 16px;
+  }
 }
 
-/* ریسپانسیو - موبایل */
+/* موبایل */
 @media (max-width: 768px) {
   .real-estate-page-container {
     padding: 12px;
@@ -210,7 +626,11 @@
   }
 
   .property-title {
-    font-size: 22px;
+    font-size: 18px;
+  }
+  
+  .property-title::before {
+    height: 16px;
   }
 
   .property-breadcrumb {
@@ -220,11 +640,11 @@
 
   .property-date {
     padding: 6px 16px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .property-count {
-    font-size: 14px;
+    font-size: 13px;
     padding-top: 12px;
   }
 
@@ -248,11 +668,61 @@
 
   .ad-banner {
     height: 80px;
-    font-size: 1rem;
+  }
+  
+  .ad-banner-icon {
+    font-size: 24px;
+  }
+  
+  .ad-banner-text {
+    font-size: 14px;
+  }
+  
+  .ad-banner-subtext {
+    font-size: 10px;
   }
 }
 
+/* موبایل کوچک */
+@media (max-width: 480px) {
+  .real-estate-page-container {
+    padding: 8px;
+    padding-bottom: 70px;
+  }
+
+  .real-estate-header {
+    padding: 12px;
+  }
+
+  .property-title {
+    font-size: 16px;
+  }
+
+  .property-card-image {
+    height: 150px;
+  }
+
+  .property-card-title {
+    font-size: 14px;
+  }
+
+  .property-card-price {
+    font-size: 16px;
+  }
+
+  .ad-banner {
+    height: 70px;
+  }
+  
+  .ad-banner-text {
+    font-size: 12px;
+  }
+}
+
+/* ======================================== */
 /* انیمیشن‌ها */
+/* ======================================== */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -266,11 +736,37 @@
 
 .real-estate-header,
 .property-row,
-.banner-container {
+.banner-container,
+.property-card {
   animation: fadeInUp 0.5s ease forwards;
 }
 
-.property-row:nth-child(1) { animation-delay: 0.1s; }
-.property-row:nth-child(2) { animation-delay: 0.2s; }
-.property-row:nth-child(3) { animation-delay: 0.3s; }
-.property-row:nth-child(4) { animation-delay: 0.4s; }
+.property-row:nth-child(1) { animation-delay: 0.05s; }
+.property-row:nth-child(2) { animation-delay: 0.1s; }
+.property-row:nth-child(3) { animation-delay: 0.15s; }
+.property-row:nth-child(4) { animation-delay: 0.2s; }
+.property-row:nth-child(5) { animation-delay: 0.25s; }
+.property-row:nth-child(6) { animation-delay: 0.3s; }
+
+/* ======================================== */
+/* اسکرول بار سفارشی */
+/* ======================================== */
+
+.real-estate-page::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.real-estate-page::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.real-estate-page::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.real-estate-page::-webkit-scrollbar-thumb:hover {
+  background: #7d0000;
+}
