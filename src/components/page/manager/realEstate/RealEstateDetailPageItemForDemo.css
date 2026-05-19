@@ -2,7 +2,7 @@
 
 /* ===== Variables ===== */
 :root {
-  --primary-color: #7d0000;
+  --primary-color: #7d0000 !important;
   --primary-dark: #5c0000;
   --primary-light: #a30000;
   --secondary-color: #25D366;

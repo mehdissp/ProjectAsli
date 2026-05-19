@@ -555,6 +555,7 @@ const AppContent = () => {
         <Route index element={<RealEstatePage />} />
         <Route path="realestate" element={<RealEstatePage />} />
               <Route path="RealEstatePageDetail" element={<RealEstatePageDetail />} />
+              <Route path="property/:id/:slug?" element={<RealEstateDetailPageItem />} />
   <Route path="RealEstateDetailPageItem" element={<RealEstateDetailPageItem />} />
   <Route path="payment-return" element={<PaymentReturn />} />
               

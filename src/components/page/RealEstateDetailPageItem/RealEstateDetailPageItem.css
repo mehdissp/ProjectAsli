@@ -285,7 +285,7 @@ body {
   }
 }
 
-.detail-title {
+.detail-subtitle {
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
@@ -295,7 +295,7 @@ body {
   padding-right: 12px;
 }
 
-.detail-title::before {
+.detail-subtitle::before {
   content: '';
   position: absolute;
   right: 0;
@@ -308,16 +308,16 @@ body {
 }
 
 @media (min-width: 768px) {
-  .detail-title {
+  .detail-subtitle {
     font-size: 24px;
   }
-  .detail-title::before {
+  .detail-subtitle::before {
     height: 24px;
   }
 }
 
 @media (min-width: 1024px) {
-  .detail-title {
+  .detail-subtitle {
     font-size: 28px;
   }
 }
@@ -351,85 +351,67 @@ body {
   }
 }
 
-/* Price Box */
-.detail-price-box {
-  background: linear-gradient(135deg, #7d0000, #a30000);
+/* Price Section */
+.price-section {
+  margin-bottom: 20px;
+}
+
+.price-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   padding: 16px;
   border-radius: var(--border-radius-lg);
+  background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
 }
 
-@media (min-width: 768px) {
-  .detail-price-box {
-    padding: 24px;
-  }
+.price-card-icon {
+  font-size: 28px;
 }
 
-.price-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.price-row.main-price {
-  margin-bottom: 8px;
-}
-
-@media (min-width: 768px) {
-  .price-row.main-price {
-    margin-bottom: 12px;
-  }
-}
-
-.price-row.rent-price {
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-@media (min-width: 768px) {
-  .price-row.rent-price {
-    padding-top: 12px;
-  }
+.price-card-content {
+  flex: 1;
 }
 
 .price-label {
   font-size: 14px;
   opacity: 0.9;
+  display: block;
+  margin-bottom: 4px;
 }
 
-@media (min-width: 768px) {
-  .price-label {
-    font-size: 16px;
-  }
+.price-value-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
-.price-value {
+.price-number {
   font-size: 20px;
   font-weight: 700;
 }
 
-@media (min-width: 768px) {
-  .price-value {
-    font-size: 28px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .price-value {
-    font-size: 32px;
-  }
-}
-
-.price-currency {
+.price-unit {
   font-size: 12px;
   opacity: 0.9;
 }
 
 @media (min-width: 768px) {
-  .price-currency {
-    font-size: 14px;
+  .price-number {
+    font-size: 28px;
   }
+}
+
+.rent-price-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rent-price-group .price-card {
+  background: linear-gradient(135deg, #5c0000, #7d0000);
 }
 
 /* Quick Specs */
@@ -525,6 +507,12 @@ body {
     font-size: 14px;
     padding: 8px 16px;
   }
+}
+
+.type-chip {
+  background: #fff0f0;
+  color: #7d0000;
+  font-weight: 500;
 }
 
 /* Tabs */
@@ -645,6 +633,12 @@ body {
   }
 }
 
+.address-info h4 {
+  font-size: 13px;
+  color: #7d0000;
+  margin-bottom: 8px;
+}
+
 .address-info p {
   font-size: 14px;
   color: var(--text-secondary);
@@ -737,6 +731,30 @@ body {
   color: #7d0000;
 }
 
+.map-location-badge {
+  margin-bottom: 12px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge.exact {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge.approximate {
+  background: #fff3e0;
+  color: #e65100;
+}
+
 .map-container {
   position: relative;
   border-radius: var(--border-radius-md);
@@ -746,12 +764,76 @@ body {
   width: 100%;
 }
 
-/* Leaflet Container */
-.leaflet-container {
-  height: 100%;
+@media (min-width: 768px) {
+  .map-container {
+    height: 400px;
+  }
+}
+
+.map-privacy-note {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.map-privacy-note small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ===== Location Circles for Approximate Location ===== */
+.map-marker-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  background: #fff0f0 !important;
-  z-index: 1;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.location-circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* فقط یک دایره بزرگ ساده - بدون انیمیشن */
+.circle-3 {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 2px dashed rgba(125, 0, 0, 0.6);
+  background: rgba(125, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+/* Location Dot for Exact Location */
+.location-dot {
+  width: 16px;
+  height: 16px;
+  background: #7d0000;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(125, 0, 0, 0.3);
+  z-index: 15;
+  pointer-events: none;
+}
+
+.location-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: rgba(125, 0, 0, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 /* Features Tab */
@@ -819,6 +901,104 @@ body {
   .feature-icon {
     font-size: 18px;
   }
+}
+
+.no-data {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 20px;
+}
+
+/* Warnings Tab */
+.warnings-tab h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+  border-right: 3px solid #7d0000;
+  padding-right: 12px;
+}
+
+@media (min-width: 768px) {
+  .warnings-tab h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}
+
+.warnings-list {
+  list-style: none;
+  padding: 0;
+}
+
+.warning-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #fff0f0;
+  margin-bottom: 8px;
+  border-radius: var(--border-radius-md);
+  font-size: 14px;
+  color: #7d0000;
+}
+
+.warning-bullet {
+  width: 8px;
+  height: 8px;
+  background: #7d0000;
+  border-radius: 50%;
+}
+
+.warning-footer {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fff3e0;
+  border-radius: var(--border-radius-md);
+  font-size: 13px;
+  color: #e65100;
+}
+
+/* Nearby Tab */
+.nearby-tab h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+  border-right: 3px solid #7d0000;
+  padding-right: 12px;
+}
+
+@media (min-width: 768px) {
+  .nearby-tab h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}
+
+.nearby-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nearby-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: var(--bg-light);
+  border-radius: var(--border-radius-md);
+}
+
+.nearby-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.nearby-distance {
+  color: #7d0000;
+  font-size: 13px;
 }
 
 /* Agent Card */
@@ -987,74 +1167,68 @@ body {
   transform: scale(0.98);
 }
 
-/* Bottom Actions */
-.bottom-actions {
+/* Toast Notification */
+.toast-notification {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--bg-white);
-  padding: 16px;
-  display: flex;
-  gap: 8px;
-  box-shadow: 0 -4px 12px rgba(125,0,0,0.1);
-  z-index: 100;
-}
-
-@media (min-width: 768px) {
-  .bottom-actions {
-    position: relative;
-    box-shadow: none;
-    padding: 20px 0 0;
-    margin-top: 20px;
-    border-top: 1px solid var(--border-color);
-  }
-}
-
-.action-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: var(--border-radius-md);
-  font-size: 14px;
-  font-weight: 500;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2e7d32;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
+  font-size: 14px;
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  .action-btn {
-    padding: 16px;
-    font-size: 16px;
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
   }
 }
 
-.action-btn.primary {
+/* Error Message */
+.error-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.error-message h2 {
+  color: #7d0000;
+  margin-bottom: 16px;
+}
+
+.error-message p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.error-message button {
+  padding: 12px 24px;
   background: #7d0000;
   color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  margin: 0 8px;
 }
 
-.action-btn.primary:hover {
-  background: #a30000;
-  transform: translateY(-2px);
-}
-
-.action-btn.secondary {
-  background: var(--secondary-color);
+.retry-btn, .home-btn {
+  padding: 12px 24px;
+  background: #7d0000;
   color: white;
-}
-
-.action-btn.secondary:hover {
-  background: #128C7E;
-}
-
-.action-btn:active {
-  transform: scale(0.98);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
 }
 
 /* Breadcrumb Styles */
@@ -1115,80 +1289,31 @@ body {
   cursor: default;
 }
 
-/* Custom Marker */
-.custom-marker {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.custom-marker::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #7d0000, #a30000);
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  box-shadow: 0 4px 12px rgba(125,0,0,0.5);
-  border: 3px solid white;
-  animation: markerBounce 1s ease infinite;
-}
-
-.custom-marker::after {
-  content: '🏠';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  color: white;
-  font-size: 18px;
-  z-index: 1;
-}
-
-@keyframes markerBounce {
-  0%, 100% { transform: rotate(-45deg) translateY(0); }
-  50% { transform: rotate(-45deg) translateY(-8px); }
-}
-
-/* Location Dot */
-.location-dot {
-  width: 14px;
-  height: 14px;
-  background: #7d0000;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 4px rgba(125,0,0,0.3);
-  z-index: 5;
-  animation: pulseDot 2s ease infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 0 0 4px rgba(125,0,0,0.3);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-    box-shadow: 0 0 0 8px rgba(125,0,0,0.1);
-  }
-}
-
 /* Skeleton Loading */
 .detail-skeleton {
   width: 100%;
   min-height: 100vh;
   background: var(--bg-white);
-  animation: pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+.skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.skeleton-circle {
+  width: 40px;
+  height: 40px;
+  background: #e0e0e0;
+  border-radius: 50%;
+}
+
+.skeleton-title {
+  width: 200px;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 8px;
 }
 
 .skeleton-gallery {
@@ -1219,17 +1344,70 @@ body {
   100% { background-position: -200% 0; }
 }
 
+.skeleton-content {
+  padding: 20px;
+}
+
+.skeleton-price {
+  height: 80px;
+  background: #e0e0e0;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.skeleton-info {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.skeleton-chip {
+  width: 100px;
+  height: 32px;
+  background: #e0e0e0;
+  border-radius: 20px;
+}
+
+.skeleton-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.skeleton-tab {
+  flex: 1;
+  height: 40px;
+  background: #e0e0e0;
+  border-radius: 8px;
+}
+
+.skeleton-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-line {
+  height: 16px;
+  background: #e0e0e0;
+  border-radius: 8px;
+}
+
+.skeleton-line:nth-child(1) { width: 100%; }
+.skeleton-line:nth-child(2) { width: 80%; }
+.skeleton-line:nth-child(3) { width: 60%; }
+
 /* Responsive */
 @media (max-width: 768px) {
   .detail-main {
     padding: 16px;
   }
   
-  .detail-title {
+  .detail-subtitle {
     font-size: 18px;
   }
   
-  .price-value {
+  .price-number {
     font-size: 18px;
   }
   
@@ -1259,14 +1437,19 @@ body {
   .agent-name {
     font-size: 16px;
   }
+  
+  .circle-3 {
+    width: 220px;
+    height: 220px;
+  }
 }
 
 @media (max-width: 480px) {
-  .detail-title {
+  .detail-subtitle {
     font-size: 16px;
   }
   
-  .price-value {
+  .price-number {
     font-size: 16px;
   }
   
@@ -1295,8 +1478,8 @@ body {
     font-size: 12px;
   }
   
-  .action-btn {
-    padding: 12px;
-    font-size: 12px;
+  .circle-3 {
+    width: 180px;
+    height: 180px;
   }
 }
