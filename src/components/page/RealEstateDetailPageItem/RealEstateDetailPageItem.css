@@ -1483,3 +1483,161 @@ body {
     height: 180px;
   }
 }
+
+/* ===== دو ستونی برای دسکتاپ ===== */
+.detail-main-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .detail-main-wrapper {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .detail-main-wrapper {
+    flex-direction: row;
+    gap: 32px;
+    padding: 0 32px;
+  }
+  
+  .detail-main-column {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .sidebar-banner-column {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sidebar-banner-column {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .sidebar-banner-column {
+    width: 320px;
+  }
+}
+/* ===== گالری با بنر کناری ===== */
+.gallery-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 1024px) {
+  .gallery-wrapper {
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .detail-gallery {
+    flex: 1;
+    height: 500px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+  }
+  
+  .gallery-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery-sidebar {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .gallery-sidebar {
+    width: 320px;
+  }
+}
+
+/* در موبایل بنر کنار گالری مخفی شود */
+@media (max-width: 1023px) {
+  .gallery-sidebar {
+    display: none;
+  }
+}
+
+/* بنر سمت راست */
+.sidebar-banner {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 260px;
+  z-index: 1000;
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .sidebar-banner {
+    display: block;
+  }
+}
+
+@media (min-width: 1600px) {
+  .sidebar-banner {
+    right: 40px;
+    width: 280px;
+  }
+}
+
+.sidebar-banner-link {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(125, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  background: white;
+}
+
+.sidebar-banner-link:hover {
+  transform: translateY(-5px);
+}
+
+.sidebar-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sidebar-banner-overlay {
+  padding: 12px;
+  text-align: center;
+  background: white;
+}
+
+.sidebar-banner-overlay h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #7d0000;
+  margin: 0 0 4px 0;
+}
+
+.sidebar-banner-overlay p {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}

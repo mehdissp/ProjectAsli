@@ -1,9 +1,10 @@
 
-// // export default RealEstateDetailPageItem;
+// // RealEstateDetailPageItem.jsx - نسخه نهایی با سئوی بهبود یافته
 // import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 // import CryptoJS from 'crypto-js';
 // import DOMPurify from 'dompurify';
 // import { useNavigate, useLocation, useParams } from 'react-router-dom';
+// import RelatedPropertiesSlider from './RelatedPropertiesSlider';
 // import { 
 //   FaMapMarkerAlt, 
 //   FaPhone, 
@@ -41,22 +42,46 @@
 // import 'swiper/css/pagination';
 // import './RealEstateDetailPageItem.css';
 
-// // ==================== هِلمت جایگزین با استفاده از useEffect ====================
+// // ==================== هِلم کمکی برای سئو ====================
+// const stripHtml = (html) => {
+//   if (!html) return '';
+//   const temp = document.createElement('div');
+//   temp.innerHTML = html;
+//   return temp.textContent || temp.innerText || '';
+// };
+
+// const truncateText = (text, maxLength) => {
+//   if (!text) return '';
+//   if (text.length <= maxLength) return text;
+//   return text.substring(0, maxLength - 2) + '…';
+// };
+
+// // ==================== هِلمت سئو (اصلاح شده) ====================
 // const PageMetadata = ({ property, isForSale, isForRent }) => {
 //   useEffect(() => {
 //     if (!property) return;
 
-//     // تایتل داینامیک
-//     const title = property.title 
-//       ? `${property.title} | ${isForSale ? 'فروش' : 'رهن و اجاره'} | ${property.area} متری ${property.regionName}`
-//       : 'جزئیات ملک | مشاور املاک';
+//     // ===== عنوان بهینه (حداکثر ۶۵ کاراکتر) =====
+//     let title = property.title 
+//       ? `${truncateText(property.title, 40)} | ${isForSale ? 'فروش' : 'رهن و اجاره'} ${property.area}م ${property.regionName}`
+//       : `ملک ${property.area} متری ${property.regionName}`;
     
-//     // توضیحات متا - 150-160 کاراکتر
-//     const description = property.description
-//       ? `${property.description.substring(0, 150)}... ${isForSale ? 'قیمت: ' + property.price : 'رهن: ' + property.mortgagePrice} تومان - تماس بگیرید`
-//       : `ملک ${isForSale ? 'فروش' : 'رهن و اجاره'} در منطقه ${property.regionName} با ${property.area} متر مربع و ${property.rooms} خواب - ${property.address}`;
+//     title = truncateText(title, 65);
+//     document.title = title;
+
+//     // ===== متا توضیحات بدون HTML (۱۵۰-۱۶۰ کاراکتر) =====
+//     const plainDescription = stripHtml(property.description || '');
+//     const priceText = isForSale 
+//       ? `قیمت: ${property.price} تومان`
+//       : `رهن: ${property.mortgagePrice || property.depositPrice || 'تماس بگیرید'} تومان`;
     
-//     // کلمات کلیدی
+//     let description = plainDescription 
+//       ? truncateText(plainDescription, 120) + `... ${priceText}`
+//       : `ملک ${isForSale ? 'فروش' : 'رهن و اجاره'} در ${property.regionName}، ${property.area} متری، ${property.rooms} خوابه - ${priceText}`;
+    
+//     description = truncateText(description, 155);
+    
+//     // ===== کلمات کلیدی (اختیاری، گوگل استفاده نمی‌کند ولی ضرر ندارد) =====
 //     const keywords = [
 //       property.title,
 //       `${property.regionName} ملک`,
@@ -68,110 +93,49 @@
 //       ...property.features.slice(0, 5)
 //     ].filter(Boolean).join(',');
     
-//     // متاتگ‌های پایه
-//     document.title = title;
+//     // ===== تابع کمکی برای ایجاد/به‌روزرسانی متاتگ =====
+//     const updateOrCreateMeta = (name, content, isProperty = false) => {
+//       const selector = isProperty ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+//       let meta = document.querySelector(selector);
+//       if (!meta) {
+//         meta = document.createElement('meta');
+//         if (isProperty) meta.setAttribute('property', name);
+//         else meta.setAttribute('name', name);
+//         document.head.appendChild(meta);
+//       }
+//       meta.setAttribute('content', content);
+//     };
     
-//     let metaDescription = document.querySelector('meta[name="description"]');
-//     if (!metaDescription) {
-//       metaDescription = document.createElement('meta');
-//       metaDescription.name = 'description';
-//       document.head.appendChild(metaDescription);
-//     }
-//     metaDescription.setAttribute('content', description);
+//     // ===== اعمال متاتگ‌ها =====
+//     updateOrCreateMeta('description', description);
+//     updateOrCreateMeta('keywords', keywords);
+//     updateOrCreateMeta('robots', 'index, follow, max-image-preview:large, max-snippet:-1');
     
-//     let metaKeywords = document.querySelector('meta[name="keywords"]');
-//     if (!metaKeywords) {
-//       metaKeywords = document.createElement('meta');
-//       metaKeywords.name = 'keywords';
-//       document.head.appendChild(metaKeywords);
-//     }
-//     metaKeywords.setAttribute('content', keywords);
-    
-//     // روبات‌ها
-//     let metaRobots = document.querySelector('meta[name="robots"]');
-//     if (!metaRobots) {
-//       metaRobots = document.createElement('meta');
-//       metaRobots.name = 'robots';
-//       document.head.appendChild(metaRobots);
-//     }
-//     metaRobots.setAttribute('content', 'index, follow, max-image-preview:large');
-    
-//     // Canonical URL
+//     // ===== Canonical URL =====
 //     let canonical = document.querySelector('link[rel="canonical"]');
 //     if (!canonical) {
 //       canonical = document.createElement('link');
 //       canonical.rel = 'canonical';
 //       document.head.appendChild(canonical);
 //     }
-//     canonical.href = window.location.href.split('?')[0];
+//     canonical.href = window.location.href;
     
-//     // Open Graph - Facebook, LinkedIn
-//     let ogTitle = document.querySelector('meta[property="og:title"]');
-//     if (!ogTitle) {
-//       ogTitle = document.createElement('meta');
-//       ogTitle.setAttribute('property', 'og:title');
-//       document.head.appendChild(ogTitle);
-//     }
-//     ogTitle.setAttribute('content', title);
+//     // ===== Open Graph (فیسبوک، لینکدین) =====
+//     updateOrCreateMeta('og:title', title, true);
+//     updateOrCreateMeta('og:description', truncateText(description, 200), true);
+//     updateOrCreateMeta('og:image', property.images?.[0] || '/default-property-image.jpg', true);
+//     updateOrCreateMeta('og:url', window.location.href, true);
+//     updateOrCreateMeta('og:type', 'product', true);
+//     updateOrCreateMeta('og:locale', 'fa_IR', true);
+//     updateOrCreateMeta('og:site_name', 'مشاور املاک', true);
     
-//     let ogDesc = document.querySelector('meta[property="og:description"]');
-//     if (!ogDesc) {
-//       ogDesc = document.createElement('meta');
-//       ogDesc.setAttribute('property', 'og:description');
-//       document.head.appendChild(ogDesc);
-//     }
-//     ogDesc.setAttribute('content', description.substring(0, 200));
+//     // ===== Twitter Card =====
+//     updateOrCreateMeta('twitter:card', 'summary_large_image');
+//     updateOrCreateMeta('twitter:title', title);
+//     updateOrCreateMeta('twitter:description', truncateText(description, 200));
+//     updateOrCreateMeta('twitter:image', property.images?.[0] || '/default-property-image.jpg');
     
-//     let ogImage = document.querySelector('meta[property="og:image"]');
-//     if (!ogImage) {
-//       ogImage = document.createElement('meta');
-//       ogImage.setAttribute('property', 'og:image');
-//       document.head.appendChild(ogImage);
-//     }
-//     ogImage.setAttribute('content', property.images?.[0] || '/default-property-image.jpg');
-    
-//     let ogUrl = document.querySelector('meta[property="og:url"]');
-//     if (!ogUrl) {
-//       ogUrl = document.createElement('meta');
-//       ogUrl.setAttribute('property', 'og:url');
-//       document.head.appendChild(ogUrl);
-//     }
-//     ogUrl.setAttribute('content', window.location.href);
-    
-//     let ogType = document.querySelector('meta[property="og:type"]');
-//     if (!ogType) {
-//       ogType = document.createElement('meta');
-//       ogType.setAttribute('property', 'og:type');
-//       document.head.appendChild(ogType);
-//     }
-//     ogType.setAttribute('content', 'product');
-    
-//     // Twitter Card
-//     let twitterCard = document.querySelector('meta[name="twitter:card"]');
-//     if (!twitterCard) {
-//       twitterCard = document.createElement('meta');
-//       twitterCard.name = 'twitter:card';
-//       document.head.appendChild(twitterCard);
-//     }
-//     twitterCard.setAttribute('content', 'summary_large_image');
-    
-//     let twitterTitle = document.querySelector('meta[name="twitter:title"]');
-//     if (!twitterTitle) {
-//       twitterTitle = document.createElement('meta');
-//       twitterTitle.name = 'twitter:title';
-//       document.head.appendChild(twitterTitle);
-//     }
-//     twitterTitle.setAttribute('content', title);
-    
-//     let twitterImage = document.querySelector('meta[name="twitter:image"]');
-//     if (!twitterImage) {
-//       twitterImage = document.createElement('meta');
-//       twitterImage.name = 'twitter:image';
-//       document.head.appendChild(twitterImage);
-//     }
-//     twitterImage.setAttribute('content', property.images?.[0] || '/default-property-image.jpg');
-    
-//     // زبان و دایرکشن
+//     // ===== زبان و دایرکشن =====
 //     document.documentElement.lang = 'fa';
 //     document.documentElement.dir = 'rtl';
     
@@ -192,19 +156,25 @@
     
 //     removeOldScript();
     
+//     // تابع تبدیل قیمت به عدد
+//     const parsePriceToNumber = (priceStr) => {
+//       if (!priceStr || priceStr === '۰') return '0';
+//       return String(priceStr).replace(/[^0-9]/g, '') || '0';
+//     };
+    
 //     const structuredData = {
 //       "@context": "https://schema.org",
 //       "@type": isForSale ? "Product" : "RealEstateListing",
 //       "name": property.title,
-//       "description": property.description?.substring(0, 500),
-//       "image": property.images,
+//       "description": stripHtml(property.description || '').substring(0, 500),
+//       "image": property.images.slice(0, 10),
 //       "url": window.location.href,
 //       "datePublished": new Date().toISOString(),
 //       "dateModified": new Date().toISOString(),
 //       ...(isForSale && {
 //         "offers": {
 //           "@type": "Offer",
-//           "price": property.price.replace(/[^0-9]/g, ''),
+//           "price": parsePriceToNumber(property.price),
 //           "priceCurrency": "IRR",
 //           "availability": "https://schema.org/InStock",
 //           "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
@@ -212,36 +182,38 @@
 //       }),
 //       ...(isForRent && {
 //         "offers": {
-//           "@type": "RentalCarReservation",
-//           "rentalPrice": property.rentPrice?.replace(/[^0-9]/g, ''),
-//           "deposit": property.mortgagePrice?.replace(/[^0-9]/g, '')
+//           "@type": "Offer",
+//           "price": parsePriceToNumber(property.mortgagePrice || property.rentPrice || '0'),
+//           "priceCurrency": "IRR",
+//           "description": "ملک رهن و اجاره"
 //         }
 //       }),
 //       "address": {
 //         "@type": "PostalAddress",
 //         "addressLocality": property.regionName,
 //         "streetAddress": property.address,
-//         "addressCountry": "IR"
+//         "addressCountry": "IR",
+//         "addressRegion": "تهران"
 //       },
 //       "floorSize": {
 //         "@type": "QuantitativeValue",
-//         "value": property.area,
+//         "value": property.area || 0,
 //         "unitCode": "MTK",
 //         "unitText": "متر مربع"
 //       },
-//       "numberOfRooms": property.rooms,
+//       "numberOfRooms": property.rooms || 0,
 //       "additionalProperty": [
 //         {
 //           "@type": "PropertyValue",
 //           "name": "طبقه",
-//           "value": `${property.floor} از ${property.totalFloors}`
+//           "value": `${property.floor || 1} از ${property.totalFloors || 1}`
 //         },
 //         {
 //           "@type": "PropertyValue",
 //           "name": "سال ساخت",
-//           "value": property.year
+//           "value": property.year !== "نامشخص" ? property.year : "نامشخص"
 //         },
-//         ...property.features.map(feature => ({
+//         ...property.features.slice(0, 15).map(feature => ({
 //           "@type": "PropertyValue",
 //           "name": "امکانات",
 //           "value": feature
@@ -252,7 +224,7 @@
 //         "name": "تماس با مشاور",
 //         "target": {
 //           "@type": "EntryPoint",
-//           "urlTemplate": `tel:${property.agent?.phone}`,
+//           "urlTemplate": `tel:${property.agent?.phone || ''}`,
 //           "inLanguage": "fa-IR",
 //           "actionPlatform": [
 //             "http://schema.org/DesktopWebPlatform",
@@ -286,6 +258,9 @@
     
 //     removeOldScript();
     
+//     const baseUrl = window.location.origin;
+//     const regionSlug = encodeURIComponent(property.regionName || 'منطقه');
+    
 //     const breadcrumbData = {
 //       "@context": "https://schema.org",
 //       "@type": "BreadcrumbList",
@@ -293,25 +268,25 @@
 //         {
 //           "@type": "ListItem",
 //           "position": 1,
-//           "name": "خانه",
-//           "item": `${window.location.origin}/`
+//           "name": "صفحه اصلی",
+//           "item": `${baseUrl}/`
 //         },
 //         {
 //           "@type": "ListItem",
 //           "position": 2,
-//           "name": isForSale ? "ملک‌های فروش" : "ملک‌های رهن و اجاره",
-//           "item": `${window.location.origin}/${isForSale ? 'RealEstatePageDetail' : 'rent'}`
+//           "name": isForSale ? "آپارتمان‌های فروش" : "آپارتمان‌های رهن و اجاره",
+//           "item": `${baseUrl}/${isForSale ? 'RealEstatePageDetail' : 'rent'}`
 //         },
 //         {
 //           "@type": "ListItem",
 //           "position": 3,
 //           "name": `منطقه ${property.regionName}`,
-//           "item": `${window.location.origin}/region/${encodeURIComponent(property.regionName)}`
+//           "item": `${baseUrl}/region/${regionSlug}`
 //         },
 //         {
 //           "@type": "ListItem",
 //           "position": 4,
-//           "name": property.title?.substring(0, 100),
+//           "name": truncateText(property.title || 'جزئیات ملک', 80),
 //           "item": window.location.href
 //         }
 //       ]
@@ -361,7 +336,6 @@
 //   const navigate = useNavigate();
 //   const { id: paramId } = useParams();
   
-//   // پشتیبانی از هر دو روش (query param و param)
 //   const queryParams = new URLSearchParams(location.search);
 //   const id = paramId || queryParams.get('id');
   
@@ -374,39 +348,28 @@
 //   const [isFavorite, setIsFavorite] = useState(false);
 //   const [imagesLoaded, setImagesLoaded] = useState({});
 
-// const ENCRYPTION_KEY = "xK9mN2pQ5rS7uV8wX1yZ3aB4cD6eF0gH2jK5lL8nP9qR1sT3uV5wX7yZ9="; // کلید 256 بیتی
+//   const ENCRYPTION_KEY = "xK9mN2pQ5rS7uV8wX1yZ3aB4cD6eF0gH2jK5lL8nP9qR1sT3uV5wX7yZ9=";
 
-// // تابع رمزگشایی
-// const decryptResponse = (encryptedData, iv) => {
-//   try {
-//     // تبدیل IV از Base64
-//     const ivWordArray = CryptoJS.enc.Base64.parse(iv);
-    
-//     // رمزگشایی
-//     const decrypted = CryptoJS.AES.decrypt(
-//       encryptedData,
-//       CryptoJS.enc.Base64.parse(ENCRYPTION_KEY),
-//       {
-//         iv: ivWordArray,
-//         mode: CryptoJS.mode.CBC,
-//         padding: CryptoJS.pad.Pkcs7
-//       }
-//     );
-    
-//     // تبدیل به متن
-//     const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-    
-//     if (!decryptedText) {
-//       throw new Error("Decryption resulted in empty text");
+//   const decryptResponse = (encryptedData, iv) => {
+//     try {
+//       const ivWordArray = CryptoJS.enc.Base64.parse(iv);
+//       const decrypted = CryptoJS.AES.decrypt(
+//         encryptedData,
+//         CryptoJS.enc.Base64.parse(ENCRYPTION_KEY),
+//         {
+//           iv: ivWordArray,
+//           mode: CryptoJS.mode.CBC,
+//           padding: CryptoJS.pad.Pkcs7
+//         }
+//       );
+//       const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+//       if (!decryptedText) throw new Error("Decryption failed");
+//       return JSON.parse(decryptedText);
+//     } catch (error) {
+//       console.error("Decryption failed:", error);
+//       throw error;
 //     }
-    
-//     // تبدیل به JSON
-//     return JSON.parse(decryptedText);
-//   } catch (error) {
-//     console.error("Decryption failed:", error);
-//     throw error;
-//   }
-// };
+//   };
 
 //   // ==================== فراخوانی داده ====================
 //   useEffect(() => {
@@ -469,7 +432,6 @@
 //               "بررسی مفاصا حساب"
 //             ],
 //             images: (data.images || []).map(
-              
 //               (img) => `https://localhost:7178/${img}`
 //             ),
 //             agent: {
@@ -505,8 +467,6 @@
 //     };
 
 //     fetchPropertyData();
-    
-//     // اسکرول به بالای صفحه
 //     window.scrollTo({ top: 0, behavior: 'smooth' });
 //   }, [id]);
 
@@ -621,14 +581,10 @@
 //   // ==================== رندر اصلی ====================
 //   return (
 //     <>
-//       {/* متادیتای سئو */}
 //       <PageMetadata property={property} isForSale={isForSale} isForRent={isForRent} />
-      
-//       {/* Structured Data */}
 //       <StructuredData property={property} isForSale={isForSale} isForRent={isForRent} />
 //       <BreadcrumbStructuredData property={property} isForSale={isForSale} />
       
-//       {/* کامپوننت اصلی */}
 //       <div className="detail-container" itemScope itemType="https://schema.org/Product">
         
 //         {/* ===== Breadcrumb Navigation ===== */}
@@ -639,7 +595,7 @@
 //             </li>
 //             <li className="breadcrumb-item">
 //               <a href={isForSale ? '/sale' : '/rent'} className="breadcrumb-link">
-//                 {isForSale ? 'فروش' : 'رهن و اجاره'}
+//                 {isForSale ? 'فروش آپارتمان' : 'رهن و اجاره آپارتمان'}
 //               </a>
 //             </li>
 //             <li className="breadcrumb-item">
@@ -648,12 +604,12 @@
 //               </a>
 //             </li>
 //             <li className="breadcrumb-item active" aria-current="page">
-//               {property.title.substring(0, 50)}...
+//               {truncateText(property.title, 50)}
 //             </li>
 //           </ol>
 //         </nav>
         
-//         {/* ===== Header ===== */}
+//         {/* ===== Header با H1 صحیح ===== */}
 //         <div className="detail-header">
 //           <button className="header-btn" onClick={() => navigate(-1)} aria-label="بازگشت به صفحه قبل">
 //             <FaArrowRight aria-hidden="true" />
@@ -664,7 +620,7 @@
 //           </button>
 //         </div>
 
-//         {/* ===== Image Gallery بدون Lazy module ===== */}
+//         {/* ===== Image Gallery ===== */}
 //         <div className="detail-gallery">
 //           <Swiper
 //             modules={[Navigation, Pagination, Autoplay]}
@@ -686,7 +642,7 @@
 //                   )}
 //                   <img 
 //                     src={img} 
-//                     alt={`${property.title} - ${index === 0 ? 'نمای اصلی' : index === 1 ? 'داخلی' : `تصویر ${index + 1}`} - ${property.area} متری ${property.regionName}`}
+//                     alt={`${property.title} - ${index === 0 ? 'نمای اصلی' : `تصویر ${index + 1}`} - ${property.area} متری ${property.regionName}`}
 //                     loading={index === 0 ? 'eager' : 'lazy'}
 //                     decoding="async"
 //                     fetchPriority={index === 0 ? 'high' : 'auto'}
@@ -723,10 +679,9 @@
 //         {/* ===== Main Content ===== */}
 //         <div className="detail-main">
           
-//           {/* Title Section با stats */}
+//           {/* آمار ملک - بدون H2 تکراری */}
 //           <div className="detail-title-section">
 //             <div className="title-row">
-//               <h2 className="detail-subtitle" itemProp="name">{property.title}</h2>
 //               <div className="property-stats">
 //                 <span className="stat-badge" title="تعداد بازدید">
 //                   <FaEye className="stat-icon" aria-hidden="true" />
@@ -901,42 +856,29 @@
 //                 <div className="address-card">
 //                   <FaMapMarkerAlt className="address-icon" aria-hidden="true" />
 //                   <div className="address-info">
-//                     <h3>آدرس ملک</h3> 
-//                     <h4>منطقه {property.regionName}</h4>
+//                     <h3 className="section-heading">آدرس ملک</h3>
+//                     <div className="region-subheading">منطقه {property.regionName}</div>
 //                     <p itemProp="address">{property.address}</p>
 //                     <span className="post-date">تاریخ درج: {property.createdAt}</span>
 //                   </div>
 //                 </div>
                 
-//                 {/* توضیحات کامل با کلمات کلیدی */}
+//                 {/* توضیحات کامل */}
 //                 <div className="description-card">
-//                   <h3>توضیحات کامل ملک {property.title}</h3>
-//                   <div className="description-highlights">
-//                     <ul>
-//                       <li><strong>نوع ملک:</strong> {isForSale ? 'فروش' : 'رهن و اجاره'}</li>
-//                       <li><strong>موقعیت:</strong> منطقه {property.regionName}، تهران</li>
-//                       <li><strong>متراژ:</strong> {property.area} متر مربع</li>
-//                       <li><strong>تعداد اتاق:</strong> {property.rooms} خواب</li>
-//                       {property.year !== "نامشخص" && <li><strong>سال ساخت:</strong> {property.year}</li>}
-//                       <li><strong>طبقه:</strong> {property.floor} از {property.totalFloors}</li>
-//                     </ul>
-//                   </div>
-//                   {/* <p className="description-text" itemProp="description">
-//                     {property.description}
-//                   </p> */}
-// <div 
-//   className="description-text" 
-//   itemProp="description"
-//   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(property.description, {
-//     ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'a', 'blockquote', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'img'],
-//     ALLOWED_ATTR: ['href', 'target', 'src', 'alt', 'width', 'height']
-//   }) }}
-// />
+//                   <h3 className="section-heading">توضیحات کامل {property.title}</h3>
+//                   <div 
+//                     className="description-text" 
+//                     itemProp="description"
+//                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(property.description, {
+//                       ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'a', 'blockquote'],
+//                       ALLOWED_ATTR: ['href', 'target']
+//                     }) }}
+//                   />
 //                 </div>
 
-//                 {/* نقشه */}
+//                 {/* نقشه (ثابت - بدون تغییر) */}
 //                 <div className="map-card">
-//                   <h3>
+//                   <h3 className="section-heading">
 //                     <FaMapMarkerAlt aria-hidden="true" />
 //                     موقعیت مکانی ملک در منطقه {property.regionName}
 //                   </h3>
@@ -993,7 +935,7 @@
 
 //             {activeTab === 'features' && (
 //               <div className="features-tab">
-//                 <h3>امکانات و ویژگی‌های {property.title}</h3>
+//                 <h3 className="section-heading">امکانات و ویژگی‌های {property.title}</h3>
 //                 <div className="features-grid">
 //                   {property.features.length > 0 ? property.features.map((feature, index) => {
 //                     let IconComponent = FaCheckCircle;
@@ -1017,7 +959,7 @@
 
 //             {activeTab === 'warnings' && (
 //               <div className="warnings-tab">
-//                 <h3>⚠️ هشدارهای مهم قبل از معامله ملک</h3>
+//                 <h3 className="section-heading">⚠️ هشدارهای مهم قبل از معامله ملک</h3>
 //                 <ul className="warnings-list">
 //                   {property.warnings.map((warning, index) => (
 //                     <li key={index} className="warning-item">
@@ -1034,7 +976,7 @@
 
 //             {activeTab === 'nearby' && (
 //               <div className="nearby-tab">
-//                 <h3>امکانات اطراف ملک در منطقه {property.regionName}</h3>
+//                 <h3 className="section-heading">امکانات اطراف ملک در منطقه {property.regionName}</h3>
 //                 <div className="nearby-list">
 //                   {property.nearby.map((item, index) => (
 //                     <div key={index} className="nearby-item">
@@ -1087,7 +1029,13 @@
 //             </div>
 //           </div>
 //         </div>
-
+// {property && (
+//   <RelatedPropertiesSlider 
+//     currentPropertyId={property.id}
+//     regionName={property.regionName}
+//     propertyType={property.type}
+//   />
+// )}
 //         {/* ===== نوتیفیکیشن ===== */}
 //         {copied && (
 //           <div className="toast-notification" role="status" aria-live="polite">
@@ -1104,49 +1052,27 @@
 
 // export default RealEstateDetailPageItem;
 
-// RealEstateDetailPageItem.jsx - نسخه نهایی با سئوی بهبود یافته
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import CryptoJS from 'crypto-js';
 import DOMPurify from 'dompurify';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import RelatedPropertiesSlider from './RelatedPropertiesSlider';
+import DoubleSidebarBanners  from './SidebarBanner';
 import { 
-  FaMapMarkerAlt, 
-  FaPhone, 
-  FaWhatsapp, 
-  FaShare, 
-  FaArrowRight, 
-  FaHeart,
-  FaRegHeart,
-  FaStar,
-  FaParking,
-  FaWarehouse,
-  FaSwimmingPool,
-  FaBath,
-  FaRulerCombined,
-  FaCalendarAlt,
-  FaLayerGroup,
-  FaArrowUp,
-  FaCheckCircle,
-  FaTag,
-  FaHome,
-  FaBuilding,
-  FaRuler,
-  FaShieldAlt,
-  FaClock,
-  FaEye,
-  FaBookmark
+  FaMapMarkerAlt, FaPhone, FaWhatsapp, FaShare, FaArrowRight, FaHeart, FaRegHeart,
+  FaStar, FaParking, FaWarehouse, FaSwimmingPool, FaBath, FaRulerCombined,
+  FaCalendarAlt, FaLayerGroup, FaArrowUp, FaCheckCircle, FaTag, FaHome,
+  FaBuilding, FaRuler, FaShieldAlt, FaClock, FaEye, FaBookmark
 } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import NeshanMap from "@neshan-maps-platform/react-openlayers";
 import "@neshan-maps-platform/react-openlayers/dist/style.css";
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './RealEstateDetailPageItem.css';
 
-// ==================== هِلم کمکی برای سئو ====================
 const stripHtml = (html) => {
   if (!html) return '';
   const temp = document.createElement('div');
@@ -1160,44 +1086,19 @@ const truncateText = (text, maxLength) => {
   return text.substring(0, maxLength - 2) + '…';
 };
 
-// ==================== هِلمت سئو (اصلاح شده) ====================
 const PageMetadata = ({ property, isForSale, isForRent }) => {
   useEffect(() => {
     if (!property) return;
-
-    // ===== عنوان بهینه (حداکثر ۶۵ کاراکتر) =====
     let title = property.title 
       ? `${truncateText(property.title, 40)} | ${isForSale ? 'فروش' : 'رهن و اجاره'} ${property.area}م ${property.regionName}`
       : `ملک ${property.area} متری ${property.regionName}`;
-    
     title = truncateText(title, 65);
     document.title = title;
-
-    // ===== متا توضیحات بدون HTML (۱۵۰-۱۶۰ کاراکتر) =====
     const plainDescription = stripHtml(property.description || '');
-    const priceText = isForSale 
-      ? `قیمت: ${property.price} تومان`
-      : `رهن: ${property.mortgagePrice || property.depositPrice || 'تماس بگیرید'} تومان`;
-    
-    let description = plainDescription 
-      ? truncateText(plainDescription, 120) + `... ${priceText}`
-      : `ملک ${isForSale ? 'فروش' : 'رهن و اجاره'} در ${property.regionName}، ${property.area} متری، ${property.rooms} خوابه - ${priceText}`;
-    
+    const priceText = isForSale ? `قیمت: ${property.price} تومان` : `رهن: ${property.mortgagePrice || property.depositPrice || 'تماس بگیرید'} تومان`;
+    let description = plainDescription ? truncateText(plainDescription, 120) + `... ${priceText}` : `ملک ${isForSale ? 'فروش' : 'رهن و اجاره'} در ${property.regionName}، ${property.area} متری، ${property.rooms} خوابه - ${priceText}`;
     description = truncateText(description, 155);
-    
-    // ===== کلمات کلیدی (اختیاری، گوگل استفاده نمی‌کند ولی ضرر ندارد) =====
-    const keywords = [
-      property.title,
-      `${property.regionName} ملک`,
-      isForSale ? 'فروش آپارتمان' : 'رهن آپارتمان',
-      `${property.area} متری`,
-      `${property.rooms} خوابه`,
-      `طبقه ${property.floor}`,
-      property.year !== "نامشخص" ? `ساخت ${property.year}` : '',
-      ...property.features.slice(0, 5)
-    ].filter(Boolean).join(',');
-    
-    // ===== تابع کمکی برای ایجاد/به‌روزرسانی متاتگ =====
+    const keywords = [property.title, `${property.regionName} ملک`, isForSale ? 'فروش آپارتمان' : 'رهن آپارتمان', `${property.area} متری`, `${property.rooms} خوابه`, `طبقه ${property.floor}`, property.year !== "نامشخص" ? `ساخت ${property.year}` : '', ...property.features.slice(0, 5)].filter(Boolean).join(',');
     const updateOrCreateMeta = (name, content, isProperty = false) => {
       const selector = isProperty ? `meta[property="${name}"]` : `meta[name="${name}"]`;
       let meta = document.querySelector(selector);
@@ -1209,13 +1110,9 @@ const PageMetadata = ({ property, isForSale, isForRent }) => {
       }
       meta.setAttribute('content', content);
     };
-    
-    // ===== اعمال متاتگ‌ها =====
     updateOrCreateMeta('description', description);
     updateOrCreateMeta('keywords', keywords);
     updateOrCreateMeta('robots', 'index, follow, max-image-preview:large, max-snippet:-1');
-    
-    // ===== Canonical URL =====
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
@@ -1223,8 +1120,6 @@ const PageMetadata = ({ property, isForSale, isForRent }) => {
       document.head.appendChild(canonical);
     }
     canonical.href = window.location.href;
-    
-    // ===== Open Graph (فیسبوک، لینکدین) =====
     updateOrCreateMeta('og:title', title, true);
     updateOrCreateMeta('og:description', truncateText(description, 200), true);
     updateOrCreateMeta('og:image', property.images?.[0] || '/default-property-image.jpg', true);
@@ -1232,217 +1127,84 @@ const PageMetadata = ({ property, isForSale, isForRent }) => {
     updateOrCreateMeta('og:type', 'product', true);
     updateOrCreateMeta('og:locale', 'fa_IR', true);
     updateOrCreateMeta('og:site_name', 'مشاور املاک', true);
-    
-    // ===== Twitter Card =====
     updateOrCreateMeta('twitter:card', 'summary_large_image');
     updateOrCreateMeta('twitter:title', title);
     updateOrCreateMeta('twitter:description', truncateText(description, 200));
     updateOrCreateMeta('twitter:image', property.images?.[0] || '/default-property-image.jpg');
-    
-    // ===== زبان و دایرکشن =====
     document.documentElement.lang = 'fa';
     document.documentElement.dir = 'rtl';
-    
   }, [property, isForSale, isForRent]);
-  
   return null;
 };
 
-// ==================== JSON-LD Structured Data ====================
 const StructuredData = ({ property, isForSale, isForRent }) => {
   useEffect(() => {
     if (!property) return;
-    
-    const removeOldScript = () => {
-      const oldScript = document.getElementById('json-ld-structured-data');
-      if (oldScript) oldScript.remove();
-    };
-    
+    const removeOldScript = () => { const oldScript = document.getElementById('json-ld-structured-data'); if (oldScript) oldScript.remove(); };
     removeOldScript();
-    
-    // تابع تبدیل قیمت به عدد
-    const parsePriceToNumber = (priceStr) => {
-      if (!priceStr || priceStr === '۰') return '0';
-      return String(priceStr).replace(/[^0-9]/g, '') || '0';
-    };
-    
+    const parsePriceToNumber = (priceStr) => { if (!priceStr || priceStr === '۰') return '0'; return String(priceStr).replace(/[^0-9]/g, '') || '0'; };
     const structuredData = {
-      "@context": "https://schema.org",
-      "@type": isForSale ? "Product" : "RealEstateListing",
-      "name": property.title,
-      "description": stripHtml(property.description || '').substring(0, 500),
-      "image": property.images.slice(0, 10),
-      "url": window.location.href,
-      "datePublished": new Date().toISOString(),
-      "dateModified": new Date().toISOString(),
-      ...(isForSale && {
-        "offers": {
-          "@type": "Offer",
-          "price": parsePriceToNumber(property.price),
-          "priceCurrency": "IRR",
-          "availability": "https://schema.org/InStock",
-          "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-        }
-      }),
-      ...(isForRent && {
-        "offers": {
-          "@type": "Offer",
-          "price": parsePriceToNumber(property.mortgagePrice || property.rentPrice || '0'),
-          "priceCurrency": "IRR",
-          "description": "ملک رهن و اجاره"
-        }
-      }),
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": property.regionName,
-        "streetAddress": property.address,
-        "addressCountry": "IR",
-        "addressRegion": "تهران"
-      },
-      "floorSize": {
-        "@type": "QuantitativeValue",
-        "value": property.area || 0,
-        "unitCode": "MTK",
-        "unitText": "متر مربع"
-      },
+      "@context": "https://schema.org", "@type": isForSale ? "Product" : "RealEstateListing", "name": property.title,
+      "description": stripHtml(property.description || '').substring(0, 500), "image": property.images.slice(0, 10), "url": window.location.href,
+      "datePublished": new Date().toISOString(), "dateModified": new Date().toISOString(),
+      ...(isForSale && { "offers": { "@type": "Offer", "price": parsePriceToNumber(property.price), "priceCurrency": "IRR", "availability": "https://schema.org/InStock", "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] } }),
+      ...(isForRent && { "offers": { "@type": "Offer", "price": parsePriceToNumber(property.mortgagePrice || property.rentPrice || '0'), "priceCurrency": "IRR", "description": "ملک رهن و اجاره" } }),
+      "address": { "@type": "PostalAddress", "addressLocality": property.regionName, "streetAddress": property.address, "addressCountry": "IR", "addressRegion": "تهران" },
+      "floorSize": { "@type": "QuantitativeValue", "value": property.area || 0, "unitCode": "MTK", "unitText": "متر مربع" },
       "numberOfRooms": property.rooms || 0,
-      "additionalProperty": [
-        {
-          "@type": "PropertyValue",
-          "name": "طبقه",
-          "value": `${property.floor || 1} از ${property.totalFloors || 1}`
-        },
-        {
-          "@type": "PropertyValue",
-          "name": "سال ساخت",
-          "value": property.year !== "نامشخص" ? property.year : "نامشخص"
-        },
-        ...property.features.slice(0, 15).map(feature => ({
-          "@type": "PropertyValue",
-          "name": "امکانات",
-          "value": feature
-        }))
-      ],
-      "potentialAction": {
-        "@type": "CommunicateAction",
-        "name": "تماس با مشاور",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": `tel:${property.agent?.phone || ''}`,
-          "inLanguage": "fa-IR",
-          "actionPlatform": [
-            "http://schema.org/DesktopWebPlatform",
-            "http://schema.org/MobileWebPlatform"
-          ]
-        }
-      }
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "طبقه", "value": `${property.floor || 1} از ${property.totalFloors || 1}` }, { "@type": "PropertyValue", "name": "سال ساخت", "value": property.year !== "نامشخص" ? property.year : "نامشخص" }, ...property.features.slice(0, 15).map(feature => ({ "@type": "PropertyValue", "name": "امکانات", "value": feature }))],
+      "potentialAction": { "@type": "CommunicateAction", "name": "تماس با مشاور", "target": { "@type": "EntryPoint", "urlTemplate": `tel:${property.agent?.phone || ''}`, "inLanguage": "fa-IR", "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"] } }
     };
-    
     const script = document.createElement('script');
     script.id = 'json-ld-structured-data';
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(structuredData);
     document.head.appendChild(script);
-    
     return () => removeOldScript();
   }, [property, isForSale, isForRent]);
-  
   return null;
 };
 
-// ==================== Breadcrumb Structured Data ====================
 const BreadcrumbStructuredData = ({ property, isForSale }) => {
   useEffect(() => {
     if (!property) return;
-    
-    const removeOldScript = () => {
-      const oldScript = document.getElementById('json-ld-breadcrumb');
-      if (oldScript) oldScript.remove();
-    };
-    
+    const removeOldScript = () => { const oldScript = document.getElementById('json-ld-breadcrumb'); if (oldScript) oldScript.remove(); };
     removeOldScript();
-    
     const baseUrl = window.location.origin;
     const regionSlug = encodeURIComponent(property.regionName || 'منطقه');
-    
     const breadcrumbData = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
+      "@context": "https://schema.org", "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "صفحه اصلی",
-          "item": `${baseUrl}/`
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": isForSale ? "آپارتمان‌های فروش" : "آپارتمان‌های رهن و اجاره",
-          "item": `${baseUrl}/${isForSale ? 'RealEstatePageDetail' : 'rent'}`
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": `منطقه ${property.regionName}`,
-          "item": `${baseUrl}/region/${regionSlug}`
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": truncateText(property.title || 'جزئیات ملک', 80),
-          "item": window.location.href
-        }
+        { "@type": "ListItem", "position": 1, "name": "صفحه اصلی", "item": `${baseUrl}/` },
+        { "@type": "ListItem", "position": 2, "name": isForSale ? "آپارتمان‌های فروش" : "آپارتمان‌های رهن و اجاره", "item": `${baseUrl}/${isForSale ? 'RealEstatePageDetail' : 'rent'}` },
+        { "@type": "ListItem", "position": 3, "name": `منطقه ${property.regionName}`, "item": `${baseUrl}/region/${regionSlug}` },
+        { "@type": "ListItem", "position": 4, "name": truncateText(property.title || 'جزئیات ملک', 80), "item": window.location.href }
       ]
     };
-    
     const script = document.createElement('script');
     script.id = 'json-ld-breadcrumb';
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(breadcrumbData);
     document.head.appendChild(script);
-    
     return () => removeOldScript();
   }, [property, isForSale]);
-  
   return null;
 };
 
-// ==================== کامپوننت اسکلتون ====================
 const DetailSkeleton = () => (
-  <div className="detail-skeleton" aria-label="در حال بارگذاری اطلاعات ملک">
-    <div className="skeleton-header">
-      <div className="skeleton-circle"></div>
-      <div className="skeleton-title"></div>
-      <div className="skeleton-circle"></div>
-    </div>
-    <div className="skeleton-gallery">
-      <div className="skeleton-image"></div>
-    </div>
-    <div className="skeleton-content">
-      <div className="skeleton-price"></div>
-      <div className="skeleton-info">
-        {[1,2,3,4].map(i => <div key={i} className="skeleton-chip"></div>)}
-      </div>
-      <div className="skeleton-tabs">
-        {[1,2,3,4].map(i => <div key={i} className="skeleton-tab"></div>)}
-      </div>
-      <div className="skeleton-text">
-        {[1,2,3].map(i => <div key={i} className="skeleton-line"></div>)}
-      </div>
-    </div>
+  <div className="detail-skeleton">
+    <div className="skeleton-header"><div className="skeleton-circle"></div><div className="skeleton-title"></div><div className="skeleton-circle"></div></div>
+    <div className="skeleton-gallery"><div className="skeleton-image"></div></div>
+    <div className="skeleton-content"><div className="skeleton-price"></div><div className="skeleton-info">{[]}</div><div className="skeleton-tabs">{[]}</div><div className="skeleton-text">{[]}</div></div>
   </div>
 );
 
-// ==================== کامپوننت اصلی ====================
 const RealEstateDetailPageItem = memo(() => {
   const location = useLocation();
   const navigate = useNavigate();
   const { id: paramId } = useParams();
-  
   const queryParams = new URLSearchParams(location.search);
   const id = paramId || queryParams.get('id');
-  
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -1452,700 +1214,90 @@ const RealEstateDetailPageItem = memo(() => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState({});
 
-  const ENCRYPTION_KEY = "xK9mN2pQ5rS7uV8wX1yZ3aB4cD6eF0gH2jK5lL8nP9qR1sT3uV5wX7yZ9=";
-
-  const decryptResponse = (encryptedData, iv) => {
-    try {
-      const ivWordArray = CryptoJS.enc.Base64.parse(iv);
-      const decrypted = CryptoJS.AES.decrypt(
-        encryptedData,
-        CryptoJS.enc.Base64.parse(ENCRYPTION_KEY),
-        {
-          iv: ivWordArray,
-          mode: CryptoJS.mode.CBC,
-          padding: CryptoJS.pad.Pkcs7
-        }
-      );
-      const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-      if (!decryptedText) throw new Error("Decryption failed");
-      return JSON.parse(decryptedText);
-    } catch (error) {
-      console.error("Decryption failed:", error);
-      throw error;
-    }
-  };
-
-  // ==================== فراخوانی داده ====================
   useEffect(() => {
     const fetchPropertyData = async () => {
-      if (!id) {
-        setError('شناسه ملک یافت نشد');
-        setLoading(false);
-        return;
-      }
-      
-      setLoading(true);
-      setError(null);
-      
+      if (!id) { setError('شناسه ملک یافت نشد'); setLoading(false); return; }
+      setLoading(true); setError(null);
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
-        
-        const response = await fetch(
-          `https://localhost:7178/api/RealEstatePage/GetRealEstateDetails?id=${id}`,
-          { signal: controller.signal }
-        );
-        
+        const response = await fetch(`https://localhost:7178/api/RealEstatePage/GetRealEstateDetails?id=${id}`, { signal: controller.signal });
         clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const result = await response.json();
-
         if (result.status === 200 && result.data) {
           const data = result.data;
           setProperty({
-            id: data.id,
-            title: data.title || `ملک در ${data.regionName || 'منطقه'} `,
-            price: data.price?.toLocaleString("fa-IR") || "۰",
-            priceMeter: data.priceMeter?.toLocaleString("fa-IR") || "۰",
-            rentPrice: data.rent?.toLocaleString("fa-IR") || null,
-            depositPrice: data.deposit?.toLocaleString("fa-IR") || null,
-            mortgagePrice: data.mortgagePrice?.toLocaleString("fa-IR") || null,
-            type: data.categoryType,
-            area: parseInt(data.additionalInformation?.match(/\d+/)?.[0]) || 0,
-            rooms: data.rooms || 0,
-            floor: data.floor || 1,
-            regionName: data.regionName || "منطقه نامشخص",
-            totalFloors: data.countFloor || 1,
-            year: data.constructionYear || "نامشخص",
-            address: data.address || "آدرس درج نشده",
-            showExactLocation: data.showExactLocation,
-            location: {
-              lat: data.lat || 35.7199363,
-              lng: data.lng || 51.4334842,
-            },
-            description: data.descriptionRows || "توضیحاتی برای این ملک ثبت نشده است.",
-            features: data.facilities || [],
-            warnings: data.warnings || [
-              "استعلام خلافی",
-              "بررسی سند مالکیت",
-              "استعلام پایان کار",
-              "بررسی مفاصا حساب"
-            ],
-            images: (data.images || []).map(
-              (img) => `https://localhost:7178/${img}`
-            ),
-            agent: {
-              name: data.agents?.name || "مشاور املاک",
-              phone: data.agents?.phone || "۰۲۱۹۱۰۰۰۰۰۰",
-              whatsapp: data.agents?.connectSocialMedia || "",
-              address: data.agents?.address || "آدرس دفتر درج نشده",
-              rating: data.agents?.rating || 4.5,
-              deals: data.agents?.deals || 120,
-              image: data.agents?.image || "https://randomuser.me/api/portraits/men/32.jpg",
-            },
-            views: data.views || 0,
-            saved: data.saved || 0,
-            createdAt: data.createdAtPersianRelative || "امروز",
-            certificate: data.isHasLoan ? "قابل وام" : "سند رسمی",
-            mortgage: data.isHasLoan ? "امکان وام" : "بدون وام",
-            nearby: [
-              { name: "مترو", distance: "۵۰۰ متر" },
-              { name: "مرکز خرید", distance: "۳۰۰ متر" },
-              { name: "پارک", distance: "۲۰۰ متر" },
-              { name: "مدرسه", distance: "۴۰۰ متر" }
-            ]
+            id: data.id, title: data.title || `ملک در ${data.regionName || 'منطقه'} `, price: data.price?.toLocaleString("fa-IR") || "۰",
+            priceMeter: data.priceMeter?.toLocaleString("fa-IR") || "۰", rentPrice: data.rent?.toLocaleString("fa-IR") || null,
+            depositPrice: data.deposit?.toLocaleString("fa-IR") || null, mortgagePrice: data.mortgagePrice?.toLocaleString("fa-IR") || null,
+            type: data.categoryType, area: parseInt(data.additionalInformation?.match(/\d+/)?.[0]) || 0, rooms: data.rooms || 0,
+            floor: data.floor || 1, regionName: data.regionName || "منطقه نامشخص", totalFloors: data.countFloor || 1,
+            year: data.constructionYear || "نامشخص", address: data.address || "آدرس درج نشده", showExactLocation: data.showExactLocation,
+            location: { lat: data.lat || 35.7199363, lng: data.lng || 51.4334842 },
+            description: data.descriptionRows || "توضیحاتی برای این ملک ثبت نشده است.", features: data.facilities || [],
+            warnings: data.warnings || ["استعلام خلافی", "بررسی سند مالکیت", "استعلام پایان کار", "بررسی مفاصا حساب"],
+            images: (data.images || []).map(img => `https://localhost:7178/${img}`),
+            agent: { name: data.agents?.name || "مشاور املاک", phone: data.agents?.phone || "۰۲۱۹۱۰۰۰۰۰۰", whatsapp: data.agents?.connectSocialMedia || "", address: data.agents?.address || "آدرس دفتر درج نشده", rating: data.agents?.rating || 4.5, deals: data.agents?.deals || 120, image: data.agents?.image || "https://randomuser.me/api/portraits/men/32.jpg" },
+            views: data.views || 0, saved: data.saved || 0, createdAt: data.createdAtPersianRelative || "امروز", certificate: data.isHasLoan ? "قابل وام" : "سند رسمی", mortgage: data.isHasLoan ? "امکان وام" : "بدون وام",
+            nearby: [{ name: "مترو", distance: "۵۰۰ متر" }, { name: "مرکز خرید", distance: "۳۰۰ متر" }, { name: "پارک", distance: "۲۰۰ متر" }, { name: "مدرسه", distance: "۴۰۰ متر" }]
           });
-        } else {
-          throw new Error(result.message || 'ملک یافت نشد');
-        }
-      } catch (error) {
-        console.error('خطا در دریافت اطلاعات:', error);
-        setError(error.name === 'AbortError' ? 'مدت زمان درخواست به پایان رسید' : 'مشکل در ارتباط با سرور');
-      } finally {
-        setLoading(false);
-      }
+        } else throw new Error(result.message || 'ملک یافت نشد');
+      } catch (error) { console.error('خطا:', error); setError(error.name === 'AbortError' ? 'مدت زمان درخواست به پایان رسید' : 'مشکل در ارتباط با سرور'); } 
+      finally { setLoading(false); }
     };
-
     fetchPropertyData();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [id]);
 
-  // ==================== محاسبات memoized ====================
   const isForSale = useMemo(() => property?.type === 1, [property]);
   const isForRent = useMemo(() => property?.type === 2, [property]);
-  
-  const formattedPricePerMeter = useMemo(() => {
-    if (!property?.priceMeter || property.priceMeter === "۰") return null;
-    return `${property.priceMeter} تومان`;
-  }, [property]);
-  
-  const shareUrl = useMemo(() => {
-    if (typeof window === 'undefined') return '';
-    return window.location.href;
-  }, []);
+  const formattedPricePerMeter = useMemo(() => { if (!property?.priceMeter || property.priceMeter === "۰") return null; return `${property.priceMeter} تومان`; }, [property]);
+  const shareUrl = useMemo(() => window.location.href, []);
 
-  // ==================== هندلرها ====================
-  const handleCopyLink = useCallback(() => {
-    navigator.clipboard.writeText(shareUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }, [shareUrl]);
-  
-  const handleShare = useCallback(async () => {
-    if (!property) return;
-    
-    const shareData = {
-      title: property.title,
-      text: `${property.title} - ${property.area} متری - ${isForSale ? `قیمت ${property.price}` : `رهن ${property.mortgagePrice}`} تومان`,
-      url: shareUrl
-    };
-    
-    if (navigator.share && /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent)) {
-      try {
-        await navigator.share(shareData);
-      } catch (error) {
-        if (error.name !== 'AbortError') {
-          handleCopyLink();
-        }
-      }
-    } else {
-      handleCopyLink();
-    }
-  }, [property, isForSale, shareUrl, handleCopyLink]);
-  
-  const handleCopyPhone = useCallback(() => {
-    if (!property?.agent?.phone) return;
-    navigator.clipboard.writeText(property.agent.phone);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }, [property]);
-  
-  const handleImageLoad = useCallback((index) => {
-    setImagesLoaded(prev => ({ ...prev, [index]: true }));
-  }, []);
-  
-  const handleFavoriteToggle = useCallback(() => {
-    setIsFavorite(prev => !prev);
-  }, []);
+  const handleCopyLink = useCallback(() => { navigator.clipboard.writeText(shareUrl); setCopied(true); setTimeout(() => setCopied(false), 2000); }, [shareUrl]);
+  const handleShare = useCallback(async () => { if (!property) return; const shareData = { title: property.title, text: `${property.title} - ${property.area} متری - ${isForSale ? `قیمت ${property.price}` : `رهن ${property.mortgagePrice}`} تومان`, url: shareUrl }; if (navigator.share && /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent)) { try { await navigator.share(shareData); } catch (error) { if (error.name !== 'AbortError') handleCopyLink(); } } else handleCopyLink(); }, [property, isForSale, shareUrl, handleCopyLink]);
+  const handleCopyPhone = useCallback(() => { if (!property?.agent?.phone) return; navigator.clipboard.writeText(property.agent.phone); setCopied(true); setTimeout(() => setCopied(false), 2000); }, [property]);
+  const handleImageLoad = useCallback((index) => { setImagesLoaded(prev => ({ ...prev, [index]: true })); }, []);
+  const handleFavoriteToggle = useCallback(() => { setIsFavorite(prev => !prev); }, []);
 
-  // ==================== رندر خطا ====================
-  if (error) {
-    return (
-      <>
-        <PageMetadata property={null} />
-        <div className="detail-container">
-          <div className="detail-header">
-            <button className="header-btn" onClick={() => navigate(-1)} aria-label="بازگشت">
-              <FaArrowRight />
-            </button>
-            <h1 className="header-title">خطا</h1>
-            <div className="header-btn"></div>
-          </div>
-          <div className="error-message" role="alert">
-            <h2>متاسفانه خطایی رخ داده است</h2>
-            <p>{error}</p>
-            <button onClick={() => window.location.reload()} className="retry-btn">
-              تلاش مجدد
-            </button>
-            <button onClick={() => navigate('/')} className="home-btn">
-              بازگشت به صفحه اصلی
-            </button>
-          </div>
-        </div>
-      </>
-    );
-  }
-  
+  if (error) return ( <> <PageMetadata property={null} /> <div className="detail-container"><div className="detail-header"><button className="header-btn" onClick={() => navigate(-1)}><FaArrowRight /></button><h1 className="header-title">خطا</h1><div className="header-btn"></div></div><div className="error-message"><h2>متاسفانه خطایی رخ داده است</h2><p>{error}</p><button onClick={() => window.location.reload()}>تلاش مجدد</button><button onClick={() => navigate('/')}>بازگشت به صفحه اصلی</button></div></div></> );
   if (loading) return <DetailSkeleton />;
-  if (!property) {
-    return (
-      <>
-        <PageMetadata property={null} />
-        <div className="detail-container">
-          <div className="detail-header">
-            <button className="header-btn" onClick={() => navigate(-1)}>
-              <FaArrowRight />
-            </button>
-            <h1 className="header-title">ملک یافت نشد</h1>
-            <div className="header-btn"></div>
-          </div>
-          <div className="error-message">
-            <p>متاسفانه ملک مورد نظر یافت نشد</p>
-            <button onClick={() => navigate('/')}>بازگشت به صفحه اصلی</button>
-          </div>
+  if (!property) return ( <> <PageMetadata property={null} /> <div className="detail-container"><div className="detail-header"><button className="header-btn" onClick={() => navigate(-1)}><FaArrowRight /></button><h1 className="header-title">ملک یافت نشد</h1><div className="header-btn"></div></div><div className="error-message"><p>متاسفانه ملک مورد نظر یافت نشد</p><button onClick={() => navigate('/')}>بازگشت به صفحه اصلی</button></div></div></> );
+
+  return ( <>
+    <PageMetadata property={property} isForSale={isForSale} isForRent={isForRent} />
+    <StructuredData property={property} isForSale={isForSale} isForRent={isForRent} />
+    <BreadcrumbStructuredData property={property} isForSale={isForSale} />
+    <div className="detail-container">
+      <nav className="breadcrumb-nav"><ol className="breadcrumb-list"><li className="breadcrumb-item"><a href="/">خانه</a></li><li className="breadcrumb-item"><a href={isForSale ? '/sale' : '/rent'}>{isForSale ? 'فروش آپارتمان' : 'رهن و اجاره آپارتمان'}</a></li><li className="breadcrumb-item"><a href={`/region/${encodeURIComponent(property.regionName)}`}>منطقه {property.regionName}</a></li><li className="breadcrumb-item active">{truncateText(property.title, 50)}</li></ol></nav>
+      <div className="detail-header"><button className="header-btn" onClick={() => navigate(-1)}><FaArrowRight /></button><h1 className="header-title">{property.title}</h1><button className="header-btn" onClick={handleShare}><FaShare /></button></div>
+      <div className="detail-gallery"><Swiper modules={[Navigation, Pagination, Autoplay]} navigation pagination={{ clickable: true }} autoplay={{ delay: 4000, disableOnInteraction: false }} spaceBetween={0} slidesPerView={1} onSlideChange={(swiper) => setSelectedImage(swiper.activeIndex)} className="gallery-swiper">{property.images.length > 0 ? property.images.map((img, index) => (<SwiperSlide key={index}><div className="gallery-slide">{!imagesLoaded[index] && <div className="image-placeholder"><FaHome /></div>}<img src={img} alt={`${property.title} - ${index === 0 ? 'نمای اصلی' : `تصویر ${index + 1}`}`} loading={index === 0 ? 'eager' : 'lazy'} onLoad={() => handleImageLoad(index)} style={{ display: imagesLoaded[index] ? 'block' : 'none' }} /></div></SwiperSlide>)) : (<SwiperSlide><div className="gallery-slide no-image"><FaHome /><span>تصویری موجود نیست</span></div></SwiperSlide>)}</Swiper><button className={`favorite-btn ${isFavorite ? 'active' : ''}`} onClick={handleFavoriteToggle}>{isFavorite ? <FaHeart /> : <FaRegHeart />}</button><div className="image-counter">{selectedImage + 1} / {property.images.length || 1}</div></div>
+      <div className="detail-main">
+        <div className="detail-title-section"><div className="title-row"><div className="property-stats"><span className="stat-badge"><FaEye /> {property.views.toLocaleString('fa-IR')} بازدید</span><span className="stat-badge"><FaBookmark /> {property.saved.toLocaleString('fa-IR')} ذخیره</span><span className="stat-badge"><FaClock /> {property.createdAt}</span></div></div></div>
+        <div className="price-section">
+          {isForSale && (<div className="price-card sale-price"><div className="price-card-icon"><FaTag /></div><div className="price-card-content"><span className="price-label">قیمت فروش</span><div className="price-value-wrapper"><span className="price-number">{property.price}</span><span className="price-unit">تومان</span></div>{formattedPricePerMeter && <div className="price-meta"><FaRuler /><span>متری {formattedPricePerMeter}</span></div>}</div></div>)}
+          {isForRent && (<div className="rent-price-group">{property.mortgagePrice && property.mortgagePrice !== "۰" && (<div className="price-card mortgage-price"><div className="price-card-icon"><FaBuilding /></div><div className="price-card-content"><span className="price-label">مبلغ رهن</span><div className="price-value-wrapper"><span className="price-number">{property.mortgagePrice}</span><span className="price-unit">تومان</span></div></div></div>)}{property.rentPrice && property.rentPrice !== "۰" && (<div className="price-card rent-price"><div className="price-card-icon"><FaHome /></div><div className="price-card-content"><span className="price-label">اجاره ماهانه</span><div className="price-value-wrapper"><span className="price-number">{property.rentPrice}</span><span className="price-unit">تومان</span></div></div></div>)}</div>)}
         </div>
-      </>
-    );
-  }
-
-  // ==================== رندر اصلی ====================
-  return (
-    <>
-      <PageMetadata property={property} isForSale={isForSale} isForRent={isForRent} />
-      <StructuredData property={property} isForSale={isForSale} isForRent={isForRent} />
-      <BreadcrumbStructuredData property={property} isForSale={isForSale} />
-      
-      <div className="detail-container" itemScope itemType="https://schema.org/Product">
-        
-        {/* ===== Breadcrumb Navigation ===== */}
-        <nav aria-label="مسیر راهنما" className="breadcrumb-nav">
-          <ol className="breadcrumb-list">
-            <li className="breadcrumb-item">
-              <a href="/" className="breadcrumb-link">خانه</a>
-            </li>
-            <li className="breadcrumb-item">
-              <a href={isForSale ? '/sale' : '/rent'} className="breadcrumb-link">
-                {isForSale ? 'فروش آپارتمان' : 'رهن و اجاره آپارتمان'}
-              </a>
-            </li>
-            <li className="breadcrumb-item">
-              <a href={`/region/${encodeURIComponent(property.regionName)}`} className="breadcrumb-link">
-                منطقه {property.regionName}
-              </a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              {truncateText(property.title, 50)}
-            </li>
-          </ol>
-        </nav>
-        
-        {/* ===== Header با H1 صحیح ===== */}
-        <div className="detail-header">
-          <button className="header-btn" onClick={() => navigate(-1)} aria-label="بازگشت به صفحه قبل">
-            <FaArrowRight aria-hidden="true" />
-          </button>
-          <h1 className="header-title" itemProp="name">{property.title}</h1>
-          <button className="header-btn" onClick={handleShare} aria-label="اشتراک‌گذاری">
-            <FaShare aria-hidden="true" />
-          </button>
+        <div className="quick-specs"><div className="spec-item"><FaRulerCombined /><span className="spec-label">متراژ</span><span className="spec-value">{property.area} متر²</span></div><div className="spec-item"><FaBath /><span className="spec-label">اتاق‌خواب</span><span className="spec-value">{property.rooms} خواب</span></div><div className="spec-item"><FaLayerGroup /><span className="spec-label">طبقه</span><span className="spec-value">{property.floor} از {property.totalFloors}</span></div><div className="spec-item"><FaCalendarAlt /><span className="spec-label">سال ساخت</span><span className="spec-value">{property.year}</span></div></div>
+        <div className="info-chips"><span className="info-chip">کد ملک: {property.id}</span><span className="info-chip"><FaShieldAlt /> {property.certificate}</span><span className="info-chip type-chip">{isForSale ? 'فروش' : 'رهن و اجاره'}</span></div>
+        <div className="detail-tabs"><button className={`tab-btn ${activeTab === 'details' ? 'active' : ''}`} onClick={() => setActiveTab('details')}>جزئیات ملک</button><button className={`tab-btn ${activeTab === 'features' ? 'active' : ''}`} onClick={() => setActiveTab('features')}>امکانات ({property.features.length})</button><button className={`tab-btn ${activeTab === 'warnings' ? 'active' : ''}`} onClick={() => setActiveTab('warnings')}>هشدارهای معامله</button><button className={`tab-btn ${activeTab === 'nearby' ? 'active' : ''}`} onClick={() => setActiveTab('nearby')}>امکانات اطراف</button></div>
+        <div className="tab-content">
+          {activeTab === 'details' && (<div className="details-tab"><div className="address-card"><FaMapMarkerAlt /><div className="address-info"><h3>آدرس ملک</h3><div>منطقه {property.regionName}</div><p>{property.address}</p><span className="post-date">تاریخ درج: {property.createdAt}</span></div></div><div className="description-card"><h3>توضیحات کامل {property.title}</h3><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(property.description, { ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'ul', 'ol', 'li', 'a', 'blockquote'], ALLOWED_ATTR: ['href', 'target'] }) }} /></div><div className="map-card"><h3><FaMapMarkerAlt /> موقعیت مکانی ملک در منطقه {property.regionName}</h3><div className="map-location-badge">{property.showExactLocation ? <span className="badge exact">📍 نمایش موقعیت دقیق ملک</span> : <span className="badge approximate">🔵 نمایش محدوده تقریبی</span>}</div><div className="map-container"><NeshanMap mapKey="web.31c5ea6c425e40cc9b30620a84a8be90" center={{ latitude: property.location.lat, longitude: property.location.lng }} zoom={property.showExactLocation ? 17 : 15.9} defaultType="dreamy" poi={true} traffic={false} style={{ height: '100%', width: '100%', pointerEvents: 'none' }} /><div className="map-marker-overlay">{property.showExactLocation ? <><div className="location-dot"></div><div className="location-ripple"></div></> : <div className="location-circles"><div className="circle-3"></div></div>}</div></div><div className="map-privacy-note"><small>{property.showExactLocation ? '📍 موقعیت دقیق ملک' : '📍 محدوده تقریبی ملک'}</small></div></div></div>)}
+          {activeTab === 'features' && (<div className="features-tab"><h3>امکانات و ویژگی‌ها</h3><div className="features-grid">{property.features.length > 0 ? property.features.map((feature, idx) => { let Icon = FaCheckCircle; if (feature.includes('پارکینگ')) Icon = FaParking; else if (feature.includes('انباری')) Icon = FaWarehouse; else if (feature.includes('آسانسور')) Icon = FaArrowUp; else if (feature.includes('استخر')) Icon = FaSwimmingPool; return (<div key={idx} className="feature-card"><Icon /><span>{feature}</span></div>); }) : <p className="no-data">امکاناتی ثبت نشده است</p>}</div></div>)}
+          {activeTab === 'warnings' && (<div className="warnings-tab"><h3>⚠️ هشدارهای مهم</h3><ul className="warnings-list">{property.warnings.map((w, idx) => (<li key={idx} className="warning-item"><span className="warning-bullet"></span><span>{w}</span></li>))}</ul><div className="warning-footer"><p>⚠️ قبل از معامله مدارک را بررسی کنید</p></div></div>)}
+          {activeTab === 'nearby' && (<div className="nearby-tab"><h3>امکانات اطراف</h3><div className="nearby-list">{property.nearby.map((item, idx) => (<div key={idx} className="nearby-item"><span className="nearby-name">{item.name}</span><span className="nearby-distance">{item.distance}</span></div>))}</div></div>)}
         </div>
-
-        {/* ===== Image Gallery ===== */}
-        <div className="detail-gallery">
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            spaceBetween={0}
-            slidesPerView={1}
-            onSlideChange={(swiper) => setSelectedImage(swiper.activeIndex)}
-            className="gallery-swiper"
-          >
-            {property.images.length > 0 ? property.images.map((img, index) => (
-              <SwiperSlide key={index}>
-                <div className="gallery-slide">
-                  {!imagesLoaded[index] && (
-                    <div className="image-placeholder" aria-label="در حال بارگذاری تصویر">
-                      <FaHome className="placeholder-icon" />
-                    </div>
-                  )}
-                  <img 
-                    src={img} 
-                    alt={`${property.title} - ${index === 0 ? 'نمای اصلی' : `تصویر ${index + 1}`} - ${property.area} متری ${property.regionName}`}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    fetchPriority={index === 0 ? 'high' : 'auto'}
-                    onLoad={() => handleImageLoad(index)}
-                    style={{ display: imagesLoaded[index] ? 'block' : 'none' }}
-                    itemProp="image"
-                  />
-                </div>
-              </SwiperSlide>
-            )) : (
-              <SwiperSlide>
-                <div className="gallery-slide no-image">
-                  <FaHome className="no-image-icon" />
-                  <span>تصویری موجود نیست</span>
-                </div>
-              </SwiperSlide>
-            )}
-          </Swiper>
-          
-          <button 
-            className={`favorite-btn ${isFavorite ? 'active' : ''}`}
-            onClick={handleFavoriteToggle}
-            aria-label={isFavorite ? 'حذف از علاقه‌مندی‌ها' : 'افزودن به علاقه‌مندی‌ها'}
-            aria-pressed={isFavorite}
-          >
-            {isFavorite ? <FaHeart aria-hidden="true" /> : <FaRegHeart aria-hidden="true" />}
-          </button>
-          
-          <div className="image-counter" aria-label={`تصویر ${selectedImage + 1} از ${property.images.length || 1}`}>
-            {selectedImage + 1} / {property.images.length || 1}
-          </div>
-        </div>
-
-        {/* ===== Main Content ===== */}
-        <div className="detail-main">
-          
-          {/* آمار ملک - بدون H2 تکراری */}
-          <div className="detail-title-section">
-            <div className="title-row">
-              <div className="property-stats">
-                <span className="stat-badge" title="تعداد بازدید">
-                  <FaEye className="stat-icon" aria-hidden="true" />
-                  {property.views.toLocaleString('fa-IR')} بازدید
-                </span>
-                <span className="stat-badge" title="تعداد ذخیره شده">
-                  <FaBookmark className="stat-icon" aria-hidden="true" />
-                  {property.saved.toLocaleString('fa-IR')} ذخیره
-                </span>
-                <span className="stat-badge" title="تاریخ درج">
-                  <FaClock className="stat-icon" aria-hidden="true" />
-                  {property.createdAt}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* ===== قیمت‌ها ===== */}
-          <div className="price-section" itemProp="offers" itemScope itemType="https://schema.org/Offer">
-            {isForSale && (
-              <div className="price-card sale-price">
-                <div className="price-card-icon">
-                  <FaTag aria-hidden="true" />
-                </div>
-                <div className="price-card-content">
-                  <span className="price-label">قیمت فروش</span>
-                  <div className="price-value-wrapper">
-                    <span className="price-number" itemProp="price">{property.price}</span>
-                    <span className="price-unit" itemProp="priceCurrency" content="IRR">تومان</span>
-                  </div>
-                  {formattedPricePerMeter && (
-                    <div className="price-meta">
-                      <FaRuler aria-hidden="true" />
-                      <span>متری {formattedPricePerMeter}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {isForRent && (
-              <div className="rent-price-group">
-                {property.mortgagePrice && property.mortgagePrice !== "۰" && (
-                  <div className="price-card mortgage-price">
-                    <div className="price-card-icon">
-                      <FaBuilding aria-hidden="true" />
-                    </div>
-                    <div className="price-card-content">
-                      <span className="price-label">مبلغ رهن (قرض‌الحسنه)</span>
-                      <div className="price-value-wrapper">
-                        <span className="price-number">{property.mortgagePrice}</span>
-                        <span className="price-unit">تومان</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {property.rentPrice && property.rentPrice !== "۰" && (
-                  <div className="price-card rent-price">
-                    <div className="price-card-icon">
-                      <FaHome aria-hidden="true" />
-                    </div>
-                    <div className="price-card-content">
-                      <span className="price-label">اجاره ماهانه</span>
-                      <div className="price-value-wrapper">
-                        <span className="price-number">{property.rentPrice}</span>
-                        <span className="price-unit">تومان</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {(!property.mortgagePrice || property.mortgagePrice === "۰") && 
-                 (!property.rentPrice || property.rentPrice === "۰") && property.depositPrice && (
-                  <div className="price-card deposit-price">
-                    <div className="price-card-icon">
-                      <FaShieldAlt aria-hidden="true" />
-                    </div>
-                    <div className="price-card-content">
-                      <span className="price-label">ودیعه</span>
-                      <div className="price-value-wrapper">
-                        <span className="price-number">{property.depositPrice}</span>
-                        <span className="price-unit">تومان</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* ===== مشخصات سریع ===== */}
-          <div className="quick-specs">
-            <div className="spec-item" itemProp="floorSize" itemScope itemType="https://schema.org/QuantitativeValue">
-              <FaRulerCombined className="spec-icon" aria-hidden="true" />
-              <span className="spec-label">متراژ</span>
-              <span className="spec-value" itemProp="value">{property.area} متر²</span>
-            </div>
-            <div className="spec-item">
-              <FaBath className="spec-icon" aria-hidden="true" />
-              <span className="spec-label">اتاق‌خواب</span>
-              <span className="spec-value" itemProp="numberOfRooms">{property.rooms} خواب</span>
-            </div>
-            <div className="spec-item">
-              <FaLayerGroup className="spec-icon" aria-hidden="true" />
-              <span className="spec-label">طبقه</span>
-              <span className="spec-value">{property.floor} از {property.totalFloors}</span>
-            </div>
-            <div className="spec-item">
-              <FaCalendarAlt className="spec-icon" aria-hidden="true" />
-              <span className="spec-label">سال ساخت</span>
-              <span className="spec-value">{property.year}</span>
-            </div>
-          </div>
-
-          {/* ===== چیپ‌های اطلاعاتی ===== */}
-          <div className="info-chips">
-            <span className="info-chip">کد ملک: {property.id}</span>
-            <span className="info-chip">
-              <FaShieldAlt aria-hidden="true" /> {property.certificate}
-            </span>
-            <span className="info-chip type-chip">
-              {isForSale ? 'فروش' : 'رهن و اجاره'}
-            </span>
-          </div>
-
-          {/* ===== تب‌ها ===== */}
-          <div className="detail-tabs" role="tablist">
-            <button 
-              className={`tab-btn ${activeTab === 'details' ? 'active' : ''}`} 
-              onClick={() => setActiveTab('details')}
-              role="tab"
-              aria-selected={activeTab === 'details'}
-              id="tab-details"
-            >
-              جزئیات ملک
-            </button>
-            <button 
-              className={`tab-btn ${activeTab === 'features' ? 'active' : ''}`} 
-              onClick={() => setActiveTab('features')}
-              role="tab"
-              aria-selected={activeTab === 'features'}
-              id="tab-features"
-            >
-              امکانات ({property.features.length})
-            </button>
-            <button 
-              className={`tab-btn ${activeTab === 'warnings' ? 'active' : ''}`} 
-              onClick={() => setActiveTab('warnings')}
-              role="tab"
-              aria-selected={activeTab === 'warnings'}
-              id="tab-warnings"
-            >
-              هشدارهای معامله
-            </button>
-            <button 
-              className={`tab-btn ${activeTab === 'nearby' ? 'active' : ''}`} 
-              onClick={() => setActiveTab('nearby')}
-              role="tab"
-              aria-selected={activeTab === 'nearby'}
-              id="tab-nearby"
-            >
-              امکانات اطراف
-            </button>
-          </div>
-
-          {/* ===== محتوای تب‌ها ===== */}
-          <div className="tab-content" role="tabpanel">
-            {activeTab === 'details' && (
-              <div className="details-tab">
-                {/* آدرس و موقعیت */}
-                <div className="address-card">
-                  <FaMapMarkerAlt className="address-icon" aria-hidden="true" />
-                  <div className="address-info">
-                    <h3 className="section-heading">آدرس ملک</h3>
-                    <div className="region-subheading">منطقه {property.regionName}</div>
-                    <p itemProp="address">{property.address}</p>
-                    <span className="post-date">تاریخ درج: {property.createdAt}</span>
-                  </div>
-                </div>
-                
-                {/* توضیحات کامل */}
-                <div className="description-card">
-                  <h3 className="section-heading">توضیحات کامل {property.title}</h3>
-                  <div 
-                    className="description-text" 
-                    itemProp="description"
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(property.description, {
-                      ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'a', 'blockquote'],
-                      ALLOWED_ATTR: ['href', 'target']
-                    }) }}
-                  />
-                </div>
-
-                {/* نقشه (ثابت - بدون تغییر) */}
-                <div className="map-card">
-                  <h3 className="section-heading">
-                    <FaMapMarkerAlt aria-hidden="true" />
-                    موقعیت مکانی ملک در منطقه {property.regionName}
-                  </h3>
-                  
-                  <div className="map-location-badge">
-                    {property.showExactLocation ? (
-                      <span className="badge exact">📍 نمایش موقعیت دقیق ملک</span>
-                    ) : (
-                      <span className="badge approximate">🔵 نمایش محدوده تقریبی برای حفظ حریم خصوصی</span>
-                    )}
-                  </div>
-                  
-                  <div className="map-container" style={{ position: 'relative', overflow: 'hidden' }}>
-                    <NeshanMap
-                      mapKey="web.31c5ea6c425e40cc9b30620a84a8be90"
-                      center={{ 
-                        latitude: property.location.lat, 
-                        longitude: property.location.lng 
-                      }}
-                      zoom={property.showExactLocation ? 17 : 15.9}
-                      defaultType="dreamy"
-                      poi={true}
-                      traffic={false}
-                      style={{ height: '100%', width: '100%', pointerEvents: 'none' }}
-                    />
-                    
-                    <div className="map-marker-overlay">
-                      {property.showExactLocation && (
-                        <>
-                          <div className="location-dot"></div>
-                          <div className="location-ripple"></div>
-                        </>
-                      )}
-                      {!property.showExactLocation && (
-                        <div className="location-circles">
-                          <div className="circle-1"></div>
-                          <div className="circle-2"></div>
-                          <div className="circle-3"></div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="map-privacy-note">
-                    <small>
-                      {property.showExactLocation 
-                        ? '📍 موقعیت دقیق ملک - با تایید مالک نمایش داده می‌شود' 
-                        : '📍 محدوده تقریبی ملک برای حفظ حریم خصوصی'}
-                    </small>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'features' && (
-              <div className="features-tab">
-                <h3 className="section-heading">امکانات و ویژگی‌های {property.title}</h3>
-                <div className="features-grid">
-                  {property.features.length > 0 ? property.features.map((feature, index) => {
-                    let IconComponent = FaCheckCircle;
-                    if (feature.includes('پارکینگ')) IconComponent = FaParking;
-                    else if (feature.includes('انباری')) IconComponent = FaWarehouse;
-                    else if (feature.includes('آسانسور')) IconComponent = FaArrowUp;
-                    else if (feature.includes('استخر')) IconComponent = FaSwimmingPool;
-                    
-                    return (
-                      <div key={index} className="feature-card">
-                        <IconComponent className="feature-icon" aria-hidden="true" />
-                        <span>{feature}</span>
-                      </div>
-                    );
-                  }) : (
-                    <p className="no-data">امکاناتی برای این ملک ثبت نشده است</p>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'warnings' && (
-              <div className="warnings-tab">
-                <h3 className="section-heading">⚠️ هشدارهای مهم قبل از معامله ملک</h3>
-                <ul className="warnings-list">
-                  {property.warnings.map((warning, index) => (
-                    <li key={index} className="warning-item">
-                      <span className="warning-bullet"></span>
-                      <span>{warning}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="warning-footer">
-                  <p>⚠️ توجه: لطفاً قبل از هرگونه معامله، مدارک ملک را به دقت بررسی کنید و از مشاور حقوقی کمک بگیرید</p>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'nearby' && (
-              <div className="nearby-tab">
-                <h3 className="section-heading">امکانات اطراف ملک در منطقه {property.regionName}</h3>
-                <div className="nearby-list">
-                  {property.nearby.map((item, index) => (
-                    <div key={index} className="nearby-item">
-                      <span className="nearby-name">{item.name}</span>
-                      <span className="nearby-distance">{item.distance}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* ===== اطلاعات مشاور املاک ===== */}
-          <div className="agent-card" itemScope itemType="https://schema.org/RealEstateAgent">
-            <div className="agent-header">
-              <img 
-                src={property.agent.image} 
-                alt={property.agent.name} 
-                className="agent-avatar"
-                loading="lazy"
-                width="64"
-                height="64"
-              />
-              <div className="agent-info">
-                <h3 className="agent-name" itemProp="name">{property.agent.name}</h3>
-                <p className="agent-address" itemProp="address">{property.agent.address}</p>
-                <div className="agent-rating" itemProp="aggregateRating" itemScope itemType="https://schema.org/AggregateRating">
-                  <FaStar className="rating-star" aria-hidden="true" />
-                  <span itemProp="ratingValue">{property.agent.rating}</span>
-                  <span className="rating-count" itemProp="reviewCount">({property.agent.deals} معامله موفق)</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="agent-actions">
-              <button className="agent-action-btn phone" onClick={handleCopyPhone} aria-label="کپی شماره تماس">
-                <FaPhone aria-hidden="true" />
-                {copied ? 'کپی شد!' : 'کپی شماره'}
-              </button>
-              <a 
-                href={`https://wa.me/${property.agent.whatsapp}`} 
-                target="_blank" 
-                rel="noopener noreferrer nofollow"
-                className="agent-action-btn whatsapp"
-                aria-label="ارسال پیام در واتساپ"
-              >
-                <FaWhatsapp aria-hidden="true" />
-                واتساپ
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* ===== نوتیفیکیشن ===== */}
-        {copied && (
-          <div className="toast-notification" role="status" aria-live="polite">
-            <FaCheckCircle aria-hidden="true" />
-            لینک با موفقیت کپی شد
-          </div>
-        )}
+        <div className="agent-card"><div className="agent-header"><img src={property.agent.image} alt={property.agent.name} className="agent-avatar" loading="lazy" /><div className="agent-info"><h3>{property.agent.name}</h3><p>{property.agent.address}</p><div className="agent-rating"><FaStar /><span>{property.agent.rating}</span><span>({property.agent.deals} معامله)</span></div></div></div><div className="agent-actions"><button className="agent-action-btn phone" onClick={handleCopyPhone}><FaPhone /> {copied ? 'کپی شد!' : 'کپی شماره'}</button><a href={`https://wa.me/${property.agent.whatsapp}`} target="_blank" rel="noopener noreferrer" className="agent-action-btn whatsapp"><FaWhatsapp /> واتساپ</a></div></div>
       </div>
-    </>
-  );
+            <DoubleSidebarBanners  />
+      <RelatedPropertiesSlider currentPropertyId={property.id} regionName={property.regionName} propertyType={property.type} />
+      {copied && <div className="toast-notification"><FaCheckCircle /> لینک کپی شد</div>}
+   
+    </div>
+ 
+  </> );
 });
 
 RealEstateDetailPageItem.displayName = 'RealEstateDetailPageItem';
-
 export default RealEstateDetailPageItem;
