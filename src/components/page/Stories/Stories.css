@@ -1,0 +1,682 @@
+/* src/components/Stories/Stories.css - نسخه نهایی و تمیز */
+
+/* ===== بخش استوری‌ها ===== */
+.stories-section {
+  padding: 20px 0;
+  background: linear-gradient(to bottom, #ffffff, #f8fafc);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 10;
+}
+
+.stories-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.stories-slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 8px 0 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+  -webkit-overflow-scrolling: touch;
+}
+
+.stories-slider::-webkit-scrollbar {
+  height: 4px;
+}
+
+.stories-slider::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.stories-slider::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* آیتم استوری */
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex: 0 0 auto;
+  width: 80px;
+}
+
+.story-item:hover {
+  transform: translateY(-3px);
+}
+
+.story-avatar-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7d0000, #5c0000, #3d0000);
+  padding: 2px;
+  transition: all 0.2s ease;
+}
+
+.story-avatar-wrapper.viewed {
+  background: #e2e8f0;
+}
+
+.story-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  background: #f1f5f9;
+}
+
+.story-unread-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.story-live-badge {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 12px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.story-live-badge span {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.story-name {
+  font-size: 12px;
+  color: #334155;
+  text-align: center;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ===== مودال استوری ===== */
+.story-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.story-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  height: 80vh;
+  max-height: 700px;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* دکمه بستن - بالا وسط */
+.story-modal-close-top {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.story-modal-close-top:hover {
+  background: rgba(125, 0, 0, 0.9);
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* هدر - سمت چپ */
+.story-modal-header {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 8px 16px;
+  border-radius: 50px;
+  z-index: 90;
+  color: white;
+  max-width: 70%;
+}
+
+.story-modal-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.story-modal-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.story-modal-name {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-modal-time {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+/* نوار پیشرفت */
+.story-progress-container {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+  z-index: 95;
+  padding: 0 50px;
+}
+
+.story-progress-bar {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: white;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.story-progress-bar.active .story-progress-fill {
+  transition: width 0.1s linear;
+}
+
+.story-progress-bar.completed .story-progress-fill {
+  width: 100%;
+}
+
+/* دکمه‌های ناوبری - درست برای RTL */
+.story-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* دکمه قبلی - سمت راست */
+.story-nav-prev {
+  right: 16px;
+  left: auto;
+}
+
+/* دکمه بعدی - سمت چپ */
+.story-nav-next {
+  left: 16px;
+  right: auto;
+}
+
+.story-nav-btn:hover {
+  background: rgba(125, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* مخفی کردن دکمه قبلی در استوری اول */
+.story-nav-prev.hidden,
+.story-nav-btn.hidden {
+  display: none !important;
+}
+
+/* مناطق لمسی - درست برای RTL */
+.story-touch-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.story-touch-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 25%;
+  z-index: 20;
+  cursor: pointer;
+}
+
+/* محتوا */
+.story-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.story-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 20px 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  z-index: 15;
+}
+
+.story-caption p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.story-link-btn {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #7d0000, #5c0000);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 15;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.story-link-btn:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* مخفی کردن متن برای سئو */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .story-avatar-wrapper {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .story-item {
+    width: 70px;
+  }
+  
+  .story-name {
+    font-size: 11px;
+    max-width: 70px;
+  }
+  
+  .stories-container {
+    padding: 0 16px;
+  }
+  
+  .stories-slider {
+    gap: 16px;
+  }
+  
+  .story-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+  }
+  
+  .story-nav-prev {
+    right: 8px;
+  }
+  
+  .story-nav-next {
+    left: 8px;
+  }
+  
+  .story-modal-close-top {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    top: 12px;
+  }
+  
+  .story-modal-header {
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stories-section {
+    padding: 12px 0;
+  }
+  
+  .story-avatar-wrapper {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .story-item {
+    width: 62px;
+  }
+  
+  .story-name {
+    font-size: 10px;
+  }
+  
+  .story-nav-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+  }
+  
+  .story-nav-prev {
+    right: 4px;
+  }
+  
+  .story-nav-next {
+    left: 4px;
+  }
+  
+  .story-modal-close-top {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    top: 10px;
+  }
+  
+  .story-modal-content {
+    width: 100%;
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+  }
+  
+  .story-caption {
+    font-size: 12px;
+    padding: 20px 15px 15px;
+  }
+  
+  .story-link-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+    bottom: 70px;
+  }
+}
+
+/* فوکوس برای کیبورد */
+.story-item:focus-visible {
+  outline: 2px solid #7d0000;
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.story-nav-btn:focus-visible,
+.story-modal-close-top:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* به Stories.css اضافه کن - جایگزین بخش‌های قبلی */
+
+/* دکمه ذخیره استوری - سمت چپ */
+.story-save-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.story-save-btn:hover {
+  background: rgba(125, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+.story-save-btn.saved {
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.story-save-btn.saved:hover {
+  background: rgba(125, 0, 0, 0.9);
+  color: #ffed4a;
+}
+
+/* هدر - سمت راست (جابجا شد) */
+.story-modal-header {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  left: auto;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px 6px 16px;
+  border-radius: 50px;
+  z-index: 90;
+  color: white;
+  max-width: 70%;
+}
+
+/* لینک پروفایل */
+.story-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 50px;
+  padding: 2px 0;
+}
+
+.story-profile-link:hover {
+  transform: scale(1.02);
+}
+
+.story-profile-link:hover .story-modal-name {
+  color: #ffaaaa;
+}
+
+.story-modal-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.story-modal-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.story-modal-name {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.story-modal-time {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .story-save-btn {
+    width: 36px;
+    height: 36px;
+    top: 12px;
+    left: 12px;
+  }
+  
+  .story-save-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .story-modal-header {
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px 4px 14px;
+  }
+  
+  .story-modal-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .story-modal-name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-save-btn {
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .story-save-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .story-modal-header {
+    top: 10px;
+    right: 10px;
+    padding: 3px 8px 3px 12px;
+  }
+  
+  .story-modal-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .story-modal-name {
+    font-size: 11px;
+  }
+  
+  .story-modal-time {
+    font-size: 9px;
+  }
+}

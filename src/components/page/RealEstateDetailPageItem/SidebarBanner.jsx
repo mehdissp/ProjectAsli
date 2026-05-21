@@ -801,11 +801,11 @@ const DoubleSidebarBanners = () => {
     <div className="double-banners-container">
       <div className="banners-side left-side">
         <SidebarBanner side="left" />
-        <SidebarBanner side="left" />
+
       </div>
       <div className="banners-side right-side">
         <SidebarBanner side="right" />
-        <SidebarBanner side="right" />
+  
       </div>
     </div>
   );
