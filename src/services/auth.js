@@ -10,7 +10,7 @@ class AuthService {
       if (!response.data || !response.data.data) {
         throw new Error('Invalid response format');
       }
-      
+      console.log('++++++++++++++++++++++++++++++++++++++++++++++++',response)
       return response.data.data;
     } catch (error) {
       console.error('Login service error:', error);

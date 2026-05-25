@@ -7,6 +7,7 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   // بررسی وضعیت احراز هویت
   const checkAuth = useCallback(async () => {
@@ -36,15 +37,39 @@ export const useAuth = () => {
       setIsLoading(true);
       setError(null);
 
+    console.log('2. Calling authService.login');
       const result = await authService.login(credentials);
       setToken(result.token);
       setRefreshToken(result.refreshToken);
+  console.log('3. Calling authService.login');
+        // ذخیره نقش کاربر
+    // if (result.role) {
+    //   setUserRole(result.role);
+    //   localStorage.setItem('user_role', result.role);
+    // }
 
+        // ذخیره نقش کاربر اگر وجود دارد
+    let userRole = null;
+    if (result.role) {
+      userRole = result.role;
+      localStorage.setItem('user_role', result.role);
+      setUserRole(result.role); // اگر state جداگانه دارید
+    } else if (result.data?.role) {
+      userRole = result.data.role;
+      localStorage.setItem('user_role', result.data.role);
+      setUserRole(result.data.role);
+    }
+console.log('4. Calling authService.login');
       const userProfile = await authService.getProfile();
       setUser(userProfile);
       setIsAuthenticated(true);
-
-      return { success: true };
+   
+    console.log('Raw login result:', result); // برای دیباگ
+        // برگرداندن موفقیت و نقش کاربر
+    return { 
+      success: true, 
+      role: userRole || userProfile?.role || null 
+    };
     } catch (err) {
       const errorMessage = err.response?.data?.message || 'Login failed';
       setError(errorMessage);

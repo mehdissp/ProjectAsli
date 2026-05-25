@@ -1,0 +1,1128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.independent-register-container {
+  min-height: 100vh;
+  font-family: 'Inter', 'Vazirmatn', 'Tahoma', sans-serif;
+  direction: rtl;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ========== پس‌زمینه ========== */
+.independent-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1a3a 50%, #24243e 100%);
+  z-index: -2;
+}
+
+.gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(125, 0, 0, 0.4), transparent 60%),
+              radial-gradient(circle at 80% 70%, rgba(204, 0, 0, 0.3), transparent 50%);
+  animation: gradientShift 10s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* ========== چیدمان دو ستونی ========== */
+.two-column-layout {
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* سمت راست - توضیحات */
+.right-column-info {
+  flex: 1;
+  padding: 48px 32px;
+  color: white;
+  overflow-y: auto;
+  direction: rtl;
+  animation: fadeInRight 0.8s ease-out;
+}
+
+/* سمت چپ - فرم */
+.left-column-form {
+  flex: 1;
+  padding: 48px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+  backdrop-filter: blur(20px);
+  border-radius: 0 60px 60px 0;
+  margin: 24px 24px 24px 0;
+  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.2);
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.content-wrapper {
+  max-width: 500px;
+  margin-left: auto;
+}
+
+/* ========== هدر برند ========== */
+.brand-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.logo-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.brand-name {
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, #ff6b6b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
+}
+
+.brand-tagline {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ========== باکس خوش‌آمدگویی ========== */
+.welcome-box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  padding: 32px;
+  margin-bottom: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.welcome-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-box h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.welcome-box p {
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* ========== مزایا ========== */
+.benefits-sidebar {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 32px;
+  padding: 28px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+}
+
+.benefits-sidebar h3 {
+  font-size: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(204, 0, 0, 0.5);
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateX(-8px);
+}
+
+.benefit-icon {
+  font-size: 32px;
+  min-width: 48px;
+}
+
+.benefit-info strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.benefit-info p {
+  font-size: 12px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* ========== آمار ========== */
+.stats-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(125, 0, 0, 0.6), rgba(204, 0, 0, 0.4));
+  border-radius: 32px;
+  padding: 28px;
+  margin-bottom: 32px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.stat {
+  flex: 1;
+  transition: transform 0.3s ease;
+}
+
+.stat:hover {
+  transform: scale(1.05);
+}
+
+.stat-number {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* ========== پشتیبانی ========== */
+.support-box {
+  display: flex;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 20px;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.support-box:hover {
+  transform: translateY(-3px);
+}
+
+.support-icon {
+  font-size: 40px;
+}
+
+.support-box h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.support-box p {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* ========== کارت فرم ========== */
+.form-card {
+  width: 100%;
+  max-width: 550px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.form-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(125, 0, 0, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(125, 0, 0, 0); }
+}
+
+.form-header h2 {
+  font-size: 28px;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ========== فرم ========== */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  position: relative;
+}
+
+/* لیبل شناور */
+.floating-label {
+  position: relative;
+}
+
+.floating-label input,
+.floating-label textarea {
+  width: 100%;
+  padding: 18px 16px 8px;
+  font-size: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  background: white;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.floating-label input:focus,
+.floating-label textarea:focus {
+  border-color: #7d0000;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.floating-label input.error,
+.floating-label textarea.error {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.02);
+}
+
+.floating-label input.success,
+.floating-label textarea.success {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.floating-label input:disabled,
+.floating-label textarea:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.floating-label label {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: white;
+  padding: 0 4px;
+  font-size: 14px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label textarea:focus + label,
+.floating-label textarea:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #7d0000;
+  font-weight: 600;
+}
+
+.floating-label input.error + label,
+.floating-label textarea.error + label {
+  color: #ef4444;
+}
+
+.floating-label input.success + label,
+.floating-label textarea.success + label {
+  color: #10b981;
+}
+
+.error-message {
+  display: block;
+  font-size: 11px;
+  color: #ef4444;
+  margin-top: 6px;
+  padding-right: 12px;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #10b981;
+  margin-top: 6px;
+  padding-right: 12px;
+}
+
+.success-message svg {
+  font-size: 12px;
+}
+
+.success-check-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #10b981;
+  font-size: 18px;
+}
+
+/* ========== رمز عبور ========== */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-left: 50px;
+}
+
+.toggle-password {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  color: #9ca3af;
+}
+
+.toggle-password:hover {
+  background: rgba(125, 0, 0, 0.1);
+  color: #7d0000;
+}
+
+.toggle-password svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* قدرت رمز عبور */
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.strength-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.strength-text {
+  font-size: 11px;
+}
+
+/* ========== کپچا ========== */
+.captcha-section {
+  margin-bottom: 8px;
+}
+
+.captcha-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.required {
+  color: #ef4444;
+  margin-right: 4px;
+}
+
+.captcha-container {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.captcha-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.captcha-image {
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 60px;
+  width: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.captcha-image:hover {
+  border-color: #7d0000;
+  box-shadow: 0 4px 12px rgba(125, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.refresh-captcha {
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.refresh-captcha:hover {
+  background: #7d0000;
+  color: white;
+  transform: rotate(180deg);
+  border-color: #7d0000;
+}
+
+.refresh-captcha:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spin {
+  animation: spin 0.5s linear;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.captcha-input-wrapper {
+  flex: 1;
+  min-width: 150px;
+  position: relative;
+}
+
+.captcha-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  direction: ltr;
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+.captcha-input:focus {
+  border-color: #7d0000;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.captcha-input.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.captcha-input.success {
+  border-color: #10b981;
+  background-color: #f0fdf4;
+}
+
+.captcha-success-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #10b981;
+  font-size: 18px;
+}
+
+.captcha-hint {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 6px;
+}
+
+/* ========== باکس نکات ========== */
+.notice-box {
+  display: flex;
+  gap: 16px;
+  background: linear-gradient(135deg, #fef3c7, #fffbeb);
+  border-radius: 20px;
+  padding: 20px;
+  border-right: 4px solid #f59e0b;
+  transition: transform 0.3s ease;
+}
+
+.notice-box:hover {
+  transform: translateX(-5px);
+}
+
+.notice-icon {
+  font-size: 28px;
+}
+
+.notice-content strong {
+  display: block;
+  font-size: 14px;
+  color: #92400e;
+  margin-bottom: 10px;
+}
+
+.notice-content ul {
+  list-style: none;
+  padding-right: 0;
+}
+
+.notice-content li {
+  font-size: 12px;
+  color: #78350f;
+  margin-bottom: 8px;
+  padding-right: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.notice-content li::before {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+/* ========== قوانین ========== */
+.terms-section {
+  margin: 8px 0;
+}
+
+.terms-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.terms-label input {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.terms-label input:checked + .custom-checkbox {
+  background: #7d0000;
+  border-color: #7d0000;
+}
+
+.terms-label input:checked + .custom-checkbox::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.terms-label span:last-child {
+  font-size: 13px;
+  color: #374151;
+  transition: color 0.3s ease;
+}
+
+.terms-label:hover span:last-child {
+  color: #7d0000;
+}
+
+.terms-section .error-message {
+  text-align: center;
+  background: #fef2f2;
+  padding: 8px;
+  border-radius: 12px;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+/* ========== دکمه ثبت‌نام ========== */
+.submit-button {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-button:hover:not(:disabled)::before {
+  width: 300px;
+  height: 300px;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(125, 0, 0, 0.4);
+  gap: 14px;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: buttonSpin 0.6s linear infinite;
+}
+
+@keyframes buttonSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========== دکمه‌های پایین فرم ========== */
+.form-extra-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.nav-btn2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  /* border-radius: 40px; */
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: #f3f4f6;
+  color: #4b5563;
+  flex: 1;
+}
+
+.home-btn:hover {
+  background: #e0e7ff;
+  color: #4338ca;
+  transform: translateY(-2px);
+}
+
+.login-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* ========== لودینگ ========== */
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(135deg, #0f0c29, #1a1a3a);
+  color: white;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #cc0000;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-spinner-small {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #7d0000;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ========== کلاس‌های کمکی ========== */
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* ========== اسکرول بار ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(125, 0, 0, 0.5);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(125, 0, 0, 0.7);
+}
+
+/* ========== ریسپانسیو ========== */
+@media (max-width: 1024px) {
+  .two-column-layout {
+    flex-direction: column;
+  }
+  
+  .left-column-form {
+    order: 1;
+    margin: 24px 24px 0 24px;
+    border-radius: 40px;
+    padding: 40px 24px;
+  }
+  
+  .right-column-info {
+    order: 2;
+    padding: 32px 24px;
+  }
+  
+  .content-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .brand-header {
+    margin-bottom: 32px;
+  }
+  
+  .stats-box {
+    justify-content: center;
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .left-column-form {
+    margin: 16px 16px 0 16px;
+    padding: 32px 20px;
+  }
+  
+  .right-column-info {
+    padding: 24px 20px;
+  }
+  
+  .form-header h2 {
+    font-size: 24px;
+  }
+  
+  .stats-box {
+    flex-wrap: wrap;
+  }
+  
+  .stat {
+    min-width: 100px;
+  }
+  
+  .benefits-list {
+    gap: 16px;
+  }
+  
+  .benefit-icon {
+    font-size: 28px;
+    min-width: 40px;
+  }
+  
+  .floating-label input {
+    padding: 16px 14px 8px;
+    font-size: 14px;
+  }
+  
+  .captcha-container {
+    flex-direction: column;
+  }
+  
+  .captcha-image-wrapper {
+    align-self: center;
+  }
+  
+  .form-extra-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .nav-btn {
+    padding: 10px;
+  }
+  
+  .nav-btn span {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-column-form {
+    margin: 12px 12px 0 12px;
+    padding: 24px 16px;
+    border-radius: 32px;
+  }
+  
+  .right-column-info {
+    padding: 20px 16px;
+  }
+  
+  .welcome-box {
+    padding: 20px;
+  }
+  
+  .welcome-box h2 {
+    font-size: 18px;
+  }
+  
+  .benefits-sidebar {
+    padding: 16px;
+  }
+  
+  .benefits-sidebar h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .form-header {
+    margin-bottom: 24px;
+  }
+  
+  .form-header h2 {
+    font-size: 20px;
+  }
+  
+  .form-header p {
+    font-size: 12px;
+  }
+  
+  .form-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+  }
+  
+  .form-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .submit-button {
+    padding: 14px;
+    font-size: 15px;
+  }
+  
+  .brand-name {
+    font-size: 28px;
+  }
+  
+  .brand-tagline {
+    font-size: 12px;
+  }
+  
+  .logo-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+  
+  .stat-number {
+    font-size: 20px;
+  }
+  
+  .stat-label {
+    font-size: 10px;
+  }
+  
+  .notice-box {
+    padding: 14px;
+  }
+  
+  .notice-icon {
+    font-size: 22px;
+  }
+  
+  .notice-content strong {
+    font-size: 13px;
+  }
+  
+  .notice-content li {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  
+  .terms-label span:last-child {
+    font-size: 12px;
+  }
+}

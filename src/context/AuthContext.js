@@ -112,6 +112,7 @@
 // // export default AuthProvider;
 
 // context/AuthContext.js
+
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { authService } from '../services/auth';
 import { getToken, setToken, removeToken, getRefreshToken, setRefreshToken } from '../utils/token';
@@ -174,7 +175,7 @@ export const AuthProvider = ({ children }) => {
       const userMenus = await authService.getMenus();
       setMenus(userMenus);
       
-      return { success: true };
+      return { success: true,role:result.role };
     } catch (error) {
       return { 
         success: false, 

@@ -1,0 +1,143 @@
+/* مسیر: src/components/auth/Register/LocationSelector.css */
+
+.location-selector {
+  width: 100%;
+  direction: rtl;
+}
+
+.location-selector-group {
+  margin-bottom: 12px;
+}
+
+.location-selector-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+  padding-right: 4px;
+}
+
+.location-selector-input {
+  position: relative;
+  width: 100%;
+}
+
+.location-selector-input input,
+.location-selector-input select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.location-selector-input input:focus,
+.location-selector-input select:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.location-selector-input input:disabled,
+.location-selector-input select:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.location-selector-input .dropdown-arrow {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.location-selector-input .loading-indicator {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.location-selector-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 4px;
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dropdown-item:hover {
+  background: rgba(125, 0, 0, 0.05);
+  color: #7d0000;
+}
+
+.dropdown-item.selected {
+  background: rgba(125, 0, 0, 0.1);
+  color: #7d0000;
+  font-weight: 600;
+}
+
+.dropdown-loading {
+  padding: 20px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.location-selector-input.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.location-selector-input.disabled input {
+  cursor: not-allowed;
+  background: #f3f4f6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .location-selector-input input,
+  .location-selector-input select {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .location-selector-label {
+    font-size: 11px;
+  }
+  
+  .dropdown-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}

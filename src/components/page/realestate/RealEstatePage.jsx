@@ -1838,6 +1838,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import { useAuth } from '../../../context/AuthContext';
+import StoriesFooter from '../Stories/StoriesFooter';
 import DoubleSidebarBanners  from '../RealEstateDetailPageItem/SidebarBanner';
 import { 
   buyCategoriesData, 
@@ -2443,6 +2444,10 @@ const RealEstatePage = () => {
             </div>
           </div>
         </div>
+            {/* فوتر استوری‌ها برای سئو */}
+        {stories && stories.length > 0 && (
+          <StoriesFooter storiesData={stories} />
+        )}
       </div>
     </>
   );

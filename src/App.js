@@ -701,19 +701,25 @@ import { CityProvider } from './context/CityContext'; // اضافه کردن Cit
 import Layout from './components/common/Layout/Layout';
 import Login from './components/auth/Login/Login';
 import OTPLogin from './components/auth/Login/OTPLogin';
+import Register from './components/auth/Register/RegisterType';
+import RegisterVerify from './components/auth/Register/RegisterVerify';
 import Dashboard from './components/dashboard/Dashboard/Dashboard';
 import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner';
 import Project from './components/page/project/Project';
 import TodoBoard from './components/page/todo/TodoBoard';
 import UserManagement from './components/page/user/UserManagement';
 import Profile from './components/page/profile/Profile';
+import ConsultantProfile from './components/page/profile/ConsultantProfile';
 import MenuAccess from './components/page/menuAccess/MenuAccess';
 import Role from './components/page/role/Role';
 import Tag from './components/page/tag/Tag';
 import HomePage from './components/page/homePage/HomePage';
+import RegisterIndependent from './components/auth/Register/RegisterIndependent';
+import RegisterAgency from './components/auth/Register/RegisterAgency';
 import Archive from './components/page/archive/Archive';
 import HotelPage from './components/page/hotel/HotelPage';
 import RealEstatePage from './components/page/realestate/RealEstatePage';
+import ChargeWalletPage from './components/page/profile/ChargeWallet/ChargeWallet';
 
  import RealEstatePageDetail from './components/page/realEstateDetails/RealEstatePageDetail'
  import CityModal from './components/layout/CityModal';
@@ -762,8 +768,16 @@ const AppContent = () => {
       </Route>
       
       {/* روت‌های عمومی */}
+      <Route path="/register/independent" element={<RegisterIndependent />} />
+      <Route path="/register/agency" element={<RegisterAgency />} />
       <Route path="/login" element={<Login />} />
       <Route path="/otp-login" element={<OTPLogin />} />
+      <Route path="/Register" element={<Register />} />
+      <Route path="/otp-Register" element={<RegisterVerify />} />
+
+
+
+      
       
       {/* روت‌های محافظت شده */}
       <Route path="/*" element={
@@ -792,6 +806,8 @@ const AuthenticatedApp = () => {
         <Route path="Role" element={<Role />} />
         <Route path="Tag" element={<Tag />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="ConsultantProfile" element={<ConsultantProfile />} />
+        <Route path="/charge-wallet" element={<ChargeWalletPage />} />
         <Route path="UserPropertiesPanel" element={<UserPropertiesPanel />} />
         <Route path="RealEstateDetailPageItemForDemo" element={<RealEstateDetailPageItemForDemo />} />
         
