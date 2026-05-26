@@ -228,7 +228,7 @@ const PaymentReturn = () => {
           if (countdownIntervalRef.current) {
             clearInterval(countdownIntervalRef.current);
           }
-          navigate('/UserPropertiesPanel');
+          navigate('/charge-wallet');
         }
       }, 1000);
     };
@@ -277,6 +277,7 @@ const PaymentReturn = () => {
           
           startCountdown();
         } else {
+          console.log(result.data?.message || result.message )
           setStatus({
             success: false,
             message: result.data?.message || result.message || 'پرداخت ناموفق بود',

@@ -1,78 +1,95 @@
-/* ChargeWalletPage.css */
+/* ChargeWallet.css - طراحی کاملاً حرفه‌ای و مدرن */
 
 .charge-wallet-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   direction: rtl;
+  font-family: 'Inter', 'Vazirmatn', system-ui, -apple-system, sans-serif;
 }
 
+/* هدر شیشه‌ای */
 .page-header {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 20px 30px;
+  background: rgba(15, 25, 45, 0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 }
 
 .back-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
   padding: 10px 20px;
-  border-radius: 12px;
+  border-radius: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  transition: all 0.3s;
+  font-weight: 500;
+  transition: all 0.25s ease;
 }
 
 .back-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateX(-5px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-4px);
 }
 
 .page-header h1 {
   color: white;
   margin: 0;
-  font-size: 28px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  background: linear-gradient(135deg, #fff, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .page-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 32px;
 }
 
+/* کارت موجودی - طراحی مدرن با گرادینت ظریف */
 .balance-card {
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  border-radius: 24px;
-  padding: 30px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(59, 130, 246, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  padding: 28px 32px;
   display: flex;
   align-items: center;
-  gap: 25px;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  gap: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .balance-icon {
-  width: 70px;
-  height: 70px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 34px;
   color: white;
+  backdrop-filter: blur(4px);
 }
 
 .balance-info {
@@ -80,195 +97,225 @@
 }
 
 .balance-label {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
   font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .balance-amount {
   color: white;
-  font-size: 36px;
+  font-size: 42px;
   margin: 0;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
 
-.balance-loading {
-  width: 200px;
-  height: 40px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-  border-radius: 8px;
-  animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-  0% { background-position: -200px 0; }
-  100% { background-position: 200px 0; }
-}
-
+/* گرید اصلی */
 .main-charge-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
 }
 
+/* کارت‌های اصلی */
 .charge-form-card,
 .history-card {
-  background: white;
-  border-radius: 24px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(18, 25, 45, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
 }
 
-.charge-form-card h3,
-.history-card h3 {
-  margin: 0 0 20px 0;
-  font-size: 24px;
-  color: #1f2937;
+.charge-form-card:hover,
+.history-card:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.charge-form-card h3 {
+  margin: 0 0 24px 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .section-subtitle {
-  color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin-bottom: 14px;
+  font-weight: 500;
 }
 
+/* دکمه‌های مبلغ */
 .amount-buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 12px;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .amount-btn {
-  background: #f3f4f6;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 14px 8px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  transition: all 0.3s;
+  gap: 6px;
+  transition: all 0.25s ease;
 }
 
 .amount-btn:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
   transform: translateY(-2px);
-  border-color: #667eea;
 }
 
 .amount-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
   border-color: transparent;
-  color: white;
+  box-shadow: 0 8px 20px -8px rgba(139, 92, 246, 0.5);
 }
 
 .amount-icon {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .amount-value {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
+  color: white;
 }
 
 .amount-currency {
-  font-size: 11px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
+/* ورودی مبلغ دلخواه */
 .custom-amount-section {
-  margin-bottom: 25px;
+  margin-bottom: 24px;
 }
 
 .custom-amount-input-wrapper {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .custom-amount-input {
   width: 100%;
-  padding: 14px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
   font-size: 16px;
+  color: white;
   direction: ltr;
   text-align: right;
-  transition: all 0.3s;
+  transition: all 0.25s ease;
+  font-family: inherit;
 }
 
 .custom-amount-input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.custom-amount-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .currency-unit {
   position: absolute;
-  left: 16px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
 }
 
 .amount-limits-info {
   display: flex;
-  gap: 15px;
-  font-size: 12px;
+  gap: 12px;
+  font-size: 11px;
 }
 
 .limit-badge {
-  padding: 4px 10px;
-  border-radius: 8px;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-weight: 500;
 }
 
 .limit-badge.min {
-  background: #dbeafe;
-  color: #2563eb;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .limit-badge.max {
-  background: #fee2e2;
-  color: #dc2626;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
+/* خطا */
 .error-alert {
-  background: #fee2e2;
-  border-right: 4px solid #dc2626;
-  padding: 12px 16px;
-  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border-right: 3px solid #ef4444;
+  padding: 14px 18px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 20px;
-  color: #991b1b;
+  color: #fca5a5;
+  font-size: 14px;
 }
 
+/* مبلغ قابل پرداخت */
 .payable-amount {
-  background: linear-gradient(135deg, #f3f4ff 0%, #e0e7ff 100%);
-  padding: 15px 20px;
-  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.15);
+  padding: 16px 22px;
+  border-radius: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .payable-amount p {
   margin: 0;
-  color: #4b5563;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
 }
 
 .payable-amount strong {
-  font-size: 24px;
-  color: #667eea;
+  font-size: 26px;
+  color: #a78bfa;
+  font-weight: 700;
 }
 
+/* روش‌های پرداخت */
 .payment-methods-section h4 {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #1f2937;
-  margin-bottom: 15px;
+  gap: 10px;
+  color: white;
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .payment-method-card {
@@ -282,39 +329,43 @@
 }
 
 .payment-method-card-content {
-  background: #f9fafb;
-  border: 2px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
-  gap: 15px;
-  transition: all 0.3s;
+  gap: 16px;
+  transition: all 0.25s ease;
 }
 
 .payment-method-card.selected .payment-method-card-content {
-  border-color: #667eea;
-  background: linear-gradient(135deg, #f3f4ff 0%, #e0e7ff 100%);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  border-color: #8b5cf6;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.1));
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
 }
 
 .payment-method-card.disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .payment-method-logo {
-  width: 80px;
-  height: 50px;
+  width: 70px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 5px;
 }
 
 .payment-method-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .payment-method-details {
@@ -322,59 +373,61 @@
 }
 
 .method-name {
-  font-weight: bold;
-  font-size: 16px;
-  color: #1f2937;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
   margin-bottom: 4px;
 }
 
 .method-description {
-  font-size: 12px;
-  color: #6b7280;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .method-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-size: 11px;
   font-weight: 600;
 }
 
 .method-badge.active {
-  background: #10b981;
-  color: white;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .method-badge.inactive {
-  background: #9ca3af;
-  color: white;
+  background: rgba(156, 163, 175, 0.2);
+  color: #9ca3af;
 }
 
+/* دکمه پرداخت اصلی */
 .charge-submit-btn {
   width: 100%;
   padding: 16px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: bold;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 25px;
-  transition: all 0.3s;
+  margin-top: 24px;
+  transition: all 0.3s ease;
 }
 
 .charge-submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 15px 30px -12px rgba(16, 185, 129, 0.4);
 }
 
 .charge-submit-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -387,51 +440,63 @@
   animation: spin 0.6s linear infinite;
 }
 
+/* نکته امنیتی */
 .security-note {
-  background: #fef3c7;
-  padding: 12px;
-  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 12px 16px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 15px;
-  font-size: 13px;
-  color: #92400e;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
+/* بخش تاریخچه */
 .history-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .history-header h3 {
   margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .refresh-history {
-  background: #f3f4f6;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 18px;
+  border-radius: 30px;
   cursor: pointer;
-  font-size: 13px;
-  transition: all 0.3s;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s;
 }
 
 .refresh-history:hover:not(:disabled) {
-  background: #e5e7eb;
+  background: rgba(139, 92, 246, 0.2);
+  color: white;
 }
 
+/* جدول */
 .history-table-container {
   overflow-x: auto;
-  max-height: 400px;
+  max-height: 450px;
   overflow-y: auto;
+  border-radius: 20px;
 }
 
 .history-table {
@@ -441,57 +506,59 @@
 
 .history-table th,
 .history-table td {
-  padding: 12px;
+  padding: 14px 12px;
   text-align: right;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .history-table th {
-  background: #f9fafb;
+  background: rgba(0, 0, 0, 0.3);
   font-weight: 600;
-  color: #374151;
+  color: rgba(255, 255, 255, 0.8);
   position: sticky;
   top: 0;
+  font-size: 13px;
 }
 
 .history-table tbody tr:hover {
-  background: #f9fafb;
+  background: rgba(139, 92, 246, 0.1);
 }
 
 .date-cell {
-  font-size: 13px;
-  color: #4b5563;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .amount-cell {
   font-weight: 600;
-  color: #1f2937;
+  color: #a78bfa;
 }
 
 .status-badge {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-size: 11px;
   font-weight: 600;
 }
 
 .status-badge.success {
-  background: #d1fae5;
-  color: #065f46;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
 }
 
 .status-badge.failed {
-  background: #fee2e2;
-  color: #991b1b;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
 }
 
 .tracking-cell {
-  font-family: monospace;
-  font-size: 12px;
-  color: #6b7280;
+  font-family: 'SF Mono', monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
+/* حالت خالی */
 .history-loading,
 .empty-history {
   text-align: center;
@@ -499,25 +566,26 @@
 }
 
 .empty-icon {
-  font-size: 64px;
+  font-size: 56px;
   margin-bottom: 16px;
+  opacity: 0.5;
 }
 
 .empty-history p {
-  color: #6b7280;
-  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 6px;
 }
 
 .empty-history span {
-  font-size: 13px;
-  color: #9ca3af;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #e5e7eb;
-  border-top-color: #667eea;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #8b5cf6;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 0 auto 16px;
@@ -527,8 +595,24 @@
   to { transform: rotate(360deg); }
 }
 
+/* اسکرول بار سفارشی */
+.history-table-container::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.history-table-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.history-table-container::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 10px;
+}
+
 /* ریسپانسیو */
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .main-charge-section {
     grid-template-columns: 1fr;
   }
@@ -538,19 +622,35 @@
   }
   
   .balance-amount {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .amount-buttons {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .payment-method-card-content {
-    flex-wrap: wrap;
+  .balance-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .charge-form-card,
+  .history-card {
+    padding: 20px;
   }
   
-  .payment-method-logo {
-    width: 100%;
-    justify-content: flex-start;
+  .amount-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .header-content {
+    flex-wrap: wrap;
   }
 }

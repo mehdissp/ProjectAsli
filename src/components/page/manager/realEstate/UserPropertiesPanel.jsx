@@ -66,7 +66,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
           id: item.id,
           title: item.title,
           address: item.address || `${item.region} - آدرس مشخص نشده`,
-          price: item.price * 10000,
+          price: item.price ,
           area: item.area,
           rooms: item.countRooms,
           hasParking: item.isHasParking,
@@ -471,7 +471,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
             ? { 
                 ...p, 
                 title: updatedData.title,
-                price: updatedData.price * 10000,
+                price: updatedData.price ,
                 area: updatedData.area,
                 address: updatedData.address,
                 region: updatedData.region,
@@ -599,12 +599,12 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
   });
 
   const formatPrice = (price) => {
-    if (price >= 1000000000) {
-      return (price / 1000000000).toFixed(1) + ' میلیارد تومان';
-    }
-    if (price >= 1000000) {
-      return (price / 1000000).toFixed(0) + ' میلیون تومان';
-    }
+    // if (price >= 1000000000) {
+    //   return (price / 1000000000).toFixed(1) + ' میلیارد تومان';
+    // }
+    // if (price >= 1000000) {
+    //   return (price / 1000000).toFixed(0) + ' میلیون تومان';
+    // }
     return price.toLocaleString() + ' تومان';
   };
 
