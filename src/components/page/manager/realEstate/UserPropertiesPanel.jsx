@@ -139,7 +139,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
   };
 
   // ✅ تابع verifyPayment بهبود یافته با قابلیت abort
-  const verifyPayment = useCallback(async (authority, paymentId, status) => {
+  const verifyPayment = useCallback(async (authority, paymentId, status,realEstateId) => {
     // اگر قبلاً در حال تایید است، دوباره شروع نکن
     if (verifying) {
       console.log('⏭️ Already verifying, skipping...');
@@ -161,7 +161,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
       console.log('📤 Calling verify-callback (ONCE):', { authority, paymentId, status });
       
       const response = await fetch(
-        `https://localhost:7178/api/Payment/verify-callback?authority=${authority}&status=${status}&paymentId=${paymentId}`,
+        `https://localhost:7178/api/Payment/verify-callback-WithDraw?authority=${authority}&status=${status}&paymentId=${paymentId}&id=${realEstateId}`,
         {
           method: 'GET',
           headers: {
@@ -206,6 +206,8 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
       const status = urlParams.get('Status') || urlParams.get('status');
       const authority = urlParams.get('Authority') || urlParams.get('authority');
       const paymentId = urlParams.get('paymentId');
+    const realEstateId = urlParams.get('realEstateId');
+      
       const refId = urlParams.get('RefId') || urlParams.get('refId');
       
       console.log('🔍 Callback params:', { status, authority, paymentId, refId });
@@ -242,7 +244,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
             backendStatus = 'OK';
           }
           
-          const verifyResult = await verifyPayment(authority, paymentId, backendStatus);
+          const verifyResult = await verifyPayment(authority, paymentId, backendStatus,realEstateId);
           console.log('🎯 Verify result:', verifyResult);
           
           if (backendStatus === 'OK' && verifyResult && !verifyResult.error) {
@@ -1061,7 +1063,11 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
       {selectedPaymentProperty && (
         <PaymentModal
           isOpen={!!selectedPaymentProperty}
-          onClose={() => setSelectedPaymentProperty(null)}
+             onClose={() => {
+      setSelectedPaymentProperty(null);
+      // بعد از بستن مودال، لیست املاک بروزرسانی می‌شود
+      fetchUserProperties();
+    }}
           property={selectedPaymentProperty}
           onSuccess={() => {
             fetchUserProperties();

@@ -729,6 +729,8 @@ import UserPropertiesPanel from '../src/components/page/manager/realEstate/UserP
 import RealEstateDetailPageItemForDemo from '../src/components/page/manager/realEstate/RealEstateDetailPageItemForDemo';
 import MapSearchPage from './components/page/mapSearch/MapSearchPage';
 import PaymentReturn from '../src/components/page/manager/realEstate/PaymentReturn';
+import PaymentReturnAds from '../src/components/page/manager/realEstate/PaymentReturnAds';
+
 
 import './styles/globals.css';
 import './styles/animations.css';
@@ -762,6 +764,8 @@ const AppContent = () => {
         <Route path="property/:id/:slug?" element={<RealEstateDetailPageItem />} />
         <Route path="RealEstateDetailPageItem" element={<RealEstateDetailPageItem />} />
         <Route path="payment-return" element={<PaymentReturn />} />
+        <Route path="payment-returnAds" element={<PaymentReturnAds />} />
+
         <Route path="map-search" element={<MapSearchPage />} />
         <Route path="hotel" element={<HotelPage />} />
         <Route path="hotel/tehran" element={<HotelPage />} />
