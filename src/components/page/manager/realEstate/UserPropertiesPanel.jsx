@@ -842,7 +842,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
                       </div>
                       
                       <div className="compact-card-actions">
-                        <button 
+                        {/* <button 
                           className="compact-status-btn active-btn"
                           onClick={() => handleStatusChange(property.id, 'active')}
                           title="فعال"
@@ -855,7 +855,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
                           title="در انتظار"
                         >
                           ⏳
-                        </button>
+                        </button> */}
                         <button 
                           className="compact-status-btn sold-btn"
                           onClick={() => handleStatusChange(property.id, 'sold')}
@@ -936,7 +936,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
                       </div>
                       
                       <div className="compact-list-actions">
-                        <button 
+                        {/* <button 
                           className="compact-status-btn-sm active-btn"
                           onClick={() => handleStatusChange(property.id, 'active')}
                           title="فعال"
@@ -949,7 +949,7 @@ const [selectedPropertyForEdit, setSelectedPropertyForEdit] = useState(null); //
                           title="در انتظار"
                         >
                           ⏳ در انتظار
-                        </button>
+                        </button> */}
                         <button 
                           className="compact-status-btn-sm sold-btn"
                           onClick={() => handleStatusChange(property.id, 'sold')}
