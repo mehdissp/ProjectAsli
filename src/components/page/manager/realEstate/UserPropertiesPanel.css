@@ -2571,3 +2571,43 @@ button:disabled {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* ======================================== */
+/* Panel Tabs */
+/* ======================================== */
+
+.panel-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  background: white;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.panel-tab {
+  flex: 1;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #64748b;
+  font-family: inherit;
+}
+
+.panel-tab:hover {
+  background: #f8fafc;
+  color: #7d0000;
+}
+
+.panel-tab.active {
+  background: linear-gradient(135deg, #7d0000 0%, #a30000 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(125,0,0,0.2);
+}

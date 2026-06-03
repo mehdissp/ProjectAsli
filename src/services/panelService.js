@@ -107,6 +107,19 @@ export const panelService = {
     }
   },
 
+    async GetStories() {
+    try {
+      const response = await api.get('/Story/StoryProfile');
+      console.log('📦 GetRealEstatePanel data received:', response.data);
+      return response.data.data;
+    } catch (error) {
+      console.error('❌ Get Archive service error:', error);
+      throw error;
+    }
+  },
+
+
+
   async GetFacilities(id) {
     try {
       const response = await api.get(`/RealEstatePage/GetFacilities?id=${id}`);
