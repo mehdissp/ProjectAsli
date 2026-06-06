@@ -91,6 +91,7 @@
 
 
 // };
+
 // services/panelService.js
 import api from './api';
 
@@ -107,6 +108,8 @@ export const panelService = {
     }
   },
 
+
+
     async GetStories() {
     try {
       const response = await api.get('/Story/StoryProfile');
@@ -117,8 +120,33 @@ export const panelService = {
       throw error;
     }
   },
+  // ✅ اضافه کردن متد DeleteStory
+  // async DeleteStory(storyId) {
+  //   try {
+  //     const response = await api.post(`/Story/DeleteStory?id=${storyId}`);
+  //     console.log('🗑️ DeleteStory response:', response.data);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('❌ DeleteStory service error:', error);
+  //     throw error;
+  //   }
+  // },
 
-
+  async DeleteStory(storyId) {
+  try {
+    const formData = new FormData();
+    const response = await api.post(`/Story/DeleteStory?id=${storyId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    console.log('🗑️ DeleteStory response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('❌ DeleteStory service error:', error);
+    throw error;
+  }
+},
 
   async GetFacilities(id) {
     try {
