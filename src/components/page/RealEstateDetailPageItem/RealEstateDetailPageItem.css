@@ -1641,3 +1641,3050 @@ body {
   color: #666;
   margin: 0;
 }
+
+/* ===== استایل‌های استوری ===== */
+
+/* رینگ قرمز دور آواتار مشاور */
+.agent-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.agent-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+/* رینگ استوری - قرمز با گرادیان */
+.story-ring-indicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.story-ring-gradient {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000
+  );
+  animation: storySpin 3s linear infinite;
+  mask: radial-gradient(circle at center, transparent 62%, black 63%);
+  -webkit-mask: radial-gradient(circle at center, transparent 62%, black 63%);
+}
+
+@keyframes storySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* آیکون پلی روی رینگ */
+.story-play-icon {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 0, 0, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+}
+
+.agent-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* برچسب استوری کنار اسم */
+.story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.story-label:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.story-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: storyPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes storyPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* ===== پاپ‌آپ استوری ===== */
+.story-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.story-popup-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 750px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .story-popup-content {
+    height: 80vh;
+    max-height: 700px;
+  }
+}
+
+/* Progress bars */
+.story-progress-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.story-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* Header */
+.story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.story-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.story-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ff0000;
+  object-fit: cover;
+}
+
+.story-user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.story-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.story-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.story-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Story content */
+.story-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Navigation areas */
+.story-nav-left,
+.story-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.story-nav-left {
+  left: 0;
+}
+
+.story-nav-right {
+  right: 0;
+}
+
+/* ===== استایل استوری در گالری ===== */
+.story-indicator-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.story-ring {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.story-ring img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid white;
+}
+
+.story-gradient-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000
+  );
+  animation: storySpin 3s linear infinite;
+}
+
+.story-badge {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .story-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .story-ring {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .story-ring img {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* ===== استایل‌های استوری ===== */
+
+/* کپشن استوری */
+.story-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* دکمه لینک استوری */
+.story-link-button {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 6;
+  transition: all 0.3s ease;
+}
+
+.story-link-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-50%) scale(1.05);
+}
+
+.story-link-button svg {
+  font-size: 14px;
+}
+
+/* رینگ قرمز دور آواتار */
+.agent-avatar.has-story {
+  border: 3px solid #ff0000;
+}
+
+.story-ring-indicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.story-ring-gradient {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000
+  );
+  animation: storySpin 3s linear infinite;
+  mask: radial-gradient(circle at center, transparent 62%, black 63%);
+  -webkit-mask: radial-gradient(circle at center, transparent 62%, black 63%);
+}
+
+@keyframes storySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.story-play-icon {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 0, 0, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+}
+
+/* برچسب استوری */
+.story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.story-label:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.story-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: storyPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes storyPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* پاپ‌آپ استوری */
+.story-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.story-popup-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 750px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .story-popup-content {
+    height: 80vh;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* Progress bars */
+.story-progress-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.story-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* Header */
+.story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.story-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.story-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ff0000;
+  object-fit: cover;
+}
+
+.story-user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.story-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.story-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.story-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Story content */
+.story-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Navigation areas */
+.story-nav-left,
+.story-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.story-nav-left {
+  left: 0;
+}
+
+.story-nav-right {
+  right: 0;
+}
+
+/* ===== استایل‌های استوری ===== */
+
+/* کپشن استوری */
+.story-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* دکمه لینک استوری */
+.story-link-button {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 6;
+  transition: all 0.3s ease;
+}
+
+.story-link-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-50%) scale(1.05);
+}
+
+.story-link-button svg {
+  font-size: 14px;
+}
+
+/* رینگ قرمز دور آواتار */
+.agent-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.agent-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.agent-avatar.has-story {
+  border: 3px solid #ff0000;
+}
+
+.story-ring-indicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.story-ring-gradient {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000
+  );
+  animation: storySpin 3s linear infinite;
+  mask: radial-gradient(circle at center, transparent 62%, black 63%);
+  -webkit-mask: radial-gradient(circle at center, transparent 62%, black 63%);
+}
+
+@keyframes storySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.story-play-icon {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 0, 0, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+}
+
+/* برچسب استوری */
+.agent-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.story-label:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.story-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: storyPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes storyPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* پاپ‌آپ استوری */
+.story-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.story-popup-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 750px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .story-popup-content {
+    height: 80vh;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* Progress bars */
+.story-progress-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.story-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* Header */
+.story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.story-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.story-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ff0000;
+  object-fit: cover;
+}
+
+.story-user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.story-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.story-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.story-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Story content */
+.story-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Navigation areas */
+.story-nav-left,
+.story-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.story-nav-left {
+  left: 0;
+}
+
+.story-nav-right {
+  right: 0;
+}
+
+/* ===== استایل‌های استوری - با کلاس‌های خاص ===== */
+
+/* کلاس‌های خاص برای جلوگیری از تداخل */
+.realestate-detail .story-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 6;
+  pointer-events: none;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-link-button {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 6;
+  transition: all 0.3s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  text-decoration: none;
+}
+
+.realestate-detail .story-link-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-50%) scale(1.05);
+}
+
+.realestate-detail .story-link-button svg {
+  font-size: 14px;
+}
+
+/* ===== رینگ قرمز دور آواتار مشاور ===== */
+.realestate-detail .agent-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.realestate-detail .agent-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+/* رینگ قرمز - فقط یک border ساده و ضخیم */
+.realestate-detail .agent-avatar.has-story {
+  border: 4px solid #ff0000;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ff0000;
+}
+
+/* ===== برچسب استوری کنار اسم ===== */
+.realestate-detail .agent-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.realestate-detail .story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.08);
+  padding: 2px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  user-select: none;
+}
+
+.realestate-detail .story-label:hover {
+  background: rgba(255, 0, 0, 0.15);
+}
+
+.realestate-detail .story-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: realestateStoryPulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes realestateStoryPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.4; 
+    transform: scale(1.3); 
+  }
+}
+
+/* ===== پاپ‌آپ استوری ===== */
+.realestate-detail .story-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: realestateStoryFadeIn 0.3s ease;
+}
+
+@keyframes realestateStoryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.realestate-detail .story-popup-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 750px;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 768px) {
+  .realestate-detail .story-popup-content {
+    height: 80vh;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realestate-detail .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* ===== نوارهای پیشرفت ===== */
+.realestate-detail .story-progress-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.realestate-detail .story-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.realestate-detail .story-progress-fill {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* ===== هدر پاپ‌آپ ===== */
+.realestate-detail .story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.realestate-detail .story-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.realestate-detail .story-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ff0000;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.realestate-detail .story-user-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  margin-right: 4px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  padding: 0;
+  line-height: 1;
+}
+
+.realestate-detail .story-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== محتوای استوری ===== */
+.realestate-detail .story-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  position: relative;
+}
+
+.realestate-detail .story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== دکمه‌های ناوبری ===== */
+.realestate-detail .story-nav-left,
+.realestate-detail .story-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.realestate-detail .story-nav-left {
+  left: 0;
+}
+
+.realestate-detail .story-nav-right {
+  right: 0;
+}
+
+/* ===== پنهان کردن اسکرول هنگام باز بودن استوری ===== */
+.realestate-detail.story-open {
+  overflow: hidden;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .realestate-detail .agent-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .realestate-detail .agent-avatar.has-story {
+    border-width: 3px;
+  }
+  
+  .realestate-detail .story-label {
+    font-size: 10px;
+    padding: 1px 8px;
+  }
+  
+  .realestate-detail .story-caption {
+    font-size: 14px;
+    bottom: 70px;
+    padding: 15px;
+  }
+  
+  .realestate-detail .story-link-button {
+    font-size: 12px;
+    padding: 10px 18px;
+    bottom: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realestate-detail .agent-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .realestate-detail .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .realestate-detail .story-user-name {
+    font-size: 12px;
+  }
+  
+  .realestate-detail .story-user-avatar {
+    width: 30px;
+    height: 30px;
+  }
+}
+/* ===== استایل‌های استوری - با کلاس‌های خاص ===== */
+
+/* کلاس‌های خاص برای جلوگیری از تداخل */
+.realestate-detail .story-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 6;
+  pointer-events: none;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-link-button {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 6;
+  transition: all 0.3s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  text-decoration: none;
+}
+
+.realestate-detail .story-link-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-50%) scale(1.05);
+}
+
+.realestate-detail .story-link-button svg {
+  font-size: 14px;
+}
+
+/* ===== رینگ قرمز دور آواتار مشاور (مثل اینستاگرام) ===== */
+.realestate-detail .agent-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.realestate-detail .agent-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+/* رینگ قرمز - فقط یک border ساده و ضخیم */
+.realestate-detail .agent-avatar.has-story {
+  border: 4px solid #ff0000;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ff0000;
+}
+
+/* ===== برچسب استوری کنار اسم ===== */
+.realestate-detail .agent-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.realestate-detail .story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.08);
+  padding: 2px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  user-select: none;
+}
+
+.realestate-detail .story-label:hover {
+  background: rgba(255, 0, 0, 0.15);
+}
+
+.realestate-detail .story-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: realestateStoryPulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes realestateStoryPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.4; 
+    transform: scale(1.3); 
+  }
+}
+
+/* ===== پاپ‌آپ استوری ===== */
+.realestate-detail .story-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: realestateStoryFadeIn 0.3s ease;
+}
+
+@keyframes realestateStoryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.realestate-detail .story-popup-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 750px;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 768px) {
+  .realestate-detail .story-popup-content {
+    height: 80vh;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realestate-detail .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* ===== نوارهای پیشرفت ===== */
+.realestate-detail .story-progress-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.realestate-detail .story-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.realestate-detail .story-progress-fill {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* ===== هدر پاپ‌آپ ===== */
+.realestate-detail .story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.realestate-detail .story-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.realestate-detail .story-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ff0000;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.realestate-detail .story-user-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  margin-right: 4px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  padding: 0;
+  line-height: 1;
+}
+
+.realestate-detail .story-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== محتوای استوری ===== */
+.realestate-detail .story-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  position: relative;
+}
+
+.realestate-detail .story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== دکمه‌های ناوبری ===== */
+.realestate-detail .story-nav-left,
+.realestate-detail .story-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.realestate-detail .story-nav-left {
+  left: 0;
+}
+
+.realestate-detail .story-nav-right {
+  right: 0;
+}
+
+/* ===== پنهان کردن اسکرول هنگام باز بودن استوری ===== */
+.realestate-detail.story-open {
+  overflow: hidden;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .realestate-detail .agent-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .realestate-detail .agent-avatar.has-story {
+    border-width: 3px;
+  }
+  
+  .realestate-detail .story-label {
+    font-size: 10px;
+    padding: 1px 8px;
+  }
+  
+  .realestate-detail .story-caption {
+    font-size: 14px;
+    bottom: 70px;
+    padding: 15px;
+  }
+  
+  .realestate-detail .story-link-button {
+    font-size: 12px;
+    padding: 10px 18px;
+    bottom: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realestate-detail .agent-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .realestate-detail .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .realestate-detail .story-user-name {
+    font-size: 12px;
+  }
+  
+  .realestate-detail .story-user-avatar {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ===== استایل‌های استوری - با کلاس‌های خاص ===== */
+
+/* کلاس‌های خاص برای جلوگیری از تداخل */
+.realestate-detail .story-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 6;
+  pointer-events: none;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-link-button {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 6;
+  transition: all 0.3s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  text-decoration: none;
+}
+
+.realestate-detail .story-link-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-50%) scale(1.05);
+}
+
+.realestate-detail .story-link-button svg {
+  font-size: 14px;
+}
+
+/* ===== رینگ قرمز دور آواتار مشاور (مثل اینستاگرام) ===== */
+.realestate-detail .agent-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.realestate-detail .agent-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+/* رینگ قرمز - فقط یک border ساده و ضخیم */
+.realestate-detail .agent-avatar.has-story {
+  border: 4px solid #ff0000;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ff0000;
+}
+
+/* ===== رینگ استوری (قسمت قابل کلیک برای استوری) ===== */
+.realestate-detail .story-ring-indicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.realestate-detail .story-ring-gradient {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000,
+    #ff4500,
+    #ff6b00,
+    #ff0000
+  );
+  animation: realestateStorySpin 3s linear infinite;
+  mask: radial-gradient(circle at center, transparent 62%, black 63%);
+  -webkit-mask: radial-gradient(circle at center, transparent 62%, black 63%);
+}
+
+@keyframes realestateStorySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== برچسب استوری کنار اسم ===== */
+.realestate-detail .agent-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.realestate-detail .story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.08);
+  padding: 2px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  user-select: none;
+}
+
+.realestate-detail .story-label:hover {
+  background: rgba(255, 0, 0, 0.15);
+}
+
+.realestate-detail .story-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: realestateStoryPulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes realestateStoryPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.4; 
+    transform: scale(1.3); 
+  }
+}
+
+/* ===== پاپ‌آپ استوری ===== */
+.realestate-detail .story-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: realestateStoryFadeIn 0.3s ease;
+}
+
+@keyframes realestateStoryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.realestate-detail .story-popup-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 750px;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 768px) {
+  .realestate-detail .story-popup-content {
+    height: 80vh;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realestate-detail .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* ===== نوارهای پیشرفت ===== */
+.realestate-detail .story-progress-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.realestate-detail .story-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.realestate-detail .story-progress-fill {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* ===== هدر پاپ‌آپ ===== */
+.realestate-detail .story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.realestate-detail .story-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.realestate-detail .story-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ff0000;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.realestate-detail .story-user-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  margin-right: 4px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.realestate-detail .story-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  padding: 0;
+  line-height: 1;
+}
+
+.realestate-detail .story-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== محتوای استوری ===== */
+.realestate-detail .story-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  position: relative;
+}
+
+.realestate-detail .story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== دکمه‌های ناوبری ===== */
+.realestate-detail .story-nav-left,
+.realestate-detail .story-nav-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.realestate-detail .story-nav-left {
+  left: 0;
+}
+
+.realestate-detail .story-nav-right {
+  right: 0;
+}
+
+/* ===== پنهان کردن اسکرول هنگام باز بودن استوری ===== */
+.realestate-detail.story-open {
+  overflow: hidden;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .realestate-detail .agent-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .realestate-detail .agent-avatar.has-story {
+    border-width: 3px;
+  }
+  
+  .realestate-detail .story-label {
+    font-size: 10px;
+    padding: 1px 8px;
+  }
+  
+  .realestate-detail .story-caption {
+    font-size: 14px;
+    bottom: 70px;
+    padding: 15px;
+  }
+  
+  .realestate-detail .story-link-button {
+    font-size: 12px;
+    padding: 10px 18px;
+    bottom: 120px;
+  }
+  
+  .realestate-detail .story-ring-indicator {
+    width: 68px;
+    height: 68px;
+    top: -4px;
+    right: -4px;
+  }
+  
+  .realestate-detail .story-ring-gradient {
+    width: 64px;
+    height: 64px;
+    top: -2px;
+    right: -2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .realestate-detail .agent-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .realestate-detail .story-popup-content {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .realestate-detail .story-user-name {
+    font-size: 12px;
+  }
+  
+  .realestate-detail .story-user-avatar {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .realestate-detail .story-ring-indicator {
+    width: 58px;
+    height: 58px;
+    top: -4px;
+    right: -4px;
+  }
+  
+  .realestate-detail .story-ring-gradient {
+    width: 54px;
+    height: 54px;
+    top: -2px;
+    right: -2px;
+  }
+}
+
+/* ============================================================ */
+/* ===== دکمه‌های تماس با حالت لاک شده ===== */
+/* ============================================================ */
+
+.agent-actions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .agent-actions-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ===== دکمه‌های عادی ===== */
+.agent-action-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-action-btn .btn-label {
+  white-space: nowrap;
+}
+
+/* دکمه تلفن */
+.agent-action-btn.phone {
+  background: #fff0f0;
+  color: #7d0000;
+  border: 1px solid rgba(125, 0, 0, 0.15);
+}
+
+.agent-action-btn.phone:hover:not(.locked) {
+  background: #7d0000;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(125, 0, 0, 0.3);
+}
+
+/* دکمه واتساپ */
+.agent-action-btn.whatsapp {
+  background: #dcf8c5;
+  color: #075e54;
+  border: 1px solid rgba(7, 94, 84, 0.15);
+}
+
+.agent-action-btn.whatsapp:hover:not(.locked) {
+  background: #075e54;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(7, 94, 84, 0.3);
+}
+
+/* ============================================================ */
+/* ===== دکمه‌های لاک شده (وقتی لاگین نیست) ===== */
+/* ============================================================ */
+.agent-action-btn.locked {
+  position: relative;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #999;
+  border: 1px solid #e0e0e0;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.agent-action-btn.locked:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+.agent-action-btn.locked.phone:hover {
+  background: #fff0f0;
+  border-color: #7d0000;
+}
+
+.agent-action-btn.locked.whatsapp:hover {
+  background: #dcf8c5;
+  border-color: #075e54;
+}
+
+/* ===== بج قفل کوچک روی دکمه ===== */
+.lock-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  background: #7d0000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.3);
+  animation: lockBadgePulse 2s ease-in-out infinite;
+}
+
+@keyframes lockBadgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.lock-icon-small {
+  font-size: 10px;
+}
+
+/* ===== اوورلی روی دکمه که با hover نمایش داده میشه ===== */
+.agent-action-btn.locked .lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  opacity: 0;
+  transition: all 0.35s ease;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.agent-action-btn.locked:hover .lock-overlay {
+  opacity: 1;
+}
+
+.agent-action-btn.locked .lock-overlay .lock-icon {
+  font-size: 20px;
+  color: #7d0000;
+  animation: lockFloat 2s ease-in-out infinite;
+}
+
+@keyframes lockFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.agent-action-btn.locked .lock-overlay .lock-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.agent-action-btn.locked .lock-overlay .lock-subtext {
+  font-size: 10px;
+  color: #7d0000;
+  font-weight: 600;
+}
+
+/* ============================================================ */
+/* ===== دکمه ورود به سامانه ===== */
+/* ============================================================ */
+.login-prompt-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
+}
+
+.login-prompt-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(125, 0, 0, 0.4);
+}
+
+.login-prompt-btn:active {
+  transform: scale(0.97);
+}
+
+.login-prompt-btn .login-icon {
+  font-size: 16px;
+}
+
+.login-prompt-btn .arrow-icon {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.login-prompt-btn:hover .arrow-icon {
+  transform: translateX(-4px);
+}
+
+/* ============================================================ */
+/* ===== مودال لاگین ===== */
+/* ============================================================ */
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.login-modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 32px 32px;
+  max-width: 450px;
+  width: 92%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .login-modal-content {
+    padding: 28px 20px 24px;
+    border-radius: 16px;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #ffebee;
+  color: #7d0000;
+  transform: rotate(90deg);
+}
+
+.modal-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #fff0f0, #ffcdd2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.modal-lock-icon {
+  font-size: 32px;
+  color: #7d0000;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 18px;
+  }
+}
+
+.modal-description {
+  font-size: 15px;
+  color: #555;
+  text-align: center;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+}
+
+.modal-description strong {
+  color: #7d0000;
+}
+
+@media (max-width: 480px) {
+  .modal-description {
+    font-size: 13px;
+  }
+}
+
+.modal-benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+  .modal-benefits {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.benefit-item:hover {
+  background: #fff0f0;
+}
+
+.benefit-icon {
+  font-size: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.modal-login-btn {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
+}
+
+.modal-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(125, 0, 0, 0.4);
+}
+
+.modal-guest-btn {
+  padding: 12px 24px;
+  background: transparent;
+  color: #666;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-guest-btn:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.modal-footer-text {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+  margin: 16px 0 0 0;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 480px) {
+  .agent-action-btn {
+    font-size: 12px;
+    padding: 12px 16px;
+    min-width: 100px;
+  }
+  
+  .agent-action-btn .btn-label {
+    font-size: 11px;
+  }
+  
+  .lock-badge {
+    width: 20px;
+    height: 20px;
+    font-size: 8px;
+    top: -4px;
+    right: -4px;
+  }
+  
+  .agent-action-btn.locked .lock-overlay .lock-icon {
+    font-size: 16px;
+  }
+  
+  .agent-action-btn.locked .lock-overlay .lock-text {
+    font-size: 10px;
+  }
+  
+  .agent-action-btn.locked .lock-overlay .lock-subtext {
+    font-size: 9px;
+  }
+  
+  .login-prompt-btn {
+    font-size: 13px;
+    padding: 12px 16px;
+  }
+}
+
+/* ============================================================ */
+/* ===== استایل‌های مودال لاگین/ثبت‌نام ===== */
+/* ============================================================ */
+
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.login-modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 32px 32px;
+  max-width: 450px;
+  width: 92%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .login-modal-content {
+    padding: 28px 20px 24px;
+    border-radius: 16px;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #ffebee;
+  color: #7d0000;
+  transform: rotate(90deg);
+}
+
+.modal-back-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.modal-back-btn:hover {
+  color: #7d0000;
+}
+
+.modal-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #fff0f0, #ffcdd2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.modal-phone-icon {
+  font-size: 32px;
+  color: #7d0000;
+}
+
+.modal-login-icon {
+  font-size: 32px;
+  color: #2e7d32;
+}
+
+.modal-register-icon {
+  font-size: 32px;
+  color: #1565c0;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 18px;
+  }
+}
+
+.modal-description {
+  font-size: 15px;
+  color: #555;
+  text-align: center;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+}
+
+.modal-description strong {
+  color: #7d0000;
+}
+
+@media (max-width: 480px) {
+  .modal-description {
+    font-size: 13px;
+  }
+}
+
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+}
+
+.phone-input-wrapper:focus-within {
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.phone-prefix {
+  padding: 14px 16px;
+  background: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+  border-right: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.phone-input {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  direction: ltr;
+  text-align: left;
+}
+
+.phone-input::placeholder {
+  color: #bbb;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.input-icon {
+  position: absolute;
+  right: 14px;
+  color: #999;
+  font-size: 16px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 14px 44px 14px 16px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  background: transparent;
+}
+
+.modal-input::placeholder {
+  color: #bbb;
+}
+
+.modal-submit-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
+  margin-top: 8px;
+}
+
+.modal-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(125, 0, 0, 0.4);
+}
+
+.modal-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-submit-btn .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.modal-guest-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background: transparent;
+  color: #666;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.modal-guest-btn:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+
+/* ============================================================ */
+/* ===== استایل‌های کپچا ===== */
+/* ============================================================ */
+
+.captcha-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+}
+
+.captcha-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.captcha-image {
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.captcha-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 50px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.captcha-loading .spinner {
+  font-size: 24px;
+  color: #7d0000;
+  animation: spin 1s linear infinite;
+}
+
+.captcha-refresh-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #666;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.captcha-refresh-btn:hover:not(:disabled) {
+  background: #7d0000;
+  color: white;
+  transform: rotate(45deg);
+}
+
+.captcha-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.captcha-refresh-btn .spinner {
+  animation: spin 1s linear infinite;
+}
+
+.captcha-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 8px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.3s ease;
+  direction: ltr;
+}
+
+.captcha-input:focus {
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+  outline: none;
+}
+
+.captcha-input::placeholder {
+  letter-spacing: 0;
+  color: #bbb;
+  font-size: 14px;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 480px) {
+  .captcha-image {
+    height: 40px;
+    width: auto;
+  }
+  
+  .captcha-refresh-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+  
+  .captcha-input {
+    font-size: 14px;
+    padding: 10px 12px;
+    letter-spacing: 6px;
+  }
+}
+
+/* ============================================================ */
+/* ===== دکمه بوک‌مارک ===== */
+/* ============================================================ */
+
+.bookmark-btn {
+  position: absolute;
+  top: 16px;
+  right: 72px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.bookmark-btn.active {
+  color: #7d0000;
+  background: rgba(255, 107, 0, 0.1);
+}
+
+.bookmark-btn.active:hover {
+  background: rgba(255, 107, 0, 0.2);
+}
+
+.bookmark-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bookmark-btn .spinner {
+  font-size: 20px;
+  color: #7d0000;
+  animation: spin 1s linear infinite;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 480px) {
+  .bookmark-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    right: 60px;
+    top: 12px;
+  }
+}

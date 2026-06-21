@@ -878,3 +878,192 @@
     }
 }
 
+/* UserStoriesPanel.css */
+
+.usr-property-select {
+    position: relative;
+}
+
+.usr-property-select-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: white;
+    font-size: 14px;
+    color: #2d3748;
+    transition: all 0.3s ease;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+}
+
+.usr-property-select-input:hover {
+    border-color: #b794f4;
+}
+
+.usr-property-select-input:focus {
+    outline: none;
+    border-color: #805ad5;
+    box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.1);
+}
+
+.usr-property-select-input option {
+    padding: 8px;
+}
+
+.usr-property-loading {
+    display: block;
+    margin-top: 6px;
+    color: #718096;
+    font-size: 13px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.usr-upload-status {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #4CAF50;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.usr-uploaded-files {
+    margin-top: 8px;
+    color: #4CAF50;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* UserStoriesPanel.css - اضافه کردن این استایل‌ها */
+
+/* پیام نمایش ملک */
+.usr-property-selected-info {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* حالت نمایش ملک */
+.usr-property-mode-message {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+    border: 2px solid #805ad5;
+    border-radius: 16px;
+    align-items: flex-start;
+}
+
+.usr-property-mode-icon {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.usr-property-mode-text {
+    flex: 1;
+}
+
+.usr-property-mode-text h4 {
+    margin: 0 0 4px 0;
+    color: #553c9a;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.usr-property-mode-text p {
+    margin: 0 0 12px 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.usr-property-mode-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.usr-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: white;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #2d3748;
+}
+
+.usr-preview-item span:first-child {
+    font-size: 16px;
+}
+
+/* انیمیشن برای toast جدید */
+.usr-stories-toast.info {
+    background: #3182ce;
+    color: white;
+}
+
+/* بهبود استایل آپلود عکس */
+.usr-upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f7fafc;
+}
+
+.usr-upload-area:hover {
+    border-color: #805ad5;
+    background: #f0f4ff;
+}
+
+.usr-upload-area.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.usr-upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.usr-upload-icon {
+    font-size: 40px;
+}
+
+.usr-upload-content span {
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.usr-upload-content small {
+    color: #a0aec0;
+    font-size: 12px;
+}

@@ -21,7 +21,7 @@ import {
 import './Profile.css';
 
 import { profileService } from '../../../services/profile';
-
+import ImageWithSafeError from '../../common/ImageWithSafeError/ImageWithSafeError';
 const Profile = () => {
   const { user, updateProfile } = useAuth();
   const [isEditing, setIsEditing] = useState(false);

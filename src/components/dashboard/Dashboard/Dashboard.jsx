@@ -161,7 +161,7 @@ import useApi from '../../../hooks/useApi';
 import { authService } from '../../../services/auth';
 import './Dashboard.css';
 // import PersianGanttChart from './PersianGanttChart';
-
+import ImageWithSafeError from '../../common/ImageWithSafeError/ImageWithSafeError';
 const Dashboard = () => {
   const { user } = useAuth();
   

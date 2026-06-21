@@ -800,6 +800,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
+import ImageWithSafeError from '../ImageWithSafeError/ImageWithSafeError';
 import { 
   FaPencilAlt, 
   FaHome, 

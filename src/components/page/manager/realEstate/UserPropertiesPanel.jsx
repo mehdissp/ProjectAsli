@@ -1091,6 +1091,7 @@ import EditPropertyModal from './EditPropertyModal';
 import PaymentModal from './PaymentModal';
 import UserStoriesPanel from '../stories/UserStoriesPanel';
 import './UserPropertiesPanel.css';
+import ImageWithSafeError from '../../../common/ImageWithSafeError/ImageWithSafeError';
 
 const UserPropertiesPanel = () => {
   const navigate = useNavigate();

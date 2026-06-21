@@ -382,6 +382,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 const useStories = (apiUrl = 'https://localhost:7178/api/Story/StoryForSite') => {
+  console.log("storyyyyyyyyyyyyyyyyyyy",useStories)
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

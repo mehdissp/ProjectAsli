@@ -334,7 +334,7 @@ const StoriesFooter = ({ storiesData, onStoryClick }) => {
                   >
                     <div className="footer-slide-image">
                       <img 
-                        src={story.avatar || story.stories?.[0]?.image} 
+                        src={`https://localhost:7178${story.avatar}` || story.stories?.[0]?.image} 
                         alt={story.name || 'آژانس املاک'}
                         loading="lazy"
                         onError={(e) => {

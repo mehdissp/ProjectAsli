@@ -78,7 +78,7 @@ const Header = ({ onToggleSidebar }) => {
     setNotifications(notifications.map(notif => ({ ...notif, read: true })));
   };
     const getProfileImageUrl = () => {
-    return user.avatar || user?.avatar;
+    return `https://localhost:7178${user.avatar}` ||    `https://localhost:7178${user.avatar}`
   };
   const formattedTime = currentTime.toLocaleTimeString('fa-IR');
   const formattedDate = currentTime.toLocaleDateString('fa-IR', {
@@ -224,11 +224,7 @@ const Header = ({ onToggleSidebar }) => {
                     alt="Profile" 
                     className="user-avatar  profile-image"
                      onClick={handleProfileClick}
-                    onError={(e) => {
-                      // اگر تصویر لود نشد، آواتار پیش‌فرض نشان داده شود
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
+        
                   />
                 ) : null}
                 

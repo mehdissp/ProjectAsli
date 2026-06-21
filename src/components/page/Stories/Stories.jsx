@@ -1327,7 +1327,7 @@ const Stories = ({
               >
                 <div className={`story-avatar-wrapper ${story.isViewed ? 'viewed' : ''}`}>
                   <img 
-                    src={story.avatar || story.stories?.[0]?.url} 
+                    src={`https://localhost:7178${story.avatar}`|| story.stories?.[0]?.url} 
                     alt={`آواتار ${story.name}`}
                     className="story-avatar"
                     loading="lazy"
@@ -1433,7 +1433,7 @@ const Stories = ({
                 aria-label={`مشاهده پروفایل ${selectedStory.name}`}
               >
                 <img 
-                  src={selectedStory.avatar || selectedStory.stories[0]?.url} 
+                  src={`https://localhost:7178${selectedStory.avatar}`|| selectedStory.stories[0]?.url} 
                   alt={selectedStory.name}
                   className="story-modal-avatar"
                   width="40"

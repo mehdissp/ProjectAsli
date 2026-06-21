@@ -1,6 +1,34 @@
 import { http } from './api';
 
 export const consultantService = {
+
+  // ✅ دریافت عکس پروفایل
+  async getAvatar() {
+    try {
+      const response = await http.get('/UserProfile/GetAvatar');
+      console.log('📸 Avatar response:', response.data);
+      return response.data.data; // returns imageUrl or null
+    } catch (error) {
+      console.error('Error fetching avatar:', error);
+      return null;
+    }
+  },
+// آپلود عکس پروفایل
+  async uploadProfileImage(imageFile) {
+    try {
+      const formData = new FormData();
+    formData.append('File', imageFile); // ✅ تغییر از 'image' به 'File'
+      const response = await http.post('/UserProfile/upload-photo', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error uploading profile image:', error);
+      throw error;
+    }
+  },
   async getConsultantDashboard() {
     try {
       console.log('🔄 Fetching consultant dashboard data...');
@@ -42,4 +70,4 @@ export const consultantService = {
   }
 };
 
-export default consultantService;
+export default consultantService;   
