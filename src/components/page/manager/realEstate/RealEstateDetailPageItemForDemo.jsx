@@ -364,6 +364,7 @@ const RealEstateDetailPageItemForDemo = memo(() => {
   // پشتیبانی از هر دو روش (query param و param)
   const queryParams = new URLSearchParams(location.search);
 //   const id = paramId || queryParams.get('id');
+console.log(location.state?.propertyId)
 const id = location.state?.propertyId;
   
   const [property, setProperty] = useState(null);
@@ -438,6 +439,7 @@ const decryptResponse = (encryptedData, iv) => {
       setLoading(false);
       return;
     }
+   
         const response = await fetch(
           `https://localhost:7178/api/RealEstatePage/GetRealEstateDetailsForDemo?id=${id}`,
           { signal: controller.signal ,

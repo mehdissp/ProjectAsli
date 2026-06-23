@@ -813,7 +813,7 @@ import {
   FaUser,
   FaChevronDown,
   FaChevronRight,
-  FaUserCircle,FaFingerprint 
+  FaUserCircle,FaFingerprint ,FaBookmark
 } from 'react-icons/fa';
 import { BiSolidDashboard, BiLogoWindows } from "react-icons/bi";
 import './Sidebar.css';
@@ -830,6 +830,8 @@ const iconComponents = {
   FaSignOutAlt: FaSignOutAlt,
   FaTimes: FaTimes,
   FaUserCircle: FaUserCircle,
+  FaBookmark:FaBookmark
+
 };
 
 const Sidebar = ({ isOpen, onClose }) => {

@@ -730,7 +730,8 @@ import RealEstateDetailPageItemForDemo from '../src/components/page/manager/real
 import MapSearchPage from './components/page/mapSearch/MapSearchPage';
 import PaymentReturn from '../src/components/page/manager/realEstate/PaymentReturn';
 import PaymentReturnAds from '../src/components/page/manager/realEstate/PaymentReturnAds';
-
+import ConsultantProfilePage from './components/page/RealEstateDetailPageItem/ConsultantProfilePage/ConsultantProfilePage';
+import UserBookmarksPanel from './components/page/manager/bookMark/UserBookmarksPanel';
 
 import './styles/globals.css';
 import './styles/animations.css';
@@ -763,6 +764,7 @@ const AppContent = () => {
         <Route path="RealEstatePageDetail" element={<RealEstatePageDetail />} />
         <Route path="property/:id/:slug?" element={<RealEstateDetailPageItem />} />
         <Route path="RealEstateDetailPageItem" element={<RealEstateDetailPageItem />} />
+     <Route path="/profile/:name" element={<ConsultantProfilePage />} />
         <Route path="payment-return" element={<PaymentReturn />} />
         <Route path="payment-returnAds" element={<PaymentReturnAds />} />
 
@@ -814,6 +816,9 @@ const AuthenticatedApp = () => {
         <Route path="/charge-wallet" element={<ChargeWalletPage />} />
         <Route path="UserPropertiesPanel" element={<UserPropertiesPanel />} />
         <Route path="RealEstateDetailPageItemForDemo" element={<RealEstateDetailPageItemForDemo />} />
+        <Route path="UserBookmarksPanel" element={<UserBookmarksPanel />} />
+
+        
         
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}

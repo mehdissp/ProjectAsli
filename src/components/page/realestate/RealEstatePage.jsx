@@ -1840,6 +1840,8 @@ import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import { useAuth } from '../../../context/AuthContext';
 import StoriesFooter from '../Stories/StoriesFooter';
 import DoubleSidebarBanners  from '../RealEstateDetailPageItem/SidebarBanner';
+import AgentsSlider from './components/AgentsSlider';
+
 import { 
   buyCategoriesData, 
   rentCategoriesData, 
@@ -2413,7 +2415,8 @@ const RealEstatePage = () => {
             </div>
           </div>
         </div>
-
+  {/* بخش مشاوران مستقل - جدید */}
+  <AgentsSlider />
         {/* بخش مشاوره تخصصی */}
         <div className="consult-section">
           <div className="container">

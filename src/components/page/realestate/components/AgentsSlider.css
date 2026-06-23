@@ -1,0 +1,621 @@
+/* src/components/AgentsSlider.css */
+
+.agents-slider-container {
+  padding: 30px 0 50px 0;
+  background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+}
+
+/* دکوراسیون پس‌زمینه */
+.agents-slider-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.agents-slider-container::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(118, 75, 162, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* هدر بخش */
+.agents-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.header-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #ffffff;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.agents-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+.agents-title span {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.agents-subtitle {
+  font-size: 0.85rem;
+  color: #718096;
+  margin: 4px 0 0 0;
+}
+
+/* ویپر اسلایدر */
+.agents-slider-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* هر آیتم اسلایدر */
+.agent-slide {
+  padding: 10px 12px;
+}
+
+/* کارت مشاور - شیشه‌ای و کوچک */
+.agent-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px 16px 18px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.agent-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+/* آواتار با حلقه */
+.agent-avatar-container {
+  position: relative;
+  margin-bottom: 10px;
+  overflow: visible !important;
+}
+
+.agent-avatar-ring {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25);
+  transition: all 0.4s ease;
+  margin: 0 auto;
+  overflow: visible !important;
+}
+
+.agent-card:hover .agent-avatar-ring {
+  transform: scale(1.06);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.35);
+}
+
+.agent-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  display: block;
+  background: #e2e8f0;
+}
+
+/* دایره امتیاز - زیر عکس و سمت راست - رنگ شرابی */
+.agent-score {
+  position: absolute;
+  bottom: -8px;
+  right: -6px;
+  background: linear-gradient(135deg, #8B1A1A, #6B0F0F);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(139, 26, 26, 0.5);
+  border: 2.5px solid #ffffff;
+  gap: 2px;
+  z-index: 10;
+  overflow: visible !important;
+}
+
+.score-icon {
+  font-size: 0.5rem;
+  color: #ffd700;
+}
+
+/* نام مشاور */
+.agent-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 6px 0 8px 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ردیف اطلاعات */
+.agent-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 4px 0 10px 0;
+  padding: 4px 12px;
+  background: rgba(247, 250, 252, 0.8);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 160px;
+}
+
+.agent-info-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: #4a5568;
+}
+
+.info-icon {
+  color: #667eea;
+  font-size: 0.7rem;
+}
+
+.info-number {
+  font-weight: 700;
+  color: #2d3748;
+  font-size: 0.85rem;
+}
+
+.info-label {
+  color: #a0aec0;
+  font-size: 0.6rem;
+}
+
+.agent-info-divider {
+  width: 1px;
+  height: 16px;
+  background: #e2e8f0;
+}
+
+/* دکمه تماس */
+.agent-call-btn {
+  width: 100%;
+  max-width: 160px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #ffffff;
+  box-shadow: 0 3px 12px rgba(102, 126, 234, 0.25);
+}
+
+.agent-call-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+}
+
+.call-icon {
+  font-size: 0.6rem;
+}
+
+/* استایل دکمه‌های اسلایدر */
+.slick-arrow {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  color: #4a5568;
+  font-size: 0.7rem;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.slick-arrow:hover {
+  background: #667eea;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+.slick-next-custom {
+  right: -10px;
+}
+
+.slick-prev-custom {
+  left: -10px;
+}
+
+/* دات‌های اسلایدر */
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li {
+  margin: 0 3px;
+}
+
+.slick-dots li button:before {
+  font-size: 8px;
+  color: #cbd5e0;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #667eea;
+  opacity: 1;
+  font-size: 10px;
+}
+
+/* اسکلتون لودینگ */
+.agents-skeleton {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.skeleton-item {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 230px;
+}
+
+.skeleton-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-name {
+  width: 60%;
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-stats {
+  width: 40%;
+  height: 10px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* حالت خالی */
+.agents-empty {
+  text-align: center;
+  padding: 30px;
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+/* ====== ریسپانسیو ====== */
+
+/* تبلت و لپ‌تاپ کوچک */
+@media (max-width: 1024px) {
+  .agents-skeleton {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .agent-avatar-ring {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .agent-score {
+    width: 26px;
+    height: 26px;
+    font-size: 0.55rem;
+    bottom: -7px;
+    right: -5px;
+  }
+  
+  .agent-name {
+    font-size: 0.85rem;
+  }
+  
+  .agent-info-row {
+    max-width: 140px;
+    padding: 3px 10px;
+  }
+  
+  .agent-call-btn {
+    max-width: 140px;
+    font-size: 0.65rem;
+    padding: 5px 10px;
+  }
+  
+  .agents-slider-wrapper {
+    padding: 0 20px;
+  }
+}
+
+/* موبایل بزرگ و تبلت کوچک */
+@media (max-width: 768px) {
+  .agents-slider-container {
+    padding: 20px 0 40px 0;
+  }
+  
+  .agents-title {
+    font-size: 1.3rem;
+  }
+  
+  .agents-skeleton {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+  }
+  
+  .agent-card {
+    min-height: 200px;
+    padding: 16px 12px 14px;
+    border-radius: 14px;
+  }
+  
+  .agent-avatar-ring {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .agent-score {
+    width: 24px;
+    height: 24px;
+    font-size: 0.5rem;
+    bottom: -6px;
+    right: -4px;
+    border-width: 2px;
+  }
+  
+  .agent-name {
+    font-size: 0.8rem;
+    margin: 4px 0 6px 0;
+  }
+  
+  .agent-info-row {
+    max-width: 120px;
+    padding: 2px 8px;
+    gap: 8px;
+  }
+  
+  .agent-info-item {
+    font-size: 0.65rem;
+  }
+  
+  .info-number {
+    font-size: 0.75rem;
+  }
+  
+  .agent-call-btn {
+    max-width: 120px;
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+  
+  .agents-slider-wrapper {
+    padding: 0 16px;
+  }
+  
+  .slick-dots {
+    bottom: -25px;
+  }
+  
+  .slick-arrow {
+    display: none !important;
+  }
+}
+
+/* موبایل کوچک */
+@media (max-width: 480px) {
+  .agents-slider-container {
+    padding: 15px 0 35px 0;
+  }
+  
+  .agents-title {
+    font-size: 1.1rem;
+  }
+  
+  .agents-subtitle {
+    font-size: 0.75rem;
+  }
+  
+  .header-badge {
+    font-size: 0.65rem;
+    padding: 3px 12px;
+  }
+  
+  .agents-skeleton {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+  
+  .agent-slide {
+    padding: 6px 8px;
+  }
+  
+  .agent-card {
+    min-height: 180px;
+    padding: 14px 10px 12px;
+    border-radius: 12px;
+  }
+  
+  .agent-avatar-ring {
+    width: 50px;
+    height: 50px;
+    padding: 2px;
+  }
+  
+  .agent-avatar {
+    border-width: 1.5px;
+  }
+  
+  .agent-score {
+    width: 22px;
+    height: 22px;
+    font-size: 0.45rem;
+    bottom: -5px;
+    right: -3px;
+    border-width: 1.5px;
+  }
+  
+  .score-icon {
+    font-size: 0.4rem;
+  }
+  
+  .agent-name {
+    font-size: 0.75rem;
+    margin: 3px 0 4px 0;
+  }
+  
+  .agent-info-row {
+    max-width: 100px;
+    padding: 2px 6px;
+    gap: 6px;
+    border-radius: 8px;
+  }
+  
+  .agent-info-item {
+    font-size: 0.6rem;
+    gap: 2px;
+  }
+  
+  .info-number {
+    font-size: 0.7rem;
+  }
+  
+  .info-label {
+    font-size: 0.5rem;
+  }
+  
+  .agent-info-divider {
+    height: 12px;
+  }
+  
+  .agent-call-btn {
+    max-width: 100px;
+    font-size: 0.55rem;
+    padding: 3px 6px;
+    border-radius: 6px;
+    gap: 4px;
+  }
+  
+  .call-icon {
+    font-size: 0.5rem;
+  }
+  
+  .agents-slider-wrapper {
+    padding: 0 10px;
+  }
+  
+  .slick-dots {
+    bottom: -20px;
+  }
+  
+  .slick-dots li button:before {
+    font-size: 6px;
+  }
+}
