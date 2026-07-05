@@ -349,6 +349,7 @@ import './MainLayout.css';
 import CityModal from './CityModal';
 import { useAuth } from '../../context/AuthContext';
 import { useCity } from '../../context/CityContext';
+import ChatBot from '../common/ChatBot/ChatBot';
 
 const MainLayout = () => {
   const navigate = useNavigate();
@@ -388,6 +389,9 @@ const MainLayout = () => {
     { path: '/map-search', label: 'جستجوی نقشه', icon: '🗺️' },
     { path: '/UserPropertiesPanel', label: 'ثبت آگهی', icon: '📝' },
     { path: '/agencies', label: 'آژانس‌ها', icon: '🏢' },
+    { path: '/SnakeGame', label: 'بازی و سرگرمی', icon: '🏢' },
+
+    
   ];
 
   useEffect(() => {
@@ -497,7 +501,8 @@ const MainLayout = () => {
           if (selectedCity) setIsCityModalOpen(false);
         }}
       />
-
+   {/* اضافه کردن چت‌بات */}
+      <ChatBot userId={user?.id} />
       <footer className="main-footer">
         <div className="footer-container">
           <div className="footer-section">

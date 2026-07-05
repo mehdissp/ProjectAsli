@@ -732,7 +732,9 @@ import PaymentReturn from '../src/components/page/manager/realEstate/PaymentRetu
 import PaymentReturnAds from '../src/components/page/manager/realEstate/PaymentReturnAds';
 import ConsultantProfilePage from './components/page/RealEstateDetailPageItem/ConsultantProfilePage/ConsultantProfilePage';
 import UserBookmarksPanel from './components/page/manager/bookMark/UserBookmarksPanel';
-
+import SnakeGame from './components/page/game/SnakeGame ';
+import ClickGame from './components/page/game/ClickGame';
+import GameSelector from './components/page/game/GameSelector';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -771,6 +773,8 @@ const AppContent = () => {
         <Route path="map-search" element={<MapSearchPage />} />
         <Route path="hotel" element={<HotelPage />} />
         <Route path="hotel/tehran" element={<HotelPage />} />
+<Route path="SnakeGame" element={<GameSelector />} />
+        
       </Route>
       
       {/* روت‌های عمومی */}
