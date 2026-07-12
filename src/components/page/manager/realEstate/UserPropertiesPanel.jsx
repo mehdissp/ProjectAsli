@@ -1479,19 +1479,30 @@ const UserPropertiesPanel = () => {
     try {
       const timeoutId = setTimeout(() => statusController.abort(), 10000);
       
+      // const response = await fetch(
+      //   `https://localhost:7178/api/RealEstate/GetPaymentStatus/${propertyId}`,
+      //   {
+      //     method: 'PATCH',
+      //     headers: {
+      //       'Authorization': `Bearer ${token}`,
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({ status: persianStatus }),
+      //     signal: statusController.signal
+      //   }
+      // );
+      
       const response = await fetch(
-        `https://localhost:7178/api/RealEstate/ChangeStatus/${propertyId}`,
-        {
-          method: 'PATCH',
-          headers: {
+    `https://localhost:7178/api/RealEstatePage/GetPaymentStatus?id=${propertyId}`,  // ✅ Route Parameter
+    {
+        method: 'GET',
+        headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ status: persianStatus }),
-          signal: statusController.signal
-        }
-      );
-      
+        },
+        signal: statusController.signal
+    }
+);
       clearTimeout(timeoutId);
       
       if (!response.ok) {

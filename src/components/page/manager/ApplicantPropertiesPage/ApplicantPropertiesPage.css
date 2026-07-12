@@ -1,4 +1,4 @@
-/* ApplicantPropertiesPage.css - نسخه با بک‌گراند مناطق */
+/* ApplicantPropertiesPage.css - با کلاس‌های unique */
 
 * {
   margin: 0;
@@ -364,6 +364,11 @@
   transform: scale(0.97);
 }
 
+.action-btn-small:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .payment-btn-small {
   background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
@@ -373,11 +378,6 @@
 .payment-btn-small:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(125, 0, 0, 0.3);
-}
-
-.payment-btn-small:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 .spinner-small {
@@ -391,7 +391,7 @@
   border: 1px solid #e0e0e0;
 }
 
-.details-btn-small:hover {
+.details-btn-small:hover:not(:disabled) {
   background: #eeeeee;
   transform: translateY(-1px);
 }
@@ -401,7 +401,7 @@
   transition: transform 0.2s ease;
 }
 
-.details-btn-small:hover .btn-arrow-small {
+.details-btn-small:hover:not(:disabled) .btn-arrow-small {
   transform: translateX(-3px);
 }
 
@@ -452,49 +452,75 @@
   font-size: 12px;
 }
 
-/* ===== مودال ===== */
-.detail-modal-overlay {
+/* ============================================================ */
+/* ===== مودال با کلاس‌های unique ===== */
+/* ============================================================ */
+
+.detail-modal-overlay-applicant {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: modalFadeIn 0.2s ease;
+  animation: modalFadeInApplicant 0.3s ease;
 }
 
-@keyframes modalFadeIn {
+@keyframes modalFadeInApplicant {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
-.detail-modal-content {
+.detail-modal-content-applicant {
   background: white;
-  border-radius: 16px;
-  max-width: 500px;
-  width: 92%;
-  max-height: 85vh;
+  border-radius: 20px;
+  max-width: 580px;
+  width: 94%;
+  max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  animation: modalSlideUpApplicant 0.3s ease;
 }
 
-.modal-close-btn {
+@keyframes modalSlideUpApplicant {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* اسکرول مودال */
+.detail-modal-content-applicant::-webkit-scrollbar {
+  width: 4px;
+}
+
+.detail-modal-content-applicant::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.detail-modal-content-applicant::-webkit-scrollbar-thumb {
+  background: #7d0000;
+  border-radius: 10px;
+}
+
+/* ===== دکمه بستن ===== */
+.modal-close-btn-applicant {
   position: sticky;
-  top: 8px;
-  left: 8px;
+  top: 12px;
+  left: 12px;
   float: left;
-  width: 32px;
-  height: 32px;
-  background: #f5f5f5;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   border-radius: 50%;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -502,180 +528,360 @@
   color: #666;
   transition: all 0.2s ease;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.modal-close-btn:hover {
+.modal-close-btn-applicant:hover {
   background: #ffebee;
   color: #7d0000;
   transform: rotate(90deg);
 }
 
-.modal-header {
-  padding: 16px 20px 10px;
-  border-bottom: 1px solid #f0f0f0;
+/* ===== هدر مودال ===== */
+.modal-header-applicant {
+  padding: 24px 28px 16px;
+  border-bottom: 2px solid #f0f0f0;
+  background: linear-gradient(135deg, #fafafa, #ffffff);
+  border-radius: 20px 20px 0 0;
 }
 
-.modal-title {
-  font-size: 18px;
+.modal-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.modal-title-applicant {
+  font-size: 22px;
   font-weight: 700;
   color: #1a1a1a;
-  margin: 0 0 4px 0;
+  margin: 0;
 }
 
-.modal-status {
+.modal-status-applicant {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 14px;
-  border-radius: 20px;
-  font-size: 12px;
+  gap: 6px;
+  padding: 4px 16px;
+  border-radius: 30px;
+  font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-.modal-status.paid {
+.modal-status-applicant.paid {
   background: #e8f5e9;
   color: #2e7d32;
 }
 
-.modal-status.unpaid {
+.modal-status-applicant.unpaid {
   background: #fff3e0;
   color: #e65100;
 }
 
-.modal-body {
-  padding: 14px 20px 16px;
-}
-
-.detail-row {
-  display: flex;
-  padding: 5px 0;
-  border-bottom: 1px solid #f5f5f5;
-  gap: 10px;
-  font-size: 13px;
-}
-
-.detail-row:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  min-width: 80px;
-  font-weight: 600;
-  color: #666;
+.modal-code {
   font-size: 12px;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* ===== بدنه مودال ===== */
+.modal-body-applicant {
+  padding: 20px 28px 24px;
+}
+
+/* ===== گرید اطلاعات ===== */
+.detail-grid-applicant {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.detail-item-applicant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  transition: all 0.2s ease;
+}
+
+.detail-item-applicant:hover {
+  background: #f0f0f0;
+}
+
+.detail-icon-applicant {
+  width: 36px;
+  height: 36px;
+  background: #7d0000;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
   flex-shrink: 0;
 }
 
-.detail-value {
-  flex: 1;
-  color: #1a1a1a;
-  font-size: 13px;
-  word-break: break-word;
+.detail-label-applicant {
+  font-size: 11px;
+  color: #999;
+  font-weight: 500;
 }
 
-.regions-list {
+.detail-value-applicant {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ===== بخش‌های مودال ===== */
+.detail-section-applicant {
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #e8e8e8;
+}
+
+.detail-section-applicant.regions-section {
+  background: #fdf8f8;
+  border-color: #f0e0e0;
+}
+
+.detail-section-applicant.desc-section {
+  background: #f8f9fa;
+  border-color: #e8e8e8;
+}
+
+.detail-section-applicant.customer-section {
+  background: #f0f7ff;
+  border-color: #d4e4f7;
+}
+
+.detail-section-label-applicant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.section-icon {
+  font-size: 14px;
+  color: #7d0000;
+}
+
+/* ===== مناطق ===== */
+.regions-list-applicant {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
 }
 
-.region-badge {
-  background: #f5f0f0;
-  padding: 1px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  color: #333;
-  border: 1px solid #e8d8d8;
-}
-
-.desc-row {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin: 4px 0;
-  border: 1px solid #e8e8e8;
-}
-
-.desc-value {
+.region-badge-applicant {
+  background: white;
+  padding: 4px 14px;
+  border-radius: 20px;
   font-size: 13px;
-  color: #444;
-  line-height: 1.6;
+  color: #333;
+  border: 1px solid #e0d0d0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.budget-value {
+/* ===== مشخصات ===== */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.spec-item-applicant {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  color: #2e7d32;
-}
-
-.budget-icon {
-  color: #2e7d32;
-  font-size: 14px;
-}
-
-.phone-row {
+  gap: 10px;
+  padding: 10px 14px;
   background: #f8f9fa;
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-top: 4px;
+  border-radius: 10px;
   border: 1px solid #e8e8e8;
 }
 
-.phone-value {
+.spec-icon-applicant {
+  font-size: 18px;
+  color: #7d0000;
+  flex-shrink: 0;
+}
+
+.spec-label-applicant {
+  font-size: 10px;
+  color: #999;
+}
+
+.spec-value-applicant {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.spec-value-applicant.budget {
+  color: #2e7d32;
+}
+
+/* ===== توضیحات ===== */
+.desc-content-applicant {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  padding: 4px 0;
+}
+
+/* ===== متقاضی ===== */
+.customer-name-applicant {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1565c0;
+}
+
+/* ===== فوتر اطلاعات ===== */
+.detail-footer-applicant {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 6px;
+}
+
+.footer-item {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.footer-icon {
+  font-size: 14px;
+  color: #999;
+}
+
+.relative-time {
+  font-size: 12px;
+  color: #7d0000;
   font-weight: 600;
+  background: #fff0f0;
+  padding: 2px 12px;
+  border-radius: 20px;
+}
+
+/* ===== شماره تماس ===== */
+.phone-section-applicant {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid;
+}
+
+.phone-section-applicant.paid {
+  background: #f0f7ff;
+  border-color: #1976d2;
+}
+
+.phone-section-applicant.unpaid {
+  background: #fafafa;
+  border-color: #e0e0e0;
+}
+
+.phone-label-applicant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.phone-icon-section {
+  color: #1976d2;
+  font-size: 16px;
+}
+
+.phone-number-applicant {
+  font-size: 20px;
+  font-weight: 700;
   color: #1976d2;
   direction: ltr;
+  letter-spacing: 2px;
 }
 
-.phone-icon-modal {
-  color: #1976d2;
-  font-size: 14px;
-}
-
-.phone-locked-modal {
+.phone-locked-applicant {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  font-size: 14px;
   color: #999;
-  font-size: 12px;
 }
 
-.lock-icon-modal {
+.lock-icon-section {
   color: #999;
-  font-size: 12px;
+  font-size: 16px;
 }
 
-.modal-footer {
-  padding: 10px 20px 16px;
-  border-top: 1px solid #f0f0f0;
+/* ===== فوتر مودال ===== */
+.modal-footer-applicant {
+  padding: 16px 28px 24px;
+  border-top: 2px solid #f0f0f0;
+  background: #fafafa;
+  border-radius: 0 0 20px 20px;
 }
 
-.payment-btn-modal {
+.payment-btn-modal-applicant {
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 12px rgba(125, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(125, 0, 0, 0.3);
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.payment-btn-modal:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(125, 0, 0, 0.35);
+.payment-btn-modal-applicant:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(125, 0, 0, 0.4);
 }
 
+.payment-btn-modal-applicant:active {
+  transform: scale(0.97);
+}
+
+.btn-lock-icon {
+  font-size: 16px;
+}
+
+/* ============================================================ */
 /* ===== ریسپانسیو ===== */
+/* ============================================================ */
+
 @media (max-width: 768px) {
   .applicant-page-container {
     padding: 10px;
@@ -706,9 +912,35 @@
     padding: 6px 12px 10px;
   }
   
-  .detail-modal-content {
-    width: 95%;
-    border-radius: 14px;
+  .detail-modal-content-applicant {
+    width: 96%;
+    border-radius: 16px;
+    max-height: 92vh;
+  }
+  
+  .modal-header-applicant {
+    padding: 18px 20px 12px;
+  }
+  
+  .modal-title-applicant {
+    font-size: 18px;
+  }
+  
+  .modal-body-applicant {
+    padding: 16px 18px 18px;
+  }
+  
+  .detail-grid-applicant {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .specs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .modal-footer-applicant {
+    padding: 12px 18px 18px;
   }
 }
 
@@ -747,20 +979,6 @@
     padding: 1px 8px;
   }
   
-  .info-tag {
-    font-size: 10px;
-    padding: 1px 8px;
-  }
-  
-  .region-tag-small {
-    font-size: 9px;
-    padding: 1px 8px;
-  }
-  
-  .desc-text {
-    font-size: 10px;
-  }
-  
   .card-actions-compact {
     padding: 6px 10px 8px;
     flex-direction: column;
@@ -772,6 +990,59 @@
     font-size: 11px;
   }
   
+  .detail-modal-content-applicant {
+    border-radius: 12px;
+    width: 98%;
+  }
+  
+  .modal-header-applicant {
+    padding: 14px 16px 10px;
+  }
+  
+  .modal-title-applicant {
+    font-size: 16px;
+  }
+  
+  .modal-status-applicant {
+    font-size: 11px;
+    padding: 2px 12px;
+  }
+  
+  .modal-body-applicant {
+    padding: 12px 14px 14px;
+  }
+  
+  .detail-item-applicant {
+    padding: 10px 12px;
+  }
+  
+  .detail-icon-applicant {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .spec-item-applicant {
+    padding: 8px 12px;
+  }
+  
+  .phone-number-applicant {
+    font-size: 17px;
+  }
+  
+  .modal-footer-applicant {
+    padding: 10px 14px 14px;
+  }
+  
+  .payment-btn-modal-applicant {
+    font-size: 14px;
+    padding: 10px;
+  }
+  
   .pagination-compact {
     gap: 3px;
   }
@@ -781,5 +1052,180 @@
     height: 28px;
     font-size: 11px;
     padding: 0 6px;
+  }
+}
+
+/* ============================================================ */
+/* ===== بخش جستجو ===== */
+/* ============================================================ */
+
+.search-container {
+  margin-bottom: 16px;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 2px solid #e8e8e8;
+  transition: all 0.3s ease;
+}
+
+.search-wrapper:focus-within {
+  border-color: #7d0000;
+  box-shadow: 0 4px 16px rgba(125, 0, 0, 0.12);
+}
+
+.search-icon {
+  position: absolute;
+  right: 14px;
+  color: #999;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 46px 12px 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  background: transparent;
+  outline: none;
+  color: #1a1a1a;
+}
+
+.search-input::placeholder {
+  color: #bbb;
+}
+
+.search-clear {
+  position: absolute;
+  left: 14px;
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+.search-clear:hover {
+  color: #7d0000;
+  background: #f5f5f5;
+}
+
+.search-spinner {
+  position: absolute;
+  left: 14px;
+  color: #7d0000;
+  font-size: 18px;
+  animation: spin 1s linear infinite;
+}
+
+.search-result-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-right: 3px solid #7d0000;
+}
+
+.search-result-info strong {
+  color: #7d0000;
+}
+
+.result-count {
+  font-weight: 600;
+  color: #7d0000;
+  background: #fff0f0;
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.clear-search-btn {
+  margin-top: 12px;
+  padding: 8px 24px;
+  background: #7d0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.clear-search-btn:hover {
+  background: #a30000;
+  transform: translateY(-1px);
+}
+
+/* ===== ریسپانسیو سرچ ===== */
+@media (max-width: 768px) {
+  .search-wrapper {
+    border-radius: 10px;
+  }
+  
+  .search-input {
+    padding: 10px 40px 10px 12px;
+    font-size: 14px;
+  }
+  
+  .search-icon {
+    right: 12px;
+    font-size: 16px;
+  }
+  
+  .search-clear,
+  .search-spinner {
+    left: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-wrapper {
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+  
+  .search-input {
+    padding: 8px 36px 8px 10px;
+    font-size: 13px;
+  }
+  
+  .search-icon {
+    right: 10px;
+    font-size: 14px;
+  }
+  
+  .search-clear,
+  .search-spinner {
+    left: 10px;
+    font-size: 14px;
+  }
+  
+  .search-result-info {
+    font-size: 12px;
+    padding: 6px 10px;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
   }
 }

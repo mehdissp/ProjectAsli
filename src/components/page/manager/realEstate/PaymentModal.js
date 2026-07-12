@@ -1578,7 +1578,10 @@ const PaymentModal = ({ isOpen, onClose, property, onSuccess }) => {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(property.id)
+                  body: JSON.stringify({
+    id: property.id,
+    adPriceRangeType: 1// یا مقدار مناسب دیگر
+  })
         });
 
         if (!response.ok) {
