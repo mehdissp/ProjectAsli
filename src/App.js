@@ -735,6 +735,7 @@ import UserBookmarksPanel from './components/page/manager/bookMark/UserBookmarks
 import SnakeGame from './components/page/game/SnakeGame ';
 import ClickGame from './components/page/game/ClickGame';
 import GameSelector from './components/page/game/GameSelector';
+import ApplicantPropertiesPage from './components/page/manager/ApplicantPropertiesPage/ApplicantPropertiesPage';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -821,7 +822,7 @@ const AuthenticatedApp = () => {
         <Route path="UserPropertiesPanel" element={<UserPropertiesPanel />} />
         <Route path="RealEstateDetailPageItemForDemo" element={<RealEstateDetailPageItemForDemo />} />
         <Route path="UserBookmarksPanel" element={<UserBookmarksPanel />} />
-
+        <Route path="ApplicantPropertiesPage" element={<ApplicantPropertiesPage />} />
         
         
         {/* روت‌های داینامیک */}

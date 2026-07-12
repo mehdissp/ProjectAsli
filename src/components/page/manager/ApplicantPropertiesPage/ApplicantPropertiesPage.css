@@ -1,0 +1,785 @@
+/* ApplicantPropertiesPage.css - نسخه با بک‌گراند مناطق */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.applicant-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  min-height: 100vh;
+  background: #f0f2f5;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+/* ===== هدر ===== */
+.applicant-header {
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(125, 0, 0, 0.2);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.applicant-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.title-icon {
+  font-size: 20px;
+}
+
+.total-count {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ===== Loading & Error ===== */
+.applicant-loading,
+.applicant-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  gap: 12px;
+}
+
+.loading-spinner {
+  font-size: 32px;
+  color: #7d0000;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-icon {
+  font-size: 36px;
+  color: #dc3545;
+}
+
+.applicant-error p {
+  color: #666;
+  font-size: 14px;
+}
+
+.retry-btn {
+  padding: 8px 28px;
+  background: #7d0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+  background: #a30000;
+  transform: translateY(-1px);
+}
+
+/* ===== لیست خالی ===== */
+.applicant-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: #ddd;
+  margin-bottom: 12px;
+}
+
+.applicant-empty h3 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.applicant-empty p {
+  color: #999;
+  font-size: 13px;
+}
+
+/* ===== گرید کارت‌ها ===== */
+.applicant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+/* ===== کارت ===== */
+.applicant-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e8e8e8;
+}
+
+.applicant-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-color: #7d0000;
+}
+
+.card-top {
+  padding: 12px 14px 10px;
+  flex: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.property-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status-badge.paid {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.unpaid {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.status-badge svg {
+  font-size: 10px;
+}
+
+/* ===== اطلاعات فشرده ===== */
+.property-info-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.info-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #666;
+  background: #f5f6fa;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.info-icon-small {
+  font-size: 10px;
+  color: #7d0000;
+}
+
+/* ===== مناطق با بک‌گراند مشخص ===== */
+.regions-compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: #f8f0f0;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border-right: 3px solid #7d0000;
+}
+
+.regions-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #7d0000;
+  margin-left: 4px;
+}
+
+.region-tag-small {
+  background: #ffffff;
+  padding: 1px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  color: #333;
+  border: 1px solid #e0d0d0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.region-tag-small.more {
+  background: #7d0000;
+  color: white;
+  border-color: #7d0000;
+}
+
+/* ===== توضیحات ===== */
+.desc-compact {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border-right: 2px solid #7d0000;
+}
+
+.desc-icon-small {
+  font-size: 10px;
+  color: #7d0000;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.desc-text {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== شماره موبایل ===== */
+.phone-display-compact {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: #f0f7ff;
+  border-radius: 8px;
+  border: 1px solid #d4e4f7;
+}
+
+.phone-icon-small {
+  color: #1976d2;
+  font-size: 12px;
+}
+
+.phone-number-small {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1976d2;
+  direction: ltr;
+}
+
+.phone-locked-compact {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+}
+
+.lock-icon-small {
+  color: #999;
+  font-size: 11px;
+}
+
+.phone-locked-compact span {
+  font-size: 11px;
+  color: #999;
+}
+
+/* ===== دکمه‌ها ===== */
+.card-actions-compact {
+  padding: 8px 14px 10px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn-small {
+  flex: 1;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.action-btn-small:active {
+  transform: scale(0.97);
+}
+
+.payment-btn-small {
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.2);
+}
+
+.payment-btn-small:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(125, 0, 0, 0.3);
+}
+
+.payment-btn-small:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner-small {
+  animation: spin 1s linear infinite;
+  font-size: 14px;
+}
+
+.details-btn-small {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.details-btn-small:hover {
+  background: #eeeeee;
+  transform: translateY(-1px);
+}
+
+.btn-arrow-small {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.details-btn-small:hover .btn-arrow-small {
+  transform: translateX(-3px);
+}
+
+/* ===== صفحه‌بندی ===== */
+.pagination-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+}
+
+.page-btn-small {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 6px;
+  color: #555;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.page-btn-small:hover:not(:disabled):not(.active) {
+  background: #f5f5f5;
+  border-color: #7d0000;
+  color: #7d0000;
+}
+
+.page-btn-small.active {
+  background: #7d0000;
+  border-color: #7d0000;
+  color: white;
+}
+
+.page-btn-small:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-dots-small {
+  color: #999;
+  padding: 0 2px;
+  font-size: 12px;
+}
+
+/* ===== مودال ===== */
+.detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.detail-modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 92%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-btn {
+  position: sticky;
+  top: 8px;
+  left: 8px;
+  float: left;
+  width: 32px;
+  height: 32px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: #ffebee;
+  color: #7d0000;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  padding: 16px 20px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+}
+
+.modal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.modal-status.paid {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.modal-status.unpaid {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.modal-body {
+  padding: 14px 20px 16px;
+}
+
+.detail-row {
+  display: flex;
+  padding: 5px 0;
+  border-bottom: 1px solid #f5f5f5;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  min-width: 80px;
+  font-weight: 600;
+  color: #666;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  flex: 1;
+  color: #1a1a1a;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.regions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.region-badge {
+  background: #f5f0f0;
+  padding: 1px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #333;
+  border: 1px solid #e8d8d8;
+}
+
+.desc-row {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 4px 0;
+  border: 1px solid #e8e8e8;
+}
+
+.desc-value {
+  font-size: 13px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.budget-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.budget-icon {
+  color: #2e7d32;
+  font-size: 14px;
+}
+
+.phone-row {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 4px;
+  border: 1px solid #e8e8e8;
+}
+
+.phone-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #1976d2;
+  direction: ltr;
+}
+
+.phone-icon-modal {
+  color: #1976d2;
+  font-size: 14px;
+}
+
+.phone-locked-modal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #999;
+  font-size: 12px;
+}
+
+.lock-icon-modal {
+  color: #999;
+  font-size: 12px;
+}
+
+.modal-footer {
+  padding: 10px 20px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.payment-btn-modal {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 12px rgba(125, 0, 0, 0.25);
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.payment-btn-modal:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(125, 0, 0, 0.35);
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .applicant-page-container {
+    padding: 10px;
+  }
+  
+  .applicant-header {
+    padding: 12px 16px;
+  }
+  
+  .applicant-title {
+    font-size: 16px;
+  }
+  
+  .applicant-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .card-top {
+    padding: 10px 12px 8px;
+  }
+  
+  .property-title {
+    font-size: 14px;
+  }
+  
+  .card-actions-compact {
+    padding: 6px 12px 10px;
+  }
+  
+  .detail-modal-content {
+    width: 95%;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .applicant-header {
+    padding: 10px 12px;
+  }
+  
+  .applicant-title {
+    font-size: 14px;
+  }
+  
+  .title-icon {
+    font-size: 16px;
+  }
+  
+  .total-count {
+    font-size: 10px;
+    padding: 2px 10px;
+  }
+  
+  .applicant-grid {
+    gap: 10px;
+  }
+  
+  .card-top {
+    padding: 8px 10px 6px;
+  }
+  
+  .property-title {
+    font-size: 13px;
+  }
+  
+  .status-badge {
+    font-size: 9px;
+    padding: 1px 8px;
+  }
+  
+  .info-tag {
+    font-size: 10px;
+    padding: 1px 8px;
+  }
+  
+  .region-tag-small {
+    font-size: 9px;
+    padding: 1px 8px;
+  }
+  
+  .desc-text {
+    font-size: 10px;
+  }
+  
+  .card-actions-compact {
+    padding: 6px 10px 8px;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .action-btn-small {
+    padding: 5px;
+    font-size: 11px;
+  }
+  
+  .pagination-compact {
+    gap: 3px;
+  }
+  
+  .page-btn-small {
+    min-width: 28px;
+    height: 28px;
+    font-size: 11px;
+    padding: 0 6px;
+  }
+}

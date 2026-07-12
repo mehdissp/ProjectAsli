@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import SnakeGame from './SnakeGame '; // ✅ فاصله اضافی رو حذف کردم
 import ClickGame from './ClickGame';
 import Game2048 from './Game2048';
+import Arrows from './Arrows';
 
 const GameSelector = () => {
   const [selectedGame, setSelectedGame] = useState(null);
@@ -89,7 +90,7 @@ const GameSelector = () => {
       case 'snake':
         return <SnakeGame />;
       case 'click':
-        return <ClickGame />;
+        return <Arrows />;
       case '2048':
         return <Game2048 />;
       default:

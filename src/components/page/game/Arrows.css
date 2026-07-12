@@ -1,0 +1,324 @@
+/* ============================================
+   Arrows Puzzle Escape - CSS یونیک
+   همه کلاس‌ها با "apg-" شروع می‌شوند
+   ============================================ */
+
+/* ----- صفحه منو ----- */
+.apg-game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.apg-menu {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  padding: 40px 30px;
+  border-radius: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 450px;
+  width: 100%;
+}
+
+.apg-title {
+  font-size: 44px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 0 30px rgba(100, 200, 255, 0.3);
+}
+
+.apg-subtitle {
+  font-size: 22px;
+  color: #4fc3f7;
+  margin: 5px 0 20px;
+  font-weight: 300;
+}
+
+.apg-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+
+.apg-menu-btn {
+  background: linear-gradient(135deg, #4fc3f7, #0288d1);
+  color: white;
+  border: none;
+  padding: 14px 45px;
+  font-size: 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.apg-menu-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(79, 195, 247, 0.3);
+}
+
+.apg-controls-info {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.apg-controls-info span {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+/* ----- صفحه بازی ----- */
+.apg-game-area {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+}
+
+.apg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 5px;
+}
+
+.apg-stats {
+  display: flex;
+  gap: 15px;
+  color: white;
+  font-size: 15px;
+}
+
+.apg-stats span {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.apg-reset-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.apg-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ----- گرید بازی ----- */
+.apg-grid-container {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 8px;
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.apg-grid {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+.apg-cell {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  transition: all 0.2s;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.apg-cell:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.apg-exit {
+  background: rgba(76, 175, 80, 0.12) !important;
+}
+
+.apg-player {
+  font-size: 30px;
+  animation: apg-playerPulse 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes apg-playerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.apg-exit-icon {
+  font-size: 26px;
+}
+
+.apg-arrow-icon {
+  font-size: 26px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.apg-arrow-icon:hover {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(79, 195, 247, 0.2);
+}
+
+.apg-arrow-up { color: #4CAF50; }
+.apg-arrow-down { color: #f44336; }
+.apg-arrow-left { color: #2196F3; }
+.apg-arrow-right { color: #FF9800; }
+
+/* ----- کنترل‌ها ----- */
+.apg-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 18px;
+  gap: 6px;
+}
+
+.apg-control-row {
+  display: flex;
+  gap: 8px;
+}
+
+.apg-control-btn {
+  width: 58px;
+  height: 58px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.apg-control-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: scale(1.04);
+}
+
+.apg-control-btn:active {
+  transform: scale(0.92);
+  background: rgba(79, 195, 247, 0.2);
+}
+
+/* ----- صفحه برنده شدن ----- */
+.apg-win-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: apg-fadeIn 0.4s ease;
+  z-index: 10;
+}
+
+@keyframes apg-fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.apg-win-modal {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  padding: 35px 30px;
+  border-radius: 25px;
+  text-align: center;
+  border: 2px solid rgba(76, 175, 80, 0.25);
+  max-width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.apg-win-modal h2 {
+  color: #4fc3f7;
+  font-size: 34px;
+  margin: 0;
+}
+
+.apg-win-modal p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 17px;
+  margin: 12px 0 22px;
+}
+
+.apg-next-btn {
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+  color: white;
+  border: none;
+  padding: 11px 38px;
+  font-size: 17px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+.apg-next-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+
+/* ===== واکنش‌گرایی ===== */
+@media (max-width: 520px) {
+  .apg-menu { padding: 30px 20px; }
+  .apg-title { font-size: 36px; }
+  .apg-subtitle { font-size: 18px; }
+  .apg-game-area { padding: 15px; }
+  .apg-cell { font-size: 20px; }
+  .apg-player { font-size: 24px; }
+  .apg-arrow-icon { font-size: 20px; }
+  .apg-control-btn { width: 50px; height: 50px; font-size: 22px; }
+  .apg-stats { font-size: 13px; gap: 10px; }
+  .apg-stats span { padding: 3px 10px; }
+}
+
+@media (max-width: 400px) {
+  .apg-cell { font-size: 16px; border-radius: 5px; }
+  .apg-player { font-size: 18px; }
+  .apg-arrow-icon { font-size: 16px; }
+  .apg-control-btn { width: 44px; height: 44px; font-size: 18px; }
+  .apg-grid { gap: 3px; }
+  .apg-win-modal h2 { font-size: 28px; }
+}
