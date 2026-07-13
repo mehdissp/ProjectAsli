@@ -390,6 +390,7 @@ const MainLayout = () => {
     { path: '/UserPropertiesPanel', label: 'ثبت آگهی', icon: '📝' },
     { path: '/agencies', label: 'آژانس‌ها', icon: '🏢' },
     { path: '/SnakeGame', label: 'بازی و سرگرمی', icon: '🏢' },
+    { path: '/blog', label: ' بلاگ', icon: '🏢' },
 
     
   ];
