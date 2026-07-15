@@ -1,0 +1,1110 @@
+/* BlogCreate.css */
+.blog-create-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  background: #f0f2f5;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+/* ===== هدر ===== */
+.blog-create-header {
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  border-radius: 16px;
+  padding: 24px 32px;
+  margin-bottom: 24px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.blog-create-title {
+  color: white;
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 4px 0;
+}
+
+.blog-create-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  margin: 0;
+}
+
+.preview-toggle-btn {
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.preview-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== فرم ===== */
+.blog-create-form-container {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e8e8e8;
+}
+
+/* ===== ویرایشگر ===== */
+.editor-wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.editor-wrapper.preview-mode {
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  min-height: 400px;
+  padding: 20px;
+  background: #fafafa;
+}
+
+.preview-content {
+  font-size: 16px;
+  line-height: 2;
+  color: #333;
+  direction: rtl;
+}
+
+.preview-content h1,
+.preview-content h2,
+.preview-content h3,
+.preview-content h4 {
+  color: #1a1a1a;
+  margin: 20px 0 10px 0;
+}
+
+.preview-content p {
+  margin: 0 0 12px 0;
+}
+
+.preview-content ul,
+.preview-content ol {
+  padding-right: 24px;
+  margin: 0 0 12px 0;
+}
+
+.preview-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* ===== استایل‌های Quill ===== */
+.blog-editor {
+  direction: rtl;
+}
+
+.blog-editor .ql-toolbar {
+  border-radius: 10px 10px 0 0;
+  background: #f8f9fa;
+  border-color: #e0e0e0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.blog-editor .ql-toolbar .ql-formats {
+  margin-left: 4px;
+}
+
+.blog-editor .ql-toolbar button {
+  padding: 3px 6px;
+}
+
+.blog-editor .ql-container {
+  min-height: 400px;
+  font-size: 16px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  border-radius: 0 0 10px 10px;
+  border-color: #e0e0e0;
+}
+
+.blog-editor .ql-editor {
+  direction: rtl;
+  text-align: right;
+  min-height: 400px;
+  padding: 16px;
+}
+
+.blog-editor .ql-editor p,
+.blog-editor .ql-editor div {
+  direction: rtl;
+}
+
+.blog-editor .ql-editor h1,
+.blog-editor .ql-editor h2,
+.blog-editor .ql-editor h3,
+.blog-editor .ql-editor h4 {
+  direction: rtl;
+  margin: 12px 0 8px 0;
+}
+
+.blog-editor .ql-editor ul,
+.blog-editor .ql-editor ol {
+  padding-right: 24px;
+}
+
+.blog-editor.error .ql-toolbar {
+  border-color: #c62828;
+}
+
+.blog-editor.error .ql-container {
+  border-color: #c62828;
+}
+
+/* ===== نکات ویرایشگر ===== */
+.editor-tips {
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+}
+
+.editor-tips > span {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px;
+}
+
+.tip-item {
+  font-size: 13px;
+  color: #555;
+  padding: 4px 8px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+}
+
+.tip-item .highlight {
+  color: #7d0000;
+  font-weight: 600;
+  background: #fff0f0;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
+/* ===== سایر استایل‌ها ===== */
+.submit-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  border-radius: 10px;
+  color: #c62828;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.submit-error svg {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.input-error {
+  display: block;
+  font-size: 12px;
+  color: #c62828;
+  margin-top: 4px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.required {
+  color: #c62828;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: #7d0000;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+  outline: none;
+}
+
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+  border-color: #c62828;
+  background: #fff5f5;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #bbb;
+}
+
+.input-hint {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7d0000;
+  pointer-events: none;
+}
+
+.form-select {
+  padding-right: 40px;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* ===== تصویر شاخص ===== */
+.image-upload-area {
+  border: 2px dashed #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image-upload-area.error {
+  border-color: #c62828;
+  background: #fff5f5;
+}
+
+.image-upload-area:hover {
+  border-color: #7d0000;
+  background: #fafafa;
+}
+
+.image-input {
+  display: none;
+}
+
+.image-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  padding: 20px;
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: #7d0000;
+}
+
+.image-upload-label span {
+  font-size: 15px;
+  color: #666;
+}
+
+.upload-hint {
+  font-size: 12px;
+  color: #999 !important;
+}
+
+.image-preview-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.image-preview {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #c62828;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.remove-image-btn:hover {
+  background: #b71c1c;
+  transform: scale(1.1);
+}
+
+/* ===== انتشار ===== */
+.publish-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.toggle-btn {
+  padding: 8px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toggle-btn:hover {
+  border-color: #ccc;
+}
+
+.toggle-btn.active {
+  border-color: #7d0000;
+  background: #fff0f0;
+  color: #7d0000;
+}
+
+/* ===== دکمه‌ها ===== */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cancel-btn {
+  padding: 12px 32px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.cancel-btn:hover {
+  background: #eeeeee;
+}
+
+.submit-btn {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 2;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(125, 0, 0, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-btn .spinner {
+  animation: spin 1s linear infinite;
+  font-size: 18px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== پیشرفت ===== */
+.upload-progress {
+  margin-top: 16px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7d0000, #a30000);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* ===== موفقیت ===== */
+.success-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.success-icon {
+  font-size: 64px;
+  color: #2e7d32;
+  margin-bottom: 16px;
+}
+
+.success-message h3 {
+  font-size: 24px;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.success-message p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .blog-create-wrapper {
+    padding: 12px;
+  }
+
+  .blog-create-header {
+    padding: 20px 16px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .preview-toggle-btn {
+    align-self: center;
+  }
+
+  .blog-create-title {
+    font-size: 22px;
+  }
+
+  .blog-create-form-container {
+    padding: 20px 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .submit-btn,
+  .cancel-btn {
+    flex: none;
+    width: 100%;
+  }
+
+  .publish-toggle {
+    flex-direction: column;
+  }
+
+  .toggle-btn {
+    justify-content: center;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-create-header {
+    padding: 16px 12px;
+  }
+
+  .blog-create-title {
+    font-size: 18px;
+  }
+
+  .blog-create-subtitle {
+    font-size: 13px;
+  }
+
+  .blog-create-form-container {
+    padding: 16px 12px;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-editor .ql-container {
+    min-height: 250px;
+  }
+
+  .blog-editor .ql-editor {
+    min-height: 250px;
+  }
+}
+
+/* BlogCreate.css - اضافه کنید */
+
+/* ===== رفع مشکل اسکرول در ویرایشگر ===== */
+.blog-editor .ql-editor {
+  max-height: 500px;
+  overflow-y: auto;
+  direction: rtl;
+  text-align: right;
+  min-height: 400px;
+  padding: 16px;
+}
+
+.blog-editor .ql-container {
+  min-height: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+  font-size: 16px;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  border-radius: 0 0 10px 10px;
+  border-color: #e0e0e0;
+}
+
+/* ===== رفع مشکل تمرکز ===== */
+.blog-editor .ql-editor:focus {
+  outline: none;
+}
+
+.blog-editor .ql-editor.ql-blank::before {
+  color: #bbb;
+  font-style: normal;
+  right: 16px;
+  left: auto;
+}
+
+/* ===== جلوگیری از جا به جایی صفحه ===== */
+.blog-editor .ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f8f9fa;
+  border-radius: 10px 10px 0 0;
+  border-color: #e0e0e0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+/* ===== رفع مشکل تصاویر ===== */
+.blog-editor .ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+/* اضافه کنید به BlogCreate.css */
+
+/* ===== بخش برچسب‌ها (تگ‌ها) ===== */
+.tags-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.spinner-small {
+  animation: spin 1s linear infinite;
+  font-size: 18px;
+  color: #7d0000;
+}
+
+.tags-multiselect {
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.tags-multiselect:focus-within {
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.selected-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px 4px 8px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  animation: tagAppear 0.3s ease;
+}
+
+@keyframes tagAppear {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.selected-tag .tag-name {
+  font-size: 13px;
+}
+
+.remove-tag-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  font-size: 12px;
+}
+
+.remove-tag-btn:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+}
+
+.tag-item:hover {
+  border-color: #7d0000;
+  color: #7d0000;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.15);
+}
+
+.tag-item.selected {
+  background: #7d0000;
+  border-color: #7d0000;
+  color: white;
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.3);
+}
+
+.tag-item.selected .tag-check {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tag-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  font-size: 11px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.tag-item.selected .tag-check {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tag-item .tag-name {
+  font-size: 13px;
+}
+
+.no-tags-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background: #fff8e1;
+  border: 1px solid #ffd54f;
+  border-radius: 10px;
+  color: #f57f17;
+  font-size: 14px;
+}
+
+.no-tags-message svg {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .tags-multiselect {
+    padding: 10px;
+  }
+
+  .selected-tags {
+    gap: 6px;
+  }
+
+  .selected-tag {
+    font-size: 12px;
+    padding: 3px 10px 3px 6px;
+  }
+
+  .tag-item {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .tag-check {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  .no-tags-message {
+    font-size: 13px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tags-list {
+    gap: 6px;
+  }
+
+  .tag-item {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .selected-tag {
+    font-size: 11px;
+    padding: 2px 8px 2px 4px;
+  }
+
+  .tag-check {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+  }
+}
+
+/* اضافه کنید به BlogCreate.css */
+
+/* ===== وضعیت آپلود تصاویر ===== */
+.upload-status-container {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+}
+
+.upload-status-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.upload-status-icon {
+  color: #7d0000;
+  font-size: 16px;
+}
+
+.upload-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-status-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+}
+
+.upload-file-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 100px;
+}
+
+.upload-file-name {
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.upload-file-size {
+  font-size: 11px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.upload-progress-bar {
+  flex: 2;
+  height: 6px;
+  background: #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 80px;
+}
+
+.upload-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.upload-progress-fill.uploading {
+  background: linear-gradient(90deg, #7d0000, #a30000);
+}
+
+.upload-progress-fill.success {
+  background: #2e7d32;
+  width: 100% !important;
+}
+
+.upload-progress-fill.error {
+  background: #c62828;
+  width: 100% !important;
+}
+
+.upload-status-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.upload-status-text {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.upload-status-text.uploading {
+  color: #7d0000;
+}
+
+.upload-status-text.success {
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.upload-status-text.error {
+  color: #c62828;
+}
+
+.remove-upload-btn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.remove-upload-btn:hover {
+  color: #c62828;
+  background: #ffebee;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .upload-status-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .upload-file-info {
+    min-width: 100%;
+  }
+
+  .upload-file-name {
+    max-width: 120px;
+  }
+
+  .upload-progress-bar {
+    flex: 1;
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-status-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .upload-file-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .upload-status-actions {
+    justify-content: space-between;
+  }
+}

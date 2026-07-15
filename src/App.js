@@ -738,6 +738,7 @@ import GameSelector from './components/page/game/GameSelector';
 import ApplicantPropertiesPage from './components/page/manager/ApplicantPropertiesPage/ApplicantPropertiesPage';
 import BlogPage from './components/page/blogPage/BlogPage';
 import BlogPostDetail from './components/page/blogPage/BlogPostDetail';
+import BlogCreate from './components/page/blogPage/Crud/BlogCreate';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -779,7 +780,8 @@ const AppContent = () => {
 <Route path="SnakeGame" element={<GameSelector />} />
   {/* ===== مسیر وبلاگ ===== */}
   <Route path="blog" element={<BlogPage />} />
-        <Route path="blog/post/:id" element={<BlogPostDetail />} />
+        {/* <Route path="blog/post/:id" element={<BlogPostDetail />} /> */}
+        <Route path="blog/post/:slug/:id" element={<BlogPostDetail />} />
       </Route>
       
       {/* روت‌های عمومی */}
@@ -828,7 +830,7 @@ const AuthenticatedApp = () => {
         <Route path="UserBookmarksPanel" element={<UserBookmarksPanel />} />
         <Route path="ApplicantPropertiesPage" element={<ApplicantPropertiesPage />} />
         
-        
+        <Route path="BlogCreate" element={<BlogCreate />} />
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}
         <Route path="*" element={<NotFoundPage />} />

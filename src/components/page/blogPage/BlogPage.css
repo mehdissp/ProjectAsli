@@ -1,6 +1,9 @@
-/* BlogPage.css - تمام‌صفحه با ریسپانسیو کامل */
+/* ============================================================ */
+/* وبلاگ مشاور املاک - طراحی مدرن و حرفه‌ای */
+/* ============================================================ */
 
-* {
+/* ===== ریست و فونت ===== */
+.blog-page-wrapper * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,510 +12,676 @@
 .blog-page-wrapper {
   width: 100%;
   min-height: 100vh;
-  background: #f0f2f5;
+  background: linear-gradient(180deg, #f8f9fa 0%, #f0f2f5 100%);
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
   padding: 0;
 }
 
-/* ===== Loading ===== */
-.blog-loading {
+/* ===== اسکرول بار سفارشی ===== */
+.blog-page-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog-page-wrapper::-webkit-scrollbar-track {
+  background: #f0f2f5;
+}
+
+.blog-page-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7d0000, #a30000);
+  border-radius: 10px;
+}
+
+/* ===== لودینگ ===== */
+.blog-page-wrapper .blog-loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  gap: 16px;
+  gap: 20px;
+  background: linear-gradient(180deg, #f8f9fa, #f0f2f5);
 }
 
-.blog-loading-spinner {
-  font-size: 40px;
+.blog-page-wrapper .blog-loading-spinner {
+  font-size: 48px;
   color: #7d0000;
-  animation: spin 1s linear infinite;
+  animation: blog-spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes blog-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 
-.blog-loading span {
+.blog-page-wrapper .blog-loading span {
   color: #666;
   font-size: 16px;
-}
-
-/* ===== هدر ===== */
-.blog-header {
-  background: linear-gradient(135deg, #7d0000, #a30000);
-  padding: 40px 20px;
-  text-align: center;
-  width: 100%;
-}
-
-.blog-title {
-  color: white;
-  font-size: 32px;
-  font-weight: 800;
-  margin: 0 0 8px 0;
-}
-
-.blog-subtitle {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 16px;
-  margin: 0 0 16px 0;
-}
-
-.blog-stats {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.stat-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 6px 20px;
-  border-radius: 20px;
-  color: white;
-  font-size: 14px;
-}
-
-/* ===== سه ستونه ===== */
-.blog-three-column {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-/* ===== ستون چپ ===== */
-.blog-sidebar-left {
-  width: 260px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ===== ستون راست ===== */
-.blog-sidebar-right {
-  width: 260px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ===== ستون وسط ===== */
-.blog-main-content {
-  flex: 1;
-  min-width: 0;
-}
-
-/* ===== کارت‌های تبلیغات ===== */
-.ad-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e8e8e8;
-  transition: all 0.3s ease;
-}
-
-.ad-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.ad-badge {
-  background: linear-gradient(135deg, #ff6b00, #ff4500);
-  color: white;
-  padding: 4px 12px;
-  font-size: 10px;
-  font-weight: 700;
-  text-align: center;
+  font-weight: 500;
   letter-spacing: 1px;
 }
 
-.ad-content {
-  padding: 16px;
+/* ===== هدر با طراحی مدرن ===== */
+.blog-page-wrapper .blog-header {
+  background: linear-gradient(135deg, #7d0000 0%, #a30000 40%, #cc0000 100%);
+  padding: 60px 20px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* افکت دایره‌های تزئینی */
+.blog-page-wrapper .blog-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  animation: float-bubble 8s ease-in-out infinite;
+}
+
+.blog-page-wrapper .blog-header::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  animation: float-bubble 10s ease-in-out infinite reverse;
+}
+
+@keyframes float-bubble {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.1); }
+}
+
+.blog-page-wrapper .blog-title {
+  color: white;
+  font-size: 38px;
+  font-weight: 900;
+  margin: 0 0 12px 0;
+  position: relative;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
+}
+
+.blog-page-wrapper .blog-title .highlight {
+  color: #ffd700;
+}
+
+.blog-page-wrapper .blog-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  margin: 0 0 24px 0;
+  position: relative;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.blog-page-wrapper .blog-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.blog-page-wrapper .stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 8px 24px;
+  border-radius: 30px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.blog-page-wrapper .stat-badge:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Breadcrumb مدرن ===== */
+.blog-page-wrapper .blog-breadcrumb {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+}
+
+.blog-page-wrapper .breadcrumb-list {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.blog-page-wrapper .breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.blog-page-wrapper .breadcrumb-item::after {
+  content: "›";
+  color: #ccc;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.blog-page-wrapper .breadcrumb-item:last-child::after {
+  content: "";
+}
+
+.blog-page-wrapper .breadcrumb-item.active {
+  color: #7d0000;
+  font-weight: 700;
+}
+
+.blog-page-wrapper .breadcrumb-link {
+  color: #7d0000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.blog-page-wrapper .breadcrumb-link:hover {
+  color: #cc0000;
+  transform: translateX(-4px);
+}
+
+/* ===== سه ستونه با فاصله بهتر ===== */
+.blog-page-wrapper .blog-three-column {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  /* max-width: 1440px; */
+  margin: 0 auto;
+}
+
+/* ===== ستون‌های کناری ===== */
+.blog-page-wrapper .blog-sidebar-left,
+.blog-page-wrapper .blog-sidebar-right {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== کارت‌های تبلیغات با طراحی مدرن ===== */
+.blog-page-wrapper .ad-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.blog-page-wrapper .ad-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7d0000, #cc0000, #7d0000);
+  background-size: 200% 100%;
+  animation: shimmer-gradient 3s linear infinite;
+}
+
+@keyframes shimmer-gradient {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.blog-page-wrapper .ad-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(125, 0, 0, 0.12);
+}
+
+.blog-page-wrapper .ad-badge {
+  background: linear-gradient(135deg, #ff6b00, #ff4500);
+  color: white;
+  padding: 4px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  border-radius: 0 0 12px 0;
+}
+
+.blog-page-wrapper .ad-content {
+  padding: 20px;
   text-align: center;
 }
 
-.ad-icon {
-  font-size: 36px;
-  color: #7d0000;
-  margin-bottom: 8px;
+.blog-page-wrapper .ad-icon {
+  font-size: 40px;
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
 }
 
-.ad-content h4 {
-  font-size: 15px;
+.blog-page-wrapper .ad-content h4 {
+  font-size: 16px;
   font-weight: 700;
   color: #1a1a1a;
-  margin: 0 0 4px 0;
+  margin: 0 0 6px 0;
 }
 
-.ad-content p {
+.blog-page-wrapper .ad-content p {
   font-size: 13px;
-  color: #666;
-  margin: 0 0 12px 0;
-  line-height: 1.5;
+  color: #888;
+  margin: 0 0 16px 0;
+  line-height: 1.6;
 }
 
-.ad-btn {
-  padding: 8px 20px;
-  background: #7d0000;
+.blog-page-wrapper .ad-btn {
+  padding: 10px 28px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
 }
 
-.ad-btn:hover {
-  background: #a30000;
-  transform: translateY(-2px);
+.blog-page-wrapper .ad-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(125, 0, 0, 0.4);
 }
 
-.ad-image {
+.blog-page-wrapper .ad-image {
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
-/* ===== بخش جستجو ===== */
-.blog-search-section {
-  margin-bottom: 16px;
+.blog-page-wrapper .ad-card:hover .ad-image {
+  transform: scale(1.02);
 }
 
-.blog-search-wrapper {
+/* ===== بخش جستجو با طراحی مدرن ===== */
+.blog-page-wrapper .blog-search-section {
+  margin-bottom: 24px;
+}
+
+.blog-page-wrapper .blog-search-wrapper {
   display: flex;
   align-items: center;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  border: 2px solid #e8e8e8;
-  transition: all 0.3s ease;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.blog-search-wrapper:focus-within {
+.blog-page-wrapper .blog-search-wrapper:focus-within {
   border-color: #7d0000;
-  box-shadow: 0 4px 16px rgba(125, 0, 0, 0.12);
+  box-shadow: 0 8px 30px rgba(125, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
-.blog-search-icon {
-  padding: 0 14px;
+.blog-page-wrapper .blog-search-icon {
+  padding: 0 18px;
   color: #999;
-  font-size: 18px;
+  font-size: 20px;
+  transition: color 0.3s ease;
 }
 
-.blog-search-input {
+.blog-page-wrapper .blog-search-wrapper:focus-within .blog-search-icon {
+  color: #7d0000;
+}
+
+.blog-page-wrapper .blog-search-input {
   flex: 1;
-  padding: 12px 0;
+  padding: 14px 0;
   border: none;
   outline: none;
-  font-size: 15px;
+  font-size: 16px;
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
   background: transparent;
   color: #1a1a1a;
   min-width: 50px;
 }
 
-.blog-search-input::placeholder {
-  color: #bbb;
+.blog-page-wrapper .blog-search-input::placeholder {
+  color: #c0c0c0;
+  font-weight: 300;
 }
 
-.blog-search-clear {
-  padding: 0 12px;
+.blog-page-wrapper .blog-search-clear {
+  padding: 0 14px;
   background: none;
   border: none;
-  color: #999;
-  font-size: 18px;
+  color: #ccc;
+  font-size: 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.blog-search-clear:hover {
+.blog-page-wrapper .blog-search-clear:hover {
   color: #7d0000;
+  transform: rotate(90deg);
 }
 
-.blog-search-btn {
-  padding: 12px 24px;
-  background: #7d0000;
+.blog-page-wrapper .blog-search-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
   color: white;
   border: none;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
   white-space: nowrap;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
-.blog-search-btn:hover {
-  background: #a30000;
+.blog-page-wrapper .blog-search-btn:hover {
+  background: linear-gradient(135deg, #a30000, #cc0000);
+  transform: scale(1.02);
 }
 
-/* ===== دسته‌بندی‌ها ===== */
-.blog-categories-scroll {
+/* ===== دکمه‌های دسته‌بندی با طراحی مدرن ===== */
+.blog-page-wrapper .blog-categories-scroll {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
-  padding: 4px 2px 8px;
+  padding: 4px 2px 12px;
   scrollbar-width: thin;
   scrollbar-color: #7d0000 transparent;
 }
 
-.blog-categories-scroll::-webkit-scrollbar {
+.blog-page-wrapper .blog-categories-scroll::-webkit-scrollbar {
   height: 4px;
 }
 
-.blog-categories-scroll::-webkit-scrollbar-track {
+.blog-page-wrapper .blog-categories-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.blog-categories-scroll::-webkit-scrollbar-thumb {
-  background: #7d0000;
+.blog-page-wrapper .blog-categories-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #7d0000, #cc0000);
   border-radius: 10px;
 }
 
-.category-btn {
+.blog-page-wrapper .category-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
+  gap: 8px;
+  padding: 8px 20px;
   background: white;
-  border: 1px solid #e0e0e0;
+  border: 2px solid #e8e8e8;
   border-radius: 30px;
-  font-size: 13px;
-  color: #555;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
   cursor: pointer;
   white-space: nowrap;
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.category-btn:hover {
-  background: #f5f5f5;
+.blog-page-wrapper .category-btn:hover {
+  background: #f8f0f0;
   border-color: #7d0000;
   color: #7d0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.1);
 }
 
-.category-btn.active {
-  background: #7d0000;
+.blog-page-wrapper .category-btn.active {
+  background: linear-gradient(135deg, #7d0000, #a30000);
   border-color: #7d0000;
   color: white;
+  box-shadow: 0 4px 20px rgba(125, 0, 0, 0.3);
 }
 
-.category-icon-small {
-  font-size: 12px;
+.blog-page-wrapper .category-btn.active:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(125, 0, 0, 0.4);
+}
+
+.blog-page-wrapper .category-icon-small {
+  font-size: 14px;
 }
 
 /* ===== فیلترهای فعال ===== */
-.blog-filters {
+.blog-page-wrapper .blog-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
-  margin-bottom: 16px;
-  padding: 8px 12px;
+  margin-bottom: 20px;
+  padding: 12px 18px;
   background: white;
-  border-radius: 10px;
-  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.filter-tag {
+.blog-page-wrapper .filter-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: 20px;
+  gap: 8px;
+  padding: 5px 14px 5px 10px;
+  border-radius: 30px;
   font-size: 13px;
-  background: #fff0f0;
+  font-weight: 500;
+  background: linear-gradient(135deg, #fff0f0, #ffe8e8);
   border: 1px solid #ffd0d0;
   color: #333;
+  animation: fadeInUp 0.3s ease;
 }
 
-.filter-tag.search {
-  background: #f0f7ff;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-page-wrapper .filter-tag.search {
+  background: linear-gradient(135deg, #f0f7ff, #e8f0ff);
   border-color: #d0e4ff;
 }
 
-.remove-filter {
+.blog-page-wrapper .remove-filter {
   background: none;
   border: none;
   color: #999;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   padding: 0 2px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-.remove-filter:hover {
+.blog-page-wrapper .remove-filter:hover {
   color: #7d0000;
+  transform: rotate(90deg);
 }
 
-.total-count {
-  font-size: 13px;
-  color: #666;
+.blog-page-wrapper .total-count {
+  font-size: 14px;
+  color: #888;
   font-weight: 600;
   margin-right: auto;
+  background: #f5f5f5;
+  padding: 4px 16px;
+  border-radius: 30px;
 }
 
-/* ===== لیست مطالب ===== */
-.blog-posts-section {
-  min-height: 400px;
-}
-
-.blog-posts-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  gap: 12px;
-}
-
-.blog-posts-loading .loading-spinner {
-  font-size: 32px;
-  color: #7d0000;
-  animation: spin 1s linear infinite;
-}
-
-/* ===== حالت خالی ===== */
-.blog-empty {
-  text-align: center;
-  padding: 60px 20px;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e8e8e8;
-}
-
-.empty-icon {
-  font-size: 48px;
-  color: #ddd;
-  margin-bottom: 12px;
-}
-
-.blog-empty h3 {
-  color: #333;
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-
-.blog-empty p {
-  color: #999;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.clear-search-btn {
-  padding: 8px 24px;
-  background: #7d0000;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
-}
-
-.clear-search-btn:hover {
-  background: #a30000;
-}
-
-/* ===== کارت‌های مطالب ===== */
-.blog-posts-grid {
+/* ===== لیست مطالب با کارت‌های مدرن ===== */
+.blog-page-wrapper .blog-posts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 24px;
+  margin-bottom: 32px;
 }
 
-.blog-post-card {
+.blog-page-wrapper .blog-post-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid #e8e8e8;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.blog-post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  border-color: #7d0000;
+.blog-page-wrapper .blog-post-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #7d0000, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.post-image-wrapper {
+.blog-page-wrapper .blog-post-card:hover::after {
+  opacity: 1;
+}
+
+.blog-page-wrapper .blog-post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 50px rgba(125, 0, 0, 0.12);
+  border-color: rgba(125, 0, 0, 0.1);
+}
+
+.blog-page-wrapper .post-image-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 55%;
+  padding-top: 60%;
   overflow: hidden;
-  background: #f0f0f0;
+  background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
   flex-shrink: 0;
 }
 
-.post-image {
+.blog-page-wrapper .post-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.blog-post-card:hover .post-image {
+.blog-page-wrapper .blog-post-card:hover .post-image {
+  transform: scale(1.08);
+}
+
+.blog-page-wrapper .post-category-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 16px;
+  background: rgba(125, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.blog-page-wrapper .blog-post-card:hover .post-category-badge {
+  background: #7d0000;
   transform: scale(1.05);
 }
 
-.post-category-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 3px 12px;
-  background: rgba(125, 0, 0, 0.9);
+.blog-page-wrapper .post-category-badge a {
   color: white;
-  font-size: 10px;
-  font-weight: 600;
-  border-radius: 16px;
+  text-decoration: none;
 }
 
-.post-content {
-  padding: 14px 16px;
+/* ===== محتوای پست ===== */
+.blog-page-wrapper .post-content {
+  padding: 20px 22px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.post-title {
-  font-size: 15px;
-  font-weight: 700;
+.blog-page-wrapper .post-title {
+  font-size: 18px;
+  font-weight: 800;
   color: #1a1a1a;
-  margin: 0 0 6px 0;
-  line-height: 1.5;
+  margin: 0 0 8px 0;
+  line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.3s ease;
 }
 
-.post-summary {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.6;
-  margin: 0 0 10px 0;
+.blog-page-wrapper .blog-post-card:hover .post-title {
+  color: #7d0000;
+}
+
+.blog-page-wrapper .post-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-page-wrapper .post-summary {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.8;
+  margin: 0 0 14px 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -520,87 +689,103 @@
   flex: 1;
 }
 
-.post-meta {
+.blog-page-wrapper .post-meta {
   display: flex;
-  gap: 12px;
-  font-size: 11px;
-  color: #999;
-  padding-bottom: 10px;
+  gap: 16px;
+  font-size: 12px;
+  color: #aaa;
+  padding-bottom: 12px;
   border-bottom: 1px solid #f0f0f0;
+  flex-wrap: wrap;
 }
 
-.post-meta span {
+.blog-page-wrapper .post-meta span {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
-.post-read-more {
+.blog-page-wrapper .post-read-more {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
   color: #7d0000;
-  padding-top: 8px;
+  padding-top: 10px;
+  transition: all 0.3s ease;
 }
 
-.post-read-more svg {
-  transition: transform 0.2s ease;
+.blog-page-wrapper .post-read-more a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.blog-post-card:hover .post-read-more svg {
-  transform: translateX(-4px);
+.blog-page-wrapper .post-read-more svg {
+  transition: transform 0.3s ease;
 }
 
-/* ===== صفحه‌بندی ===== */
-.blog-pagination {
+.blog-page-wrapper .blog-post-card:hover .post-read-more svg {
+  transform: translateX(-6px);
+}
+
+/* ===== صفحه‌بندی مدرن ===== */
+.blog-page-wrapper .blog-pagination {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding: 8px 0 16px;
+  padding: 12px 0 20px;
 }
 
-.page-btn {
-  min-width: 36px;
-  height: 36px;
-  padding: 0 12px;
-  border: 1px solid #e0e0e0;
+.blog-page-wrapper .page-btn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 16px;
+  border: 2px solid #e8e8e8;
   background: white;
-  border-radius: 8px;
-  color: #555;
-  font-size: 14px;
+  border-radius: 12px;
+  color: #666;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.page-btn:hover:not(:disabled):not(.active) {
-  background: #f5f5f5;
+.blog-page-wrapper .page-btn:hover:not(:disabled):not(.active) {
+  background: #f8f0f0;
   border-color: #7d0000;
   color: #7d0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.1);
 }
 
-.page-btn.active {
-  background: #7d0000;
+.blog-page-wrapper .page-btn.active {
+  background: linear-gradient(135deg, #7d0000, #a30000);
   border-color: #7d0000;
   color: white;
+  box-shadow: 0 4px 20px rgba(125, 0, 0, 0.3);
 }
 
-.page-btn:disabled {
-  opacity: 0.4;
+.blog-page-wrapper .page-btn:disabled {
+  opacity: 0.3;
   cursor: not-allowed;
+  transform: none !important;
 }
 
-.page-dots {
-  color: #999;
+.blog-page-wrapper .page-dots {
+  color: #ccc;
   padding: 0 4px;
+  font-weight: 700;
 }
 
 /* ============================================================ */
@@ -609,263 +794,323 @@
 
 /* دسکتاپ بزرگ */
 @media (max-width: 1400px) {
-  .blog-sidebar-left,
-  .blog-sidebar-right {
-    width: 220px;
+  .blog-page-wrapper .blog-sidebar-left,
+  .blog-page-wrapper .blog-sidebar-right {
+    width: 240px;
   }
 }
 
 /* دسکتاپ */
 @media (max-width: 1200px) {
-  .blog-sidebar-left,
-  .blog-sidebar-right {
+  .blog-page-wrapper .blog-sidebar-left,
+  .blog-page-wrapper .blog-sidebar-right {
     width: 200px;
   }
   
-  .blog-posts-grid {
+  .blog-page-wrapper .blog-posts-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .blog-page-wrapper .blog-three-column {
+    padding: 20px;
+    gap: 20px;
   }
 }
 
 /* تبلت بزرگ */
 @media (max-width: 992px) {
-  .blog-sidebar-left,
-  .blog-sidebar-right {
+  .blog-page-wrapper .blog-sidebar-left,
+  .blog-page-wrapper .blog-sidebar-right {
     width: 180px;
   }
   
-  .blog-posts-grid {
+  .blog-page-wrapper .blog-posts-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
   
-  .blog-title {
-    font-size: 28px;
+  .blog-page-wrapper .blog-title {
+    font-size: 30px;
+  }
+  
+  .blog-page-wrapper .blog-header {
+    padding: 40px 16px 35px;
   }
 }
 
 /* تبلت */
 @media (max-width: 768px) {
-  .blog-header {
-    padding: 30px 16px;
+  .blog-page-wrapper .blog-header {
+    padding: 30px 16px 25px;
   }
   
-  .blog-title {
-    font-size: 24px;
+  .blog-page-wrapper .blog-title {
+    font-size: 26px;
   }
   
-  .blog-subtitle {
-    font-size: 14px;
+  .blog-page-wrapper .blog-subtitle {
+    font-size: 15px;
   }
   
-  .blog-three-column {
+  .blog-page-wrapper .blog-three-column {
     flex-direction: column;
-    padding: 12px;
-    gap: 16px;
+    padding: 16px;
+    gap: 20px;
   }
   
-  .blog-sidebar-left,
-  .blog-sidebar-right {
+  .blog-page-wrapper .blog-sidebar-left,
+  .blog-page-wrapper .blog-sidebar-right {
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
   }
   
-  .blog-sidebar-left .ad-card,
-  .blog-sidebar-right .ad-card {
+  .blog-page-wrapper .blog-sidebar-left .ad-card,
+  .blog-page-wrapper .blog-sidebar-right .ad-card {
     flex: 1;
-    min-width: calc(50% - 6px);
+    min-width: calc(50% - 8px);
   }
   
-  .blog-posts-grid {
+  .blog-page-wrapper .blog-posts-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 16px;
   }
   
-  .blog-search-btn {
-    padding: 10px 16px;
-    font-size: 13px;
-  }
-  
-  .blog-search-input {
+  .blog-page-wrapper .blog-search-btn {
+    padding: 12px 24px;
     font-size: 14px;
-    padding: 10px 0;
   }
   
-  .stat-badge {
-    font-size: 12px;
-    padding: 4px 14px;
+  .blog-page-wrapper .blog-search-input {
+    font-size: 15px;
+    padding: 12px 0;
   }
   
-  .blog-stats {
-    gap: 12px;
+  .blog-page-wrapper .stat-badge {
+    font-size: 13px;
+    padding: 6px 16px;
+  }
+  
+  .blog-page-wrapper .blog-stats {
+    gap: 15px;
+  }
+  
+  .blog-page-wrapper .blog-breadcrumb {
+    padding: 10px 16px;
+  }
+  
+  .blog-page-wrapper .breadcrumb-item {
+    font-size: 13px;
   }
 }
 
 /* موبایل بزرگ */
 @media (max-width: 576px) {
-  .blog-header {
-    padding: 20px 12px;
+  .blog-page-wrapper .blog-header {
+    padding: 24px 12px 20px;
   }
   
-  .blog-title {
-    font-size: 20px;
+  .blog-page-wrapper .blog-title {
+    font-size: 22px;
   }
   
-  .blog-subtitle {
-    font-size: 13px;
+  .blog-page-wrapper .blog-subtitle {
+    font-size: 14px;
   }
   
-  .blog-three-column {
-    padding: 8px;
+  .blog-page-wrapper .blog-three-column {
+    padding: 12px;
+    gap: 16px;
+  }
+  
+  .blog-page-wrapper .blog-sidebar-left,
+  .blog-page-wrapper .blog-sidebar-right {
+    flex-direction: column;
     gap: 12px;
   }
   
-  .blog-sidebar-left,
-  .blog-sidebar-right {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .blog-sidebar-left .ad-card,
-  .blog-sidebar-right .ad-card {
+  .blog-page-wrapper .blog-sidebar-left .ad-card,
+  .blog-page-wrapper .blog-sidebar-right .ad-card {
     min-width: auto;
     flex: none;
   }
   
-  .blog-posts-grid {
+  .blog-page-wrapper .blog-posts-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
   }
   
-  .blog-search-wrapper {
+  .blog-page-wrapper .blog-search-wrapper {
     flex-wrap: wrap;
+    border-radius: 12px;
   }
   
-  .blog-search-btn {
+  .blog-page-wrapper .blog-search-btn {
     width: 100%;
-    border-radius: 0 0 10px 10px;
-    padding: 10px;
-  }
-  
-  .blog-search-icon {
-    padding: 0 10px;
-    font-size: 16px;
-  }
-  
-  .blog-search-input {
-    font-size: 13px;
-    padding: 10px 0;
-  }
-  
-  .blog-search-clear {
-    font-size: 16px;
-    padding: 0 8px;
-  }
-  
-  .category-btn {
-    font-size: 12px;
-    padding: 5px 12px;
-  }
-  
-  .post-title {
-    font-size: 14px;
-  }
-  
-  .post-summary {
-    font-size: 12px;
-  }
-  
-  .post-meta {
-    font-size: 10px;
-    gap: 8px;
-  }
-  
-  .blog-pagination {
-    gap: 4px;
-  }
-  
-  .page-btn {
-    min-width: 28px;
-    height: 28px;
-    font-size: 12px;
-    padding: 0 8px;
-    border-radius: 6px;
-  }
-  
-  .stat-badge {
-    font-size: 11px;
-    padding: 3px 10px;
-  }
-  
-  .blog-stats {
-    gap: 8px;
-  }
-  
-  .ad-content {
+    border-radius: 0 0 12px 12px;
     padding: 12px;
-  }
-  
-  .ad-icon {
-    font-size: 28px;
-  }
-  
-  .ad-content h4 {
     font-size: 14px;
   }
   
-  .ad-content p {
+  .blog-page-wrapper .blog-search-icon {
+    padding: 0 12px;
+    font-size: 18px;
+  }
+  
+  .blog-page-wrapper .blog-search-input {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+  
+  .blog-page-wrapper .blog-search-clear {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+  
+  .blog-page-wrapper .category-btn {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+  
+  .blog-page-wrapper .post-title {
+    font-size: 16px;
+  }
+  
+  .blog-page-wrapper .post-summary {
+    font-size: 13px;
+  }
+  
+  .blog-page-wrapper .post-meta {
+    font-size: 11px;
+    gap: 10px;
+  }
+  
+  .blog-page-wrapper .blog-pagination {
+    gap: 6px;
+  }
+  
+  .blog-page-wrapper .page-btn {
+    min-width: 36px;
+    height: 36px;
+    font-size: 13px;
+    padding: 0 12px;
+    border-radius: 8px;
+  }
+  
+  .blog-page-wrapper .stat-badge {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+  
+  .blog-page-wrapper .blog-stats {
+    gap: 10px;
+  }
+  
+  .blog-page-wrapper .ad-content {
+    padding: 14px;
+  }
+  
+  .blog-page-wrapper .ad-icon {
+    font-size: 32px;
+  }
+  
+  .blog-page-wrapper .ad-content h4 {
+    font-size: 15px;
+  }
+  
+  .blog-page-wrapper .ad-content p {
     font-size: 12px;
   }
   
-  .ad-btn {
+  .blog-page-wrapper .ad-btn {
     font-size: 12px;
-    padding: 6px 16px;
+    padding: 8px 20px;
+  }
+  
+  .blog-page-wrapper .blog-breadcrumb {
+    padding: 8px 12px;
+  }
+  
+  .blog-page-wrapper .breadcrumb-item {
+    font-size: 12px;
+  }
+  
+  .blog-page-wrapper .filter-tag {
+    font-size: 12px;
+    padding: 4px 12px 4px 8px;
+  }
+  
+  .blog-page-wrapper .total-count {
+    font-size: 12px;
+    padding: 3px 12px;
   }
 }
 
 /* موبایل کوچک */
 @media (max-width: 360px) {
-  .blog-title {
-    font-size: 17px;
+  .blog-page-wrapper .blog-title {
+    font-size: 18px;
   }
   
-  .blog-subtitle {
+  .blog-page-wrapper .blog-subtitle {
     font-size: 12px;
   }
   
-  .blog-header {
-    padding: 16px 10px;
+  .blog-page-wrapper .blog-header {
+    padding: 18px 10px 16px;
   }
   
-  .blog-three-column {
-    padding: 4px;
-    gap: 8px;
+  .blog-page-wrapper .blog-three-column {
+    padding: 8px;
+    gap: 12px;
   }
   
-  .post-content {
-    padding: 10px 12px;
+  .blog-page-wrapper .post-content {
+    padding: 14px 16px;
   }
   
-  .post-title {
-    font-size: 13px;
+  .blog-page-wrapper .post-title {
+    font-size: 14px;
   }
   
-  .post-summary {
+  .blog-page-wrapper .post-summary {
+    font-size: 12px;
+  }
+  
+  .blog-page-wrapper .category-btn {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+  
+  .blog-page-wrapper .filter-tag {
     font-size: 11px;
   }
   
-  .category-btn {
+  .blog-page-wrapper .total-count {
     font-size: 11px;
-    padding: 4px 10px;
   }
   
-  .filter-tag {
-    font-size: 11px;
-    padding: 3px 10px;
-  }
-  
-  .total-count {
-    font-size: 11px;
+  .blog-page-wrapper .page-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+    padding: 0 10px;
   }
 }
+
+/* ===== انیمیشن‌های اضافی ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.blog-page-wrapper .blog-post-card {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.blog-page-wrapper .blog-post-card:nth-child(2) { animation-delay: 0.1s; }
+.blog-page-wrapper .blog-post-card:nth-child(3) { animation-delay: 0.2s; }
+.blog-page-wrapper .blog-post-card:nth-child(4) { animation-delay: 0.3s; }
+.blog-page-wrapper .blog-post-card:nth-child(5) { animation-delay: 0.4s; }
+.blog-page-wrapper .blog-post-card:nth-child(6) { animation-delay: 0.5s; }
