@@ -62,7 +62,7 @@
   letter-spacing: 1px;
 }
 
-/* ===== هدر با طراحی مدرن ===== */
+/* ===== هدر ===== */
 .blog-page-wrapper .blog-header {
   background: linear-gradient(135deg, #7d0000 0%, #a30000 40%, #cc0000 100%);
   padding: 60px 20px 50px;
@@ -71,7 +71,6 @@
   overflow: hidden;
 }
 
-/* افکت دایره‌های تزئینی */
 .blog-page-wrapper .blog-header::before {
   content: '';
   position: absolute;
@@ -109,10 +108,6 @@
   position: relative;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   letter-spacing: -0.5px;
-}
-
-.blog-page-wrapper .blog-title .highlight {
-  color: #ffd700;
 }
 
 .blog-page-wrapper .blog-subtitle {
@@ -153,7 +148,7 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== Breadcrumb مدرن ===== */
+/* ===== Breadcrumb ===== */
 .blog-page-wrapper .blog-breadcrumb {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
@@ -214,26 +209,242 @@
   transform: translateX(-4px);
 }
 
-/* ===== سه ستونه با فاصله بهتر ===== */
+/* ===== سه ستونه ===== */
 .blog-page-wrapper .blog-three-column {
   display: flex;
   gap: 30px;
   padding: 30px;
-  /* max-width: 1440px; */
   margin: 0 auto;
 }
 
 /* ===== ستون‌های کناری ===== */
 .blog-page-wrapper .blog-sidebar-left,
 .blog-page-wrapper .blog-sidebar-right {
-  width: 280px;
+  width: 350px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-height: 200px;
 }
 
-/* ===== کارت‌های تبلیغات با طراحی مدرن ===== */
+.blog-page-wrapper .blog-main-content {
+  flex: 1;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== کارت پست‌های پربازدید ===== */
+.blog-page-wrapper .popular-posts-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-page-wrapper .popular-posts-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(125, 0, 0, 0.08);
+}
+
+.blog-page-wrapper .popular-posts-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+  border-bottom: 2px solid #ffd0d0;
+}
+
+.blog-page-wrapper .popular-icon {
+  color: #ff4500;
+  font-size: 22px;
+  animation: fire-pulse 2s ease-in-out infinite;
+}
+
+@keyframes fire-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.blog-page-wrapper .popular-posts-header h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+}
+
+.blog-page-wrapper .popular-badge {
+  background: linear-gradient(135deg, #ff4500, #ff6b00);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 30px;
+  letter-spacing: 0.5px;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.blog-page-wrapper .popular-posts-list {
+  padding: 8px 12px 12px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.blog-page-wrapper .popular-posts-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.blog-page-wrapper .popular-posts-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blog-page-wrapper .popular-posts-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7d0000, #cc0000);
+  border-radius: 10px;
+}
+
+/* ===== هر آیتم پست پربازدید ===== */
+.blog-page-wrapper .popular-post-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.blog-page-wrapper .popular-post-item:last-child {
+  border-bottom: none;
+}
+
+.blog-page-wrapper .popular-post-item:hover {
+  background: #f8f0f0;
+  transform: translateX(-4px);
+}
+
+.blog-page-wrapper .popular-post-rank {
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+.blog-page-wrapper .rank-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  background: #f0f0f0;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+.blog-page-wrapper .popular-post-item:hover .rank-number {
+  transform: scale(1.1);
+}
+
+.blog-page-wrapper .rank-1 {
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: white;
+}
+
+.blog-page-wrapper .rank-2 {
+  background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
+  color: white;
+}
+
+.blog-page-wrapper .rank-3 {
+  background: linear-gradient(135deg, #cd7f32, #b87333);
+  color: white;
+}
+
+.blog-page-wrapper .rank-4,
+.blog-page-wrapper .rank-5,
+.blog-page-wrapper .rank-6,
+.blog-page-wrapper .rank-7,
+.blog-page-wrapper .rank-8,
+.blog-page-wrapper .rank-9,
+.blog-page-wrapper .rank-10 {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.blog-page-wrapper .popular-post-image-wrapper {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.blog-page-wrapper .popular-post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog-page-wrapper .popular-post-item:hover .popular-post-image {
+  transform: scale(1.1);
+}
+
+.blog-page-wrapper .popular-post-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.blog-page-wrapper .popular-post-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.blog-page-wrapper .popular-post-item:hover .popular-post-title {
+  color: #7d0000;
+}
+
+.blog-page-wrapper .popular-post-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.blog-page-wrapper .popular-post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.blog-page-wrapper .popular-post-views {
+  color: #7d0000;
+  font-weight: 600;
+}
+
+/* ===== کارت‌های تبلیغات ===== */
 .blog-page-wrapper .ad-card {
   background: white;
   border-radius: 16px;
@@ -336,9 +547,10 @@
   transform: scale(1.02);
 }
 
-/* ===== بخش جستجو با طراحی مدرن ===== */
+/* ===== بخش جستجو ===== */
 .blog-page-wrapper .blog-search-section {
   margin-bottom: 24px;
+  flex-shrink: 0;
 }
 
 .blog-page-wrapper .blog-search-wrapper {
@@ -421,7 +633,7 @@
   transform: scale(1.02);
 }
 
-/* ===== دکمه‌های دسته‌بندی با طراحی مدرن ===== */
+/* ===== دکمه‌های دسته‌بندی ===== */
 .blog-page-wrapper .blog-categories-scroll {
   display: flex;
   gap: 10px;
@@ -557,7 +769,14 @@
   border-radius: 30px;
 }
 
-/* ===== لیست مطالب با کارت‌های مدرن ===== */
+/* ===== لیست مطالب ===== */
+.blog-page-wrapper .blog-posts-section {
+  flex: 1;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
 .blog-page-wrapper .blog-posts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -733,7 +952,81 @@
   transform: translateX(-6px);
 }
 
-/* ===== صفحه‌بندی مدرن ===== */
+/* ===== حالت خالی ===== */
+.blog-page-wrapper .blog-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border: 2px dashed #e0e0e0;
+  min-height: 400px;
+  text-align: center;
+}
+
+.blog-page-wrapper .blog-empty .empty-icon {
+  font-size: 64px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.blog-page-wrapper .blog-empty h3 {
+  font-size: 22px;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.blog-page-wrapper .blog-empty p {
+  font-size: 16px;
+  color: #999;
+  margin: 0 0 24px 0;
+}
+
+.blog-page-wrapper .blog-empty .clear-search-btn {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #7d0000, #a30000);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
+}
+
+.blog-page-wrapper .blog-empty .clear-search-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(125, 0, 0, 0.4);
+}
+
+/* ===== لودینگ پست‌ها ===== */
+.blog-page-wrapper .blog-posts-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 300px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.blog-page-wrapper .loading-spinner {
+  font-size: 40px;
+  color: #7d0000;
+  animation: blog-spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  margin-bottom: 12px;
+}
+
+/* ===== صفحه‌بندی ===== */
 .blog-page-wrapper .blog-pagination {
   display: flex;
   align-items: center;
@@ -788,8 +1081,24 @@
   font-weight: 700;
 }
 
+/* ===== انیمیشن‌ها ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.blog-page-wrapper .blog-post-card {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.blog-page-wrapper .blog-post-card:nth-child(2) { animation-delay: 0.1s; }
+.blog-page-wrapper .blog-post-card:nth-child(3) { animation-delay: 0.2s; }
+.blog-page-wrapper .blog-post-card:nth-child(4) { animation-delay: 0.3s; }
+.blog-page-wrapper .blog-post-card:nth-child(5) { animation-delay: 0.4s; }
+.blog-page-wrapper .blog-post-card:nth-child(6) { animation-delay: 0.5s; }
+
 /* ============================================================ */
-/* ===== ریسپانسیو کامل ===== */
+/* ===== ریسپانسیو ===== */
 /* ============================================================ */
 
 /* دسکتاپ بزرگ */
@@ -864,8 +1173,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
+    min-height: auto;
   }
   
+  .blog-page-wrapper .blog-sidebar-left .popular-posts-card,
   .blog-page-wrapper .blog-sidebar-left .ad-card,
   .blog-page-wrapper .blog-sidebar-right .ad-card {
     flex: 1;
@@ -903,6 +1214,10 @@
   .blog-page-wrapper .breadcrumb-item {
     font-size: 13px;
   }
+  
+  .blog-page-wrapper .popular-posts-card {
+    min-width: auto;
+  }
 }
 
 /* موبایل بزرگ */
@@ -930,6 +1245,7 @@
     gap: 12px;
   }
   
+  .blog-page-wrapper .blog-sidebar-left .popular-posts-card,
   .blog-page-wrapper .blog-sidebar-left .ad-card,
   .blog-page-wrapper .blog-sidebar-right .ad-card {
     min-width: auto;
@@ -1045,6 +1361,42 @@
     font-size: 12px;
     padding: 3px 12px;
   }
+  
+  .blog-page-wrapper .blog-empty {
+    min-height: 300px;
+    padding: 40px 16px;
+  }
+  
+  .blog-page-wrapper .blog-empty .empty-icon {
+    font-size: 48px;
+  }
+  
+  .blog-page-wrapper .blog-empty h3 {
+    font-size: 18px;
+  }
+  
+  .blog-page-wrapper .blog-posts-loading {
+    min-height: 200px;
+    padding: 40px 16px;
+  }
+  
+  .blog-page-wrapper .popular-post-item {
+    padding: 8px 4px;
+  }
+  
+  .blog-page-wrapper .popular-post-image-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .blog-page-wrapper .popular-post-title {
+    font-size: 12px;
+  }
+  
+  .blog-page-wrapper .popular-post-meta {
+    font-size: 10px;
+    gap: 8px;
+  }
 }
 
 /* موبایل کوچک */
@@ -1097,20 +1449,21 @@
     font-size: 12px;
     padding: 0 10px;
   }
+  
+  .blog-page-wrapper .blog-empty {
+    min-height: 250px;
+    padding: 30px 16px;
+  }
+  
+  .blog-page-wrapper .blog-empty .empty-icon {
+    font-size: 40px;
+  }
+  
+  .blog-page-wrapper .blog-empty h3 {
+    font-size: 16px;
+  }
+  
+  .blog-page-wrapper .blog-empty p {
+    font-size: 14px;
+  }
 }
-
-/* ===== انیمیشن‌های اضافی ===== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.blog-page-wrapper .blog-post-card {
-  animation: fadeIn 0.6s ease forwards;
-}
-
-.blog-page-wrapper .blog-post-card:nth-child(2) { animation-delay: 0.1s; }
-.blog-page-wrapper .blog-post-card:nth-child(3) { animation-delay: 0.2s; }
-.blog-page-wrapper .blog-post-card:nth-child(4) { animation-delay: 0.3s; }
-.blog-page-wrapper .blog-post-card:nth-child(5) { animation-delay: 0.4s; }
-.blog-page-wrapper .blog-post-card:nth-child(6) { animation-delay: 0.5s; }

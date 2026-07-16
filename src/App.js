@@ -739,6 +739,7 @@ import ApplicantPropertiesPage from './components/page/manager/ApplicantProperti
 import BlogPage from './components/page/blogPage/BlogPage';
 import BlogPostDetail from './components/page/blogPage/BlogPostDetail';
 import BlogCreate from './components/page/blogPage/Crud/BlogCreate';
+import AdminBlogPage from './components/page/blogPage/Crud/AdminBlogPage';
 import './styles/globals.css';
 import './styles/animations.css';
 
@@ -781,7 +782,7 @@ const AppContent = () => {
   {/* ===== مسیر وبلاگ ===== */}
   <Route path="blog" element={<BlogPage />} />
         {/* <Route path="blog/post/:id" element={<BlogPostDetail />} /> */}
-        <Route path="blog/post/:slug/:id" element={<BlogPostDetail />} />
+      <Route path="blog/post/:slug/:id" element={<BlogPostDetail />} />
       </Route>
       
       {/* روت‌های عمومی */}
@@ -829,7 +830,9 @@ const AuthenticatedApp = () => {
         <Route path="RealEstateDetailPageItemForDemo" element={<RealEstateDetailPageItemForDemo />} />
         <Route path="UserBookmarksPanel" element={<UserBookmarksPanel />} />
         <Route path="ApplicantPropertiesPage" element={<ApplicantPropertiesPage />} />
+
         
+         <Route path="AdminBlogPage" element={<AdminBlogPage />} />
         <Route path="BlogCreate" element={<BlogCreate />} />
         {/* روت‌های داینامیک */}
         {renderMenuRoutes(menus)}
