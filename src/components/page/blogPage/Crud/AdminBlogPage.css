@@ -892,3 +892,68 @@
     justify-content: center;
   }
 }
+
+/* src/pages/AdminBlogPage.css */
+
+/* اضافه کردن به استایل‌های موجود */
+
+.admin-blog-modal-btn.unpublish {
+  background: #f59e0b;
+  color: white;
+}
+
+.admin-blog-modal-btn.unpublish:hover:not(:disabled) {
+  background: #d97706;
+}
+
+.admin-blog-modal-btn.publish {
+  background: #10b981;
+  color: white;
+}
+
+.admin-blog-modal-btn.publish:hover:not(:disabled) {
+  background: #059669;
+}
+
+.admin-blog-modal-btn.delete {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-blog-modal-btn.delete:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.admin-blog-modal-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.admin-blog-modal-btn .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin-blog-modal-icon.publish {
+  color: #10b981;
+}
+
+.admin-blog-modal-icon.danger {
+  color: #ef4444;
+}
+
+/* بهبود نمایش وضعیت در موبایل */
+@media (max-width: 768px) {
+  .admin-blog-card-meta .status-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+}
