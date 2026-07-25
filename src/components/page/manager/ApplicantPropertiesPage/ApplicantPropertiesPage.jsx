@@ -3756,7 +3756,7 @@ const ApplicantPropertiesPage = () => {
   
   const [pagination, setPagination] = useState({
     pageNumber: 1,
-    pageSize: 15,
+    pageSize: 40,
     totalCount: 0,
     totalPages: 0,
     hasNextPage: false,

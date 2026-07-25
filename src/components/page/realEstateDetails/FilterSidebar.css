@@ -261,3 +261,972 @@
   color: #7d0000;
   font-weight: 500;
 }
+
+/* اضافه کردن به FilterSidebar.css */
+
+/* استایل‌های فیلتر محدوده */
+.range-filter {
+  padding: 4px 0;
+}
+
+.range-inputs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.range-input-group {
+  flex: 1;
+}
+
+.range-input-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.range-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+  background: white;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.range-input::-webkit-outer-spin-button,
+.range-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.range-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.range-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.apply-range-btn,
+.reset-range-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.apply-range-btn {
+  background: #7d0000;
+  color: white;
+}
+
+.apply-range-btn:hover {
+  background: #9c0000;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.3);
+}
+
+.reset-range-btn {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.reset-range-btn:hover {
+  background: #e0e0e0;
+}
+
+/* نمایش مقادیر اعمال شده */
+.range-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.range-values span {
+  font-weight: 500;
+  color: #333;
+}
+
+/* پاسخگو برای موبایل */
+@media (max-width: 768px) {
+  .range-inputs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .range-actions {
+    flex-direction: column;
+  }
+
+  .apply-range-btn,
+  .reset-range-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .range-input {
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
+}
+
+/* اضافه کردن به FilterSidebar.css */
+
+/* استایل‌های فیلترهای فعال */
+.active-filters-container {
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.active-filters-title {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.active-filters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #7d0000;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  color: #7d0000;
+  animation: fadeIn 0.3s ease;
+}
+
+.active-filter-tag span {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-filter-btn {
+  background: none;
+  border: none;
+  color: #7d0000;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.remove-filter-btn:hover {
+  background: #7d0000;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* استایل‌های فیلتر محدوده (قبلی) */
+.range-filter {
+  padding: 4px 0;
+}
+
+.range-inputs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.range-input-group {
+  flex: 1;
+}
+
+.range-input-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.range-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+  background: white;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.range-input::-webkit-outer-spin-button,
+.range-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.range-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.range-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.apply-range-btn,
+.reset-range-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.apply-range-btn {
+  background: #7d0000;
+  color: white;
+}
+
+.apply-range-btn:hover {
+  background: #9c0000;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.3);
+}
+
+.reset-range-btn {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.reset-range-btn:hover {
+  background: #e0e0e0;
+}
+
+/* پاسخگو برای موبایل */
+@media (max-width: 768px) {
+  .range-inputs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .range-actions {
+    flex-direction: column;
+  }
+
+  .apply-range-btn,
+  .reset-range-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .range-input {
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
+
+  .active-filter-tag span {
+    max-width: 100px;
+  }
+}
+
+/* اضافه کردن به FilterSidebar.css */
+
+/* استایل نمایش حروف فارسی قیمت */
+.price-words {
+  display: block;
+  font-size: 0.8rem;
+  color: #7d0000;
+  margin-top: 4px;
+  font-weight: 500;
+  padding: 4px 8px;
+  background: #fef5f5;
+  border-radius: 4px;
+  border-right: 3px solid #7d0000;
+  direction: rtl;
+  text-align: right;
+}
+
+/* بهبود استایل ورودی‌ها */
+.range-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  background: white;
+  direction: ltr;
+  text-align: left;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.range-input::placeholder {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* بهبود استایل تگ‌های فیلترهای فعال */
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #7d0000;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  color: #7d0000;
+  animation: fadeIn 0.3s ease;
+  max-width: 100%;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.active-filter-tag:hover {
+  background: #fef5f5;
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.15);
+}
+
+.active-filter-tag span {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.remove-filter-btn {
+  background: none;
+  border: none;
+  color: #7d0000;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.remove-filter-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: scale(1.1);
+}
+
+.remove-filter-btn:active {
+  transform: scale(0.9);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* بهبود بخش فیلترهای فعال در موبایل */
+@media (max-width: 768px) {
+  .active-filter-tag span {
+    max-width: 120px;
+  }
+  
+  .active-filters-list {
+    gap: 6px;
+  }
+  
+  .active-filter-tag {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* اضافه کردن به FilterSidebar.css */
+
+/* استایل مخصوص ورودی قیمت */
+.price-input {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.price-input::placeholder {
+  font-weight: 300;
+  letter-spacing: 0;
+  color: #aaa;
+}
+
+.price-input:focus {
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+/* استایل نمایش حروف فارسی قیمت */
+.price-words {
+  display: block;
+  font-size: 0.8rem;
+  color: #7d0000;
+  margin-top: 4px;
+  font-weight: 500;
+  padding: 4px 8px;
+  background: #fef5f5;
+  border-radius: 4px;
+  border-right: 3px solid #7d0000;
+  direction: rtl;
+  text-align: right;
+  animation: slideDown 0.3s ease;
+}
+
+/* بهبود استایل ورودی‌ها */
+.range-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  background: white;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.range-input::placeholder {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* بهبود استایل تگ‌های فیلترهای فعال */
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #7d0000;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  color: #7d0000;
+  animation: fadeIn 0.3s ease;
+  max-width: 100%;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.active-filter-tag:hover {
+  background: #fef5f5;
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.15);
+}
+
+.active-filter-tag span {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.remove-filter-btn {
+  background: none;
+  border: none;
+  color: #7d0000;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.remove-filter-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: scale(1.1);
+}
+
+.remove-filter-btn:active {
+  transform: scale(0.9);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* بهبود بخش فیلترهای فعال در موبایل */
+@media (max-width: 768px) {
+  .active-filter-tag span {
+    max-width: 120px;
+  }
+  
+  .active-filters-list {
+    gap: 6px;
+  }
+  
+  .active-filter-tag {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* اضافه کردن به FilterSidebar.css */
+
+/* استایل سلیکت باکس */
+.select-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 16px;
+  padding-left: 35px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.select-input:hover {
+  border-color: #7d0000;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.select-input option {
+  padding: 8px;
+  font-size: 0.95rem;
+}
+
+/* بهبود فاصله در موبایل */
+@media (max-width: 768px) {
+  .select-input {
+    padding: 10px 12px;
+    padding-left: 35px;
+    font-size: 1rem;
+  }
+}
+
+/* اضافه کردن به FilterSidebar.css */
+
+/* =============== استایل‌های منطقه =============== */
+.region-search {
+  margin-bottom: 12px;
+}
+
+.region-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #f8f9fa;
+  transition: all 0.3s;
+  direction: rtl;
+}
+
+.region-search-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.region-search-input::placeholder {
+  color: #aaa;
+}
+
+.regions-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.regions-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.regions-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.regions-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.regions-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.region-item {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 4px 0;
+}
+
+.region-item:last-child {
+  border-bottom: none;
+}
+
+.region-parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.region-checkbox {
+  flex: 1;
+  padding: 4px 0;
+}
+
+.region-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.region-count {
+  font-size: 0.75rem;
+  color: #7d0000;
+  background: #fef5f5;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 6px;
+}
+
+.region-toggle-btn {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.region-toggle-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.region-children {
+  padding-right: 28px;
+  border-right: 2px solid #eaeaea;
+  margin-right: 4px;
+}
+
+.sub-region-checkbox {
+  padding: 4px 0 4px 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.sub-region-checkbox:hover {
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.no-regions-found {
+  text-align: center;
+  color: #999;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+.loading-regions {
+  text-align: center;
+  color: #666;
+  padding: 16px 0;
+  font-size: 0.9rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* استایل چک‌باکس با حالت indeterminate */
+.filter-checkbox input[type="checkbox"]:indeterminate + .checkbox-label {
+  color: #7d0000;
+  font-weight: 600;
+}
+
+.filter-checkbox input[type="checkbox"]:indeterminate {
+  accent-color: #7d0000;
+  background: #7d0000;
+}
+
+/* استایل سلیکت باکس */
+.select-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 16px;
+  padding-left: 35px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.select-input:hover {
+  border-color: #7d0000;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.select-input option {
+  padding: 8px;
+  font-size: 0.95rem;
+}
+
+/* استایل نمایش حروف فارسی قیمت */
+.price-words {
+  display: block;
+  font-size: 0.8rem;
+  color: #7d0000;
+  margin-top: 4px;
+  font-weight: 500;
+  padding: 4px 8px;
+  background: #fef5f5;
+  border-radius: 4px;
+  border-right: 3px solid #7d0000;
+  direction: rtl;
+  text-align: right;
+  animation: slideDown 0.3s ease;
+}
+
+.price-input {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.price-input::placeholder {
+  font-weight: 300;
+  letter-spacing: 0;
+  color: #aaa;
+}
+
+/* استایل ورودی‌های محدوده */
+.range-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  background: white;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: #7d0000;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.range-input::placeholder {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.range-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.reset-range-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.reset-range-btn:hover {
+  background: #e0e0e0;
+}
+
+/* استایل تگ‌های فیلتر فعال */
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #7d0000;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  color: #7d0000;
+  animation: fadeIn 0.3s ease;
+  max-width: 100%;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.active-filter-tag:hover {
+  background: #fef5f5;
+  box-shadow: 0 2px 8px rgba(125, 0, 0, 0.15);
+}
+
+.active-filter-tag span {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.remove-filter-btn {
+  background: none;
+  border: none;
+  color: #7d0000;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.remove-filter-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* پاسخگو برای موبایل */
+@media (max-width: 768px) {
+  .region-children {
+    padding-right: 16px;
+  }
+  
+  .active-filter-tag span {
+    max-width: 120px;
+  }
+  
+  .active-filters-list {
+    gap: 6px;
+  }
+  
+  .active-filter-tag {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .regions-list {
+    max-height: 300px;
+  }
+}

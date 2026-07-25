@@ -2063,6 +2063,7 @@ const MapSearchPage = () => {
   // بارگذاری شهر از localStorage با مختصات
   useEffect(() => {
     const savedCity = localStorage.getItem('selectedCity');
+
     if (savedCity) {
       try {
         const city = JSON.parse(savedCity);

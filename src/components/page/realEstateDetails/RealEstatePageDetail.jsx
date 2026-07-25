@@ -242,32 +242,32 @@ const RealEstatePageDetail = () => {
       {/* <Header totalCount={totalCount} /> */}
 
       <div className="real-estate-page-container">
-        {/* نان و عنوان */}
-        <div className="real-estate-header">
-          {/* <div className="property-breadcrumb">
+    
+        {/* <div className="real-estate-header">
+          <div className="property-breadcrumb">
             <span>خانه</span>
             <span className="separator">/</span>
             <span>املاک</span>
             <span className="separator">/</span>
             <span className="current">لیست آگهی‌ها</span>
-          </div> */}
+          </div>
           
-          {/* <div className="property-header-row">
+          <div className="property-header-row">
             <h1 className="property-title">لیست املاک</h1>
             <div className="property-date">
               <span className="date-range">
                 {new Date().toLocaleDateString('fa-IR')}
               </span>
             </div>
-          </div> */}
+          </div>
           
-          <p className="property-count">
+           <p className="property-count">
             {totalCount.toLocaleString('fa-IR')} ملک یافت شد
-          </p>
-        </div>
+          </p> 
+        </div> */}
 
         {/* نوار مرتب‌سازی */}
-        <div className="sort-bar-container">
+        {/* <div className="sort-bar-container">
           <SortBar 
             currentSort={sortBy} 
             onSortChange={setSortBy}
@@ -278,7 +278,7 @@ const RealEstatePageDetail = () => {
               { value: 'بیشترین امکانات', label: 'بیشترین امکانات' }
             ]}
           />
-        </div>
+        </div> */}
         
         {/* محتوای اصلی */}
         <div className="real-estate-content">
