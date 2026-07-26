@@ -1,8 +1,492 @@
 
+// // export default RealEstateCard;
+// import React, { useState } from 'react';
+// import ImageSlider from './ImageSlider';
+// import { useNavigate } from 'react-router-dom';
+// // ایمپورت FontAwesome
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { 
+//   faElevator, 
+//   faParking, 
+//   faSwimmingPool, 
+//   faBoxes, 
+//   faLocationDot,
+//   faRuler,
+//   faBuilding,
+//   faCalendar,
+//   faCamera,
+//   faTag,
+//   faBookmark as fasBookmark,
+//   faStar as fasStar
+// } from '@fortawesome/free-solid-svg-icons';
+// import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
+
+// library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark, farBookmark);
+
+// const RealEstateCard = ({ property }) => {
+//     const navigate = useNavigate();
+//   const [isBookmarked, setIsBookmarked] = useState(false);
+
+//   if (!property) return null;
+
+//   const currentYear = new Date().getFullYear() - 621;
+//   const age = property.constructionYear ? currentYear - property.constructionYear : null;
+
+//   const getAgeBadge = () => {
+//     if (!age || age < 0) return null;
+//     return null;
+//   };
+
+//   const ageBadge = getAgeBadge();
+
+//   const formatPrice = (price) => {
+//     if (!price) return null;
+//     return new Intl.NumberFormat('fa-IR').format(price);
+//   };
+
+//   const getPropertyImages = () => {
+//     if (property.imageUrl && Array.isArray(property.imageUrl) && property.imageUrl.length > 0) {
+//       return property.imageUrl;
+//     }
+//     if (property.imageUrl && typeof property.imageUrl === 'string') {
+//       return [property.imageUrl];
+//     }
+//     if (property.images && Array.isArray(property.images) && property.images.length > 0) {
+//       return property.images;
+//     }
+//     return ['https://via.placeholder.com/400x300?text=ملک+مسکونی'];
+//   };
+
+//   const toggleBookmark = (e) => {
+//     e.stopPropagation();
+//     setIsBookmarked(!isBookmarked);
+//   };
+
+//   const cardStyle = {
+//     backgroundColor: 'white',
+//     borderRadius: '16px',
+//     overflow: 'hidden',
+//     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+//     transition: 'all 0.3s ease',
+//     cursor: 'pointer',
+//     height: '100%',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     position: 'relative',
+//     border: '1px solid #e9ecef'
+//   };
+//   // ساخت اسلاگ (slug) از عنوان ملک
+// const getPropertyLink = () => {
+//   // ساخت slug از عنوان ملک
+//   const createSlug = (title) => {
+//     if (!title) return '';
+//     return title
+//       .replace(/[^\w\s\u0600-\u06FF]/g, '') // حذف علائم (پشتیبانی از فارسی)
+//       .replace(/\s+/g, '-')
+//       .substring(0, 50);
+//   };
+  
+//   const slug = createSlug(property.title);
+  
+//   // اولویت با آدرس جدید سئو شده (اگر روتر اضافه شده باشد)
+//   // در غیر این صورت آدرس قبلی کار می‌کند
+//   return `/property/${property.id}/${slug}`;
+// };
+// console.log('******************************************************************')
+
+//   return (
+//     <article 
+//       style={cardStyle}
+//       // onClick={() => navigate(`/realEstateDetailPageItem?id=${property.id}`)}
+//       onClick={() => navigate(getPropertyLink())}
+//       onMouseEnter={(e) => {
+//         e.currentTarget.style.transform = 'translateY(-5px)';
+//         e.currentTarget.style.boxShadow = '0 12px 24px rgba(125, 0, 0, 0.12)';
+//         e.currentTarget.style.borderColor = '#7d0000';
+//       }}
+//       onMouseLeave={(e) => {
+//         e.currentTarget.style.transform = 'translateY(0)';
+//         e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+//         e.currentTarget.style.borderColor = '#e9ecef';
+//       }}
+//     >
+//       {/* میکرو‌داده‌های مخفی برای SEO */}
+//       <meta itemProp="name" content={property.title} />
+//       <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+//       {property.price && <meta itemProp="offers" content={property.price.toString()} />}
+
+//       {/* میکرو‌دیتای اصلی محصول */}
+//       <meta itemProp="name" content={property.title} />
+//       <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}${property.constructionYear ? ' - ساخت ' + property.constructionYear : ''}`} />
+//       <meta itemProp="sku" content={property.id} />
+//       <meta itemProp="brand" content="املاک مستربلیط" />
+//       <meta itemProp="category" content="آپارتمان فروشی" />
+      
+//       {/* تصویر محصول */}
+//       {property.imageUrl && property.imageUrl[0] && (
+//         <meta itemProp="image" content={property.imageUrl[0]} />
+//       )}
+      
+//       {/* آدرس کامل */}
+//       <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+//         <meta itemProp="addressLocality" content={property.regionName || ''} />
+//         <meta itemProp="addressRegion" content={property.parentName || ''} />
+//         <meta itemProp="addressCountry" content="IR" />
+//       </div>
+
+//       {/* قیمت و اطلاعات مالی */}
+//       {property.price && (
+//         <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+//           <meta itemProp="price" content={property.price.toString()} />
+//           <meta itemProp="priceCurrency" content="IRR" />
+//           <meta itemProp="availability" content="https://schema.org/InStock" />
+//           <meta itemProp="priceValidUntil" content={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]} />
+//         </div>
+//       )}
+
+//       {/* ویژگی‌های ملک */}
+//       <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+//         <meta itemProp="name" content="متراژ" />
+//         <meta itemProp="value" content={property.additionalInformation || ''} />
+//       </div>
+      
+//       <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+//         <meta itemProp="name" content="سال ساخت" />
+//         <meta itemProp="value" content={property.constructionYear || ''} />
+//       </div>
+      
+//       {property.countFloor > 0 && (
+//         <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+//           <meta itemProp="name" content="تعداد طبقات" />
+//           <meta itemProp="value" content={property.countFloor.toString()} />
+//         </div>
+//       )}
+
+//       {/* امکانات */}
+//       {property.isHasElevator && (
+//         <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+//           <meta itemProp="name" content="آسانسور" />
+//           <meta itemProp="value" content="true" />
+//         </div>
+//       )}
+      
+//       {property.isHasParking && (
+//         <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+//           <meta itemProp="name" content="پارکینگ" />
+//           <meta itemProp="value" content="true" />
+//         </div>
+//       )}
+      
+//       {property.isHasPool && (
+//         <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+//           <meta itemProp="name" content="استخر" />
+//           <meta itemProp="value" content="true" />
+//         </div>
+//       )}
+      
+//       {property.isHasStoreRoom && (
+//         <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+//           <meta itemProp="name" content="انباری" />
+//           <meta itemProp="value" content="true" />
+//         </div>
+//       )}
+
+//       {/* Open Graph tags برای شبکه‌های اجتماعی */}
+//       <meta property="og:type" content="product" />
+//       <meta property="og:title" content={property.title} />
+//       <meta property="og:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+//       {property.imageUrl && property.imageUrl[0] && (
+//         <meta property="og:image" content={property.imageUrl[0]} />
+//       )}
+//       <meta property="og:url" content={`https://yourdomain.com/property/${property.id}`} />
+//       <meta property="og:locale" content="fa_IR" />
+      
+//       {/* Twitter Card tags */}
+//       <meta name="twitter:card" content="summary_large_image" />
+//       <meta name="twitter:title" content={property.title} />
+//       <meta name="twitter:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+//       {property.imageUrl && property.imageUrl[0] && (
+//         <meta name="twitter:image" content={property.imageUrl[0]} />
+//       )}
+
+//       {/* برچسب سن */}
+//       {ageBadge && (
+//         <div style={{
+//           position: 'absolute',
+//           top: '10px',
+//           right: '10px',
+//           backgroundColor: '#10b981',
+//           color: 'white',
+//           padding: '4px 8px',
+//           borderRadius: '20px',
+//           fontSize: '11px',
+//           fontWeight: '600',
+//           zIndex: 20,
+//           display: 'flex',
+//           alignItems: 'center',
+//           gap: '4px',
+//           boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+//         }}>
+//           <FontAwesomeIcon icon={fasStar} size="xs" />
+//           <span>{ageBadge.text}</span>
+//         </div>
+//       )}
+
+//       {/* آیکون بوکمارک روی عکس */}
+//       <div style={{
+//         position: 'absolute',
+//         top: '10px',
+//         left: '10px',
+//         zIndex: 20,
+//         cursor: 'pointer',
+//         backgroundColor: 'white',
+//         width: '32px',
+//         height: '32px',
+//         borderRadius: '50%',
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+//         transition: 'all 0.2s ease'
+//       }}
+//       onClick={toggleBookmark}
+//       onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+//       onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+//         <FontAwesomeIcon 
+//           icon={isBookmarked ? fasBookmark : farBookmark} 
+//           color={isBookmarked ? '#7d0000' : '#94a3b8'}
+//           size="sm"
+//         />
+//       </div>
+
+//       {/* بخش عکس با افکت زوم */}
+//       <div style={{ 
+//         position: 'relative', 
+//         overflow: 'hidden',
+//         height: '200px'
+//       }}>
+//         <div style={{ 
+//           position: 'relative', 
+//           overflow: 'hidden',
+//           height: '200px'
+//         }}>
+//           <div style={{
+//             transition: 'transform 0.6s cubic-bezier(0.25, 0.45, 0.45, 0.95)',
+//             height: '100%',
+//             width: '100%',
+//             transformOrigin: 'center center'
+//           }}
+//           onMouseEnter={(e) => {
+//             e.currentTarget.style.transform = 'scale(1.1)';
+//           }}
+//           onMouseLeave={(e) => {
+//             e.currentTarget.style.transform = 'scale(1)';
+//           }}>
+//             <ImageSlider 
+//               images={getPropertyImages()} 
+//               hotelName={property.title || ''}
+//               propertyId={property.id}
+//               alt={`${property.title || 'ملک'} - ${property.additionalInformation || ''} متری - ${property.regionName || ''}`}
+//             />
+//           </div>
+//         </div>
+        
+//         {/* تعداد عکس‌ها */}
+//         {property.imageCount > 0 && (
+//           <div style={{
+//             position: 'absolute',
+//             bottom: '8px',
+//             left: '8px',
+//             backgroundColor: 'rgba(0,0,0,0.6)',
+//             color: 'white',
+//             padding: '3px 8px',
+//             borderRadius: '20px',
+//             fontSize: '10px',
+//             display: 'flex',
+//             alignItems: 'center',
+//             gap: '4px',
+//             zIndex: 15,
+//             backdropFilter: 'blur(2px)'
+//           }}>
+//             <FontAwesomeIcon icon={faCamera} size="xs" />
+//             <span>{property.imageCount}</span>
+//           </div>
+//         )}
+//       </div>
+
+//       {/* محتوای کارت */}
+//       <div style={{ padding: '12px 14px 14px 14px', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+//         {/* عنوان */}
+//         <h3 style={{
+//           fontSize: '15px',
+//           fontWeight: '700',
+//           margin: 0,
+//           color: '#1e293b',
+//           overflow: 'hidden',
+//           textOverflow: 'ellipsis',
+//           whiteSpace: 'nowrap'
+//         }}>
+//           {property.title || 'ملک مسکونی'}
+//         </h3>
+        
+//         {/* تاریخ ایجاد - زیر عنوان */}
+//         {property.createdAtPersianRelative && (
+//           <div style={{
+//             display: 'flex',
+//             alignItems: 'center',
+//             gap: '4px',
+//             fontSize: '10px',
+//             color: '#94a3b8',
+//             marginTop: '2px'
+//           }}>
+//             <span>🕒</span>
+//             <span>{property.createdAtPersianRelative}</span>
+//           </div>
+//         )}
+        
+//         {/* موقعیت */}
+//         <div style={{
+//           display: 'flex',
+//           alignItems: 'center',
+//           gap: '4px',
+//           color: '#64748b',
+//           fontSize: '12px',
+//           marginBottom: '2px'
+//         }}>
+//           <FontAwesomeIcon icon={faLocationDot} size="xs" color="#7d0000" />
+//           <span style={{
+//             whiteSpace: 'nowrap',
+//             overflow: 'hidden',
+//             textOverflow: 'ellipsis'
+//           }}>
+//             {property.regionName || 'منطقه نامشخص'}
+//             {property.parentName && `, ${property.parentName}`}
+//           </span>
+//         </div>
+        
+//         {/* مشخصات */}
+//         <div style={{
+//           display: 'grid',
+//           gridTemplateColumns: 'repeat(3, 1fr)',
+//           gap: '4px',
+//           backgroundColor: '#f8fafc',
+//           padding: '8px 6px',
+//           borderRadius: '8px',
+//           border: '1px solid #eef2f6',
+//           marginBottom: '2px'
+//         }}>
+//           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
+//             <FontAwesomeIcon icon={faRuler} color="#7d0000" size="xs" />
+//             <span>{property.additionalInformation || '---'}</span>
+//           </div>
+          
+//           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
+//             <FontAwesomeIcon icon={faCalendar} color="#7d0000" size="xs" />
+//             <span>{property.constructionYear || '---'}</span>
+//           </div>
+          
+//           {property.countFloor > 0 && (
+//             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
+//               <FontAwesomeIcon icon={faBuilding} color="#7d0000" size="xs" />
+//               <span>{property.countFloor}</span>
+//             </div>
+//           )}
+//         </div>
+        
+//         {/* امکانات */}
+//         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '2px' }}>
+//           {property.isHasElevator && (
+//             <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+//               <FontAwesomeIcon icon={faElevator} color="#7d0000" size="xs" />
+//               <span>آسانسور</span>
+//             </span>
+//           )}
+//           {property.isHasParking && (
+//             <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+//               <FontAwesomeIcon icon={faParking} color="#7d0000" size="xs" />
+//               <span>پارکینگ</span>
+//             </span>
+//           )}
+//           {property.isHasPool && (
+//             <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+//               <FontAwesomeIcon icon={faSwimmingPool} color="#7d0000" size="xs" />
+//               <span>استخر</span>
+//             </span>
+//           )}
+//           {property.isHasStoreRoom && (
+//             <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+//               <FontAwesomeIcon icon={faBoxes} color="#7d0000" size="xs" />
+//               <span>انباری</span>
+//             </span>
+//           )}
+//         </div>
+        
+//         {/* قیمت */}
+//         <div style={{
+//           display: 'flex',
+//           justifyContent: 'space-between',
+//           alignItems: 'center',
+//           borderTop: '1px solid #eef2f6',
+//           paddingTop: '10px',
+//           marginTop: '4px'
+//         }}>
+//           <div>
+//             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
+//               <FontAwesomeIcon icon={faTag} size="xs" color="#94a3b8" />
+//               <span style={{ fontSize: '10px', color: '#64748b' }}>قیمت</span>
+//             </div>
+//             <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px', flexWrap: 'wrap' }}>
+//               <span style={{ fontSize: '16px', fontWeight: '800', color: '#7d0000' }}>
+//                 {property.price ? formatPrice(property.price) : 'تماس بگیرید'}
+//               </span>
+//               {property.price && (
+//                 <span style={{ fontSize: '9px', color: '#94a3b8' }}>تومان</span>
+//               )}
+//             </div>
+//           </div>
+          
+//           <button style={{
+//             backgroundColor: '#7d0000',
+//             color: 'white',
+//             border: 'none',
+//             borderRadius: '30px',
+//             padding: '7px 16px',
+//             fontSize: '11px',
+//             fontWeight: '600',
+//             cursor: 'pointer',
+//             transition: 'all 0.3s ease',
+//             display: 'flex',
+//             alignItems: 'center',
+//             gap: '4px'
+//           }}
+//           onMouseEnter={(e) => {
+//             e.target.style.backgroundColor = '#a30000';
+//             e.target.style.transform = 'translateY(-2px)';
+//             e.target.style.boxShadow = '0 4px 12px rgba(125, 0, 0, 0.3)';
+//           }}
+//           onMouseLeave={(e) => {
+//             e.target.style.backgroundColor = '#7d0000';
+//             e.target.style.transform = 'translateY(0)';
+//             e.target.style.boxShadow = 'none';
+//           }}>
+//             <span>📞</span>
+//             تماس
+//           </button>
+//         </div>
+//       </div>
+//     </article>
+//   );
+// };
+
 // export default RealEstateCard;
-import React, { useState } from 'react';
+// RealEstateCard.jsx
+import React, { useState, useEffect, useCallback } from 'react';
 import ImageSlider from './ImageSlider';
 import { useNavigate } from 'react-router-dom';
+import { FaSpinner } from 'react-icons/fa';
+import LoginModal from '../RealEstateDetailPageItem/LoginModal/LoginModal'; // ایمپورت مودال لاگین
+
 // ایمپورت FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,16 +501,95 @@ import {
   faCalendar,
   faCamera,
   faTag,
-  faBookmark as fasBookmark,
-  faStar as fasStar
+  faStar as fasStar,
+  faBookmark as fasBookmark // آیکون بوکمارک پر
 } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
 
-library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark, farBookmark);
+library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark);
 
 const RealEstateCard = ({ property }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  
+  // ===== state بوک‌مارک =====
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [bookmarkLoading, setBookmarkLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  // ===== بررسی لاگین =====
+  useEffect(() => {
+    const checkLogin = () => {
+      const token = localStorage.getItem('auth_token');
+      setIsLoggedIn(!!token);
+    };
+    
+    checkLogin();
+    
+    // تنظیم مقدار اولیه بوک‌مارک از property
+    if (property && property.inBookMark !== undefined) {
+      setIsBookmarked(property.inBookMark === true);
+    }
+    
+    window.addEventListener('authChange', checkLogin);
+    window.addEventListener('storage', checkLogin);
+    
+    return () => {
+      window.removeEventListener('authChange', checkLogin);
+      window.removeEventListener('storage', checkLogin);
+    };
+  }, [property]);
+
+  // ===== بستن مودال لاگین =====
+  const handleLoginModalClose = useCallback(() => {
+    setShowLoginModal(false);
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  // ===== تابع بوک‌مارک =====
+  const toggleBookmark = useCallback(async (e) => {
+    e.stopPropagation();
+    
+    // اگر لاگین نیست، مودال لاگین را نشان بده
+    if (!isLoggedIn) {
+      setShowLoginModal(true);
+      return;
+    }
+
+    if (bookmarkLoading) return;
+
+    setBookmarkLoading(true);
+    
+    try {
+      const token = localStorage.getItem('auth_token');
+      
+      const response = await fetch('https://localhost:7178/api/RealEstatePage/ToggleBookMark', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(property?.id),
+      });
+
+      if (response.ok) {
+        setIsBookmarked(prev => !prev);
+        console.log('✅ بوک‌مارک با موفقیت تغییر کرد');
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('❌ خطا در بوک‌مارک:', errorData);
+        alert('مشکل در ذخیره بوک‌مارک. لطفاً دوباره تلاش کنید.');
+      }
+    } catch (error) {
+      console.error('❌ خطا در ارتباط با سرور:', error);
+      alert('مشکل در ارتباط با سرور. لطفاً دوباره تلاش کنید.');
+    } finally {
+      setBookmarkLoading(false);
+    }
+  }, [isLoggedIn, property, bookmarkLoading]);
 
   if (!property) return null;
 
@@ -58,11 +621,6 @@ const RealEstateCard = ({ property }) => {
     return ['https://via.placeholder.com/400x300?text=ملک+مسکونی'];
   };
 
-  const toggleBookmark = (e) => {
-    e.stopPropagation();
-    setIsBookmarked(!isBookmarked);
-  };
-
   const cardStyle = {
     backgroundColor: 'white',
     borderRadius: '16px',
@@ -76,406 +634,418 @@ const RealEstateCard = ({ property }) => {
     position: 'relative',
     border: '1px solid #e9ecef'
   };
-  // ساخت اسلاگ (slug) از عنوان ملک
-const getPropertyLink = () => {
-  // ساخت slug از عنوان ملک
-  const createSlug = (title) => {
-    if (!title) return '';
-    return title
-      .replace(/[^\w\s\u0600-\u06FF]/g, '') // حذف علائم (پشتیبانی از فارسی)
-      .replace(/\s+/g, '-')
-      .substring(0, 50);
+
+  const getPropertyLink = () => {
+    const createSlug = (title) => {
+      if (!title) return '';
+      return title
+        .replace(/[^\w\s\u0600-\u06FF]/g, '')
+        .replace(/\s+/g, '-')
+        .substring(0, 50);
+    };
+    
+    const slug = createSlug(property.title);
+    return `/property/${property.id}/${slug}`;
   };
-  
-  const slug = createSlug(property.title);
-  
-  // اولویت با آدرس جدید سئو شده (اگر روتر اضافه شده باشد)
-  // در غیر این صورت آدرس قبلی کار می‌کند
-  return `/property/${property.id}/${slug}`;
-};
-console.log('******************************************************************')
 
   return (
-    <article 
-      style={cardStyle}
-      // onClick={() => navigate(`/realEstateDetailPageItem?id=${property.id}`)}
-      onClick={() => navigate(getPropertyLink())}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-5px)';
-        e.currentTarget.style.boxShadow = '0 12px 24px rgba(125, 0, 0, 0.12)';
-        e.currentTarget.style.borderColor = '#7d0000';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
-        e.currentTarget.style.borderColor = '#e9ecef';
-      }}
-    >
-      {/* میکرو‌داده‌های مخفی برای SEO */}
-      <meta itemProp="name" content={property.title} />
-      <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
-      {property.price && <meta itemProp="offers" content={property.price.toString()} />}
-
-      {/* میکرو‌دیتای اصلی محصول */}
-      <meta itemProp="name" content={property.title} />
-      <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}${property.constructionYear ? ' - ساخت ' + property.constructionYear : ''}`} />
-      <meta itemProp="sku" content={property.id} />
-      <meta itemProp="brand" content="املاک مستربلیط" />
-      <meta itemProp="category" content="آپارتمان فروشی" />
-      
-      {/* تصویر محصول */}
-      {property.imageUrl && property.imageUrl[0] && (
-        <meta itemProp="image" content={property.imageUrl[0]} />
-      )}
-      
-      {/* آدرس کامل */}
-      <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-        <meta itemProp="addressLocality" content={property.regionName || ''} />
-        <meta itemProp="addressRegion" content={property.parentName || ''} />
-        <meta itemProp="addressCountry" content="IR" />
-      </div>
-
-      {/* قیمت و اطلاعات مالی */}
-      {property.price && (
-        <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
-          <meta itemProp="price" content={property.price.toString()} />
-          <meta itemProp="priceCurrency" content="IRR" />
-          <meta itemProp="availability" content="https://schema.org/InStock" />
-          <meta itemProp="priceValidUntil" content={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]} />
-        </div>
-      )}
-
-      {/* ویژگی‌های ملک */}
-      <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
-        <meta itemProp="name" content="متراژ" />
-        <meta itemProp="value" content={property.additionalInformation || ''} />
-      </div>
-      
-      <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
-        <meta itemProp="name" content="سال ساخت" />
-        <meta itemProp="value" content={property.constructionYear || ''} />
-      </div>
-      
-      {property.countFloor > 0 && (
-        <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
-          <meta itemProp="name" content="تعداد طبقات" />
-          <meta itemProp="value" content={property.countFloor.toString()} />
-        </div>
-      )}
-
-      {/* امکانات */}
-      {property.isHasElevator && (
-        <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
-          <meta itemProp="name" content="آسانسور" />
-          <meta itemProp="value" content="true" />
-        </div>
-      )}
-      
-      {property.isHasParking && (
-        <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
-          <meta itemProp="name" content="پارکینگ" />
-          <meta itemProp="value" content="true" />
-        </div>
-      )}
-      
-      {property.isHasPool && (
-        <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
-          <meta itemProp="name" content="استخر" />
-          <meta itemProp="value" content="true" />
-        </div>
-      )}
-      
-      {property.isHasStoreRoom && (
-        <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
-          <meta itemProp="name" content="انباری" />
-          <meta itemProp="value" content="true" />
-        </div>
-      )}
-
-      {/* Open Graph tags برای شبکه‌های اجتماعی */}
-      <meta property="og:type" content="product" />
-      <meta property="og:title" content={property.title} />
-      <meta property="og:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
-      {property.imageUrl && property.imageUrl[0] && (
-        <meta property="og:image" content={property.imageUrl[0]} />
-      )}
-      <meta property="og:url" content={`https://yourdomain.com/property/${property.id}`} />
-      <meta property="og:locale" content="fa_IR" />
-      
-      {/* Twitter Card tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={property.title} />
-      <meta name="twitter:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
-      {property.imageUrl && property.imageUrl[0] && (
-        <meta name="twitter:image" content={property.imageUrl[0]} />
-      )}
-
-      {/* برچسب سن */}
-      {ageBadge && (
-        <div style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          backgroundColor: '#10b981',
-          color: 'white',
-          padding: '4px 8px',
-          borderRadius: '20px',
-          fontSize: '11px',
-          fontWeight: '600',
-          zIndex: 20,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          <FontAwesomeIcon icon={fasStar} size="xs" />
-          <span>{ageBadge.text}</span>
-        </div>
-      )}
-
-      {/* آیکون بوکمارک روی عکس */}
-      <div style={{
-        position: 'absolute',
-        top: '10px',
-        left: '10px',
-        zIndex: 20,
-        cursor: 'pointer',
-        backgroundColor: 'white',
-        width: '32px',
-        height: '32px',
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-        transition: 'all 0.2s ease'
-      }}
-      onClick={toggleBookmark}
-      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-        <FontAwesomeIcon 
-          icon={isBookmarked ? fasBookmark : farBookmark} 
-          color={isBookmarked ? '#7d0000' : '#94a3b8'}
-          size="sm"
+    <>
+      {/* مودال لاگین */}
+      {showLoginModal && (
+        <LoginModal 
+          onClose={handleLoginModalClose}
+          triggerSource="real-estate-card"
         />
-      </div>
+      )}
 
-      {/* بخش عکس با افکت زوم */}
-      <div style={{ 
-        position: 'relative', 
-        overflow: 'hidden',
-        height: '200px'
-      }}>
+      <article 
+        style={cardStyle}
+        onClick={() => navigate(getPropertyLink())}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-5px)';
+          e.currentTarget.style.boxShadow = '0 12px 24px rgba(125, 0, 0, 0.12)';
+          e.currentTarget.style.borderColor = '#7d0000';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+          e.currentTarget.style.borderColor = '#e9ecef';
+        }}
+      >
+        {/* میکرو‌داده‌های مخفی برای SEO */}
+        <meta itemProp="name" content={property.title} />
+        <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+        {property.price && <meta itemProp="offers" content={property.price.toString()} />}
+
+        <meta itemProp="name" content={property.title} />
+        <meta itemProp="description" content={`${property.additionalInformation} متری در ${property.regionName}${property.constructionYear ? ' - ساخت ' + property.constructionYear : ''}`} />
+        <meta itemProp="sku" content={property.id} />
+        <meta itemProp="brand" content="املاک مستربلیط" />
+        <meta itemProp="category" content="آپارتمان فروشی" />
+        
+        {property.imageUrl && property.imageUrl[0] && (
+          <meta itemProp="image" content={property.imageUrl[0]} />
+        )}
+        
+        <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+          <meta itemProp="addressLocality" content={property.regionName || ''} />
+          <meta itemProp="addressRegion" content={property.parentName || ''} />
+          <meta itemProp="addressCountry" content="IR" />
+        </div>
+
+        {property.price && (
+          <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+            <meta itemProp="price" content={property.price.toString()} />
+            <meta itemProp="priceCurrency" content="IRR" />
+            <meta itemProp="availability" content="https://schema.org/InStock" />
+            <meta itemProp="priceValidUntil" content={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]} />
+          </div>
+        )}
+
+        <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+          <meta itemProp="name" content="متراژ" />
+          <meta itemProp="value" content={property.additionalInformation || ''} />
+        </div>
+        
+        <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+          <meta itemProp="name" content="سال ساخت" />
+          <meta itemProp="value" content={property.constructionYear || ''} />
+        </div>
+        
+        {property.countFloor > 0 && (
+          <div itemProp="additionalProperty" itemScope itemType="https://schema.org/PropertyValue">
+            <meta itemProp="name" content="تعداد طبقات" />
+            <meta itemProp="value" content={property.countFloor.toString()} />
+          </div>
+        )}
+
+        {property.isHasElevator && (
+          <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+            <meta itemProp="name" content="آسانسور" />
+            <meta itemProp="value" content="true" />
+          </div>
+        )}
+        
+        {property.isHasParking && (
+          <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+            <meta itemProp="name" content="پارکینگ" />
+            <meta itemProp="value" content="true" />
+          </div>
+        )}
+        
+        {property.isHasPool && (
+          <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+            <meta itemProp="name" content="استخر" />
+            <meta itemProp="value" content="true" />
+          </div>
+        )}
+        
+        {property.isHasStoreRoom && (
+          <div itemProp="amenityFeature" itemScope itemType="https://schema.org/LocationFeatureSpecification">
+            <meta itemProp="name" content="انباری" />
+            <meta itemProp="value" content="true" />
+          </div>
+        )}
+
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={property.title} />
+        <meta property="og:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+        {property.imageUrl && property.imageUrl[0] && (
+          <meta property="og:image" content={property.imageUrl[0]} />
+        )}
+        <meta property="og:url" content={`https://yourdomain.com/property/${property.id}`} />
+        <meta property="og:locale" content="fa_IR" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={property.title} />
+        <meta name="twitter:description" content={`${property.additionalInformation} متری در ${property.regionName}`} />
+        {property.imageUrl && property.imageUrl[0] && (
+          <meta name="twitter:image" content={property.imageUrl[0]} />
+        )}
+
+        {/* برچسب سن */}
+        {ageBadge && (
+          <div style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            backgroundColor: '#10b981',
+            color: 'white',
+            padding: '4px 8px',
+            borderRadius: '20px',
+            fontSize: '11px',
+            fontWeight: '600',
+            zIndex: 20,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+            <FontAwesomeIcon icon={fasStar} size="xs" />
+            <span>{ageBadge.text}</span>
+          </div>
+        )}
+
+        {/* ===== آیکون بوکمارک با پشتیبانی از لودینگ و لاگین ===== */}
+        <div 
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '10px',
+            zIndex: 20,
+            cursor: bookmarkLoading ? 'default' : 'pointer',
+            backgroundColor: 'white',
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+            transition: 'all 0.2s ease',
+            opacity: bookmarkLoading ? 0.7 : 1
+          }}
+          onClick={toggleBookmark}
+          onMouseEnter={(e) => {
+            if (!bookmarkLoading) {
+              e.currentTarget.style.transform = 'scale(1.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!bookmarkLoading) {
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          }}
+          title={isLoggedIn ? (isBookmarked ? 'حذف از بوک‌مارک‌ها' : 'افزودن به بوک‌مارک‌ها') : 'برای افزودن به بوک‌مارک وارد شوید'}
+        >
+          {bookmarkLoading ? (
+            <FaSpinner className="spinner" style={{ color: '#7d0000', fontSize: '14px' }} />
+          ) : (
+            <FontAwesomeIcon 
+              icon={isBookmarked ? fasBookmark : farBookmark} 
+              color={isBookmarked ? '#7d0000' : '#94a3b8'}
+              size="sm"
+            />
+          )}
+        </div>
+
+        {/* بخش عکس با افکت زوم */}
         <div style={{ 
           position: 'relative', 
           overflow: 'hidden',
           height: '200px'
         }}>
-          <div style={{
-            transition: 'transform 0.6s cubic-bezier(0.25, 0.45, 0.45, 0.95)',
-            height: '100%',
-            width: '100%',
-            transformOrigin: 'center center'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-          }}>
-            <ImageSlider 
-              images={getPropertyImages()} 
-              hotelName={property.title || ''}
-              propertyId={property.id}
-              alt={`${property.title || 'ملک'} - ${property.additionalInformation || ''} متری - ${property.regionName || ''}`}
-            />
-          </div>
-        </div>
-        
-        {/* تعداد عکس‌ها */}
-        {property.imageCount > 0 && (
-          <div style={{
-            position: 'absolute',
-            bottom: '8px',
-            left: '8px',
-            backgroundColor: 'rgba(0,0,0,0.6)',
-            color: 'white',
-            padding: '3px 8px',
-            borderRadius: '20px',
-            fontSize: '10px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            zIndex: 15,
-            backdropFilter: 'blur(2px)'
-          }}>
-            <FontAwesomeIcon icon={faCamera} size="xs" />
-            <span>{property.imageCount}</span>
-          </div>
-        )}
-      </div>
-
-      {/* محتوای کارت */}
-      <div style={{ padding: '12px 14px 14px 14px', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        {/* عنوان */}
-        <h3 style={{
-          fontSize: '15px',
-          fontWeight: '700',
-          margin: 0,
-          color: '#1e293b',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap'
-        }}>
-          {property.title || 'ملک مسکونی'}
-        </h3>
-        
-        {/* تاریخ ایجاد - زیر عنوان */}
-        {property.createdAtPersianRelative && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '10px',
-            color: '#94a3b8',
-            marginTop: '2px'
-          }}>
-            <span>🕒</span>
-            <span>{property.createdAtPersianRelative}</span>
-          </div>
-        )}
-        
-        {/* موقعیت */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px',
-          color: '#64748b',
-          fontSize: '12px',
-          marginBottom: '2px'
-        }}>
-          <FontAwesomeIcon icon={faLocationDot} size="xs" color="#7d0000" />
-          <span style={{
-            whiteSpace: 'nowrap',
+          <div style={{ 
+            position: 'relative', 
             overflow: 'hidden',
-            textOverflow: 'ellipsis'
+            height: '200px'
           }}>
-            {property.regionName || 'منطقه نامشخص'}
-            {property.parentName && `, ${property.parentName}`}
-          </span>
-        </div>
-        
-        {/* مشخصات */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '4px',
-          backgroundColor: '#f8fafc',
-          padding: '8px 6px',
-          borderRadius: '8px',
-          border: '1px solid #eef2f6',
-          marginBottom: '2px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
-            <FontAwesomeIcon icon={faRuler} color="#7d0000" size="xs" />
-            <span>{property.additionalInformation || '---'}</span>
-          </div>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
-            <FontAwesomeIcon icon={faCalendar} color="#7d0000" size="xs" />
-            <span>{property.constructionYear || '---'}</span>
-          </div>
-          
-          {property.countFloor > 0 && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
-              <FontAwesomeIcon icon={faBuilding} color="#7d0000" size="xs" />
-              <span>{property.countFloor}</span>
-            </div>
-          )}
-        </div>
-        
-        {/* امکانات */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '2px' }}>
-          {property.isHasElevator && (
-            <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
-              <FontAwesomeIcon icon={faElevator} color="#7d0000" size="xs" />
-              <span>آسانسور</span>
-            </span>
-          )}
-          {property.isHasParking && (
-            <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
-              <FontAwesomeIcon icon={faParking} color="#7d0000" size="xs" />
-              <span>پارکینگ</span>
-            </span>
-          )}
-          {property.isHasPool && (
-            <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
-              <FontAwesomeIcon icon={faSwimmingPool} color="#7d0000" size="xs" />
-              <span>استخر</span>
-            </span>
-          )}
-          {property.isHasStoreRoom && (
-            <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
-              <FontAwesomeIcon icon={faBoxes} color="#7d0000" size="xs" />
-              <span>انباری</span>
-            </span>
-          )}
-        </div>
-        
-        {/* قیمت */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderTop: '1px solid #eef2f6',
-          paddingTop: '10px',
-          marginTop: '4px'
-        }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
-              <FontAwesomeIcon icon={faTag} size="xs" color="#94a3b8" />
-              <span style={{ fontSize: '10px', color: '#64748b' }}>قیمت</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '16px', fontWeight: '800', color: '#7d0000' }}>
-                {property.price ? formatPrice(property.price) : 'تماس بگیرید'}
-              </span>
-              {property.price && (
-                <span style={{ fontSize: '9px', color: '#94a3b8' }}>تومان</span>
-              )}
+            <div style={{
+              transition: 'transform 0.6s cubic-bezier(0.25, 0.45, 0.45, 0.95)',
+              height: '100%',
+              width: '100%',
+              transformOrigin: 'center center'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}>
+              <ImageSlider 
+                images={getPropertyImages()} 
+                hotelName={property.title || ''}
+                propertyId={property.id}
+                alt={`${property.title || 'ملک'} - ${property.additionalInformation || ''} متری - ${property.regionName || ''}`}
+              />
             </div>
           </div>
           
-          <button style={{
-            backgroundColor: '#7d0000',
-            color: 'white',
-            border: 'none',
-            borderRadius: '30px',
-            padding: '7px 16px',
-            fontSize: '11px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
+          {/* تعداد عکس‌ها */}
+          {property.imageCount > 0 && (
+            <div style={{
+              position: 'absolute',
+              bottom: '8px',
+              left: '8px',
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              color: 'white',
+              padding: '3px 8px',
+              borderRadius: '20px',
+              fontSize: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              zIndex: 15,
+              backdropFilter: 'blur(2px)'
+            }}>
+              <FontAwesomeIcon icon={faCamera} size="xs" />
+              <span>{property.imageCount}</span>
+            </div>
+          )}
+        </div>
+
+        {/* محتوای کارت */}
+        <div style={{ padding: '12px 14px 14px 14px', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {/* عنوان */}
+          <h3 style={{
+            fontSize: '15px',
+            fontWeight: '700',
+            margin: 0,
+            color: '#1e293b',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
+          }}>
+            {property.title || 'ملک مسکونی'}
+          </h3>
+          
+          {/* تاریخ ایجاد - زیر عنوان */}
+          {property.createdAtPersianRelative && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '10px',
+              color: '#94a3b8',
+              marginTop: '2px'
+            }}>
+              <span>🕒</span>
+              <span>{property.createdAtPersianRelative}</span>
+            </div>
+          )}
+          
+          {/* موقعیت */}
+          <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '4px'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#a30000';
-            e.target.style.transform = 'translateY(-2px)';
-            e.target.style.boxShadow = '0 4px 12px rgba(125, 0, 0, 0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#7d0000';
-            e.target.style.transform = 'translateY(0)';
-            e.target.style.boxShadow = 'none';
+            gap: '4px',
+            color: '#64748b',
+            fontSize: '12px',
+            marginBottom: '2px'
           }}>
-            <span>📞</span>
-            تماس
-          </button>
+            <FontAwesomeIcon icon={faLocationDot} size="xs" color="#7d0000" />
+            <span style={{
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {property.regionName || 'منطقه نامشخص'}
+              {property.parentName && `, ${property.parentName}`}
+            </span>
+          </div>
+          
+          {/* مشخصات */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '4px',
+            backgroundColor: '#f8fafc',
+            padding: '8px 6px',
+            borderRadius: '8px',
+            border: '1px solid #eef2f6',
+            marginBottom: '2px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
+              <FontAwesomeIcon icon={faRuler} color="#7d0000" size="xs" />
+              <span>{property.additionalInformation || '---'}</span>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
+              <FontAwesomeIcon icon={faCalendar} color="#7d0000" size="xs" />
+              <span>{property.constructionYear || '---'}</span>
+            </div>
+            
+            {property.countFloor > 0 && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#1e293b' }}>
+                <FontAwesomeIcon icon={faBuilding} color="#7d0000" size="xs" />
+                <span>{property.countFloor}</span>
+              </div>
+            )}
+          </div>
+          
+          {/* امکانات */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '2px' }}>
+            {property.isHasElevator && (
+              <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+                <FontAwesomeIcon icon={faElevator} color="#7d0000" size="xs" />
+                <span>آسانسور</span>
+              </span>
+            )}
+            {property.isHasParking && (
+              <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+                <FontAwesomeIcon icon={faParking} color="#7d0000" size="xs" />
+                <span>پارکینگ</span>
+              </span>
+            )}
+            {property.isHasPool && (
+              <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+                <FontAwesomeIcon icon={faSwimmingPool} color="#7d0000" size="xs" />
+                <span>استخر</span>
+              </span>
+            )}
+            {property.isHasStoreRoom && (
+              <span style={{ backgroundColor: '#f8fafc', padding: '3px 8px', borderRadius: '16px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px', border: '1px solid #e2e8f0' }}>
+                <FontAwesomeIcon icon={faBoxes} color="#7d0000" size="xs" />
+                <span>انباری</span>
+              </span>
+            )}
+          </div>
+          
+          {/* قیمت */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderTop: '1px solid #eef2f6',
+            paddingTop: '10px',
+            marginTop: '4px'
+          }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
+                <FontAwesomeIcon icon={faTag} size="xs" color="#94a3b8" />
+                <span style={{ fontSize: '10px', color: '#64748b' }}>قیمت</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '16px', fontWeight: '800', color: '#7d0000' }}>
+                  {property.price ? formatPrice(property.price) : 'تماس بگیرید'}
+                </span>
+                {property.price && (
+                  <span style={{ fontSize: '9px', color: '#94a3b8' }}>تومان</span>
+                )}
+              </div>
+            </div>
+            
+            <button style={{
+              backgroundColor: '#7d0000',
+              color: 'white',
+              border: 'none',
+              borderRadius: '30px',
+              padding: '7px 16px',
+              fontSize: '11px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#a30000';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 4px 12px rgba(125, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#7d0000';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}>
+              <span>📞</span>
+              تماس
+            </button>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 };
 
