@@ -374,7 +374,8 @@ body {
   flex: 1;
 }
 
-.price-label {
+.price-label-deposit {
+  text-align: right;
   font-size: 14px;
   opacity: 0.9;
   display: block;
@@ -411,7 +412,7 @@ body {
 }
 
 .rent-price-group .price-card {
-  background: linear-gradient(135deg, #5c0000, #7d0000);
+  background: linear-gradient(135deg, #5c0000, #c71818) !important;
 }
 
 /* Quick Specs */
@@ -4003,6 +4004,7 @@ body {
 }
 
 .login-modal-content {
+  direction: ltr;
   background: white;
   border-radius: 20px;
   padding: 40px 32px 32px;

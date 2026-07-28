@@ -1,5 +1,5 @@
 /* ============================================================ */
-/* BlogPostDetail.css - نسخه نهایی 3 ستونی */
+/* BlogPostDetail.css - نسخه نهایی بهینه شده برای موبایل */
 /* ============================================================ */
 
 /* ===== تنظیمات پایه ===== */
@@ -10,6 +10,7 @@
   background: #f0f2f5;
   font-family: 'IRANSans', 'Vazir', 'Tahoma', sans-serif;
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* ===== تاپ بار ===== */
@@ -77,6 +78,7 @@
   grid-template-columns: 2fr 8fr 2fr;
   gap: 20px;
   align-items: start;
+  max-width: 100%;
 }
 
 /* ===== ستون چپ - تبلیغات ===== */
@@ -287,10 +289,7 @@
   color: #7d0000;
 }
 
-/* ============================================================ */
-/* ===== محتوای اصلی - با جلوگیری از شکستن حرفی ===== */
-/* ============================================================ */
-
+/* ===== محتوای اصلی ===== */
 .post-detail-content {
   padding: 24px 32px 32px;
   font-size: 16px;
@@ -300,22 +299,14 @@
   overflow-x: hidden;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
 }
 
-/* تمام فرزندان */
 .post-detail-content * {
   max-width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
-/* ===== پاراگراف‌ها ===== */
 .post-detail-content p {
   margin: 0 0 18px 0;
   text-align: justify;
@@ -323,14 +314,8 @@
   max-width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
 }
 
-/* ===== تیترها ===== */
 .post-detail-content h2 {
   font-size: 24px;
   font-weight: 700;
@@ -340,7 +325,6 @@
   border-right: 4px solid #7d0000;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
 .post-detail-content h3 {
@@ -350,7 +334,6 @@
   margin: 28px 0 12px 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
 .post-detail-content h4 {
@@ -360,10 +343,8 @@
   margin: 22px 0 10px 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
-/* ===== لیست‌ها ===== */
 .post-detail-content ul,
 .post-detail-content ol {
   margin: 0 0 18px 0;
@@ -378,7 +359,6 @@
   margin-bottom: 6px;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
 .post-detail-content ul li {
@@ -394,17 +374,14 @@
   font-weight: 700;
 }
 
-/* ===== لینک‌ها ===== */
 .post-detail-content a {
   color: #7d0000;
   text-decoration: none;
   font-weight: 500;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
-/* فقط لینک‌های اینترنتی طولانی */
 .post-detail-content a[href*="http"] {
   word-break: break-all;
   display: inline-block;
@@ -415,7 +392,6 @@
   text-decoration: underline;
 }
 
-/* ===== بلوک نقل قول ===== */
 .post-detail-content blockquote {
   background: #f8f9fa;
   border-right: 4px solid #7d0000;
@@ -430,7 +406,6 @@
   word-wrap: break-word;
 }
 
-/* ===== تصاویر ===== */
 .post-detail-content img {
   max-width: 100%;
   height: auto;
@@ -440,7 +415,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* ===== جدول ===== */
 .post-detail-content table {
   width: 100%;
   max-width: 100%;
@@ -459,7 +433,6 @@
   text-align: right;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
   max-width: 100%;
 }
 
@@ -472,7 +445,6 @@
   background: #f8f9fa;
 }
 
-/* ===== کدها ===== */
 .post-detail-content pre,
 .post-detail-content code {
   max-width: 100%;
@@ -490,7 +462,6 @@
   margin: 16px 0;
 }
 
-/* ===== ویدیو و iframe ===== */
 .post-detail-content iframe,
 .post-detail-content video,
 .post-detail-content embed {
@@ -500,35 +471,14 @@
   width: 100%;
 }
 
-/* ===== دیو و اسپن ===== */
 .post-detail-content div,
 .post-detail-content span {
   max-width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: keep-all;
 }
 
-/* ===== کلمات بسیار طولانی بدون فاصله ===== */
-.post-detail-content .long-word {
-  word-break: break-all;
-  overflow-wrap: break-word;
-}
-
-/* ===== متن انگلیسی ===== */
-.post-detail-content .ltr-text {
-  direction: ltr;
-  text-align: left;
-  unicode-bidi: embed;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: keep-all;
-}
-
-/* ============================================================ */
 /* ===== بخش تعامل ===== */
-/* ============================================================ */
-
 .post-detail-actions {
   display: flex;
   flex-wrap: wrap;
@@ -630,6 +580,7 @@
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #7d0000;
+  flex-shrink: 0;
 }
 
 .author-info h4 {
@@ -818,10 +769,7 @@
   margin-top: 0;
 }
 
-/* ============================================================ */
 /* ===== نوتیفیکیشن ===== */
-/* ============================================================ */
-
 .copy-notification {
   position: fixed;
   bottom: 30px;
@@ -844,10 +792,7 @@
   to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
-/* ============================================================ */
 /* ===== Loading & Error ===== */
-/* ============================================================ */
-
 .blog-detail-loading {
   display: flex;
   flex-direction: column;
@@ -942,191 +887,215 @@
   }
 }
 
-/* موبایل بزرگ */
+/* موبایل - بازطراحی کامل برای نمایش بهتر */
 @media (max-width: 768px) {
   .blog-detail-wrapper {
-    padding: 12px;
+    padding: 8px;
   }
   
+  /* تغییر به display:flex برای کنترل بهتر */
   .blog-detail-three-column {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   
+  /* مخفی کردن ستون چپ تبلیغات در موبایل */
   .blog-detail-sidebar-left {
-    display: none;
+    display: none !important;
   }
   
-  .blog-detail-sidebar-right {
-    grid-column: 1;
-    order: 3;
-  }
-  
+  /* ستون اصلی - عرض کامل و ترتیب اول */
   .blog-detail-main {
-    order: 2;
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
   
+  /* ستون راست - زیر محتوای اصلی */
+  .blog-detail-sidebar-right {
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+  }
+  
+  /* ===== تاپ بار ===== */
   .blog-detail-top-bar {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    padding: 0;
   }
   
   .breadcrumb {
     font-size: 12px;
   }
   
-  .post-detail-image {
-    height: 280px;
-  }
-  
-  .post-detail-header {
-    padding: 20px 18px 0;
-  }
-  
-  .post-detail-title {
-    font-size: 22px;
-  }
-  
-  .post-detail-meta {
-    font-size: 13px;
-    gap: 12px;
-  }
-  
-  .post-detail-summary {
-    font-size: 15px;
-  }
-  
-  .post-detail-content {
-    padding: 16px 18px 24px;
-    font-size: 15px;
-    line-height: 2;
-  }
-  
-  .post-detail-content p {
-    font-size: 15px;
-  }
-  
-  .post-detail-content h2 {
-    font-size: 21px;
-  }
-  
-  .post-detail-content h3 {
-    font-size: 18px;
-  }
-  
-  .post-detail-actions {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 14px 18px 20px;
-  }
-  
-  .actions-left {
-    justify-content: center;
-  }
-  
-  .actions-right {
-    justify-content: center;
-  }
-  
-  .post-detail-author {
-    flex-direction: column;
-    text-align: center;
-    padding: 16px 18px 20px;
-  }
-  
-  .related-posts {
-    padding: 16px 18px;
-  }
-  
-  .related-title {
-    font-size: 18px;
-  }
-  
-  .related-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  
-  .sidebar-card {
-    padding: 14px 16px;
-  }
-  
-  .sidebar-posts-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 12px;
-  }
-  
-  .sidebar-post-item {
-    border-bottom: none;
-    padding: 4px 0;
-  }
-}
-
-/* موبایل کوچک */
-@media (max-width: 480px) {
-  .blog-detail-wrapper {
-    padding: 8px;
-  }
-  
+  /* ===== تصویر اصلی ===== */
   .post-detail-image {
     height: 200px;
+    width: 100%;
   }
   
+  .post-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .post-detail-category {
+    font-size: 10px;
+    padding: 3px 10px;
+    top: 10px;
+    right: 10px;
+  }
+  
+  /* ===== هدر مطلب ===== */
   .post-detail-header {
     padding: 14px 12px 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
   
   .post-detail-title {
-    font-size: 18px;
+    font-size: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .post-detail-meta {
     font-size: 11px;
     gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .post-detail-meta span {
+    font-size: 11px;
   }
   
   .post-detail-summary {
     font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
+  .post-detail-summary p {
+    font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* ===== محتوا ===== */
   .post-detail-content {
     padding: 12px 12px 16px;
     font-size: 14px;
     line-height: 1.9;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
   
   .post-detail-content p {
     font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .post-detail-content h2 {
     font-size: 18px;
     margin-top: 24px;
+    padding-right: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .post-detail-content h3 {
     font-size: 16px;
     margin-top: 18px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .post-detail-content h4 {
     font-size: 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .post-detail-content img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 12px 0;
   }
   
   .post-detail-content blockquote {
     padding: 10px 14px;
     font-size: 13px;
+    margin: 12px 0;
   }
   
   .post-detail-content ul,
   .post-detail-content ol {
     padding-right: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
+  .post-detail-content table {
+    display: block;
+    overflow-x: auto;
+    font-size: 12px;
+    width: 100%;
+  }
+  
+  .post-detail-content table th,
+  .post-detail-content table td {
+    padding: 6px 10px;
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .post-detail-content pre,
+  .post-detail-content code {
+    font-size: 12px;
+    padding: 8px;
+  }
+  
+  .post-detail-content iframe,
+  .post-detail-content video {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16/9;
+    max-width: 100%;
+  }
+  
+  /* ===== بخش تعامل ===== */
   .post-detail-actions {
+    flex-direction: column;
+    align-items: stretch;
     padding: 10px 12px 14px;
+    gap: 12px;
+  }
+  
+  .actions-left {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .actions-right {
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .action-btn {
@@ -1140,26 +1109,43 @@
     font-size: 13px;
   }
   
+  /* ===== نویسنده ===== */
   .post-detail-author {
+    flex-direction: column;
+    text-align: center;
     padding: 12px 12px 16px;
     gap: 10px;
+    width: 100%;
   }
   
   .author-image {
     width: 50px;
     height: 50px;
+    flex-shrink: 0;
+  }
+  
+  .author-info {
+    width: 100%;
   }
   
   .author-info h4 {
     font-size: 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .author-info p {
     font-size: 13px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
+  /* ===== مطالب مرتبط ===== */
   .related-posts {
     padding: 12px 12px 16px;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 100%;
   }
   
   .related-title {
@@ -1167,7 +1153,7 @@
   }
   
   .related-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
   
@@ -1175,15 +1161,20 @@
     font-size: 13px;
   }
   
-  .sidebar-posts-list {
-    grid-template-columns: 1fr;
+  /* ===== سایدبار راست ===== */
+  .sidebar-card {
+    padding: 12px 14px;
   }
   
-  .post-detail-category {
-    font-size: 10px;
-    padding: 3px 10px;
-    top: 10px;
-    right: 10px;
+  .sidebar-posts-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+  }
+  
+  .sidebar-post-item {
+    border-bottom: none;
+    padding: 4px 0;
   }
   
   .copy-notification {
@@ -1197,6 +1188,178 @@
   .back-btn {
     font-size: 13px;
     padding: 6px 14px;
+  }
+}
+
+/* موبایل کوچک (سایز 390x844 و کوچکتر) */
+@media (max-width: 480px) {
+  .blog-detail-wrapper {
+    padding: 4px;
+  }
+  
+  .post-detail-image {
+    height: 160px;
+  }
+  
+  .post-detail-header {
+    padding: 10px 8px 0;
+  }
+  
+  .post-detail-title {
+    font-size: 17px;
+  }
+  
+  .post-detail-meta {
+    font-size: 10px;
+    gap: 6px;
+  }
+  
+  .post-detail-meta span {
+    font-size: 10px;
+  }
+  
+  .post-detail-summary {
+    font-size: 13px;
+  }
+  
+  .post-detail-summary p {
+    font-size: 13px;
+  }
+  
+  .post-detail-content {
+    padding: 8px 8px 12px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  
+  .post-detail-content p {
+    font-size: 13px;
+  }
+  
+  .post-detail-content h2 {
+    font-size: 16px;
+    margin-top: 18px;
+    padding-right: 8px;
+  }
+  
+  .post-detail-content h3 {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+  
+  .post-detail-content h4 {
+    font-size: 14px;
+  }
+  
+  .post-detail-content blockquote {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .post-detail-content ul,
+  .post-detail-content ol {
+    padding-right: 16px;
+  }
+  
+  .post-detail-content table {
+    font-size: 11px;
+  }
+  
+  .post-detail-content table th,
+  .post-detail-content table td {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  .related-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .sidebar-posts-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-btn {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  
+  .social-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  
+  .post-detail-actions {
+    padding: 8px 8px 12px;
+  }
+  
+  .post-detail-author {
+    padding: 10px 8px 12px;
+  }
+  
+  .author-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .author-info h4 {
+    font-size: 14px;
+  }
+  
+  .author-info p {
+    font-size: 12px;
+  }
+  
+  .related-posts {
+    padding: 10px 8px 12px;
+  }
+  
+  .related-title {
+    font-size: 15px;
+  }
+  
+  .related-content h4 {
+    font-size: 12px;
+  }
+  
+  .sidebar-card {
+    padding: 10px 10px;
+  }
+  
+  .sidebar-title {
+    font-size: 14px;
+  }
+  
+  .sidebar-post-title {
+    font-size: 13px;
+  }
+  
+  .copy-notification {
+    font-size: 11px;
+    padding: 8px 12px;
+    width: 95%;
+  }
+  
+  .back-btn {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+  
+  .breadcrumb {
+    font-size: 11px;
+  }
+  
+  .breadcrumb a {
+    font-size: 11px;
+  }
+  
+  .post-detail-category {
+    font-size: 9px;
+    padding: 2px 8px;
+    top: 8px;
+    right: 8px;
   }
 }
 
@@ -1216,7 +1379,6 @@
   100% { background-position: -200% 0; }
 }
 
-/* تاپ بار */
 .skeleton-back-btn {
   width: 140px;
   height: 40px;
@@ -1229,21 +1391,18 @@
   border-radius: 4px;
 }
 
-/* کارت‌های تبلیغات */
 .skeleton-ad-card {
   width: 100%;
   height: 180px;
   border-radius: 12px;
 }
 
-/* تصویر */
 .skeleton-image {
   width: 100%;
   height: 450px;
   border-radius: 16px 16px 0 0;
 }
 
-/* تیتر */
 .skeleton-title {
   width: 80%;
   height: 36px;
@@ -1271,7 +1430,6 @@
   border-radius: 4px;
 }
 
-/* محتوای متن */
 .skeleton-content {
   padding: 24px 32px 32px;
 }
@@ -1293,7 +1451,6 @@
   border-radius: 4px;
 }
 
-/* دکمه‌های اکشن */
 .skeleton-action-btn {
   width: 90px;
   height: 38px;
@@ -1306,7 +1463,6 @@
   border-radius: 50%;
 }
 
-/* نویسنده */
 .skeleton-author-image {
   width: 64px;
   height: 64px;
@@ -1326,7 +1482,6 @@
   border-radius: 4px;
 }
 
-/* مطالب مرتبط */
 .skeleton-related {
   margin-top: 20px;
 }
@@ -1344,7 +1499,6 @@
   border-radius: 10px;
 }
 
-/* سایدبار */
 .skeleton-sidebar-card {
   width: 100%;
   height: 300px;
@@ -1364,7 +1518,7 @@
 
 @media (max-width: 768px) {
   .skeleton-image {
-    height: 280px;
+    height: 200px;
   }
   
   .skeleton-title {
@@ -1387,7 +1541,7 @@
 
 @media (max-width: 480px) {
   .skeleton-image {
-    height: 200px;
+    height: 160px;
   }
   
   .skeleton-title {

@@ -868,3 +868,71 @@
     font-size: 0.85rem;
   }
 }
+
+/* ===== اسکرول بی‌نهایت - استایل‌ها ===== */
+
+/* ایندیکیتور بارگذاری بیشتر */
+.loading-more-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px 0;
+  color: #7d0000;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.loading-more-spinner {
+  animation: spin 1s linear infinite;
+  font-size: 20px;
+  color: #7d0000;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* پیام پایان لیست */
+.end-of-list-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0 50px;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 400;
+  width: 100%;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 20px;
+}
+
+.end-of-list-message span {
+  background: #f8fafc;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid #e9ecef;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .loading-more-container {
+    padding: 20px 0;
+    font-size: 12px;
+  }
+  
+  .end-of-list-message {
+    padding: 20px 0 30px;
+    font-size: 11px;
+  }
+  
+  .end-of-list-message span {
+    padding: 6px 14px;
+  }
+}
