@@ -283,20 +283,91 @@ const RelatedPropertiesSlider = ({ currentPropertyId, regionName, propertyType }
   };
 
   // دریافت ملک‌های تصادفی از API
+  // useEffect(() => {
+  //   const fetchRandomProperties = async () => {
+  //     if (!currentPropertyId) {
+  //       setLoading(false);
+  //       return;
+  //     }
+
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
+
+  //       console.log('📡 درخواست ملک‌های تصادفی برای id:', currentPropertyId);
+
+        
+
+  //       const response = await fetch(`${API_BASE_URL}/RealEstatePage/GetRandomLastItemRealEstatesWithSimpleAsync`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Accept': 'application/json'
+  //         },
+  //         body: JSON.stringify(currentPropertyId)
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP ${response.status}`);
+  //       }
+
+  //       const result = await response.json();
+  //       console.log('📥 ملک‌های تصادفی دریافت شد:', result);
+
+  //       if (result.status === 200 && result.data && result.data.length > 0) {
+  //         // فیلتر کردن ملک فعلی از لیست و تبدیل داده‌ها
+  //         const filtered = result.data
+  //           .filter(item => item.id !== currentPropertyId)
+  //           .map(item => ({
+  //             id: item.id,
+  //             title: item.title || 'ملک بدون عنوان',
+  //             area: item.additionalInformation ? 
+  //               parseInt(item.additionalInformation.match(/\d+/)?.[0]) || 0 : 0,
+  //             rooms: 2, // از دیتا موجود نیست، مقدار پیش‌فرض
+  //             price: item.price || 0,
+  //             regionName: item.regionName || 'منطقه نامشخص',
+  //             imageUrl: item.address ? [`https://localhost:7178${item.address}`] : [],
+  //             imageCount: item.imageCount || 0,
+  //             type: 1, // مقدار پیش‌فرض
+  //             constructionYear: item.constructionYear,
+  //             countFloor: item.countFloor,
+  //             createdAt: item.createdAtPersianRelative || 'امروز',
+  //             isHasElevator: item.isHasElevator || false,
+  //             isHasParking: item.isHasParking || false,
+  //             isHasPool: item.isHasPool || false,
+  //             isHasStoreRoom: item.isHasStoreRoom || false,
+  //           }));
+
+  //         setProperties(filtered);
+  //       } else {
+  //         setProperties([]);
+  //       }
+  //     } catch (error) {
+  //       console.error('❌ خطا در دریافت ملک‌های تصادفی:', error);
+  //       setError('مشکل در دریافت ملک‌های پیشنهادی');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchRandomProperties();
+  // }, [currentPropertyId]);
+
   useEffect(() => {
-    const fetchRandomProperties = async () => {
-      if (!currentPropertyId) {
-        setLoading(false);
-        return;
-      }
+  const fetchRandomProperties = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-      try {
-        setLoading(true);
-        setError(null);
+      let response;
+      let url;
 
+      // ===== اگر currentPropertyId وجود داشت =====
+      if (currentPropertyId) {
         console.log('📡 درخواست ملک‌های تصادفی برای id:', currentPropertyId);
-
-        const response = await fetch(`${API_BASE_URL}/RealEstatePage/GetRandomLastItemRealEstatesWithSimpleAsync`, {
+        
+        url = `${API_BASE_URL}/RealEstatePage/GetRandomLastItemRealEstatesWithSimpleAsync`;
+        response = await fetch(url, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -304,52 +375,103 @@ const RelatedPropertiesSlider = ({ currentPropertyId, regionName, propertyType }
           },
           body: JSON.stringify(currentPropertyId)
         });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log('📥 ملک‌های تصادفی دریافت شد:', result);
-
-        if (result.status === 200 && result.data && result.data.length > 0) {
-          // فیلتر کردن ملک فعلی از لیست و تبدیل داده‌ها
-          const filtered = result.data
-            .filter(item => item.id !== currentPropertyId)
-            .map(item => ({
-              id: item.id,
-              title: item.title || 'ملک بدون عنوان',
-              area: item.additionalInformation ? 
-                parseInt(item.additionalInformation.match(/\d+/)?.[0]) || 0 : 0,
-              rooms: 2, // از دیتا موجود نیست، مقدار پیش‌فرض
-              price: item.price || 0,
-              regionName: item.regionName || 'منطقه نامشخص',
-              imageUrl: item.address ? [`https://localhost:7178${item.address}`] : [],
-              imageCount: item.imageCount || 0,
-              type: 1, // مقدار پیش‌فرض
-              constructionYear: item.constructionYear,
-              countFloor: item.countFloor,
-              createdAt: item.createdAtPersianRelative || 'امروز',
-              isHasElevator: item.isHasElevator || false,
-              isHasParking: item.isHasParking || false,
-              isHasPool: item.isHasPool || false,
-              isHasStoreRoom: item.isHasStoreRoom || false,
-            }));
-
-          setProperties(filtered);
-        } else {
-          setProperties([]);
-        }
-      } catch (error) {
-        console.error('❌ خطا در دریافت ملک‌های تصادفی:', error);
-        setError('مشکل در دریافت ملک‌های پیشنهادی');
-      } finally {
-        setLoading(false);
+      } 
+      // ===== اگر currentPropertyId نال بود =====
+      else {
+        console.log('📡 currentPropertyId نال است، درخواست ملک‌های VIP...');
+        
+        url = `${API_BASE_URL}/RealEstatePage/GetRandomLastItemRealEstatesWithTabIdVipSimpleAsync`;
+        response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+          // بدون body چون API پارامتر نمی‌گیره
+        });
       }
-    };
 
-    fetchRandomProperties();
-  }, [currentPropertyId]);
+      // ===== بررسی پاسخ =====
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ خطای سرور:', errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('📥 پاسخ دریافت شد:', result);
+
+      // ===== پردازش داده‌ها =====
+      let items = [];
+      
+      if (result.status === 200 && result.data) {
+        if (Array.isArray(result.data)) {
+          items = result.data;
+        } else if (result.data.items && Array.isArray(result.data.items)) {
+          items = result.data.items;
+        } else if (result.data.data && Array.isArray(result.data.data)) {
+          items = result.data.data;
+        } else {
+          // تلاش برای پیدا کردن آیتم‌ها در ساختارهای مختلف
+          const possibleKeys = ['items', 'list', 'properties', 'results', 'data'];
+          for (const key of possibleKeys) {
+            if (result.data[key] && Array.isArray(result.data[key])) {
+              items = result.data[key];
+              break;
+            }
+          }
+        }
+      }
+
+      // ===== فیلتر کردن و تبدیل داده‌ها =====
+      if (items.length > 0) {
+        const filtered = items
+          .filter(item => item.id !== currentPropertyId) // اگر currentPropertyId نال باشه، همه رو نشون بده
+          .map(item => ({
+            id: item.id,
+            title: item.title || 'ملک بدون عنوان',
+            area: item.additionalInformation ? 
+              parseInt(item.additionalInformation.match(/\d+/)?.[0]) || 0 : 
+              item.squareMeter || 0,
+            rooms: item.countFloor || 2,
+            price: item.price || 0,
+            regionName: item.regionName || 'منطقه نامشخص',
+            imageUrl: item.address ? [`https://localhost:7178${item.address}`] : 
+                      (item.imageUrl || []),
+            imageCount: item.imageCount || 0,
+            type: item.categoryType || 1,
+            constructionYear: item.constructionYear,
+            countFloor: item.countFloor,
+            createdAt: item.createdAtPersianRelative || 'امروز',
+            isHasElevator: item.isHasElevator || false,
+            isHasParking: item.isHasParking || false,
+            isHasPool: item.isHasPool || false,
+            isHasStoreRoom: item.isHasStoreRoom || false,
+            // اضافه کردن فیلدهای جدید برای رهن و اجاره
+            rent: item.rent || 0,
+            deposit: item.deposit || 0,
+            categoryType: item.categoryType || 1,
+            squareMeter: item.squareMeter || item.additionalInformation || null,
+            hasBookMark: item.hasBookMark || false,
+            inBookMark: item.inBookMark || false,
+          }));
+
+        setProperties(filtered);
+        console.log(`✅ ${filtered.length} ملک دریافت شد`);
+      } else {
+        console.log('⚠️ هیچ ملکی دریافت نشد');
+        setProperties([]);
+      }
+    } catch (error) {
+      console.error('❌ خطا در دریافت ملک‌ها:', error);
+      setError('مشکل در دریافت ملک‌های پیشنهادی. لطفاً دوباره تلاش کنید.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchRandomProperties();
+}, [currentPropertyId]);
 
   // رفتن به صفحه جزئیات ملک
   const handlePropertyClick = (propertyId) => {
@@ -363,9 +485,15 @@ const RelatedPropertiesSlider = ({ currentPropertyId, regionName, propertyType }
       <div className="related-section">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">
-              🏠 پیشنهادات مشابه در {regionName || 'منطقه'}
-            </h2>
+           {currentPropertyId == null ? (
+    <h2 className="section-title">
+      پیشنهادهای ویژه
+    </h2>
+  ) : (
+    <h2 className="section-title">
+      🏠 پیشنهادات مشابه در {regionName || 'منطقه'}
+    </h2>
+  )}
           </div>
           <div className="loading-grid">
             {[1, 2, 3, 4].map((i) => (
@@ -390,9 +518,16 @@ const RelatedPropertiesSlider = ({ currentPropertyId, regionName, propertyType }
       <div className="related-section">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">
-              🏠 پیشنهادات مشابه در {regionName || 'منطقه'}
-            </h2>
+            
+    {currentPropertyId == null ? (
+    <h2 className="section-title">
+      پیشنهادهای ویژه
+    </h2>
+  ) : (
+    <h2 className="section-title">
+      🏠 پیشنهادات مشابه در {regionName || 'منطقه'}
+    </h2>
+  )}
           </div>
           <div className="error-container">
             <p className="error-text">{error}</p>
@@ -418,9 +553,15 @@ const RelatedPropertiesSlider = ({ currentPropertyId, regionName, propertyType }
     <div className="related-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">
-            🏠 پیشنهادات مشابه در {regionName || 'منطقه'}
-          </h2>
+     {currentPropertyId == null ? (
+    <h2 className="section-title">
+      پیشنهادهای ویژه
+    </h2>
+  ) : (
+    <h2 className="section-title">
+      🏠 پیشنهادات مشابه در {regionName || 'منطقه'}
+    </h2>
+  )}
           <div className="section-nav-buttons">
             <button ref={prevRef} className="nav-btn prev-btn" aria-label="قبلی">
               <FaChevronRight />

@@ -2446,7 +2446,7 @@ const RealEstatePageDetail = () => {
       }
 
       const result = await response.json();
-      
+        console.log("خروجی=>",result.data.items)
       if (result.status === 200 && result.data) {
         const itemsWithImages = result.data.items.map(item => ({
           ...item,

@@ -2232,11 +2232,13 @@ import {
   faCamera,
   faTag,
   faStar as fasStar,
-  faBookmark as fasBookmark
+  faBookmark as fasBookmark  ,faKey,           // ← جدید - آیکون کلید برای رهن و اجاره
+  faMoneyBillWave
 } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
 
-library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark);
+// library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark);
+library.add(faElevator, faParking, faSwimmingPool, faBoxes, faLocationDot, faRuler, faBuilding, faCalendar, faCamera, faTag, fasStar, fasBookmark, faKey, faMoneyBillWave);
 
 const RealEstateCard = ({ property, onOpenLoginModal }) => {
   const navigate = useNavigate();
@@ -2340,6 +2342,43 @@ const RealEstateCard = ({ property, onOpenLoginModal }) => {
     return new Intl.NumberFormat('fa-IR').format(price);
   };
 
+  // ===== تشخیص نوع ملک =====
+  const isRental = property.categoryType === 2;
+  const isSale = property.categoryType === 1;
+
+  // ===== عنوان قیمت =====
+  const getPriceLabel = () => {
+    if (isRental) return 'رهن ';
+    if (isSale) return 'قیمت فروش';
+    return 'قیمت';
+  };
+    // ===== نمایش قیمت بر اساس نوع =====
+  const getPriceDisplay = () => {
+    if (isRental) {
+      const deposit = property.deposit || 0;
+      const rent = property.rent || 0;
+      
+      if (deposit === 0 && rent === 0) {
+        return 'تماس بگیرید';
+      }
+      
+      let parts = [];
+      if (deposit > 0) {
+        parts.push(`${formatPrice(deposit)} رهن`);
+      }
+      // if (rent > 0) {
+      //   parts.push(`${formatPrice(rent)} اجاره`);
+      // }
+      
+      return parts.length > 0 ? parts.join(' + ') : 'تماس بگیرید';
+    }
+    
+    // فروش
+    if (!property.price || property.price === 0) {
+      return 'تماس بگیرید';
+    }
+    return formatPrice(property.price);
+  };
   const getPropertyImages = () => {
     if (property.imageUrl && Array.isArray(property.imageUrl) && property.imageUrl.length > 0) {
       return property.imageUrl;
@@ -2397,6 +2436,8 @@ const RealEstateCard = ({ property, onOpenLoginModal }) => {
     if (property.additionalInformation) parts.push(`مساحت ${property.additionalInformation} متر مربع`);
     if (property.regionName) parts.push(`منطقه ${property.regionName}`);
     if (property.constructionYear) parts.push(`ساخت ${property.constructionYear}`);
+        if (isRental) parts.push('رهن و اجاره');
+    if (isSale) parts.push('فروش');
     return `خرید و فروش ${parts.join(' - ')}`;
   };
 
@@ -2737,17 +2778,48 @@ const RealEstateCard = ({ property, onOpenLoginModal }) => {
           }}>
     
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
-                <FontAwesomeIcon icon={faTag} size="xs" color="#94a3b8" aria-hidden="true" />
-                <span style={{ fontSize: '10px', color: '#64748b' }}>قیمت</span>
+      <FontAwesomeIcon 
+                  icon={isRental ? faKey : faTag} 
+                  size="xs" 
+                  color="#94a3b8" 
+                  aria-hidden="true" 
+                  style={{ flexShrink: 0 }}
+                />
+                <span style={{ fontSize: '10px', color: '#64748b' }}>{getPriceLabel()}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px', flexWrap: 'wrap' }}>
                 <span style={{ fontSize: '16px', fontWeight: '800', color: '#7d0000' }}>
-                  {property.price ? formatPrice(property.price) : 'تماس بگیرید'}
+                    {getPriceDisplay()}
                 </span>
                 {property.price && (
                   <span style={{ fontSize: '9px', color: '#94a3b8' }}>تومان</span>
                 )}
+                              {isRental && property.rent && property.rent > 0 && (
+                <div style={{ 
+                  fontSize: '10px', 
+                  color: '#64748b', 
+                  marginTop: '2px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  overflow: 'hidden',
+                  width: '100%'
+                }}>
+                  <FontAwesomeIcon icon={faMoneyBillWave} size="xs" color="#94a3b8" style={{ flexShrink: 0 }} />
+                  <span style={{ 
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
+                  }}>
+                    اجاره ماهانه: {formatPrice(property.rent)} تومان
+                  </span>
+                </div>
+              )}
               </div>
+        
+
+    
+           
          
             
             {/* <button 
