@@ -5242,7 +5242,7 @@ const RealEstateDetailPageItem = memo(() => {
             )}
           </div>
           
-          <div className="agent-card">
+          <div className="agent-card-ag">
             <div className="agent-header">
               <div 
                 className={`agent-avatar-wrapper ${property.agent.hasStory ? 'has-story' : ''}`}

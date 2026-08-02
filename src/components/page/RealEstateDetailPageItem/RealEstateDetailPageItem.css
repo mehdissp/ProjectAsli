@@ -373,7 +373,12 @@ body {
 .price-card-content {
   flex: 1;
 }
-
+.price-label-detail {
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
 .price-label-deposit {
   text-align: right;
   font-size: 14px;
@@ -1003,7 +1008,7 @@ body {
 }
 
 /* Agent Card */
-.agent-card {
+.agent-card-ag {
   background: white;
   padding: 20px;
   margin-top: 20px;

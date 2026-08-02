@@ -1,44 +1,93 @@
 /* src/components/AgentsSlider.css */
 
-.agents-slider-container {
-  padding: 30px 0 50px 0;
-  background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
+/* ============================================
+   SECTION
+   ============================================ */
+.agents-section {
+  width: 100%;
+  padding: 24px 0;
+  background: linear-gradient(170deg, #f8faff 0%, #eef2ff 40%, #ffffff 100%);
   direction: rtl;
   position: relative;
   overflow: hidden;
 }
 
-/* دکوراسیون پس‌زمینه */
-.agents-slider-container::before {
+@media (min-width: 768px) {
+  .agents-section {
+    padding: 40px 0 50px 0;
+  }
+}
+
+/* Background decorations */
+.agents-section::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -20%;
+  top: -30%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatBg 20s ease-in-out infinite alternate;
+}
+
+.agents-section::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -5%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(118, 75, 162, 0.06) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  animation: floatBg 25s ease-in-out infinite alternate-reverse;
 }
 
-.agents-slider-container::after {
-  content: '';
-  position: absolute;
-  bottom: -30%;
-  left: -10%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(118, 75, 162, 0.05) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
+@keyframes floatBg {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -20px) scale(1.1); }
 }
 
-/* هدر بخش */
+/* ============================================
+   CONTAINER
+   ============================================ */
+.agents-container {
+  width: 100%;
+  padding: 0 12px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 576px) {
+  .agents-container {
+    padding: 0 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .agents-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
 .agents-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .agents-header {
+    margin-bottom: 32px;
+  }
 }
 
 .header-badge {
@@ -46,18 +95,39 @@
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: #ffffff;
   padding: 4px 16px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .header-badge {
+    font-size: 0.8rem;
+    padding: 6px 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.header-badge:hover {
+  transform: scale(1.05);
 }
 
 .agents-title {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 800;
   color: #1a202c;
   margin: 0;
+  letter-spacing: -0.5px;
+}
+
+@media (min-width: 768px) {
+  .agents-title {
+    font-size: 2rem;
+  }
 }
 
 .agents-title span {
@@ -68,87 +138,264 @@
 }
 
 .agents-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #718096;
   margin: 4px 0 0 0;
+  font-weight: 400;
 }
 
-/* ویپر اسلایدر */
+@media (min-width: 768px) {
+  .agents-subtitle {
+    font-size: 0.95rem;
+    margin: 6px 0 0 0;
+  }
+}
+
+.header-decoration {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .header-decoration {
+    margin-top: 12px;
+  }
+}
+
+.header-decoration span {
+  width: 30px;
+  height: 2.5px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+@media (min-width: 768px) {
+  .header-decoration span {
+    width: 40px;
+    height: 3px;
+  }
+}
+
+.header-decoration span:nth-child(2) {
+  width: 15px;
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .header-decoration span:nth-child(2) {
+    width: 20px;
+  }
+}
+
+.header-decoration span:nth-child(3) {
+  width: 8px;
+  opacity: 0.3;
+}
+
+@media (min-width: 768px) {
+  .header-decoration span:nth-child(3) {
+    width: 10px;
+  }
+}
+
+/* ============================================
+   SLIDER WRAPPER
+   ============================================ */
 .agents-slider-wrapper {
-  max-width: 1400px;
-  margin: 0 auto;
+  position: relative;
   padding: 0 30px;
-  position: relative;
-  z-index: 1;
 }
 
-/* هر آیتم اسلایدر */
-.agent-slide {
-  padding: 10px 12px;
+@media (max-width: 480px) {
+  .agents-slider-wrapper {
+    padding: 0 20px;
+  }
 }
 
-/* کارت مشاور - شیشه‌ای و کوچک */
+/* ============================================
+   NAV BUTTONS
+   ============================================ */
+.agents-nav-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 640px) {
+  .agents-nav-buttons {
+    display: none;
+  }
+}
+
+.nav-btn {
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #667eea;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.nav-btn:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================
+   SWIPER
+   ============================================ */
+.agents-swiper {
+  padding: 4px 0 8px 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.agents-swiper .swiper-slide {
+  height: auto;
+}
+
+/* ============================================
+   AGENT CARD - SQUARE DESIGN
+   ============================================ */
 .agent-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-radius: 16px;
-  padding: 20px 16px 18px;
+  padding: 20px 14px 16px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 2px 12px rgba(102, 126, 234, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(102, 126, 234, 0.15);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
-  min-height: 230px;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: visible !important;
+  overflow: hidden;
+  /* height: 100%; */
+  aspect-ratio: 1 / 1.15;
+  max-width: 100%;
 }
 
-.agent-card::before {
-  content: '';
+@media (min-width: 768px) {
+  .agent-card {
+    padding: 24px 18px 20px;
+    border-radius: 18px;
+    min-height: 260px;
+    aspect-ratio: 1 / 1.1;
+    border: 2px solid rgba(102, 126, 234, 0.12);
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-card {
+    min-height: 200px;
+    padding: 16px 12px 14px;
+    max-width: 280px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1.2;
+    border: 1.5px solid rgba(102, 126, 234, 0.12);
+  }
+}
+
+.agent-card-glow {
   position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
   pointer-events: none;
 }
 
-.agent-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(102, 126, 234, 0.2);
+.agent-card:hover .agent-card-glow {
+  opacity: 1;
 }
 
-/* آواتار با حلقه */
+/* حذف ::before که باعث پوشیده شدن border میشد */
+
+.agent-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 
+    0 12px 32px rgba(102, 126, 234, 0.18),
+    0 2px 8px rgba(102, 126, 234, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #667eea;
+}
+
+@media (min-width: 768px) {
+  .agent-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: #667eea;
+  }
+}
+
+/* ============================================
+   AVATAR - SQUARE RING
+   ============================================ */
 .agent-avatar-container {
   position: relative;
   margin-bottom: 10px;
-  overflow: visible !important;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .agent-avatar-container {
+    margin-bottom: 12px;
+  }
 }
 
 .agent-avatar-ring {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   padding: 3px;
   background: linear-gradient(135deg, #667eea, #764ba2);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25);
-  transition: all 0.4s ease;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   margin: 0 auto;
-  overflow: visible !important;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .agent-avatar-ring {
+    width: 85px;
+    height: 85px;
+    padding: 3.5px;
+    box-shadow: 0 6px 24px rgba(102, 126, 234, 0.3);
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-avatar-ring {
+    width: 62px;
+    height: 62px;
+    padding: 2.5px;
+  }
 }
 
 .agent-card:hover .agent-avatar-ring {
-  transform: scale(1.06);
-  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.35);
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
 }
 
 .agent-avatar {
@@ -156,42 +403,85 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ffffff;
+  border: 2.5px solid #ffffff;
   display: block;
   background: #e2e8f0;
+  transition: transform 0.5s ease;
 }
 
-/* دایره امتیاز - زیر عکس و سمت راست - رنگ شرابی */
+.agent-card:hover .agent-avatar {
+  transform: scale(1.02);
+}
+
+/* ============================================
+   SCORE BADGE
+   ============================================ */
 .agent-score {
   position: absolute;
-  bottom: -8px;
-  right: -6px;
-  background: linear-gradient(135deg, #8B1A1A, #6B0F0F);
+  bottom: -4px;
+  right: -2px;
+  background: linear-gradient(135deg, #7a1a1a, #4a0f0f);
   color: #ffffff;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.6rem;
   font-weight: 700;
-  box-shadow: 0 3px 12px rgba(139, 26, 26, 0.5);
+  box-shadow: 0 4px 12px rgba(122, 26, 26, 0.4);
   border: 2.5px solid #ffffff;
   gap: 2px;
-  z-index: 10;
-  overflow: visible !important;
+  z-index: 5;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .agent-score {
+    width: 34px;
+    height: 34px;
+    font-size: 0.7rem;
+    bottom: -5px;
+    right: -3px;
+    border-width: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-score {
+    width: 24px;
+    height: 24px;
+    font-size: 0.5rem;
+    bottom: -3px;
+    right: -1px;
+    border-width: 2px;
+  }
+}
+
+.agent-card:hover .agent-score {
+  transform: scale(1.12);
+  box-shadow: 0 6px 20px rgba(122, 26, 26, 0.5);
 }
 
 .score-icon {
   font-size: 0.5rem;
   color: #ffd700;
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.3));
 }
 
-/* نام مشاور */
+@media (min-width: 768px) {
+  .score-icon {
+    font-size: 0.6rem;
+  }
+}
+
+/* ============================================
+   AGENT NAME
+   ============================================ */
 .agent-name {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: #1a202c;
   margin: 6px 0 8px 0;
   line-height: 1.3;
@@ -199,423 +489,431 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  position: relative;
 }
 
-/* ردیف اطلاعات */
+@media (min-width: 768px) {
+  .agent-name {
+    font-size: 1.05rem;
+    margin: 8px 0 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-name {
+    font-size: 0.82rem;
+    margin: 4px 0 6px 0;
+  }
+}
+
+.agent-name::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transition: width 0.4s ease;
+  border-radius: 4px;
+}
+
+.agent-card:hover .agent-name::after {
+  width: 50%;
+}
+
+/* ============================================
+   INFO ROW
+   ============================================ */
 .agent-info-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   margin: 4px 0 10px 0;
-  padding: 4px 12px;
-  background: rgba(247, 250, 252, 0.8);
-  border-radius: 10px;
+  padding: 5px 12px;
+  background: rgba(247, 250, 252, 0.5);
+  border-radius: 8px;
   width: 100%;
-  max-width: 160px;
+  max-width: 150px;
+  border: 1px solid rgba(226, 232, 240, 0.2);
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .agent-info-row {
+    max-width: 180px;
+    padding: 6px 16px;
+    gap: 14px;
+    margin: 6px 0 14px 0;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-info-row {
+    max-width: 120px;
+    padding: 4px 8px;
+    gap: 8px;
+    margin: 3px 0 8px 0;
+  }
+}
+
+.agent-card:hover .agent-info-row {
+  background: rgba(247, 250, 252, 0.8);
+  border-color: rgba(102, 126, 234, 0.15);
 }
 
 .agent-info-item {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #4a5568;
+}
+
+@media (min-width: 768px) {
+  .agent-info-item {
+    font-size: 0.8rem;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-info-item {
+    font-size: 0.6rem;
+    gap: 2px;
+  }
 }
 
 .info-icon {
   color: #667eea;
   font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .info-icon {
+    font-size: 0.8rem;
+  }
+}
+
+.agent-card:hover .info-icon {
+  transform: scale(1.1);
 }
 
 .info-number {
   font-weight: 700;
   color: #2d3748;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 768px) {
+  .info-number {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-number {
+    font-size: 0.7rem;
+  }
 }
 
 .info-label {
   color: #a0aec0;
-  font-size: 0.6rem;
+  font-size: 0.55rem;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .info-label {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-label {
+    font-size: 0.5rem;
+  }
 }
 
 .agent-info-divider {
   width: 1px;
   height: 16px;
-  background: #e2e8f0;
+  background: linear-gradient(to bottom, transparent, #e2e8f0, transparent);
 }
 
-/* دکمه تماس */
+@media (min-width: 768px) {
+  .agent-info-divider {
+    height: 20px;
+  }
+}
+
+/* ============================================
+   CALL BUTTON
+   ============================================ */
 .agent-call-btn {
   width: 100%;
-  max-width: 160px;
-  padding: 6px 12px;
+  max-width: 150px;
+  padding: 7px 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: #ffffff;
-  box-shadow: 0 3px 12px rgba(102, 126, 234, 0.25);
+  box-shadow: 0 3px 16px rgba(102, 126, 234, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .agent-call-btn {
+    max-width: 180px;
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-call-btn {
+    max-width: 120px;
+    padding: 5px 10px;
+    font-size: 0.6rem;
+    border-radius: 6px;
+    gap: 4px;
+  }
+}
+
+.agent-call-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .agent-call-btn::before {
+    border-radius: 10px;
+  }
 }
 
 .agent-call-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.35);
+}
+
+@media (min-width: 768px) {
+  .agent-call-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
+.agent-call-btn:hover::before {
+  opacity: 1;
+}
+
+.agent-call-btn span,
+.agent-call-btn .call-icon {
+  position: relative;
+  z-index: 1;
 }
 
 .call-icon {
   font-size: 0.6rem;
+  transition: transform 0.3s ease;
 }
 
-/* استایل دکمه‌های اسلایدر */
-.slick-arrow {
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  color: #4a5568;
-  font-size: 0.7rem;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
+@media (min-width: 768px) {
+  .call-icon {
+    font-size: 0.7rem;
+  }
 }
 
-.slick-arrow:hover {
-  background: #667eea;
-  color: #ffffff;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+.agent-call-btn:hover .call-icon {
+  transform: rotate(-15deg) scale(1.1);
 }
 
-.slick-next-custom {
-  right: -10px;
-}
-
-.slick-prev-custom {
-  left: -10px;
-}
-
-/* دات‌های اسلایدر */
-.slick-dots {
-  bottom: -30px;
-}
-
-.slick-dots li {
-  margin: 0 3px;
-}
-
-.slick-dots li button:before {
-  font-size: 8px;
-  color: #cbd5e0;
-  opacity: 0.6;
-  transition: all 0.3s ease;
-}
-
-.slick-dots li.slick-active button:before {
-  color: #667eea;
-  opacity: 1;
-  font-size: 10px;
-}
-
-/* اسکلتون لودینگ */
-.agents-skeleton {
+/* ============================================
+   SKELETON LOADING - SQUARE
+   ============================================ */
+.agents-skeleton-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
-.skeleton-item {
+@media (min-width: 576px) {
+  .agents-skeleton-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .agents-skeleton-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .agents-skeleton-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .agents-skeleton-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.skeleton-card {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
-  padding: 20px 16px 18px;
+  padding: 20px 14px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 230px;
+  min-height: 240px;
+  border: 1.5px solid rgba(226, 232, 240, 0.3);
+  aspect-ratio: 1 / 1.15;
+}
+
+@media (min-width: 768px) {
+  .skeleton-card {
+    padding: 24px 18px 20px;
+    min-height: 260px;
+    border-radius: 18px;
+    aspect-ratio: 1 / 1.1;
+    border: 2px solid rgba(226, 232, 240, 0.3);
+  }
 }
 
 .skeleton-avatar {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
   background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
+  animation: skeletonLoading 1.8s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .skeleton-avatar {
+    width: 85px;
+    height: 85px;
+  }
 }
 
 .skeleton-name {
-  width: 60%;
+  width: 55%;
   height: 14px;
   border-radius: 6px;
   background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
   background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
+  animation: skeletonLoading 1.8s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .skeleton-name {
+    height: 16px;
+  }
 }
 
 .skeleton-stats {
-  width: 40%;
+  width: 35%;
   height: 10px;
   border-radius: 6px;
   background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
   background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
+  animation: skeletonLoading 1.8s ease-in-out infinite;
 }
 
-@keyframes skeleton-loading {
+.skeleton-button {
+  width: 45%;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f7fafc 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: skeletonLoading 1.8s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .skeleton-button {
+    height: 36px;
+  }
+}
+
+@keyframes skeletonLoading {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
-/* حالت خالی */
+/* ============================================
+   EMPTY STATE
+   ============================================ */
 .agents-empty {
   text-align: center;
-  padding: 30px;
+  padding: 30px 20px;
   color: #a0aec0;
   font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1.5px dashed #cbd5e0;
 }
 
-/* ====== ریسپانسیو ====== */
-
-/* تبلت و لپ‌تاپ کوچک */
-@media (max-width: 1024px) {
-  .agents-skeleton {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .agent-avatar-ring {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .agent-score {
-    width: 26px;
-    height: 26px;
-    font-size: 0.55rem;
-    bottom: -7px;
-    right: -5px;
-  }
-  
-  .agent-name {
-    font-size: 0.85rem;
-  }
-  
-  .agent-info-row {
-    max-width: 140px;
-    padding: 3px 10px;
-  }
-  
-  .agent-call-btn {
-    max-width: 140px;
-    font-size: 0.65rem;
-    padding: 5px 10px;
-  }
-  
-  .agents-slider-wrapper {
-    padding: 0 20px;
+@media (min-width: 768px) {
+  .agents-empty {
+    padding: 40px 20px;
+    font-size: 1rem;
+    border-radius: 16px;
+    max-width: 500px;
   }
 }
 
-/* موبایل بزرگ و تبلت کوچک */
-@media (max-width: 768px) {
-  .agents-slider-container {
-    padding: 20px 0 40px 0;
-  }
-  
-  .agents-title {
-    font-size: 1.3rem;
-  }
-  
-  .agents-skeleton {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 16px;
-  }
-  
-  .agent-card {
-    min-height: 200px;
-    padding: 16px 12px 14px;
-    border-radius: 14px;
-  }
-  
-  .agent-avatar-ring {
-    width: 55px;
-    height: 55px;
-  }
-  
-  .agent-score {
-    width: 24px;
-    height: 24px;
-    font-size: 0.5rem;
-    bottom: -6px;
-    right: -4px;
-    border-width: 2px;
-  }
-  
-  .agent-name {
-    font-size: 0.8rem;
-    margin: 4px 0 6px 0;
-  }
-  
-  .agent-info-row {
-    max-width: 120px;
-    padding: 2px 8px;
-    gap: 8px;
-  }
-  
-  .agent-info-item {
-    font-size: 0.65rem;
-  }
-  
-  .info-number {
-    font-size: 0.75rem;
-  }
-  
-  .agent-call-btn {
-    max-width: 120px;
-    font-size: 0.6rem;
-    padding: 4px 8px;
-    border-radius: 8px;
-  }
-  
-  .agents-slider-wrapper {
-    padding: 0 16px;
-  }
-  
-  .slick-dots {
-    bottom: -25px;
-  }
-  
-  .slick-arrow {
-    display: none !important;
-  }
+/* ============================================
+   SWIPER DOTS (برای موبایل)
+   ============================================ */
+.agents-swiper .swiper-pagination {
+  position: relative;
+  margin-top: 16px;
 }
 
-/* موبایل کوچک */
-@media (max-width: 480px) {
-  .agents-slider-container {
-    padding: 15px 0 35px 0;
-  }
-  
-  .agents-title {
-    font-size: 1.1rem;
-  }
-  
-  .agents-subtitle {
-    font-size: 0.75rem;
-  }
-  
-  .header-badge {
-    font-size: 0.65rem;
-    padding: 3px 12px;
-  }
-  
-  .agents-skeleton {
-    grid-template-columns: 1fr;
-    padding: 0 20px;
-  }
-  
-  .agent-slide {
-    padding: 6px 8px;
-  }
-  
-  .agent-card {
-    min-height: 180px;
-    padding: 14px 10px 12px;
-    border-radius: 12px;
-  }
-  
-  .agent-avatar-ring {
-    width: 50px;
-    height: 50px;
-    padding: 2px;
-  }
-  
-  .agent-avatar {
-    border-width: 1.5px;
-  }
-  
-  .agent-score {
-    width: 22px;
-    height: 22px;
-    font-size: 0.45rem;
-    bottom: -5px;
-    right: -3px;
-    border-width: 1.5px;
-  }
-  
-  .score-icon {
-    font-size: 0.4rem;
-  }
-  
-  .agent-name {
-    font-size: 0.75rem;
-    margin: 3px 0 4px 0;
-  }
-  
-  .agent-info-row {
-    max-width: 100px;
-    padding: 2px 6px;
-    gap: 6px;
-    border-radius: 8px;
-  }
-  
-  .agent-info-item {
-    font-size: 0.6rem;
-    gap: 2px;
-  }
-  
-  .info-number {
-    font-size: 0.7rem;
-  }
-  
-  .info-label {
-    font-size: 0.5rem;
-  }
-  
-  .agent-info-divider {
-    height: 12px;
-  }
-  
-  .agent-call-btn {
-    max-width: 100px;
-    font-size: 0.55rem;
-    padding: 3px 6px;
-    border-radius: 6px;
-    gap: 4px;
-  }
-  
-  .call-icon {
-    font-size: 0.5rem;
-  }
-  
-  .agents-slider-wrapper {
-    padding: 0 10px;
-  }
-  
-  .slick-dots {
-    bottom: -20px;
-  }
-  
-  .slick-dots li button:before {
-    font-size: 6px;
-  }
+.agents-swiper .swiper-pagination-bullet {
+  background: #cbd5e0;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  width: 8px;
+  height: 8px;
+}
+
+.agents-swiper .swiper-pagination-bullet-active {
+  background: #667eea;
+  opacity: 1;
+  width: 24px;
+  border-radius: 4px;
 }
