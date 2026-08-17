@@ -5315,3 +5315,398 @@ body {
   color: #6c757d;
   margin: 0;
 }
+
+/* ============================================================ */
+/* ===== دکمه‌های اشتراک‌گذاری اجتماعی ===== */
+/* ============================================================ */
+
+.social-share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.social-share-label {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.social-share-buttons .share-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.social-share-buttons .share-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.social-share-buttons .share-btn:active {
+  transform: scale(0.95);
+}
+
+/* دکمه تلگرام */
+.social-share-buttons .share-btn.telegram {
+  background: linear-gradient(135deg, #0088cc, #006699);
+}
+
+.social-share-buttons .share-btn.telegram:hover {
+  background: linear-gradient(135deg, #0099dd, #0077aa);
+  box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+}
+
+/* دکمه واتساپ */
+.social-share-buttons .share-btn.whatsapp {
+  background: linear-gradient(135deg, #25d366, #128C7E);
+}
+
+.social-share-buttons .share-btn.whatsapp:hover {
+  background: linear-gradient(135deg, #30e07a, #1a9d8a);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* دکمه توییتر */
+.social-share-buttons .share-btn.twitter {
+  background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
+}
+
+.social-share-buttons .share-btn.twitter:hover {
+  background: linear-gradient(135deg, #2aa8f5, #1a94e0);
+  box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4);
+}
+
+/* دکمه ایمیل */
+.social-share-buttons .share-btn.email {
+  background: linear-gradient(135deg, #ea4335, #c5221f);
+}
+
+.social-share-buttons .share-btn.email:hover {
+  background: linear-gradient(135deg, #f04a3a, #d42824);
+  box-shadow: 0 6px 20px rgba(234, 67, 53, 0.4);
+}
+
+/* دکمه اشتراک‌گذاری بومی (نیتیو) */
+.social-share-buttons .share-btn.native {
+  background: linear-gradient(135deg, #6c5ce7, #5f3dc4);
+}
+
+.social-share-buttons .share-btn.native:hover {
+  background: linear-gradient(135deg, #7c6cf0, #6b4ad4);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+/* دکمه کپی لینک (به عنوان جایگزین) */
+.social-share-buttons .share-btn.copy-link {
+  background: linear-gradient(135deg, #636e72, #2d3436);
+}
+
+.social-share-buttons .share-btn.copy-link:hover {
+  background: linear-gradient(135deg, #747d82, #3d4448);
+  box-shadow: 0 6px 20px rgba(99, 110, 114, 0.4);
+}
+
+.social-share-buttons .share-btn.copy-link.copied {
+  background: linear-gradient(135deg, #00b894, #00a381);
+  animation: copyPop 0.4s ease;
+}
+
+@keyframes copyPop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 768px) {
+  .social-share-buttons {
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .social-share-buttons .share-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .social-share-label {
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-share-buttons .share-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .social-share-buttons {
+    gap: 6px;
+  }
+}
+
+/* ============================================================ */
+/* ===== لینک‌های داخلی (برای سئو) ===== */
+/* ============================================================ */
+
+.internal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 0;
+  margin-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.internal-link {
+  font-size: 13px;
+  color: #7d0000;
+  text-decoration: none;
+  background: #fff5f5;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(125, 0, 0, 0.1);
+}
+
+.internal-link:hover {
+  background: #7d0000;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(125, 0, 0, 0.2);
+}
+
+.internal-link:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 480px) {
+  .internal-link {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .internal-links {
+    gap: 6px;
+    padding: 8px 0;
+  }
+}
+
+/* ============================================================ */
+/* ===== دکمه اشتراک‌گذاری در هدر ===== */
+/* ============================================================ */
+
+.header-share-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-share-btn:hover {
+  background: #7d0000;
+  color: white;
+  transform: scale(1.05);
+}
+
+.header-share-btn .share-tooltip {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2d3436;
+  color: white;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.header-share-btn:hover .share-tooltip {
+  opacity: 1;
+}
+
+/* ============================================================ */
+/* ===== پنل اشتراک‌گذاری موبایل ===== */
+/* ============================================================ */
+
+.share-panel-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  padding: 20px 24px 30px;
+  z-index: 1000;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+  display: none;
+}
+
+.share-panel-mobile.open {
+  display: block;
+}
+
+.share-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.share-panel-overlay.open {
+  display: block;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.share-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.share-panel-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.share-panel-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f1f2f6;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.share-panel-close:hover {
+  background: #ff4757;
+  color: white;
+}
+
+.share-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.share-panel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.share-panel-item:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.share-panel-item .share-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+}
+
+.share-panel-item .share-name {
+  font-size: 12px;
+  color: #555;
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 480px) {
+  .share-panel-mobile {
+    padding: 16px 16px 24px;
+  }
+
+  .share-panel-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .share-panel-item {
+    padding: 8px 4px;
+  }
+
+  .share-panel-item .share-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .share-panel-item .share-name {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-swiper {
+    height: 300px;
+  }
+  .gallery-image {
+    object-fit: cover;
+  }
+}

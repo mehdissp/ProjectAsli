@@ -1,0 +1,1790 @@
+/* RegisterAgency.css - استایل کامل صفحه ثبت نام آژانس املاک */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.agency-register {
+  min-height: 100vh;
+  font-family: 'Inter', 'Vazirmatn', 'Tahoma', sans-serif;
+  direction: rtl;
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1a3a 50%, #24243e 100%);
+}
+
+/* ========== ذرات پس‌زمینه ========== */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ========== کانتینر اصلی ========== */
+.register-container {
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 24px;
+  gap: 24px;
+}
+
+/* ========== سایدبار راست ========== */
+.register-sidebar {
+  flex: 1;
+  padding: 40px 32px;
+  color: white;
+  overflow-y: auto;
+  animation: fadeInRight 0.8s ease-out;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-content {
+  max-width: 100%;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sidebar-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+}
+
+.sidebar-icon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+.sidebar-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, #ff6b6b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 12px;
+}
+
+.sidebar-header p {
+  font-size: 14px;
+  opacity: 0.8;
+  line-height: 1.7;
+}
+
+/* ========== باکس مزایا ========== */
+.benefits-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 32px;
+  padding: 28px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.benefits-box:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+.benefits-box h3 {
+  font-size: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffd93d;
+}
+
+.benefits-box h3 svg {
+  flex-shrink: 0;
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideIn 0.5s ease forwards;
+}
+
+.benefit-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.benefit-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-8px);
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.benefit-icon {
+  font-size: 32px;
+  min-width: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.benefit-item strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.benefit-item p {
+  font-size: 12px;
+  opacity: 0.7;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ========== باکس اطلاعات ========== */
+.info-box {
+  background: rgba(212, 175, 55, 0.05);
+  border-radius: 32px;
+  padding: 28px;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  transition: all 0.3s ease;
+}
+
+.info-box:hover {
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.info-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.info-box h4 {
+  font-size: 18px;
+  color: #ffd93d;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-box li {
+  font-size: 13px;
+  opacity: 0.8;
+  padding: 8px 0;
+  padding-right: 28px;
+  position: relative;
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-box li:last-child {
+  border-bottom: none;
+}
+
+.info-box li::before {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  color: #d4af37;
+  font-weight: bold;
+}
+
+/* ========== فرم سمت چپ ========== */
+.register-form-wrapper {
+  flex: 1.5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 700px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+  border-radius: 40px;
+  padding: 40px 48px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #7d0000, #cc0000, #d4af37);
+}
+
+/* ========== دکمه بازگشت ========== */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+  font-family: inherit;
+}
+
+.back-btn:hover {
+  background: rgba(125, 0, 0, 0.05);
+  color: #7d0000;
+  transform: translateX(-4px);
+}
+
+.back-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.back-btn:hover svg {
+  transform: translateX(-4px);
+}
+
+/* ========== پروگرس استپ ========== */
+.form-progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  position: relative;
+  padding: 0 8px;
+}
+
+.form-progress::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background: #e5e7eb;
+  z-index: 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.progress-step:hover {
+  transform: translateY(-2px);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.progress-step.active .step-number {
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  color: white;
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
+  border-color: #d4af37;
+}
+
+.progress-step.completed .step-number {
+  background: #10b981;
+  color: white;
+}
+
+.step-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.progress-step.active .step-label {
+  color: #7d0000;
+  font-weight: 600;
+}
+
+/* ========== بخش‌های فرم ========== */
+.form-section {
+  margin-bottom: 32px;
+  animation: fadeInUp 0.5s ease;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+.form-section:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title span {
+  font-size: 24px;
+}
+
+/* ========== ورودی‌ها ========== */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.input-group input,
+.input-group select {
+  padding: 14px 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background: white;
+  color: #1f2937;
+  width: 100%;
+  height: 54px;
+  line-height: 1.5;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #7d0000;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.input-group input:disabled,
+.input-group select:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.input-group input::placeholder {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.input-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 16px center;
+  padding-left: 44px;
+  padding-right: 18px;
+  height: 54px;
+  cursor: pointer;
+}
+
+.input-group select option {
+  padding: 8px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ========== باکس رمز عبور ========== */
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  padding-left: 54px;
+  padding-right: 18px;
+  height: 54px;
+}
+
+.eye-btn {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  width: 42px;
+  height: 42px;
+}
+
+.eye-btn:hover {
+  background: rgba(125, 0, 0, 0.08);
+  color: #7d0000;
+}
+
+.eye-btn:focus {
+  outline: 2px solid #7d0000;
+  outline-offset: 2px;
+}
+
+.eye-btn svg {
+  width: 22px;
+  height: 22px;
+  transition: all 0.3s ease;
+}
+
+.eye-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* ========== پیام خطا ========== */
+.error-msg {
+  color: #ef4444;
+  font-size: 13px;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-radius: 10px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ========== نمایش مقدار انتخاب شده ========== */
+.selected-value {
+  margin-top: 6px;
+  padding: 6px 12px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  color: #166534;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: fadeInUp 0.3s ease;
+}
+
+.loading-text {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.loading-text::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #7d0000;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ========== نمایش آدرس کامل ========== */
+.address-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(125, 0, 0, 0.05), rgba(212, 175, 55, 0.05));
+  border: 1px solid rgba(125, 0, 0, 0.15);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.3s ease;
+}
+
+.address-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 13px;
+}
+
+.address-value {
+  color: #7d0000;
+  font-weight: 700;
+  font-size: 14px;
+  direction: ltr;
+}
+
+.address-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280;
+  opacity: 0.7;
+}
+
+/* ========== نقشه ========== */
+.map-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #e5e7eb;
+  height: 300px;
+  background: #f3f4f6;
+  transition: all 0.3s ease;
+}
+
+.map-wrapper:hover {
+  border-color: #7d0000;
+}
+
+.neshan-map-container {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background: #e8ecf1;
+}
+
+.map-loading {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #6b7280;
+  gap: 12px;
+  border-radius: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #7d0000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.map-marker {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 28px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ========== جستجوی آدرس ========== */
+.search-box {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  height: 54px;
+}
+
+.search-box input:focus {
+  border-color: #7d0000;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(125, 0, 0, 0.1);
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.search-box button {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  height: 54px;
+  font-size: 15px;
+}
+
+.search-box button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(125, 0, 0, 0.3);
+}
+
+.search-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========== موقعیت ثبت شده ========== */
+.location-success {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  color: #166534;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeInUp 0.3s ease;
+}
+
+/* ========== آپلود مدارک ========== */
+.upload-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.upload-box {
+  border: 2px dashed #d1d5db;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fafafa;
+}
+
+.upload-box:hover {
+  border-color: #7d0000;
+  background: rgba(125, 0, 0, 0.02);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.upload-box .upload-icon {
+  font-size: 40px;
+  opacity: 0.6;
+}
+
+.upload-box p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.upload-box small {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.upload-box .preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-box .preview img {
+  max-width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 28px;
+  height: 28px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.remove-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ========== چک‌باکس قوانین ========== */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  padding: 12px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.checkbox input {
+  display: none;
+}
+
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.checkbox input:checked + .checkmark {
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  border-color: #7d0000;
+}
+
+.checkbox input:checked + .checkmark::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.checkbox:hover .checkmark {
+  border-color: #7d0000;
+}
+
+/* ========== دکمه ثبت ========== */
+.submit-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #7d0000, #cc0000);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  margin-top: 16px;
+  position: relative;
+  overflow: hidden;
+  height: 58px;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:hover:not(:disabled)::before {
+  width: 300px;
+  height: 300px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(125, 0, 0, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn .spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ========== انیمیشن‌ها ========== */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========== اسکرول بار ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(125, 0, 0, 0.5);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(125, 0, 0, 0.7);
+}
+
+/* ========== ریسپانسیو ========== */
+
+/* تبلت و لپ‌تاپ (تا 1200px) */
+@media (max-width: 1200px) {
+  .register-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .register-sidebar {
+    max-width: 100%;
+    padding: 28px 24px;
+    order: 2;
+  }
+  
+  .register-form-wrapper {
+    order: 1;
+    width: 100%;
+  }
+  
+  .register-form {
+    padding: 32px 36px;
+  }
+  
+  .benefits-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .benefit-item {
+    padding: 12px;
+  }
+}
+
+/* موبایل بزرگ و تبلت کوچک (تا 992px) */
+@media (max-width: 992px) {
+  .register-form {
+    padding: 28px 24px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .upload-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .benefits-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 24px;
+  }
+  
+  .form-progress {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  
+  .form-progress::before {
+    display: none;
+  }
+  
+  .progress-step {
+    flex-direction: row;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 30px;
+  }
+  
+  .step-number {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  
+  .step-label {
+    font-size: 12px;
+  }
+}
+
+/* موبایل (تا 768px) */
+@media (max-width: 768px) {
+  .register-container {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .register-sidebar {
+    padding: 20px 16px;
+    border-radius: 24px;
+  }
+  
+  .register-form {
+    padding: 24px 16px;
+    border-radius: 28px;
+  }
+  
+  .sidebar-header {
+    margin-bottom: 24px;
+  }
+  
+  .sidebar-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 20px;
+  }
+  
+  .benefits-box {
+    padding: 20px;
+  }
+  
+  .benefits-box h3 {
+    font-size: 17px;
+  }
+  
+  .benefit-item {
+    padding: 10px 12px;
+  }
+  
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    min-width: 40px;
+  }
+  
+  .info-box {
+    padding: 20px;
+  }
+  
+  .info-box h4 {
+    font-size: 16px;
+  }
+  
+  .info-box li {
+    font-size: 12px;
+    padding: 6px 0;
+    padding-right: 24px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  .section-title span {
+    font-size: 20px;
+  }
+  
+  .input-group label {
+    font-size: 13px;
+  }
+  
+  .input-group input,
+  .input-group select {
+    padding: 12px 16px;
+    font-size: 14px;
+    height: 48px;
+    border-radius: 12px;
+  }
+  
+  .input-group select {
+    padding-left: 40px;
+    padding-right: 16px;
+    height: 48px;
+  }
+  
+  .password-box input {
+    padding-left: 48px;
+    padding-right: 16px;
+    height: 48px;
+  }
+  
+  .eye-btn {
+    width: 36px;
+    height: 36px;
+    left: 12px;
+  }
+  
+  .eye-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .form-row {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  
+  .map-wrapper {
+    height: 220px;
+  }
+  
+  .neshan-map-container {
+    min-height: 220px;
+  }
+  
+  .map-loading {
+    min-height: 220px;
+  }
+  
+  .search-box {
+    flex-direction: column;
+  }
+  
+  .search-box input {
+    height: 48px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .search-box button {
+    height: 48px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .upload-box {
+    min-height: 140px;
+    padding: 16px;
+  }
+  
+  .upload-box .upload-icon {
+    font-size: 32px;
+  }
+  
+  .upload-box p {
+    font-size: 13px;
+  }
+  
+  .submit-btn {
+    height: 50px;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  
+  .back-btn {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  
+  .form-progress {
+    gap: 8px;
+  }
+  
+  .progress-step {
+    padding: 4px 10px;
+  }
+  
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  
+  .step-label {
+    font-size: 10px;
+  }
+  
+  .selected-value {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+  
+  .address-preview {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  
+  .address-label {
+    font-size: 12px;
+  }
+  
+  .address-value {
+    font-size: 13px;
+  }
+  
+  .location-success {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+  
+  .checkbox {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+  
+  .checkmark {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .error-msg {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/* موبایل کوچک (تا 480px) */
+@media (max-width: 480px) {
+  .register-container {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .register-sidebar {
+    padding: 16px 12px;
+    border-radius: 20px;
+  }
+  
+  .register-form {
+    padding: 20px 12px;
+    border-radius: 20px;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 18px;
+  }
+  
+  .sidebar-header p {
+    font-size: 12px;
+  }
+  
+  .sidebar-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .sidebar-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .benefits-box {
+    padding: 16px;
+  }
+  
+  .benefits-box h3 {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  
+  .benefit-item {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  
+  .benefit-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    min-width: 32px;
+  }
+  
+  .benefit-item strong {
+    font-size: 13px;
+  }
+  
+  .benefit-item p {
+    font-size: 11px;
+  }
+  
+  .info-box {
+    padding: 16px;
+  }
+  
+  .info-box h4 {
+    font-size: 14px;
+  }
+  
+  .info-box li {
+    font-size: 11px;
+    padding: 5px 0;
+    padding-right: 20px;
+  }
+  
+  .form-progress {
+    gap: 4px;
+  }
+  
+  .progress-step {
+    padding: 4px 8px;
+    border-radius: 20px;
+  }
+  
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  
+  .step-label {
+    font-size: 9px;
+  }
+  
+  .section-title {
+    font-size: 14px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+  }
+  
+  .section-title span {
+    font-size: 18px;
+  }
+  
+  .input-group label {
+    font-size: 12px;
+  }
+  
+  .input-group input,
+  .input-group select {
+    padding: 10px 14px;
+    font-size: 13px;
+    height: 44px;
+    border-radius: 10px;
+  }
+  
+  .input-group select {
+    padding-left: 36px;
+    padding-right: 14px;
+    height: 44px;
+  }
+  
+  .input-group input::placeholder {
+    font-size: 12px;
+  }
+  
+  .password-box input {
+    padding-left: 44px;
+    padding-right: 14px;
+    height: 44px;
+  }
+  
+  .eye-btn {
+    width: 34px;
+    height: 34px;
+    left: 10px;
+    padding: 5px;
+  }
+  
+  .eye-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .form-row {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .map-wrapper {
+    height: 180px;
+  }
+  
+  .neshan-map-container {
+    min-height: 180px;
+  }
+  
+  .map-loading {
+    min-height: 180px;
+  }
+  
+  .search-box input {
+    height: 44px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .search-box button {
+    height: 44px;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .upload-box {
+    min-height: 120px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+  
+  .upload-box .upload-icon {
+    font-size: 28px;
+  }
+  
+  .upload-box p {
+    font-size: 12px;
+  }
+  
+  .upload-box small {
+    font-size: 10px;
+  }
+  
+  .upload-box .preview img {
+    max-height: 100px;
+  }
+  
+  .remove-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+  
+  .submit-btn {
+    height: 46px;
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 30px;
+    margin-top: 12px;
+  }
+  
+  .submit-btn .spinner {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .back-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+  }
+  
+  .back-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .selected-value {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  
+  .address-preview {
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .address-label {
+    font-size: 11px;
+  }
+  
+  .address-value {
+    font-size: 12px;
+  }
+  
+  .checkbox {
+    font-size: 12px;
+    padding: 6px 0;
+    gap: 10px;
+  }
+  
+  .checkmark {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .location-success {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  
+  .error-msg {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+  }
+}
+
+/* حالت لودینگ صفحه */
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(135deg, #0f0c29, #1a1a3a);
+  color: white;
+}
+
+.loading-screen .loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-width: 4px;
+}
+
+/* ========== حالت تاریک ========== */
+@media (prefers-color-scheme: dark) {
+  .register-form {
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.98), rgba(17, 24, 39, 0.95));
+    color: #f3f4f6;
+  }
+  
+  .register-form .section-title {
+    color: #f3f4f6;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .register-form .input-group label {
+    color: #d1d5db;
+  }
+  
+  .register-form .input-group input,
+  .register-form .input-group select {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f3f4f6;
+  }
+  
+  .register-form .input-group input:focus,
+  .register-form .input-group select:focus {
+    border-color: #7d0000;
+  }
+  
+  .register-form .input-group input::placeholder {
+    color: #6b7280;
+  }
+  
+  .register-form .checkbox {
+    color: #d1d5db;
+  }
+  
+  .register-form .back-btn {
+    color: #9ca3af;
+  }
+  
+  .register-form .back-btn:hover {
+    color: #ff6b6b;
+  }
+  
+  .register-form .error-msg {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+  }
+  
+  .register-form .upload-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .register-form .upload-box:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  
+  .register-form .upload-box p {
+    color: #d1d5db;
+  }
+  
+  .register-form .location-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
+  }
+  
+  .register-form .form-progress::before {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .register-form .step-number {
+    background: rgba(255, 255, 255, 0.05);
+    color: #9ca3af;
+  }
+  
+  .register-form .progress-step.active .step-number {
+    background: linear-gradient(135deg, #7d0000, #cc0000);
+    color: white;
+  }
+  
+  .register-form .step-label {
+    color: #6b7280;
+  }
+  
+  .register-form .progress-step.active .step-label {
+    color: #ff6b6b;
+  }
+  
+  .register-form .password-box input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f3f4f6;
+  }
+  
+  .register-form .eye-btn {
+    color: #6b7280;
+  }
+  
+  .register-form .eye-btn:hover {
+    background: rgba(125, 0, 0, 0.15);
+    color: #ff6b6b;
+  }
+  
+  .register-form .checkmark {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .register-form .checkbox:hover .checkmark {
+    border-color: #7d0000;
+  }
+  
+  .selected-value {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
+  }
+  
+  .loading-text {
+    color: #9ca3af;
+  }
+  
+  .address-preview {
+    background: linear-gradient(135deg, rgba(125, 0, 0, 0.1), rgba(212, 175, 55, 0.05));
+    border-color: rgba(125, 0, 0, 0.3);
+  }
+  
+  .address-label {
+    color: #d1d5db;
+  }
+  
+  .address-value {
+    color: #ff6b6b;
+  }
+  
+  .address-hint {
+    color: #9ca3af;
+  }
+}
+
+/* ========== فوکوس برای دسترسی ========== */
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid #7d0000;
+  outline-offset: 2px;
+}
+
+/* ========== حاشیه‌های ایمن برای موبایل ========== */
+@supports (padding: max(0px)) {
+  .register-container {
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right));
+    padding-top: max(24px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+}
